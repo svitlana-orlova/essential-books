@@ -79,7 +79,7 @@ foreach ($pages as $path => $url) {
     }
 
     foreach ($json as $title) {
-        if ($title[2] == -1) continue;
+        if (str_contains($title[0], '#')) continue;
 
         $titleFile = $dirName . '/' . $title[0];
         $url = 'https://www.programming-books.io/' . $path . '/' . $title[0];
