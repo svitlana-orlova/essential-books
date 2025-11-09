@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-$request = $_SERVER['REQUEST_URI'];
 
 function extractFile(string $path) : string | false
 {
@@ -17,18 +16,13 @@ function findRecords(string $folder, int $sub = -1) : array
 {
     $json = getJson($folder);
     $res = [];
-
     foreach ($json as $title) {
         if ($sub == -1 && $title[1] == -1) {
             $res[] = $title;
-            continue;
-        }
-
-        if ($title[1] == $sub) {
-           $res[] = $title;
+        } else if ($title[1] == $sub) {
+            $res[] = $title;
         }
     }
-
     return $res;
 }
 
@@ -36,25 +30,42 @@ function findIndex(string $folder, string $name) : int
 {
     $json = getJson($folder);
     foreach ($json as $index => $title) {
-        if ($title[0] == $name) return $index;
+        if ($title[0] == $name) {
+            return ($title[1] == -1 ? $index : $title[1]);
+        }
     }
     return -1;
 }
 
-function indexToc(string $folder) : string
+function findTitle(string $folder, string $name) : int
 {
     $json = findRecords($folder, -1);
-    $out  = '<div id="book-toc"><div class="toc svelte-1ib47n1">';
+    $sub = findIndex($folder, $name) + 1;
+    foreach ($json as $index => $title) {
+        if ($title[0] == $name || $title[2] == $sub) {
+            return $index;
+        }
+    }
+    return -1;
+}
+
+function indexToc(string $folder, $name = '') : string
+{
+    $json = findRecords($folder, -1);
+    $out  = '<div id="book-toc"><div class="article toc svelte-1ib47n1">';
+    $sub = ($name ? findTitle($folder, $name) : -1);
 
     foreach ($json as $index => $title) {
         $out .= '<div class="toc-item"><div class="chapters-toc-item">';
         $out .= '<span class="no svelte-1ib47n1">'. $index .'</span>';
-        $out .= '<a href="/essential/'. $folder . '/'. $title[0] .'">' . $title[3] . '</a>';
+        if ($sub != -1 && $sub == $index) {
+            $out .= '<b>' . $title[3] . '</b>';
+        } else {
+            $out .= '<a href="/essential/' . $folder . '/' . $title[0] . '">' . $title[3] . '</a>';
+        }
         $out .= '</div></div>';
     }
-
     $out .= '</div></div>';
-
     return $out;
 }
 
@@ -62,42 +73,53 @@ function pageToc(string $folder, $name) : string
 {
     $index = findIndex($folder, $name);
     $records = findRecords($folder, $index);
-    $out = '<div id="page-toc"><div class="chapter-toc svelte-1t851gm">';
+    $title = findTitle($folder, $name);
 
-    foreach ($records as $index => $title) {
+    $out = '<div id="page-toc"><div class="article chapter-toc svelte-1t851gm">';
+    $out .= '<div class="mtoc-0 svelte-1t851gm"><b>';
+    $out .= findRecords($folder, -1)[$title][3];
+    $out .= ':</b></div>';
+
+    foreach ($records as $title) {
         $out .= '<div class="mtoc-1 svelte-1t851gm">';
-        $out .= '<a href="/essential/'. $folder . '/'. $title[0] .'">' . $title[3] . '</a>';
+        $out .= '<span class="no svelte-1ib47n1">*</span>';
+        if ($name == $title[0]) {
+            $out .= '<b>' . $title[3] . '</b>';
+        } else {
+            $out .= '<a href="/essential/'. $folder . '/'. $title[0] .'">' . $title[3] . '</a>';
+        }
         $out .= '</div>';
     }
-
     $out .= '</div></div>';
-
     return $out;
 }
 
-if (preg_match('#^/essential/(\w+)/(.*)$#', $request, $matches)) {
-    $folder = $matches[1];
-    $name = $matches[2];
+function main() : void
+{
+    $request = $_SERVER['REQUEST_URI'];
 
-    echo extractFile('/assets/header.html');
+    if (preg_match('#^/essential/(\w+)/?(.*)$#', $request, $matches)) {
+        $folder = $matches[1];
+        $name = $matches[2];
 
-    if ($name == 'index.html') {
-        echo indexToc($folder);
+        echo extractFile('/assets/header.html');
+
+        if (!$name || $name == 'index.html') {
+            echo indexToc($folder);
+        } else {
+            $page = extractFile($folder . '/' . $name);
+            $page = preg_replace('#<div id="page-toc"></div>#', pageToc($folder, $name), $page);
+            echo preg_replace('#<div id="book-toc"></div>#', indexToc($folder, $name), $page);
+        }
+
+        echo extractFile('/assets/footer.html');
+
+    } else if (str_ends_with($request, '.css')) {
+        header('Content-Type: text/css');
+        echo extractFile($request);
     } else {
-        $page = extractFile($folder . '/' . $name);
-        $ptoc = pageToc($folder, $name);
-        $itoc = indexToc($folder);
-
-        $page = preg_replace('#<div id="page-toc"></div>#', $ptoc, $page);
-        $page = preg_replace('#<div id="book-toc"></div>#', $itoc, $page);
-        echo $page;
+        echo extractFile('/assets/index.html');
     }
-
-    echo extractFile('/assets/footer.html');
-
-} else if (str_ends_with($request, '.css')) {
-    header('Content-Type: text/css');
-    echo extractFile($request);
 }
 
-?>
+main();
