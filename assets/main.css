@@ -250,28 +250,12 @@ h1:hover svg, h2:hover svg, h3:hover svg {
 
 /* for very small screens (i.e. phones) remove rarely needed elements and other tweaks */
 @media screen and (max-width: 500px) {
-  .page__footer {
-    display: none;
-  }
-  .page__header__left {
-    display: none;
-  }
-  .page__header__right {
-    display: none;
-  }
-  .article-contribute {
-    display: none;
-  }
-  /* TODO: not centered perfectly */
-  .page__header__center {
-    width: 80vw;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .content {
-    padding-left: 4px;
-    padding-right: 4px;
-  }
+    #book-toc {
+        margin: 16px 0;
+    }
+    .toc.svelte-1ib47n1{
+        columns:1
+    }
 }
 
 #toc .lvl1 {
