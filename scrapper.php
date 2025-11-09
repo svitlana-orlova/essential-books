@@ -7,6 +7,7 @@ use Utils\CurlFetcher;
 use Utils\PageScrapper;
 
 const OUT_DIR = __DIR__;
+const TMP_DIR = '/tmp/essential-books/';
 const PAGES = [
     'essential/go'  => 'https://www.programming-books.io/s/app-go.js',
     'essential/cpp' => 'https://www.programming-books.io/s/app-cpp.js',
@@ -41,9 +42,9 @@ const PAGES = [
     'essential/sql' => 'https://www.programming-books.io/s/app-sql.js',
 ];
 
-function main(array $pages) : void
+function scrapPages(array $pages) : void
 {
-    $fetcher = new CurlFetcher("/tmp/essential-books/");
+    $fetcher = new CurlFetcher(TMP_DIR);
     $scrap = new PageScrapper($fetcher);
     $fetcher->setAutoClean(false);
 
@@ -78,32 +79,47 @@ function main(array $pages) : void
             continue;
         }
 
+        $pid = pcntl_fork();
+
+        if ($pid == -1){
+            echo "Failed to fork\n";
+            exit(1);
+        } else if ($pid == 0) {
+            echo "Starting child process\n";
+        } else {
+            continue;
+        }
+
         foreach ($json as $title) {
             if (str_contains($title[0], '#')) continue;
 
             $titleFile = $dirName . '/' . $title[0];
-            $url = 'https://www.programming-books.io/' . $path . '/' . $title[0];
+            $url = "https://www.programming-books.io/$path/$title[0]";
 
-            echo "Scrapping $url";
+            echo "Fetching $path/$title[0]";
             $page = $scrap->getContents($url);
 
             if ($page) {
-                echo " Success\n";
+                echo " D";
             } else {
                 echo " Failed\n";
                 continue;
             }
 
-            echo "Writing into $titleFile\n";
+            echo "/S";
             if (!file_put_contents($titleFile, $page)) {
-                echo "Failed\n";
+                echo "/Failed\n";
+            } else {
+                echo "/Ok\n";
             }
         }
+
+        exit(0);
     }
 }
 
-if ($argv[1] >= 0 && $argv[1] < count(PAGES)) {
-    main(array_slice(PAGES, intval($argv[1])));
+if ($argc > 1 && $argv[1] >= 0 && $argv[1] < count(PAGES)) {
+    scrapPages(array_slice(PAGES, intval($argv[1])));
 } else {
-    main(PAGES);
+    scrapPages(PAGES);
 }

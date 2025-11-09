@@ -15,6 +15,7 @@
   "require": {
     "ext-curl": "*",
     "ext-dom": "*",
-    "ext-libxml": "*"
+    "ext-libxml": "*",
+    "ext-pcntl": "*"
   }
 }
