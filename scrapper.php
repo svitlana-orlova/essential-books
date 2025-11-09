@@ -40,6 +40,7 @@ const PAGES = [
     'essential/reactnative' => 'https://www.programming-books.io/s/app-reactnative.js',
     'essential/rubyonrails' => 'https://www.programming-books.io/s/app-rubyonrails.js',
     'essential/sql' => 'https://www.programming-books.io/s/app-sql.js',
+    'essential/ios' => 'https://www.programming-books.io/s/app-ios.js',
 ];
 
 function scrapPages(array $pages) : void
