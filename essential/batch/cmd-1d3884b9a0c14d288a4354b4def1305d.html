@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">CMD</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/1d3884b9a0c14d288a4354b4def1305d" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+<p>Invokes another instance of <code>cmd.exe</code> command interpreter.
+</p>
+<p>Links:
+</p>
+  <ul id="4d385cb6-60d5-4092-b7ce-3723f1173ece" class="bulleted-list">
+    <li><a href="http://ss64.com/nt/cmd.html">cmd at ss64.com</a>
+    </li>
+    <li><a href="https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/cmd">cmd at Microsoft</a>
+    </li>
+  </ul>
+<p>
+</p>
+
+<div class="code-box lang-Shell">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">Starts a new instance of the Windows <span class="nb">command</span> interpreter
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">CMD <span class="o">[</span>/A <span class="p">|</span> /U<span class="o">]</span> <span class="o">[</span>/Q<span class="o">]</span> <span class="o">[</span>/D<span class="o">]</span> <span class="o">[</span>/E:ON <span class="p">|</span> /E:OFF<span class="o">]</span> <span class="o">[</span>/F:ON <span class="p">|</span> /F:OFF<span class="o">]</span> <span class="o">[</span>/V:ON <span class="p">|</span> /V:OFF<span class="o">]</span>
+</span></span><span class="line"><span class="cl">    <span class="o">[[</span>/S<span class="o">]</span> <span class="o">[</span>/C <span class="p">|</span> /K<span class="o">]</span> string<span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/C      Carries out the <span class="nb">command</span> specified by string and <span class="k">then</span> terminates
+</span></span><span class="line"><span class="cl">/K      Carries out the <span class="nb">command</span> specified by string but remains
+</span></span><span class="line"><span class="cl">/S      Modifies the treatment of string after /C or /K <span class="o">(</span>see below<span class="o">)</span>
+</span></span><span class="line"><span class="cl">/Q      Turns <span class="nb">echo</span> off
+</span></span><span class="line"><span class="cl">/D      Disable execution of AutoRun commands from registry <span class="o">(</span>see below<span class="o">)</span>
+</span></span><span class="line"><span class="cl">/A      Causes the output of internal commands to a pipe or file to be ANSI
+</span></span><span class="line"><span class="cl">/U      Causes the output of internal commands to a pipe or file to be
+</span></span><span class="line"><span class="cl">        Unicode
+</span></span><span class="line"><span class="cl">/T:fg   Sets the foreground/background colors <span class="o">(</span>see COLOR /? <span class="k">for</span> more info<span class="o">)</span>
+</span></span><span class="line"><span class="cl">/E:ON   Enable <span class="nb">command</span> extensions <span class="o">(</span>see below<span class="o">)</span>
+</span></span><span class="line"><span class="cl">/E:OFF  Disable <span class="nb">command</span> extensions <span class="o">(</span>see below<span class="o">)</span>
+</span></span><span class="line"><span class="cl">/F:ON   Enable file and directory name completion characters <span class="o">(</span>see below<span class="o">)</span>
+</span></span><span class="line"><span class="cl">/F:OFF  Disable file and directory name completion characters <span class="o">(</span>see below<span class="o">)</span>
+</span></span><span class="line"><span class="cl">/V:ON   Enable delayed environment variable expansion using ! as the
+</span></span><span class="line"><span class="cl">        delimiter. For example, /V:ON would allow !var! to expand the
+</span></span><span class="line"><span class="cl">        variable var at execution time.  The var syntax expands variables
+</span></span><span class="line"><span class="cl">        at input time, which is quite a different thing when inside of a FOR
+</span></span><span class="line"><span class="cl">        loop.
+</span></span><span class="line"><span class="cl">/V:OFF  Disable delayed environment expansion.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Note that multiple commands separated by the <span class="nb">command</span> separator <span class="s1">'&amp;&amp;'</span>
+</span></span><span class="line"><span class="cl">are accepted <span class="k">for</span> string <span class="k">if</span> surrounded by quotes.  Also, <span class="k">for</span> compatibility
+</span></span><span class="line"><span class="cl">reasons, /X is the same as /E:ON, /Y is the same as /E:OFF and /R is the
+</span></span><span class="line"><span class="cl">same as /C.  Any other switches are ignored.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">If /C or /K is specified, <span class="k">then</span> the remainder of the <span class="nb">command</span> line after
+</span></span><span class="line"><span class="cl">the switch is processed as a <span class="nb">command</span> line, where the following logic is
+</span></span><span class="line"><span class="cl">used to process quote <span class="o">(</span><span class="s2">") characters:
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    1.  If all of the following conditions are met, then quote characters
+</span></span></span><span class="line"><span class="cl"><span class="s2">        on the command line are preserved:
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">        - no /S switch
+</span></span></span><span class="line"><span class="cl"><span class="s2">        - exactly two quote characters
+</span></span></span><span class="line"><span class="cl"><span class="s2">        - no special characters between the two quote characters,
+</span></span></span><span class="line"><span class="cl"><span class="s2">          where special is one of: &amp;&lt;&gt;()@^|
+</span></span></span><span class="line"><span class="cl"><span class="s2">        - there are one or more whitespace characters between the
+</span></span></span><span class="line"><span class="cl"><span class="s2">          two quote characters
+</span></span></span><span class="line"><span class="cl"><span class="s2">        - the string between the two quote characters is the name
+</span></span></span><span class="line"><span class="cl"><span class="s2">          of an executable file.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    2.  Otherwise, old behavior is to see if the first character is
+</span></span></span><span class="line"><span class="cl"><span class="s2">        a quote character and if so, strip the leading character and
+</span></span></span><span class="line"><span class="cl"><span class="s2">        remove the last quote character on the command line, preserving
+</span></span></span><span class="line"><span class="cl"><span class="s2">        any text after the last quote character.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">If /D was NOT specified on the command line, then when CMD.EXE starts, it
+</span></span></span><span class="line"><span class="cl"><span class="s2">looks for the following REG_SZ/REG_EXPAND_SZ registry variables, and if
+</span></span></span><span class="line"><span class="cl"><span class="s2">either or both are present, they are executed first.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    HKEY_LOCAL_MACHINE\Software\Microsoft\Command Processor\AutoRun
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">        and/or
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    HKEY_CURRENT_USER\Software\Microsoft\Command Processor\AutoRun
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Command Extensions are enabled by default.  You may also disable
+</span></span></span><span class="line"><span class="cl"><span class="s2">extensions for a particular invocation by using the /E:OFF switch.  You
+</span></span></span><span class="line"><span class="cl"><span class="s2">can enable or disable extensions for all invocations of CMD.EXE on a
+</span></span></span><span class="line"><span class="cl"><span class="s2">machine and/or user logon session by setting either or both of the
+</span></span></span><span class="line"><span class="cl"><span class="s2">following REG_DWORD values in the registry using REGEDIT.EXE:
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    HKEY_LOCAL_MACHINE\Software\Microsoft\Command Processor\EnableExtensions
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">        and/or
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    HKEY_CURRENT_USER\Software\Microsoft\Command Processor\EnableExtensions
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">to either 0x1 or 0x0.  The user specific setting takes precedence over
+</span></span></span><span class="line"><span class="cl"><span class="s2">the machine setting.  The command line switches take precedence over the
+</span></span></span><span class="line"><span class="cl"><span class="s2">registry settings.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">In a batch file, the SETLOCAL ENABLEEXTENSIONS or DISABLEEXTENSIONS arguments
+</span></span></span><span class="line"><span class="cl"><span class="s2">takes precedence over the /E:ON or /E:OFF switch. See SETLOCAL /? for details.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">The command extensions involve changes and/or additions to the following
+</span></span></span><span class="line"><span class="cl"><span class="s2">commands:
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    DEL or ERASE
+</span></span></span><span class="line"><span class="cl"><span class="s2">    COLOR
+</span></span></span><span class="line"><span class="cl"><span class="s2">    CD or CHDIR
+</span></span></span><span class="line"><span class="cl"><span class="s2">    MD or MKDIR
+</span></span></span><span class="line"><span class="cl"><span class="s2">    PROMPT
+</span></span></span><span class="line"><span class="cl"><span class="s2">    PUSHD
+</span></span></span><span class="line"><span class="cl"><span class="s2">    POPD
+</span></span></span><span class="line"><span class="cl"><span class="s2">    SET
+</span></span></span><span class="line"><span class="cl"><span class="s2">    SETLOCAL
+</span></span></span><span class="line"><span class="cl"><span class="s2">    ENDLOCAL
+</span></span></span><span class="line"><span class="cl"><span class="s2">    IF
+</span></span></span><span class="line"><span class="cl"><span class="s2">    FOR
+</span></span></span><span class="line"><span class="cl"><span class="s2">    CALL
+</span></span></span><span class="line"><span class="cl"><span class="s2">    SHIFT
+</span></span></span><span class="line"><span class="cl"><span class="s2">    GOTO
+</span></span></span><span class="line"><span class="cl"><span class="s2">    START (also includes changes to external command invocation)
+</span></span></span><span class="line"><span class="cl"><span class="s2">    ASSOC
+</span></span></span><span class="line"><span class="cl"><span class="s2">    FTYPE
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">To get specific details, type commandname /? to view the specifics.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Delayed environment variable expansion is NOT enabled by default.  You
+</span></span></span><span class="line"><span class="cl"><span class="s2">can enable or disable delayed environment variable expansion for a
+</span></span></span><span class="line"><span class="cl"><span class="s2">particular invocation of CMD.EXE with the /V:ON or /V:OFF switch.  You
+</span></span></span><span class="line"><span class="cl"><span class="s2">can enable or disable delayed expansion for all invocations of CMD.EXE on a
+</span></span></span><span class="line"><span class="cl"><span class="s2">machine and/or user logon session by setting either or both of the
+</span></span></span><span class="line"><span class="cl"><span class="s2">following REG_DWORD values in the registry using REGEDIT.EXE:
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    HKEY_LOCAL_MACHINE\Software\Microsoft\Command Processor\DelayedExpansion
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">        and/or
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    HKEY_CURRENT_USER\Software\Microsoft\Command Processor\DelayedExpansion
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">to either 0x1 or 0x0.  The user specific setting takes precedence over
+</span></span></span><span class="line"><span class="cl"><span class="s2">the machine setting.  The command line switches take precedence over the
+</span></span></span><span class="line"><span class="cl"><span class="s2">registry settings.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">In a batch file the SETLOCAL ENABLEDELAYEDEXPANSION or DISABLEDELAYEDEXPANSION
+</span></span></span><span class="line"><span class="cl"><span class="s2">arguments takes precedence over the /V:ON or /V:OFF switch. See SETLOCAL /?
+</span></span></span><span class="line"><span class="cl"><span class="s2">for details.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">If delayed environment variable expansion is enabled, then the exclamation
+</span></span></span><span class="line"><span class="cl"><span class="s2">character can be used to substitute the value of an environment variable
+</span></span></span><span class="line"><span class="cl"><span class="s2">at execution time.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">You can enable or disable file name completion for a particular
+</span></span></span><span class="line"><span class="cl"><span class="s2">invocation of CMD.EXE with the /F:ON or /F:OFF switch.  You can enable
+</span></span></span><span class="line"><span class="cl"><span class="s2">or disable completion for all invocations of CMD.EXE on a machine and/or
+</span></span></span><span class="line"><span class="cl"><span class="s2">user logon session by setting either or both of the following REG_DWORD
+</span></span></span><span class="line"><span class="cl"><span class="s2">values in the registry using REGEDIT.EXE:
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    HKEY_LOCAL_MACHINE\Software\Microsoft\Command Processor\CompletionChar
+</span></span></span><span class="line"><span class="cl"><span class="s2">    HKEY_LOCAL_MACHINE\Software\Microsoft\Command Processor\PathCompletionChar
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">        and/or
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    HKEY_CURRENT_USER\Software\Microsoft\Command Processor\CompletionChar
+</span></span></span><span class="line"><span class="cl"><span class="s2">    HKEY_CURRENT_USER\Software\Microsoft\Command Processor\PathCompletionChar
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">with the hex value of a control character to use for a particular
+</span></span></span><span class="line"><span class="cl"><span class="s2">function (e.g.  0x4 is Ctrl-D and 0x6 is Ctrl-F).  The user specific
+</span></span></span><span class="line"><span class="cl"><span class="s2">settings take precedence over the machine settings.  The command line
+</span></span></span><span class="line"><span class="cl"><span class="s2">switches take precedence over the registry settings.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">If completion is enabled with the /F:ON switch, the two control
+</span></span></span><span class="line"><span class="cl"><span class="s2">characters used are Ctrl-D for directory name completion and Ctrl-F for
+</span></span></span><span class="line"><span class="cl"><span class="s2">file name completion.  To disable a particular completion character in
+</span></span></span><span class="line"><span class="cl"><span class="s2">the registry, use the value for space (0x20) as it is not a valid
+</span></span></span><span class="line"><span class="cl"><span class="s2">control character.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">Completion is invoked when you type either of the two control
+</span></span></span><span class="line"><span class="cl"><span class="s2">characters.  The completion function takes the path string to the left
+</span></span></span><span class="line"><span class="cl"><span class="s2">of the cursor appends a wild card character to it if none is already
+</span></span></span><span class="line"><span class="cl"><span class="s2">present and builds up a list of paths that match.  It then displays the
+</span></span></span><span class="line"><span class="cl"><span class="s2">first matching path.  If no paths match, it just beeps and leaves the
+</span></span></span><span class="line"><span class="cl"><span class="s2">display alone.  Thereafter, repeated pressing of the same control
+</span></span></span><span class="line"><span class="cl"><span class="s2">character will cycle through the list of matching paths.  Pressing the
+</span></span></span><span class="line"><span class="cl"><span class="s2">Shift key with the control character will move through the list
+</span></span></span><span class="line"><span class="cl"><span class="s2">backwards.  If you edit the line in any way and press the control
+</span></span></span><span class="line"><span class="cl"><span class="s2">character again, the saved list of matching paths is discarded and a new
+</span></span></span><span class="line"><span class="cl"><span class="s2">one generated.  The same occurs if you switch between file and directory
+</span></span></span><span class="line"><span class="cl"><span class="s2">name completion.  The only difference between the two control characters
+</span></span></span><span class="line"><span class="cl"><span class="s2">is the file completion character matches both file and directory names,
+</span></span></span><span class="line"><span class="cl"><span class="s2">while the directory completion character only matches directory names.
+</span></span></span><span class="line"><span class="cl"><span class="s2">If file completion is used on any of the built in directory commands
+</span></span></span><span class="line"><span class="cl"><span class="s2">(CD, MD or RD) then directory completion is assumed.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">The completion code deals correctly with file names that contain spaces
+</span></span></span><span class="line"><span class="cl"><span class="s2">or other special characters by placing quotes around the matching path.
+</span></span></span><span class="line"><span class="cl"><span class="s2">Also, if you back up, then invoke completion from within a line, the
+</span></span></span><span class="line"><span class="cl"><span class="s2">text to the right of the cursor at the point completion was invoked is
+</span></span></span><span class="line"><span class="cl"><span class="s2">discarded.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">The special characters that require quotes are:
+</span></span></span><span class="line"><span class="cl"><span class="s2">     &lt;space&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">     &amp;()[]{}^=;!'+,`~</span></span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="cmd-1d3884b9a0c14d288a4354b4def1305d.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>External commands:</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="arp-95cd30a1a8114aaabd5cd8f4c94225bd.html">ARP</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="at-3c1b763701794cd1b358c9907dee916c.html">AT</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="attrib-e07492afd3c8480ebad9d3b2600e38ce.html">ATTRIB</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="bcdedit-8691692600324e078d2db30fe0a0e73b.html">BCDEDIT</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="cacls-8823eb219e694f0d9ec7d1b295696f68.html">CACLS</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="chcp-dd5572c37d204906a49ac5bfa647b25c.html">CHCP</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="chkdsk-524b83fdc1ea4927917137b4764f0547.html">CHKDSK</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="chkntfs-3a15daab58bc4ec38ce0f5152c2678d3.html">CHKNTFS</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="choice-2dae8774e6a247d9a3ee3612b47c6b71.html">CHOICE</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="cipher-d8af8cdc579e4a55af2bde7911c6917b.html">CIPHER</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="clip-77e3c76c1850453db8d9cff9f65e5a0d.html">CLIP</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><b>CMD</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="comp-6a7c05701b2c4384bc2263ddb7e19170.html">COMP</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="compact-14cddbe801ed46c38e1e9147a8181144.html">COMPACT</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="convert-60fe217f7946423b988004111233bce6.html">CONVERT</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="debug-46e477829cd84267bf4cd61435cbfb76.html">DEBUG</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="diskcomp-176b83439dac490a8c87cd35716eb9f0.html">DISKCOMP</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="diskcopy-9626bd3ab0b04b0db1e0e07ab420f869.html">DISKCOPY</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="diskpart-ca53264b07544c5695847176e9792bdc.html">DISKPART</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="doskey-17dff637f97e4c0785af583b3f2a265c.html">DOSKEY</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="driverquery-3e93494424234b51bb2978988f03985d.html">DRIVERQUERY</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="expand-0b70d14f08a940d098cc8070fe919d83.html">EXPAND</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="fc-668b8288d4db4433a8995ad44cfe73ce.html">FC</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="find-a665188736f24231920eb6b80974242c.html">FIND</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="findstr-bf58a8295a724f53ae050c0932e819c9.html">FINDSTR</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="forfiles-46e2c40d44a642d7b82ca118d85c5cb9.html">FORFILES</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="format-1dc7c172b2a7480fb2306a30d5fe4539.html">FORMAT</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="fsutil-fb2a4456d7d04051b5fcf713b27820bf.html">FSUTIL</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="gpresult-f7b78a8732f04ff39c46402f55f78d4d.html">GPRESULT</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="graftabl-adfc47e1dc064b069d4af309bc49c63a.html">GRAFTABL</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="help-6db99ebbeb044b918741eaede9fa82a3.html">HELP</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="icacls-4dfbc9200fac49d2983cfdc935714853.html">ICACLS</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="ipconfig-c739bedf98d548f3b9564c5b86f23828.html">IPCONFIG</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="label-0e11679594dd43858a6a2b0a8463f7cb.html">LABEL</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="makecab-daa5581bb28d478ca871902f2ba24c2e.html">MAKECAB</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="mode-6684f05f55594896ad35e39b852883c0.html">MODE</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="more-50f3c12fa0f1476d85d06d9e76233ddf.html">MORE</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="net-ccfe9218832b40029186f29dd87ef98e.html">NET</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="openfiles-5d0b40c300064f8fb3dd793d433c6931.html">OPENFILES</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="ping-b36ea38057d44f61a7635c7cd44bc2ef.html">PING</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="recover-6a6b1edc70b542f8a37075c78b608466.html">RECOVER</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="reg-8361c1f0fb0a43bea37744d18e0f903b.html">REG</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="replace-40027602e854464aa28dfc7aa265d514.html">REPLACE</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="robocopy-a1f87888e1a94c20a8c8330474f09d9e.html">ROBOCOPY</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="rundll32-ba5fbe37e5f94c8f8563c4ba9008cd41.html">RUNDLL32</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="sc-fb658eb53f5a4f1a88f8471308f059b0.html">SC</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="schtasks-41f7e6d06e78426f909896ec5611065a.html">SCHTASKS</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="setx-dfc93a7754e94facb7ff153f98b6afdc.html">SETX</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="shutdown-232b25a66f33466e9389b5b2a00e0226.html">SHUTDOWN</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="sort-5bbb2d056a734e4fafa065aaf1bc6bd0.html">SORT</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="subst-0589cbc4e2b2459ca2c4b7bb6ab4b920.html">SUBST</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="systeminfo-64b1025ef3d34a14afff21c42c753af9.html">SYSTEMINFO</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="taskkill-bdbf5240fbff41cba67e4cb62e72a5a1.html">TASKKILL</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="tasklist-7501f14a6e7d4e00bb106c3366428ab5.html">TASKLIST</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="timeout-6dbcda7df51c4a4380c56c14a0075148.html">TIMEOUT</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="tree-f6a1e4d3145540269ec9215b579a55ba.html">TREE</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="where-a5c28a60ed5149e3894ea7d8c3c8fd8d.html">WHERE</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="wmic-19d7a8bc84c340b89632dcb2b0e24d26.html">WMIC</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="xcopy-d2a62cc49ed44189a543e73fcc457d24.html">XCOPY</a></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="introduction-846c7623625e434bb3c481641bf2e016.html">Introduction</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="how-a-command-line-is-interpreted-cac61c915fce40c89a25c98ec229c5d6.html">How a command line is interpreted</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="batch-reloading-98bc367236ef48559db589eddaa811ff.html">Batch reloading</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="environment-variables-01b28cfb0b9b45409515334357d5f9bf.html">Environment variables</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="switches-9e2a7d8c43bb46f29962b0d2f195e19c.html">Switches</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="error-level-c70d88bae6d545b7a5b5ca99e777b409.html">Error level</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="string-processing-20d44ad6fccd4a048e3464a4dd3d4570.html">String processing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><a href="command-line-arguments-6a6ffadba81b4cc6a979f7e1ee4ea4aa.html">Command-line arguments</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><a href="wildcards-2b952cca7aee49b2a4a709c4c4ad5aef.html">Wildcards</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><a href="user-input-5726d65b176c49ebb21d2daa271031f9.html">User input</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="-percent-tilde-f4263820c2db41e399c77259970464f1.html">%~ (percent tilde)</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="functions-f516efa981d9481ca4253d271451381d.html">Functions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="calculation-06c65868038c4e2ab21937d82bebc6c0.html">Calculation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="finding-files-af14c29c29d740609e9e8c887a2c3cb7.html">Finding files</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="keyboard-shortcuts-af2ffcc6632c4dada420d99695ca6c10.html">Keyboard shortcuts</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="paths-47408b417b4f4392a3bc79fe552b4895.html">Paths</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><a href="arrays-dc75afb35c164e29a9018d897be1f452.html">Arrays</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><a href="perl-one-liners-bdb9a0cee7bf4ca09a8bb650e6e2cad7.html">Perl one-liners</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="limitations-09c168245f2e40d99e684733fb760091.html">Limitations</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">19</span><a href="built-in-commands-34f80a6dd2c84337951597d48e342fec.html">Built-in commands</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">20</span><b>External commands</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">21</span><a href="legal-credits-fde438abeea34c909d226a9d31209ee8.html">Legal & credits</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

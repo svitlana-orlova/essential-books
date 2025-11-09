@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">Environment variables</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/01b28cfb0b9b45409515334357d5f9bf" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+<p>The environment variables of the command interpreter process are inherited by the processes of any (external) commands that it executes. A few environment variables are used by the command interpreter itself. Changing them changes its operation.
+</p>
+<p>Environment variables are affected by the <a href="set-540c344e1358419fb62ff4cc35e604b8.html">SET</a>, <a href="path-724f35d412174a7dbf5a79d582f48dc0.html">PATH</a>, and <a href="prompt-dffefd5a9e97414c86e252afb7e4b128.html">PROMPT</a> commands.
+</p>
+<p>To unset a variable, set it to empty string, such as <code>set myvar=</code>.
+</p>
+<p>The command interpreter inherits its initial set of environment variables from the process that created it. In the case of command interpreters invoked from desktop shortcuts this will be Windows Explorer, for example.
+</p>
+<p>Command interpreters generally have textual user interfaces, not graphical ones, and so do not recognize the Windows message that informs applications that the environment variable template in the Registry has been changed. Changing the environment variables in Control Panel will cause Windows Explorer to update its own environment variables from the template in the Registry, and thus change the environment variables that any subsequently invoked command interpreters will inherit. However, it will not cause command interpreters that are already running to update their environment variables from the template in the Registry.
+</p>
+  <h1 id="36187cf4-1a4c-43c7-bf4c-fdb135d72259" class=""><strong>COMSPEC</strong>
+  <a class="header-anchor" href="environment-variables-01b28cfb0b9b45409515334357d5f9bf.html#36187cf4-1a4c-43c7-bf4c-fdb135d72259" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>The <code>COMSPEC </code>environment variable contains the full path name of the command interpreter program file. This is just inherited from the parent process, and is thus indirectly derived from the setting of <code>COMSPEC</code> in the environment variable template in the Registry.
+</p>
+  <h1 id="67be9173-35e0-4d85-9891-5f7446d09bd3" class=""><strong>PATH</strong>
+  <a class="header-anchor" href="environment-variables-01b28cfb0b9b45409515334357d5f9bf.html#67be9173-35e0-4d85-9891-5f7446d09bd3" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>The value of the <code>PATH</code> environment variable comprises a list of directory names, separated by semi-colon characters. This is the list of directories that are searched, in order, when locating the program file of an external command to execute.
+</p>
+  <h1 id="c5b4f6fa-75f4-49e2-a474-8583b29d4e9f" class=""><strong>PATHEXT</strong>
+  <a class="header-anchor" href="environment-variables-01b28cfb0b9b45409515334357d5f9bf.html#c5b4f6fa-75f4-49e2-a474-8583b29d4e9f" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>The value of the <code>PATHEXT </code>environment variable comprises a list of filename extensions, separated by semi-colon characters. This is the list of filename extensions that are applied, in order, when locating the program file of an external command to execute.
+</p>
+<p>An example content of <code>PATHEXT </code>printed by <code>echo %PATHEXT%</code>:
+</p>
+  <ul id="d1db80a8-a592-46e1-b7ff-2bfd7c622b13" class="bulleted-list">
+    <li><code>.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC</code>
+    </li>
+  </ul>
+<p>By adding ".PL" to the variable, you can ensure Perl programs get run from the command line even when typed without the ".pl" extension. Thus, instead of typing "mydiff.pl a.txt b.txt", you can type "mydiff a.txt b.txt".
+</p>
+<p>Adding ".PL" to the variable in Windows Vista and later:
+</p>
+  <ul id="56457f4b-4bad-4f86-9f23-55b2c4bd60ee" class="bulleted-list">
+    <li><code>setx PATHEXT %PATHEXT%;.PL</code>
+      <ul id="ac83ca7a-f5e9-49af-9e96-59e3306cc73e" class="bulleted-list">
+        <li>If you use "set" available in Windows XP, the effect will be temporary and impacting only the current console or process.
+        </li>
+      </ul>
+    </li>
+  </ul>
+<p>Links:
+</p>
+  <ul id="65980d4e-c59b-4dfa-a3b9-418d6643aaf6" class="bulleted-list">
+    <li><a href="http://ss64.com/nt/syntax-variables.html">Windows Environment Variables at ss64</a>
+    </li>
+    <li><a href="http://stackoverflow.com/questions/9037346/making-python-scripts-run-on-windows-without-specifying-py-extension">Making Python scripts run on Windows without specifying “.py” extension at stackoverflow</a>
+    </li>
+  </ul>
+  <h1 id="3b9aa790-2006-4d94-8c40-459ce06b5d36" class=""><strong>PROMPT</strong>
+  <a class="header-anchor" href="environment-variables-01b28cfb0b9b45409515334357d5f9bf.html#3b9aa790-2006-4d94-8c40-459ce06b5d36" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>The <code>PROMPT</code> environment variable controls the text emitted when the command interpreter displays the prompt. The command interpreter displays the prompt when prompting for a new command line in interactive mode, or when echoing a batch file line in batch file mode.
+</p>
+<p>Various special character sequences in the value of the <code>PROMPT</code> environment variable cause various special effects when the prompt is displayed, as in the following table:
+</p>
+<div id="069d1de0-9c22-4765-bd09-928081293982" class="collection-content">
+<h4 class="collection-title"></h4>
+<table class="collection-content">
+<thead>
+<tr>
+<th width="153">Characters</th>
+<th width="423">Expansion Result</th>
+</tr>
+</thead>
+<tbody>
+<tr id="30c2e548-dd2b-4f65-96f0-26601d581d9e">
+<td class="cell-title col-type-title">$$</td>
+<td class="cell-NJz| col-type-text">$ character itself</td>
+</tr>
+
+<tr id="d434a45e-9977-460f-b8de-b201fd9f8967">
+<td class="cell-title col-type-title">$A</td>
+<td class="cell-NJz| col-type-text">&amp; symbol AKA ampersand. A convenience, since it is difficult to place a literal &amp; in the value of the PROMPT environment variable using the SET command.</td>
+</tr>
+
+<tr id="6f0c041d-8278-4290-b71a-6069581d34a4">
+<td class="cell-title col-type-title">$B</td>
+<td class="cell-NJz| col-type-text">Vertical bar '|' (pipe symbol)</td>
+</tr>
+
+<tr id="6edca809-2b53-4ac4-9a78-e44c63f09707">
+<td class="cell-title col-type-title">$C</td>
+<td class="cell-NJz| col-type-text">Left parenthesis '('</td>
+</tr>
+
+<tr id="9a5af01a-19cd-4e1d-9e70-10774415905f">
+<td class="cell-title col-type-title">$D</td>
+<td class="cell-NJz| col-type-text">Current date</td>
+</tr>
+
+<tr id="e1250c02-0510-446b-a7da-b323981c35df">
+<td class="cell-title col-type-title">$E</td>
+<td class="cell-NJz| col-type-text">ESC (ASCII code 27)</td>
+</tr>
+
+<tr id="b171280a-41ae-479e-b4e3-813cd906cb36">
+<td class="cell-title col-type-title">$F</td>
+<td class="cell-NJz| col-type-text">Right parenthesis ')'</td>
+</tr>
+
+<tr id="3e725477-5d58-49c8-ae05-e3785ee006c6">
+<td class="cell-title col-type-title">$G</td>
+<td class="cell-NJz| col-type-text">Greater-than symbol '&gt;'</td>
+</tr>
+
+<tr id="98485342-8292-40cf-bb66-a91468940403">
+<td class="cell-title col-type-title">$H</td>
+<td class="cell-NJz| col-type-text">Backspace (deletes previous character)</td>
+</tr>
+
+<tr id="3e071873-4f62-4830-9abc-78542f66f593">
+<td class="cell-title col-type-title">$L</td>
+<td class="cell-NJz| col-type-text">Less-than symbol '&lt;'</td>
+</tr>
+
+<tr id="c1415723-6182-4f21-a568-6d600d0d0d04">
+<td class="cell-title col-type-title">$M</td>
+<td class="cell-NJz| col-type-text">Remote name linked to the current drive if it is a network drive; empty string otherwise.</td>
+</tr>
+
+<tr id="d094883b-527e-473d-9f14-bb21d1e91323">
+<td class="cell-title col-type-title">$N</td>
+<td class="cell-NJz| col-type-text">Current drive letter</td>
+</tr>
+
+<tr id="1d819dcc-9bed-4218-af1d-b0444a44a747">
+<td class="cell-title col-type-title">$P</td>
+<td class="cell-NJz| col-type-text">Current drive letter and full path</td>
+</tr>
+
+<tr id="ff2db422-820f-48b0-b0b4-98d7c1855417">
+<td class="cell-title col-type-title">$Q</td>
+<td class="cell-NJz| col-type-text">'=' (equals sign)</td>
+</tr>
+
+<tr id="153be15a-dffe-46bf-9c46-b860de8fb63d">
+<td class="cell-title col-type-title">$S</td>
+<td class="cell-NJz| col-type-text">' ' (space character)</td>
+</tr>
+
+<tr id="961c1e22-7a1f-4759-860b-85be703794a0">
+<td class="cell-title col-type-title">$T</td>
+<td class="cell-NJz| col-type-text">Current system time</td>
+</tr>
+
+<tr id="79b1e7bd-15ff-41b0-aa78-ca2578fb86fd">
+<td class="cell-title col-type-title">$V</td>
+<td class="cell-NJz| col-type-text">Windows version number</td>
+</tr>
+
+<tr id="027a8965-f033-4ab2-94da-f2ce11ddd804">
+<td class="cell-title col-type-title">$_</td>
+<td class="cell-NJz| col-type-text">&lt;CR&gt; (carriage return character, aka "enter")</td>
+</tr>
+
+<tr id="3dbc29c7-09f8-40c9-8fbb-73c671ca2735">
+<td class="cell-title col-type-title">$+</td>
+<td class="cell-NJz| col-type-text">As many plus signs (+) as there are items on the pushd directory stack</td>
+</tr>
+
+</tbody>
+</table>
+</div>
+<p>Links:
+</p>
+  <ul id="76299d7b-de4e-4b08-8215-fc383172219b" class="bulleted-list">
+    <li><a href="http://ss64.com/nt/prompt.html">prompt at ss64</a>
+    </li>
+    <li><a href="https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/prompt">prompt at Microsoft</a>
+    </li>
+  </ul>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="environment-variables-01b28cfb0b9b45409515334357d5f9bf.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>Environment variables:</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="environment-variables-01b28cfb0b9b45409515334357d5f9bf.html#36187cf4-1a4c-43c7-bf4c-fdb135d72259">COMSPEC</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="environment-variables-01b28cfb0b9b45409515334357d5f9bf.html#67be9173-35e0-4d85-9891-5f7446d09bd3">PATH</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="environment-variables-01b28cfb0b9b45409515334357d5f9bf.html#c5b4f6fa-75f4-49e2-a474-8583b29d4e9f">PATHEXT</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="environment-variables-01b28cfb0b9b45409515334357d5f9bf.html#3b9aa790-2006-4d94-8c40-459ce06b5d36">PROMPT</a></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="introduction-846c7623625e434bb3c481641bf2e016.html">Introduction</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="how-a-command-line-is-interpreted-cac61c915fce40c89a25c98ec229c5d6.html">How a command line is interpreted</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="batch-reloading-98bc367236ef48559db589eddaa811ff.html">Batch reloading</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><b>Environment variables</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="switches-9e2a7d8c43bb46f29962b0d2f195e19c.html">Switches</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="error-level-c70d88bae6d545b7a5b5ca99e777b409.html">Error level</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="string-processing-20d44ad6fccd4a048e3464a4dd3d4570.html">String processing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><a href="command-line-arguments-6a6ffadba81b4cc6a979f7e1ee4ea4aa.html">Command-line arguments</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><a href="wildcards-2b952cca7aee49b2a4a709c4c4ad5aef.html">Wildcards</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><a href="user-input-5726d65b176c49ebb21d2daa271031f9.html">User input</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="-percent-tilde-f4263820c2db41e399c77259970464f1.html">%~ (percent tilde)</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="functions-f516efa981d9481ca4253d271451381d.html">Functions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="calculation-06c65868038c4e2ab21937d82bebc6c0.html">Calculation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="finding-files-af14c29c29d740609e9e8c887a2c3cb7.html">Finding files</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="keyboard-shortcuts-af2ffcc6632c4dada420d99695ca6c10.html">Keyboard shortcuts</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="paths-47408b417b4f4392a3bc79fe552b4895.html">Paths</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><a href="arrays-dc75afb35c164e29a9018d897be1f452.html">Arrays</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><a href="perl-one-liners-bdb9a0cee7bf4ca09a8bb650e6e2cad7.html">Perl one-liners</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="limitations-09c168245f2e40d99e684733fb760091.html">Limitations</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">19</span><a href="built-in-commands-34f80a6dd2c84337951597d48e342fec.html">Built-in commands</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">20</span><a href="external-commands-f83d61795cb74a38996cd6085d1d63cb.html">External commands</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">21</span><a href="legal-credits-fde438abeea34c909d226a9d31209ee8.html">Legal & credits</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

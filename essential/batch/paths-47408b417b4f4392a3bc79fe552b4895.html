@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">Paths</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/47408b417b4f4392a3bc79fe552b4895" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+<p>File and directory paths follow certain conventions. These include the possible use of a drive letter followed by a colon (<code>:</code>), the use of backslash (<code>\</code>) as the path separator, and the distinction between relative and absolute paths.
+</p>
+<p>Forward slash (<code>/</code>) often works when used instead of (<code>\</code>) but not always; it is normally used to mark switches (options). Using forward slash can lead to various obscure behaviors, and is best avoided.
+</p>
+<p>Special device names include <code>NUL</code>, <code>CON</code>, <code>PRN</code>, <code>AUX</code>, <code>COM1</code>, ...,<code> COM9</code>, <code>LPT1</code>, ..., <code>LPT9</code>; these can be redirected to.
+</p>
+<p>Examples:
+</p>
+  <ul id="45bcd905-7d2e-4125-b971-89b02542db31" class="bulleted-list">
+    <li><code>attrib C:\Windows\System32\notepad.exe</code>
+      <ul id="6c7ab134-da3b-436c-9dca-fb60ae07bad4" class="bulleted-list">
+        <li>Succeeds if the file exists, as it should. This is an <em>absolute </em>path with a drive letter. It is also known as a  <em>fully qualified</em> path.
+        </li>
+      </ul>
+    </li>
+    <li><code>attrib \Windows\System32\notepad.exe</code>
+      <ul id="3854f4f4-165f-4c95-8fae-966c62cb37f3" class="bulleted-list">
+        <li>Succeeds if the current drive is <code>C:</code>, and if the file exists, as it should. This is an absolute path without a drive letter.
+        </li>
+      </ul>
+    </li>
+    <li><code>cd /d C:\Windows &amp; attrib System32\notepad.exe</code>
+      <ul id="860ac1d2-4012-4d50-b92e-d34c2432542b" class="bulleted-list">
+        <li>Succeeds if the file exists. The path given to <code>attrib</code> is a  relative path.
+        </li>
+      </ul>
+    </li>
+    <li><code>cd /d C:\Windows\System32 &amp; attrib C:notepad.exe</code>
+      <ul id="0af1efcf-b534-4b68-8b7c-b9b462161f32" class="bulleted-list">
+        <li>Succeeds if the file exists. The path given to <code>attrib</code> is a  one despite containing a drive letter: there would have to be <code>C:\notepad.exe</code> with a backslash for that to be an absolute path.
+        <p>relative
+        </p>
+        </li>
+      </ul>
+    </li>
+    <li><code>cd /d C:\Windows &amp; attrib .\System32\notepad.exe</code>
+      <ul id="d33129c5-1e89-4494-a606-da7202b7776b" class="bulleted-list">
+        <li>Succeeds if the file exists. A single period denotes the current folder.
+        </li>
+      </ul>
+    </li>
+    <li><code>attrib .</code>
+      <ul id="7953f02f-6c37-4411-9662-059f1fb843a4" class="bulleted-list">
+        <li>A single period denotes the current folder.
+        </li>
+      </ul>
+    </li>
+    <li><code>cd /d C:\Windows &amp; attrib .\System32\\\notepad.exe</code>
+      <ul id="7aced649-2dea-4d5c-8139-eb983768e029" class="bulleted-list">
+        <li>Succeeds if the file exists. Piling of backslashes has no impact beyond the first backslash.
+        </li>
+      </ul>
+    </li>
+    <li><code>cd /d C:\Windows &amp; attrib .\System32</code>
+      <ul id="83d3f204-0d89-4670-85c0-1f70e40e8b33" class="bulleted-list">
+        <li>Succeeds if the folder exists.
+        </li>
+      </ul>
+    </li>
+    <li><code>cd /d C:\Windows &amp; attrib .\System32\</code>
+      <ul id="ee12fe38-4bbb-4412-a531-0ae189538e95" class="bulleted-list">
+        <li>Fails. Folders are usually denoted without the final backslash.
+        </li>
+      </ul>
+    </li>
+    <li><code>cd C:\Windows\System32\</code>
+      <ul id="7e5153b8-8796-4109-974f-1206b10033d4" class="bulleted-list">
+        <li>Succeeds.
+        </li>
+      </ul>
+    </li>
+    <li><code>cd ..</code>
+      <ul id="a246a0cf-5141-4bf1-b336-07a68a4a6f91" class="bulleted-list">
+        <li>A double period denotes the parent folder.
+        </li>
+      </ul>
+    </li>
+    <li><code>attrib C:\Windows\System32\..\..\Windows\System32</code>
+      <ul id="df446dbe-fe62-40d9-85eb-d7f770e11856" class="bulleted-list">
+        <li>A double period can be used in the middle of the path to navigate to the parent folder, even multiple times.
+        </li>
+      </ul>
+    </li>
+    <li><code>attrib \\myserver\myvolume</code>
+      <ul id="49fdd3c3-9cff-40a2-a75b-aa9adf985e0f" class="bulleted-list">
+        <li>A network UNC path starts with double backslash and no drive letter.
+        </li>
+      </ul>
+    </li>
+    <li><code>cd \\myserver\myvolume</code>
+      <ul id="727f1c5a-1b00-4f28-aba5-083662220cd5" class="bulleted-list">
+        <li>Does not work; changing to a server folder in this direct manner does not work.
+        </li>
+      </ul>
+    </li>
+    <li><code>pushd \\myserver\folder</code>
+      <ul id="b87475a8-ae23-4071-a79c-2d25513bf0a9" class="bulleted-list">
+        <li>Automatically creates a drive for the folder and changes to it. After you use <a href="popd-0a6db5c64bf04b648dbfc07eeaa04a74.html">POPD</a>, the drive gets unassigned again.
+        </li>
+      </ul>
+    </li>
+    <li><code>attrib C:/Windows/System32/notepad.exe</code>
+      <ul id="11e344f9-9a37-4221-b69d-c37f82c154a4" class="bulleted-list">
+        <li>Succeeds on multiple versions of <code>cmd.exe</code>. Uses forward slashes.
+        </li>
+      </ul>
+    </li>
+  </ul>
+<p>Links:
+</p>
+  <ul id="e998e93a-84e1-42e1-86fc-a9e0c1219a81" class="bulleted-list">
+    <li><a href="http://ss64.com/nt/syntax-filenames.html">Long filenames, NTFS and legal filename characters at ss64.com</a>
+    </li>
+    <li><a href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa365247%28v=vs.85%29.aspx">Naming Files, Paths, and Namespaces at Microsoft</a>
+    </li>
+    <li><a href="https://en.wikipedia.org/wiki/Path_(computing)#MS-DOS/Microsoft_Windows_style">W:Path (computing)#MS-DOS/Microsoft Windows style</a>, wikipedia.org
+    </li>
+    <li><a href="http://stackoverflow.com/questions/10523708/why-does-the-cmd-exe-shell-on-windows-fail-with-paths-using-a-forward-slash">Why does the cmd.exe shell on Windows fail with paths using a forward-slash ('/) path separator</a>
+    </li>
+  </ul>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="paths-47408b417b4f4392a3bc79fe552b4895.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>Paths:</b></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="introduction-846c7623625e434bb3c481641bf2e016.html">Introduction</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="how-a-command-line-is-interpreted-cac61c915fce40c89a25c98ec229c5d6.html">How a command line is interpreted</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="batch-reloading-98bc367236ef48559db589eddaa811ff.html">Batch reloading</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="environment-variables-01b28cfb0b9b45409515334357d5f9bf.html">Environment variables</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="switches-9e2a7d8c43bb46f29962b0d2f195e19c.html">Switches</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="error-level-c70d88bae6d545b7a5b5ca99e777b409.html">Error level</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="string-processing-20d44ad6fccd4a048e3464a4dd3d4570.html">String processing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><a href="command-line-arguments-6a6ffadba81b4cc6a979f7e1ee4ea4aa.html">Command-line arguments</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><a href="wildcards-2b952cca7aee49b2a4a709c4c4ad5aef.html">Wildcards</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><a href="user-input-5726d65b176c49ebb21d2daa271031f9.html">User input</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="-percent-tilde-f4263820c2db41e399c77259970464f1.html">%~ (percent tilde)</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="functions-f516efa981d9481ca4253d271451381d.html">Functions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="calculation-06c65868038c4e2ab21937d82bebc6c0.html">Calculation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="finding-files-af14c29c29d740609e9e8c887a2c3cb7.html">Finding files</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="keyboard-shortcuts-af2ffcc6632c4dada420d99695ca6c10.html">Keyboard shortcuts</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><b>Paths</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><a href="arrays-dc75afb35c164e29a9018d897be1f452.html">Arrays</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><a href="perl-one-liners-bdb9a0cee7bf4ca09a8bb650e6e2cad7.html">Perl one-liners</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="limitations-09c168245f2e40d99e684733fb760091.html">Limitations</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">19</span><a href="built-in-commands-34f80a6dd2c84337951597d48e342fec.html">Built-in commands</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">20</span><a href="external-commands-f83d61795cb74a38996cd6085d1d63cb.html">External commands</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">21</span><a href="legal-credits-fde438abeea34c909d226a9d31209ee8.html">Legal & credits</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

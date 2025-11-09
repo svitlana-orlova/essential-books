@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">Finding extent of Quadratic Curve</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/3f6e99f32fbf483bbfe56887e0ebf302" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+<p>When you need to find the bounding rectangle of a quadratic bezier curve you can use the following performant method.
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">// This method was discovered by Blindman67 and solves by first normalising the control point thereby reducing the algorithm complexity 
+</span></span><span class="line"><span class="cl">// x1,y1, x2,y2, x3,y3 Start, Control, and End coords of bezier
+</span></span><span class="line"><span class="cl">// [extent] is optional and if provided the extent will be added to it allowing you to use the function
+</span></span><span class="line"><span class="cl">//        to get the extent of many beziers.
+</span></span><span class="line"><span class="cl">// returns extent object (if not supplied a new extent is created)
+</span></span><span class="line"><span class="cl">// Extent object properties
+</span></span><span class="line"><span class="cl">// top, left,right,bottom,width,height
+</span></span><span class="line"><span class="cl">function getQuadraticCurevExtent(x1, y1, x2, y2, x3, y3, extent) {
+</span></span><span class="line"><span class="cl">    var brx, bx, x, bry, by, y, px, py;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    // solve quadratic for bounds by BM67 normalizing equation
+</span></span><span class="line"><span class="cl">    brx = x3 - x1; // get x range
+</span></span><span class="line"><span class="cl">    bx = x2 - x1; // get x control point offset
+</span></span><span class="line"><span class="cl">    x = bx / brx; // normalise control point which is used to check if maxima is in range
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    // do the same for the y points
+</span></span><span class="line"><span class="cl">    bry = y3 - y1;
+</span></span><span class="line"><span class="cl">    by = y2 - y1;
+</span></span><span class="line"><span class="cl">    y = by / bry;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    px = x1; // set defaults in case maximas outside range
+</span></span><span class="line"><span class="cl">    py = y1;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    // find top/left, top/right, bottom/left, or bottom/right
+</span></span><span class="line"><span class="cl">    if (x &lt; 0 || x &gt; 1) { // check if x maxima is on the curve
+</span></span><span class="line"><span class="cl">        px = bx * bx / (2 * bx - brx) + x1; // get the x maxima
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    if (y &lt; 0 || y &gt; 1) { // same as x
+</span></span><span class="line"><span class="cl">        py = by * by / (2 * by - bry) + y1;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    // create extent object and add extent
+</span></span><span class="line"><span class="cl">    if (extent === undefined) {
+</span></span><span class="line"><span class="cl">        extent = {};
+</span></span><span class="line"><span class="cl">        extent.left = Math.min(x1, x3, px);
+</span></span><span class="line"><span class="cl">        extent.top = Math.min(y1, y3, py);
+</span></span><span class="line"><span class="cl">        extent.right = Math.max(x1, x3, px);
+</span></span><span class="line"><span class="cl">        extent.bottom = Math.max(y1, y3, py);
+</span></span><span class="line"><span class="cl">    } else { // use spplied extent and extend it to fit this curve
+</span></span><span class="line"><span class="cl">        extent.left = Math.min(x1, x3, px, extent.left);
+</span></span><span class="line"><span class="cl">        extent.top = Math.min(y1, y3, py, extent.top);
+</span></span><span class="line"><span class="cl">        extent.right = Math.max(x1, x3, px, extent.right);
+</span></span><span class="line"><span class="cl">        extent.bottom = Math.max(y1, y3, py, extent.bottom);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    extent.width = extent.right - extent.left;
+</span></span><span class="line"><span class="cl">    extent.height = extent.bottom - extent.top;
+</span></span><span class="line"><span class="cl">    return extent;
+</span></span><span class="line"><span class="cl">}</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>For a more detailed look at solving for extent see answer <a href="http://stackoverflow.com/a/39396368/3877726">To get extent of a quadratic bezier</a> which includes runnable demos.
+</p>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="finding-extent-of-quadratic-curve-3f6e99f32fbf483bbfe56887e0ebf302.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>Navigating along a path:</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="navigating-along-a-path-3677d449bf7f423c9b466c2ce0a070f9.html">Navigating along a Path</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="find-point-on-curve-953c3993815a4bafaf11e06d598c2ec2.html">Find point on curve</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="finding-points-along-a-cubic-bezier-curve-c51cbae65e58459c8e4aef58a7215602.html">Finding points along a cubic Bezier curve</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="finding-points-along-a-quadratic-curve-40d46c0b12ef48f28c04382714754c1a.html">Finding points along a quadratic curve</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="finding-points-along-an-entire-path-containing-curves-and-lines-7194e1da60234240baa70d2901d316b9.html">Finding points along an entire Path containing curves and lines</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="length-of-a-quadratic-curve-821ae8d5410a49038d6b19e031fd8a11.html">Length of a Quadratic Curve</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="split-bezier-curves-at-position-2c9822e11e234b3eb098eec6acfa7cc3.html">Split bezier curves at position</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="trim-bezier-curve.-677520852eaa4f2d951ab08b77320459.html">Trim bezier curve.</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="length-of-a-cubic-bezier-curve-a-close-approximation-abf65ea2ede040fa941b8d40ef81df14.html">Length of a Cubic Bezier Curve a close approximation</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="finding-points-along-a-line-79857376c84149eab30205128307ea9c.html">Finding points along a line</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><b>Finding extent of Quadratic Curve</b></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="getting-started-7d650957f57448d485d0f1426726d652.html">Getting started</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="images-ba65754ede34461eb1e1560e2d6309e4.html">Images</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="path-syntax-db570444b7a84c65af507de125251743.html">Path syntax</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="media-types-and-the-canvas-4ce6605a6537475291ee3480df7bacb9.html">Media types and the canvas</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="animation-43473e4727d0430a914dcd63a767322a.html">Animation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="collisions-and-intersections-c37198bed8f348ef8bfc2cebe79b5d8b.html">Collisions and intersections</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="paths-041fccaeeb964fce95770aaf8da6dad2.html">Paths</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><a href="text-0d20929db8564186bfedfbeecbb675d5.html">Text</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><a href="clearing-the-screen-28d114e4408844fc827c5f73d6238ff8.html">Clearing the screen</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><b>Navigating along a path</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="dragging-path-shapes-images-dd776e0ee2284dd699b4439d20e57076.html">Dragging path shapes images</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="shadows-15ffc1665db0493fb2645df513042ee7.html">Shadows</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="charts-diagrams-55c84186869841c98d2d873c9b4a19c9.html">Charts diagrams</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="polygons-e6a83a07a60745f6884992715cb6dc6b.html">Polygons</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="transformations-90e27c4187894f0499f3a04940f3821a.html">Transformations</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="responsive-design-d29786c782594e778b8c65265f7b95e3.html">Responsive design</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><a href="compositing-de5b9aa74f444592b8f347684b3408b3.html">Compositing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><a href="pixel-manipulation-ac5cc01d563d4c52a3602801411c5860.html">Pixel manipulation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="contributors-bdca4d70e7e644fe95706e68527f05d6.html">Contributors</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

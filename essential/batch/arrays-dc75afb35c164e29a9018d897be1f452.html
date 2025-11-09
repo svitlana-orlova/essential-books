@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">Arrays</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/dc75afb35c164e29a9018d897be1f452" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+<p>Arrays can be emulated in the delayed expansion mode using the combination of <code>%</code> and <code>!</code> to indicate variables. There, <code>%i%</code> is the value of variable <code>i</code> with the immediate expansion while <code>!i!</code> is the value of variable <code>i</code> in the delayed expansion.
+</p>
+
+<div class="code-box lang-Shell">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">@echo off
+</span></span><span class="line"><span class="cl">setlocal EnableDelayedExpansion
+</span></span><span class="line"><span class="cl"><span class="k">for</span> /l %%i in <span class="o">(</span>1, 1, 10<span class="o">)</span> <span class="k">do</span> <span class="o">(</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">set</span> array_%%i<span class="o">=</span>!random!
+</span></span><span class="line"><span class="cl"><span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> /l %%i in <span class="o">(</span>1, 1, 10<span class="o">)</span> <span class="k">do</span> <span class="o">(</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">echo</span> !array_%%i!
+</span></span><span class="line"><span class="cl"><span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">:: For each item in the array, not knowing the length
+</span></span><span class="line"><span class="cl"><span class="nb">set</span> <span class="nv">i</span><span class="o">=</span><span class="m">1</span>
+</span></span><span class="line"><span class="cl">:startloop
+</span></span><span class="line"><span class="cl"><span class="k">if</span> not defined array_%i% goto endloop
+</span></span><span class="line"><span class="cl"><span class="nb">set</span> array_%i%<span class="o">=</span>!array_%i%!_dummy_suffix
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> A%i%: !array_%i%!
+</span></span><span class="line"><span class="cl"><span class="nb">set</span> /a <span class="nv">i</span><span class="o">+=</span><span class="m">1</span>
+</span></span><span class="line"><span class="cl">goto startloop
+</span></span><span class="line"><span class="cl">:endloop</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>Links:
+</p>
+  <ul id="67289af8-37be-40aa-a2c0-b9072a170ae2" class="bulleted-list">
+    <li><a href="http://stackoverflow.com/questions/10166386/arrays-linked-lists-and-other-data-structures-in-cmd-exe-batch-script/10167990#10167990">Arrays, linked lists and other data structures in cmd.exe (batch) script</a>, stackoverflow.com
+    </li>
+  </ul>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="arrays-dc75afb35c164e29a9018d897be1f452.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>Arrays:</b></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="introduction-846c7623625e434bb3c481641bf2e016.html">Introduction</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="how-a-command-line-is-interpreted-cac61c915fce40c89a25c98ec229c5d6.html">How a command line is interpreted</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="batch-reloading-98bc367236ef48559db589eddaa811ff.html">Batch reloading</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="environment-variables-01b28cfb0b9b45409515334357d5f9bf.html">Environment variables</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="switches-9e2a7d8c43bb46f29962b0d2f195e19c.html">Switches</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="error-level-c70d88bae6d545b7a5b5ca99e777b409.html">Error level</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="string-processing-20d44ad6fccd4a048e3464a4dd3d4570.html">String processing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><a href="command-line-arguments-6a6ffadba81b4cc6a979f7e1ee4ea4aa.html">Command-line arguments</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><a href="wildcards-2b952cca7aee49b2a4a709c4c4ad5aef.html">Wildcards</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><a href="user-input-5726d65b176c49ebb21d2daa271031f9.html">User input</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="-percent-tilde-f4263820c2db41e399c77259970464f1.html">%~ (percent tilde)</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="functions-f516efa981d9481ca4253d271451381d.html">Functions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="calculation-06c65868038c4e2ab21937d82bebc6c0.html">Calculation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="finding-files-af14c29c29d740609e9e8c887a2c3cb7.html">Finding files</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="keyboard-shortcuts-af2ffcc6632c4dada420d99695ca6c10.html">Keyboard shortcuts</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="paths-47408b417b4f4392a3bc79fe552b4895.html">Paths</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><b>Arrays</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><a href="perl-one-liners-bdb9a0cee7bf4ca09a8bb650e6e2cad7.html">Perl one-liners</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="limitations-09c168245f2e40d99e684733fb760091.html">Limitations</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">19</span><a href="built-in-commands-34f80a6dd2c84337951597d48e342fec.html">Built-in commands</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">20</span><a href="external-commands-f83d61795cb74a38996cd6085d1d63cb.html">External commands</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">21</span><a href="legal-credits-fde438abeea34c909d226a9d31209ee8.html">Legal & credits</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">Calculating Selector Specificity</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/23ae82e1ca754aacae44e38e07c23c7c" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+<p>Each individual CSS Selector has its own specificity value. Every selector in a sequence increases the sequence’s overall specificity. Selectors fall into one of three different specificity groups: <em>A</em>, <em>B</em> and <em>c</em>. When multiple selector sequences select a given element, the browser uses the styles applied by the sequence with the highest overall specificity.
+</p>
+<p>Group | Comprised of | Examples |
+—— | –––––––––––––––––––– | ––––– |<em>A</em> | id selectors | <code>#foo</code> |<em>B</em> | class selectors attribute selectors pseudo-classes | <code>.bar</code> <code>[title]</code>, <code>[colspan="2"]</code> <code>:hover</code>, <code>:nth-child(2)</code> |<em>c</em> | type selectors pseudo-elements | <code>div</code>, <code>li</code> <code>::before</code>, <code>::first-letter</code> |
+</p>
+<p>Group <em>A</em> is the most specific, followed by Group <em>B</em>, then finally Group <em>c</em>.
+</p>
+<p>The universal selector (<code>\*</code>) and combinators (like <code>\&gt;</code> and <code>~</code>) have no specificity.
+</p>
+  <h3 id="ced9296d-39b0-4fd0-a50f-911b8b6f4b5f" class="">Example 1: Specificity of various selector sequences
+  <a class="header-anchor" href="calculating-selector-specificity-23ae82e1ca754aacae44e38e07c23c7c.html#ced9296d-39b0-4fd0-a50f-911b8b6f4b5f" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h3>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">#foo #baz {}      /* a=2, b=0, c=0 */
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#foo.bar {}       /* a=1, b=1, c=0 */
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#foo {}           /* a=1, b=0, c=0 */
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">.bar:hover {}     /* a=0, b=2, c=0 */
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">div.bar {}        /* a=0, b=1, c=1 */
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">:hover {}         /* a=0, b=1, c=0 */
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[title] {}        /* a=0, b=1, c=0 */
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">.bar {}           /* a=0, b=1, c=0 */
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">div ul + li {}    /* a=0, b=0, c=3 */
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">p::after {}       /* a=0, b=0, c=2 */
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">*::before {}      /* a=0, b=0, c=1 */
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">::before {}       /* a=0, b=0, c=1 */
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">div {}            /* a=0, b=0, c=1 */
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">* {}              /* a=0, b=0, c=0 */</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+  <h3 id="da8ba75d-1809-4a72-8e68-254f1b959817" class="">Example 2: How specificity is used by the browser
+  <a class="header-anchor" href="calculating-selector-specificity-23ae82e1ca754aacae44e38e07c23c7c.html#da8ba75d-1809-4a72-8e68-254f1b959817" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h3>
+<p>Imagine the following CSS implementation:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">#foo {
+</span></span><span class="line"><span class="cl">  color: blue;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">.bar {
+</span></span><span class="line"><span class="cl">  color: red;
+</span></span><span class="line"><span class="cl">  background: black;
+</span></span><span class="line"><span class="cl">}</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>Here we have an ID selector which declares <code>color</code> as <em>blue</em>, and a class selector which declares <code>color</code> as <em>red</em> and <code>background</code> as <em>black</em>.
+</p>
+<p>An element with an ID of <code>#foo</code> and a class of <code>.bar</code> will be selected by both declarations. ID selectors have a Group <em>A</em> specificity and class selectors have a Group <em>B</em> specificity. An ID selector outweighs any number of class selectors. Because of this, <code>color:blue;</code> from the <code>#foo</code> selector and the <code>background:black;</code> from the <code>.bar</code> selector will be applied to the element. The higher specificity of the ID selector will cause the browser to ignore the <code>.bar</code> selector’s <code>color</code> declaration.
+</p>
+<p>Now imagine a different CSS implementation:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">.bar {
+</span></span><span class="line"><span class="cl">  color: red;
+</span></span><span class="line"><span class="cl">  background: black;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">.baz {
+</span></span><span class="line"><span class="cl">  background: white;
+</span></span><span class="line"><span class="cl">}</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>Here we have two class selectors; one of which declares <code>color</code> as <em>red</em> and <code>background</code> as <em>black</em>, and the other declares <code>background</code> as <em>white</em>.
+</p>
+<p>An element with both the <code>.bar</code> and <code>.baz</code> classes will be affected by both of these declarations, however the problem we have now is that both <code>.bar</code> and <code>.baz</code> have an identical Group <em>B</em> specificity. The cascading nature of CSS resolves this for us: as <code>.baz</code> is defined <em>after</em> <code>.bar</code>, our element ends up with the <em>red</em> <code>color</code> from <code>.bar</code> but the <em>white</em> <code>background</code> from <code>.baz</code>.
+</p>
+  <h3 id="c4e26df4-45fe-46d0-9ecc-449dd3d5bb24" class="">Example 3: How to manipulate specificity
+  <a class="header-anchor" href="calculating-selector-specificity-23ae82e1ca754aacae44e38e07c23c7c.html#c4e26df4-45fe-46d0-9ecc-449dd3d5bb24" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h3>
+<p>The last snippet from Example 2 above can be manipulated to ensure our <code>.bar</code> class selector’s <code>color</code> declaration is used instead of that of the <code>.baz</code> class selector.
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">.bar {}        /* a=0, b=1, c=0 */
+</span></span><span class="line"><span class="cl">.baz {}        /* a=0, b=1, c=0 */</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>The most common way to achieve this would be to find out what other selectors can be applied to the <code>.bar</code> selector sequence. For example, if the <code>.bar</code> class was only ever applied to <code>span</code> elements, we could modify the <code>.bar</code> selector to <code>span.bar</code>. This would give it a new Group <em>C</em> specificity, which would override the <code>.baz</code> selector’s lack thereof:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">span.bar {}    /* a=0, b=1, c=1 */
+</span></span><span class="line"><span class="cl">.baz {}        /* a=0, b=1, c=0 */</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>However it may not always possible to find another common selector which is shared between any element which uses the <code>.bar</code> class. Because of this, CSS allows us to duplicate selectors to increase specificity. Instead of just <code>.bar</code>, we can use <code>.bar.bar</code> instead (See <a href="https://www.w3.org/TR/css3-selectors/#grammar">The grammar of Selectors, W3C Recommendation</a>). This still selects any element with a class of <code>.bar</code>, but now has double the Group <em>B</em> specificity:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">.bar.bar {}    /* a=0, b=2, c=0 */
+</span></span><span class="line"><span class="cl">.baz {}        /* a=0, b=1, c=0 */</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+  <h3 id="9fe607d6-c9e1-472b-9a86-e3c51c919efa" class=""><code>!important</code> and inline style declarations
+  <a class="header-anchor" href="calculating-selector-specificity-23ae82e1ca754aacae44e38e07c23c7c.html#9fe607d6-c9e1-472b-9a86-e3c51c919efa" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h3>
+<p>The <code>!important</code> flag on a style declaration and styles declared by the HTML <code>style</code> attribute are considered to have a greater specificity than any selector. If these exist, the style declaration they affect will overrule other declarations regardless of their specificity. That is, unless you have more than one declaration that contains an <code>!important</code> flag for the same property that apply to the same element. Then, normal specificity rules will apply to those properties in reference to each other.
+</p>
+<p>Because they completely override specificity, the use of <code>!important</code> is frowned upon in most use cases. One should use it as little as possible. To keep CSS code efficient and maintainable in the long run, it’s almost always better to increase the specificity of the surrounding selector than to use <code>!important</code>.
+</p>
+<p>One of those rare exceptions where <code>!important</code> is not frowned upon, is when implementing generic helper classes like a <code>.hidden</code> or <code>.background-yellow</code> class that are supposed to always override one or more properties wherever they are encountered. And even then, you need to know what you’re doing. The last thing you want, when writing maintainable CSS, is to have <code>!important</code> flags throughout your CSS.
+</p>
+  <h3 id="c7d4a13e-2d8d-4a87-83ac-782ddbd16664" class="">A final note
+  <a class="header-anchor" href="calculating-selector-specificity-23ae82e1ca754aacae44e38e07c23c7c.html#c7d4a13e-2d8d-4a87-83ac-782ddbd16664" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h3>
+<p>A common misconception about CSS specificity is that the Group <em>A</em>, <em>B</em> and <em>c</em> values should be combined with each other (<code>a=1, b=5, c=1</code> =&gt; 151). This is <strong>not</strong> the case. If this were the case, having 20 of a Group <em>B</em> or <em>c</em> selector would be enough to override a single Group <em>A</em> or <em>B</em> selector respectively. The three groups should be regarded as individual levels of specificity. Specificity cannot be represented by a single value.
+</p>
+<p>When creating your CSS style sheet, you should maintain the lowest specificity as possible. If you need to make the specificity a little higher to overwrite another method, make it higher but as low as possible to make it higher. You shouldn’t need to have a selector like this:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">body.page header.container nav div#main-nav li a {}</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>This makes future changes harder and pollutes that css page.
+</p>
+<hr id="c318489a-6ca5-4bc7-8ddb-6e27e172e6f4">
+<p>You can calculate the specificity of your selector <a href="http://specificity.keegan.st/">here</a>
+</p>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="calculating-selector-specificity-23ae82e1ca754aacae44e38e07c23c7c.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>Cascading and specificity:</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="cascading-and-specificity-94dea16b2259435293c1a69328191301.html">Cascading and Specificity</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><b>Calculating Selector Specificity</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="the-important-declaration-28d2cc3c45bd4131acc3c7abaae55bc2.html">The important declaration</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="cascading-4d44faa05710438ca067aa2a4f1c2ef5.html">Cascading</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="more-complex-specificity-example-e3e54d0c345b44df99b1f790f1ad844b.html">More complex specificity example</a></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="getting-started-6447d07e72794ef8ad31221f6202a958.html">Getting started</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="backgrounds-b5232adc60a14030aec3ac8cfbc40c48.html">Backgrounds</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="centering-fd36e28bd46e4e858e33850a518cc83b.html">Centering</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="margins-98e6c7b53bf246c680d3c5cbd31a66f9.html">Margins</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="media-queries-7a25433019a740789eb8742c9947c27e.html">Media queries</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="floats-46bc5a5e461b4eeaae501350e8c216f2.html">Floats</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="typography-700875db418d425ea5bc4f233df26393.html">Typography</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><a href="flexbox-8d4886c10f854e7080014f310f6668e5.html">Flexbox</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><b>Cascading and specificity</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><a href="animations-5fee4d4d52a74aa3a0a2aa7058cc0bf7.html">Animations</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="selectors-e012f9122f984998b135e4e66d4b296a.html">Selectors</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="colors-8af638cc537f4b8fa6531a9437d3ac91.html">Colors</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="box-mode-8ad0b6070b544717af1faaad85004d7a.html">Box mode</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="transiti-c50f71ff6d61466cbcd25bf31d7f79f2.html">Transiti</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="length-units-07e243d7106d41a6a70a54841524dfcf.html">Length units</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="pseudo-elements-ee0aa8d516eb4655a3e41207a664ff8d.html">Pseudo-elements</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><a href="positioning-2f766cdc785a4190bb87fe34634ce93e.html">Positioning</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><a href="2d-transforms-cfe69373b211484f859d994b14c21101.html">2D transforms</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="tables-0497482561b24800ae16c05860d63e8b.html">Tables</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">19</span><a href="browser-support-prefixes-bb456a6be908423a9f014100ba169355.html">Browser support prefixes</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">20</span><a href="normalizing-browser-styles-dbaba9a466d7412db2c93da6f51a9e9a.html">Normalizing browser styles</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">21</span><a href="padding-2abad8a1f82a4e33b8177e35df65d648.html">Padding</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">22</span><a href="layout-control-6ef1252782ae43bf9d8310c7e4f6b679.html">Layout control</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">23</span><a href="filter-property-325b6445db104fc3a31f291360b669b7.html">Filter property</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">24</span><a href="comments-b21963daf81847098a207a8c6cb88159.html">Comments</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">25</span><a href="cursor-styling-b424059796434c68b3a48effe38559fd.html">Cursor styling</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">26</span><a href="box-shadow-c07e46a0dbd44d9aa7dd7fa847bce4ff.html">Box shadow</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">27</span><a href="custom-properties-variables-ae18c98c9032491bb984171019e74029.html">Custom properties, variables</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">28</span><a href="shapes-for-floats-0e939055c3994797bc21990b347dae23.html">Shapes for floats</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">29</span><a href="grid-f6444ef03c8343a386bef9a075d908f4.html">Grid</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">30</span><a href="border-cf0362b86e4e49e69095491801d0527a.html">Border</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">31</span><a href="functions-7178e7e993fe4d6084de29271ca4ed9a.html">Functions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">32</span><a href="3d-transforms-13d6e8c94b634f68873521b9e3ecde18.html">3D Transforms</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">33</span><a href="counters-67afe3a092154b71a6ba01022485f703.html">Counters</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">34</span><a href="single-element-shapes-1fa750ee637a4507a179de35cff27ee6.html">Single element shapes</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">35</span><a href="opacity-96ef4707530e46e783ea44b8e0942142.html">Opacity</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">36</span><a href="performance-74c977770820445da5e9e83344297798.html">Performance</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">37</span><a href="columns-e7833d5c379d420fba51ef44b8c4115e.html">Columns</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">38</span><a href="inline-block-layout-cdcda7af0abd41da9da0df9cd78cd933.html">Inline-block layout</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">39</span><a href="inheritance-3dad84229fd044f5af2d9f073bdf094d.html">Inheritance</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">40</span><a href="css-image-sprites-e9225abcd9b14d31a198f7989d53b201.html">CSS Image Sprites</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">41</span><a href="clipping-and-masking-569b653b8c4641dabbb643badd1b8184.html">Clipping and masking</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">42</span><a href="list-styles-846517a87e114dbb95f6d465b22654cc.html">List styles</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">43</span><a href="outlines-a0f5216392b94ebea5a6f92f4bbb23ec.html">Outlines</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">44</span><a href="structure-and-formatting-of-a-css-rule-3a8f70330e1546d48e08f182fcbbd38d.html">Structure and formatting of a css rule</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">45</span><a href="fragmentation-918e8e2bd2af4106b9def23c6e6848ed.html">Fragmentation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">46</span><a href="overflow-dc371b5c6e7e4e078e13217dd1e6172f.html">Overflow</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">47</span><a href="css-object-model-cssom-17762587a5664b529f4cd879db1cdfd7.html">CSS Object Model (CSSOM)</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">48</span><a href="feature-queries-e3859e10527d4464bb5eabd159e7debe.html">Feature queries</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">49</span><a href="stacking-context-567b868562e7458f84e5812f701291bf.html">Stacking context</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">50</span><a href="internet-explorer-hacks-293d87a0951a45c1b5e6000a3f655a44.html">Internet Explorer hacks</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">51</span><a href="block-formatting-context-bd677d4f18484e73b270c999c66de3bf.html">Block formatting context</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">52</span><a href="vertical-centering-26e07e0443ea4728be9dd1023c1766cc.html">Vertical centering</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">53</span><a href="object-fit-and-placement-26228db1a70945acb18bf6da01bf2005.html">Object Fit and Placement</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">54</span><a href="multiple-columns-cc368be6de2848b0bff15d7584737114.html">Multiple columns</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">55</span><a href="css-design-patterns-f8858db0ce6b4454879ac60a0cfbcd09.html">CSS design patterns</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">56</span><a href="contributors-f83a172b4b074ba9ac683ee297828b82.html">Contributors</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

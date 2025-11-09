@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">String Length</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/74219ab9b8a14710bc7874960e116cea" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+<p>NSString has a <code>length</code> property to get the number of characters.
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">NSString *string = @"example";
+</span></span><span class="line"><span class="cl">NSUInteger length = string.length;       // length equals 7</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>As in the <a href="http://stackoverflow.com/documentation/objective-c/832/nsstring/3828/splitting">Splitting Example</a>, keep in mind that <code>NSString</code> uses <a href="https://en.wikipedia.org/wiki/UTF-16">UTF-16</a> to represent characters. The length is actually just the number of UTF-16 code units. This can differ from what the user perceives as characters.
+</p>
+<p>Here are some cases that might be surprising:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">@"é".length == 1   // LATIN SMALL LETTER E WITH ACUTE (U+00E9)
+</span></span><span class="line"><span class="cl">@"é".length == 2   // LATIN SMALL LETTER E (U+0065) + COMBINING ACUTE ACCENT (U+0301)
+</span></span><span class="line"><span class="cl">@"❤️".length == 2  // HEAVY BLACK HEART (U+2764) + VARIATION SELECTOR-16 (U+FE0F)
+</span></span><span class="line"><span class="cl">@"🇮🇹".length == 4  // REGIONAL INDICATOR SYMBOL LETTER I (U+1F1EE) + REGIONAL INDICATOR SYMBOL LETTER T (U+1F1F9)</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>In order to get the number of user-perceived characters, known technically as “<a href="https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/Strings/Articles/stringsClusters.html">grapheme clusters</a>”, you must iterate over the string with <a href="https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSString_Class/#//apple_ref/occ/instm/NSString/enumerateSubstringsInRange:options:usingBlock:"><code>-enumerateSubstringsInRange:options:usingBlock:</code></a> and keep a count. This is demonstrated in <a href="http://stackoverflow.com/a/33539320/603977">an answer by Nikolai Ruhe on Stack Overflow</a>.
+</p>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="string-length-74219ab9b8a14710bc7874960e116cea.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>NSString:</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="nsstring-f4531a2d8f0b445694c0d98dc8772e03.html">NSString</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="encoding-and-decoding-01e6a87a18ca408f8d41633f0f278b9b.html">Encoding and Decoding</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><b>String Length</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="splitting-667e3e9b4958414798e222cb330a726e.html">Splitting</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="comparing-strings-a81b0844f279429a91b84749f82a9ae2.html">Comparing Strings</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="creation-75e95a5f0bc6493d9793eebcc2a4946c.html">Creation</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="searching-for-a-substring-f4362ff1113642daba313e600d0b8807.html">Searching for a Substring</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="changing-case-bdcae1621a30451292efc7f52920323b.html">Changing Case</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="joining-an-array-of-strings-b46f4e5dd25b4c2da6ccad2dfff1b245.html">Joining an Array of Strings</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="removing-leading-and-trailing-whitespace-8bb8e09e2e514934aba5efe7ca6699d5.html">Removing Leading and Trailing Whitespace</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="formatting-2b6c533db4aa4660a038fd20167fe913.html">Formatting</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="working-with-c-strings-522b2afba33c47f1a1606871b92b8a0b.html">Working with C Strings</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="reversing-a-nsstring-objective-c-03dc86977d12413faa05b4f449beed12.html">Reversing a NSString Objective-C</a></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="getting-started-9c8eea30441948d99acc2af85e13f691.html">Getting started</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="protocols-659988d931bd43a9aa8a348d98106bf0.html">Protocols</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="blocks-ff4ae9d14b984f1b88147d60938bb23f.html">Blocks</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="categories-305ad731687043158bd7cb7cd68c8d5a.html">Categories</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="key-value-coding-and-observing-1a2fc903c419477ebc9c634980a5b747.html">Key Value Coding and observing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="logging-71be0d2ef5d649fc8196d4c08c802f89.html">Logging</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="nsarray-f8482d7da9384531a1d53a2dea595618.html">NSArray</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><a href="classes-and-objects-b1a212919e7c4ffa8e64d67c8ab753f2.html">Classes and objects</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><b>NSString</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><a href="nsdictionary-3bba93bb22fb4816a8ec5d32c6243cfb.html">NSDictionary</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="nsdictionary-fb4c1ee4492d40daa681cea667f64cab.html">NSDictionary</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="low-level-runtime-environment-73591b7dab8a48a48c0c08a8eb95bd4e.html">Low-level runtime environment</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="nsarray-b653a6b7956c49938016e838958e7ddc.html">NSArray</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="nsurl-aefd8c4b8e3141279a8b1d53f29839fd.html">NSURL</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="methods-8ec8ae6795b24065adb26ff87458c670.html">Methods</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="error-handling-6122b855f4c440d28cd2fed4622d6e60.html">Error handling</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><a href="enums-705af5a23877433999bfd2b1f18377ff.html">Enums</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><a href="nsdata-38d6d7259d1b46dd90eb5553450bfd05.html">NSData</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="random-numbers-e7bba57b00174678b23c37fd58d4bb80.html">Random numbers</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">19</span><a href="properties-1e25a23ed9da4b309aa185fc78588266.html">Properties</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">20</span><a href="nsdate-03bd7682492e408ba8aed2189af7bbf5.html">NSDate</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">21</span><a href="nspredicate-a41e68d2e5824c84a9f771a1875df769.html">NSPredicate</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">22</span><a href="nsmutablearray-734553f351e74bf88797b50a5168b0df.html">NSMutableArray</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">23</span><a href="nsregularexpression-92ce0718865c4b6cac2514bd8ea869e3.html">NSRegularExpression</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">24</span><a href="nsjsonserialization-4ac15f4dfa604b5bb714d3549a0d967e.html">NSJSONSerialization</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">25</span><a href="memory-management-3732f308d12a4cbd85126e4f9d34a917.html">Memory management</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">26</span><a href="singletons-1ba93139aa144c2f8bc251d74d0a5004.html">Singletons</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">27</span><a href="nscalendar-2efdb963ab024ea2b2bae9381c8d216b.html">NSCalendar</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">28</span><a href="nsmutabledictionary-82d08f770a1c41a8b1d0a6c4522aba79.html">NSMutableDictionary</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">29</span><a href="multi-threading-e7d2fa0b2d3f4e9f96af721c1e741921.html">Multi-threading</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">30</span><a href="nsattributedstring-b1516cc03f41437a8a9518c88c0a41a3.html">NSAttributedString</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">31</span><a href="nstimer-c5c180edaa1c4002b026b35629fa1a84.html">NSTimer</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">32</span><a href="structs-1780f62ba5454fe9a7678218a6496c42.html">Structs</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">33</span><a href="subscripting-9d23f8a048094661b68663a0b911686b.html">Subscripting</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">34</span><a href="basic-data-types-9ab4b6b8bf3c4fb8b76ef1e7486d2519.html">Basic data types</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">35</span><a href="unit-testing-using-xcode-fa9e7153af6b44c3a3863a9bf09a29ee.html">Unit testing using XCode</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">36</span><a href="fast-enumeration-031688801fe941c0baca65baf138fad0.html">Fast enumeration</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">37</span><a href="nssortdescrip-cb761839f116465ca45457011164d2e6.html">NSSortDescrip</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">38</span><a href="inheritance-fa5a9568291b41919be1aa8b1b3c2f54.html">Inheritance</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">39</span><a href="nstextattachment-c504c87a07be45dfad768d0af4c59938.html">NSTextAttachment</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">40</span><a href="nsurl-send-post-request-3a2c46a41ba745a0a3650faa59123e73.html">NSUrl send POST request</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">41</span><a href="bool-bool-boolean-nscfboolean-be4edf80ba6f4efc87a3342ba9d898ec.html">BOOL, bool, Boolean, NSCFBoolean</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">42</span><a href="protocols-and-delegates-dfeb304a24c54f8c9badd655832a9e39.html">Protocols and delegates</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">43</span><a href="xml-parsing-15cab868dec04d9581ce8373d1a0315d.html">XML Parsing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">44</span><a href="declare-class-method-and-instance-method-b272f15427284de5b4f534ebc1506cb0.html">Declare class method and instance method</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">45</span><a href="predefined-macros-5bafcfcaf7e146388f2f937ebf46de74.html">Predefined macros</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">46</span><a href="nscache-c1b3d15090744c8f82733a9b2fcb2ef5.html">NSCache</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">47</span><a href="grand-central-dispatch-gcd-7beccec473a84e2c8e502f52f2d456fc.html">Grand Central Dispatch (GCD)</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">48</span><a href="continue-and-break-18b57704b3ac4132984835ce57454675.html">Continue and break</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">49</span><a href="format-specifiers-021837097d634c9d817603979c40287f.html">Format specifiers</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">50</span><a href="nsobject-0836f366821747c49d26b81c0a937842.html">NSObject</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">51</span><a href="modern-objective-c-783bc93a476448cf84f28ae9024a2700.html">Modern Objective-C</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">52</span><a href="nsuserdefaults-54fea9a98cc2452ab84679af09af8bdd.html">NSUserDefaults</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">53</span><a href="contributors-83b0729b76b74568ab095eebf755428f.html">Contributors</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

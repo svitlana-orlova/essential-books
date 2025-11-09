@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">PREPARE EXECUTE and DEALLOCATE PREPARE Statements</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/9da8851fa4b740099a4422f167179ff5" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+<p><a href="http://dev.mysql.com/doc/refman/5.7/en/prepare.html">PREPARE</a> prepares a statement for execution
+</p>
+<p><a href="http://dev.mysql.com/doc/refman/5.7/en/execute.html">EXECUTE</a> executes a prepared statement
+</p>
+<p><a href="http://dev.mysql.com/doc/refman/5.7/en/deallocate-prepare.html">DEALLOCATE PREPARE</a> releases a prepared statement
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">SET @s = 'SELECT SQRT(POW(?,2) + POW(?,2)) AS hypotenuse';
+</span></span><span class="line"><span class="cl">PREPARE stmt2 FROM @s;
+</span></span><span class="line"><span class="cl">SET @a = 6;
+</span></span><span class="line"><span class="cl">SET @b = 8;
+</span></span><span class="line"><span class="cl">EXECUTE stmt2 USING @a, @b;</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>Result:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">+------------+
+</span></span><span class="line"><span class="cl">| hypotenuse |
+</span></span><span class="line"><span class="cl">+------------+
+</span></span><span class="line"><span class="cl">|         10 |
+</span></span><span class="line"><span class="cl">+------------+</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>Finally,
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">DEALLOCATE PREPARE stmt2;</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>Notes:
+</p>
+  <ul id="90a33c73-9479-4dd1-9155-0371f2b14d86" class="bulleted-list">
+    <li>You must use @variables, not DECLAREd variables for <code>FROM @s</code>
+    </li>
+    <li>A primary use for Prepare, etc, is to ‘construct’ a query for situations where binding will not work, such as inserting the table name.
+    </li>
+  </ul>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="prepare-execute-and-deallocate-prepare-statements-9da8851fa4b740099a4422f167179ff5.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>PREPARE Statements:</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="prepare-statements-5f183f4d798c4252bec6a978d19bea54.html">PREPARE Statements</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><b>PREPARE EXECUTE and DEALLOCATE PREPARE Statements</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="alter-table-with-add-column-f0d54e8e041b410f929b7989d8a26d7f.html">Alter table with add column</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="construct-and-execute-8b34ea0e88cc407f9a01adc8bfc36f81.html">Construct and execute</a></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="getting-started-with-mysql-d25b2f34014a4ef09d74c4e98f8ed143.html">Getting started with MySQL</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="limit-and-offset-56219ef2122e465db23818097866679e.html">Limit and Offset</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="creating-databases-616df522aae4484eaf238fe9263ae02e.html">Creating Databases</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="backup-using-mysqldump-c3d9d8ecfaf643e4a13e13cbdef855cc.html">Backup using mysqldump</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="table-creation-bc7ea9d4892f4285b51795fe05e9bd36.html">Table Creation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="insert-5da85f4853114fc8b300e13859a363d2.html">Insert</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="error-codes-fab6427e36e24262adf5b7dd46cbf44d.html">Error Codes</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><a href="stored-routines-procedures-and-functions-de968e559310461495f66bd52c22d03a.html">Stored routines, procedures and functions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><a href="reserved-words-26e12d5b31c24d4e96b4501e7e23e266.html">Reserved Words</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><a href="string-operations-df3e984bc17c4ef4bdc332de317ef279.html">String operations</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="delete-bf61bb3b7d3a49aca27c7b5ac3712e89.html">Delete</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="view-bed7e16dee0e43f58f205c1bc79d5d17.html">View</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="indexes-and-keys-f100905c43374203b989b6dba6b5e3e1.html">Indexes and Keys</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="date-and-time-operations-77721c8436f64ec6be50c45542d60fac.html">Date and Time Operations</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="comments-91d8d720ad934cb1921f09b00f955fcd.html">Comments</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="load-data-infile-bcfaf0983cbc4ac09044431dae911b86.html">LOAD DATA INFILE</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><b>PREPARE Statements</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><a href="alter-table-849a6ccda61b495c96569f42d5687472.html">ALTER TABLE</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="joins-5142c632f25e465db2a15bb0cb8e0e08.html">Joins</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">19</span><a href="update-47b7955cab704367a84eff21b06f98a9.html">UPDATE</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">20</span><a href="change-password-a68130cccc60491cbd0c75c5c5ef700b.html">Change Password</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">21</span><a href="json-d0746c8e09b940efab1491487d6ba6c2.html">JSON</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">22</span><a href="mysql-admin-b1b394d0cf8a4184878657837cf167ed.html">MySQL Admin</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">23</span><a href="triggers-4f524c43e2b64f628bd6470ee0289a9c.html">TRIGGERS</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">24</span><a href="pivot-queries-7b2bfa8fd1284670971de69ff2f63ebc.html">Pivot Queries</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">25</span><a href="configuration-and-tuning-81dee265723d4c948abed31eaadd39d2.html">Configuration and tuning</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">26</span><a href="converting-from-myisam-to-innodb-c795d9c698a8453ea46905796163016d.html">Converting from MyISAM to InnoDB</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">27</span><a href="select-03e33186d8474410bb1e7daf26a39b10.html">SELECT</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">28</span><a href="create-new-user-0957ac6d9c0c4615bdb80398039bf034.html">Create New User</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">29</span><a href="group-by-b8296133a75b43568d9605cf03235af0.html">Group By</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">30</span><a href="union-a028e19bc974498498e7194857fa7906.html">UNION</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">31</span><a href="drop-table-6a9276f710db44b4b0a117dc34ced22c.html">Drop Table</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">32</span><a href="data-types-8f102458c1e44c31a1e4d0cfee7ab6f7.html">Data Types</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">33</span><a href="performance-tuning-4b4c66de593f495f81b8bd41df6c224e.html">Performance Tuning</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">34</span><a href="events-e0600245bb8941f88c23c0d95e413ad0.html">Events</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">35</span><a href="enum-036d6e471c2f463e9078f6a62ce71732.html">ENUM</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">36</span><a href="install-mysql-with-docker-f0d9a5fa77864dafb38a9d22e9dc8de5.html">Install MySQL with Docker</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">37</span><a href="arithmetic-851947978db146d594bb3b680cd4adca.html">Arithmetic</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">38</span><a href="character-sets-and-collations-bb97282bfd0242929769a1b5800dba9c.html">Character Sets and Collations</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">39</span><a href="myisam-engine-6629ab26e6744f59ace6f4cef06b3c3f.html">MyISAM Engine</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">40</span><a href="many-to-many-mapping-table-d5820ffa9c584856957dd3184aad2a51.html">Many-to-many Mapping table</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">41</span><a href="using-variables-60daf2eb78d142f7a880e0fabf971391.html">Using Variables</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">42</span><a href="log-files-562d31ff4c4849a7ad7e5c6b39a2c993.html">Log files</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">43</span><a href="partitioning-bb7323503d32483facfb50caa85e7ba3.html">Partitioning</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">44</span><a href="security-via-grants-b6261c6ac5d6447a94a06868e6461771.html">Security via GRANTs</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">45</span><a href="backticks-043cdc0a6ffc4ed192d5e0a268681fc6.html">Backticks</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">46</span><a href="mysqlimport-595fc4287d2e40b09396a1a9d47d6cd1.html">mysqlimport</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">47</span><a href="mysql-lock-table-015d0c61e7d74648a98bad0175a5813d.html">MySQL LOCK TABLE</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">48</span><a href="mysql-unions-8edb469f71c54589bfc323f155af0544.html">MySQL Unions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">49</span><a href="order-by-e60647b482e1404e8c98f806fb177282.html">ORDER BY</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">50</span><a href="mysql-client-93d5655638f9455493aba2960eb74c48.html">MySQL client</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">51</span><a href="mysql-performance-tips-a14c3674c8f342a7bde06fe36822313f.html">MySQL Performance Tips</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">52</span><a href="temporary-tables-16372fe8f6c0416e98106e397303296a.html">Temporary Tables</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">53</span><a href="transaction-0c2493793ee34a2d92d3c1a4759c1ff3.html">Transaction</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">54</span><a href="customize-ps1-4705933d22cd4df2a2b65c6a93aa18c6.html">Customize PS1</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">55</span><a href="dealing-with-sparse-or-missing-data-e360c96cbb8545308877f40ef62a45ab.html">Dealing with sparse or missing data</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">56</span><a href="dynamic-un-pivot-table-using-prepared-statement-52f7847c61a04bd2a3119830661e289c.html">Dynamic Un-Pivot Table using Prepared Statement</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">57</span><a href="null-37652373ad364dfd944bd9b063f4d009.html">NULL</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">58</span><a href="replication-8b8406157d6943c4a955fa5e25657ef7.html">Replication</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">59</span><a href="connecting-with-utf-8-7f8f5bb98330470782d25565aa66767a.html">Connecting with UTF-8</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">60</span><a href="ssl-connection-setup-47ee148c2fa34addbca242f5749df850.html">SSL Connection Setup</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">61</span><a href="handling-time-zones-a92a060c1ffd4353a6c6d542d3bbf514.html">Handling Time Zones</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">62</span><a href="time-with-subsecond-precision-32080415b71d4b6e9e23aff2e8d908bb.html">Time with subsecond precision</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">63</span><a href="error-1055-only-full-group-by-f396a67b37724b0eaf59b16f2eba71a6.html">Error 1055 ONLY FULL GROUP BY</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">64</span><a href="full-text-search-3e13ef24307e40d7b1d1f6665ac35a14.html">Full-Text search</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">65</span><a href="extract-values-from-json-type-78907ef4512f456b90d6bf47f19fa4d1.html">Extract values from JSON type</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">66</span><a href="regular-expressions-7d64394fa0b54b13a19e08f9141408ff.html">Regular Expressions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">67</span><a href="recover-and-reset-default-root-password-6f381ab257eb427882068c544ab46e8e.html">Recover and reset default root password</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">68</span><a href="one-to-many-20d08160defc4a9aa9df11cdd9ecbf68.html">One to Many</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">69</span><a href="joins-join-3-tables-d7c33f986aaf44d3aec488ba01863f63.html">JOINS Join 3 tables</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">70</span><a href="server-information-bed1a394702744ed90c31c6b9457ab29.html">Server Information</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">71</span><a href="recover-from-lost-root-password-5926416cafa04187992b26d580e8c93e.html">Recover from lost root password</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">72</span><a href="contributors-8298014c00634e2caa5af60ac87dda4f.html">Contributors</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

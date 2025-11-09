@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">IF</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/3efa96b08834478eb9d87574e024e74f" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+<p>Conditionally executes a command. Available elementary tests:
+</p>
+  <ul id="64facecb-79db-42fb-ae6c-c31ae4fa4357" class="bulleted-list">
+    <li><code>exist &lt;filename&gt;</code>
+    </li>
+    <li><code>&lt;string&gt;==&lt;string&gt;</code>
+    </li>
+    <li><code>&lt;expression1&gt; equ &lt;expression2&gt;</code> -- equals
+    </li>
+    <li><code>&lt;expression1&gt; neq &lt;expression2&gt;</code> -- not equal
+    </li>
+    <li><code>&lt;expression1&gt; lss &lt;expression2&gt;</code> -- less than
+    </li>
+    <li><code>&lt;expression1&gt; leq &lt;expression2&gt;</code> -- less than or equal
+    </li>
+    <li><code>&lt;expression1&gt; gtr &lt;expression2&gt;</code> -- greater than
+    </li>
+    <li><code>&lt;expression1&gt; geq &lt;expression2&gt;</code> -- greater than or equal
+    </li>
+    <li><code>defined &lt;variable&gt;</code>
+    </li>
+    <li><code>errorlevel &lt;number&gt;</code>
+    </li>
+    <li><code>cmdextversion &lt;number&gt;</code>
+    </li>
+  </ul>
+<p>To each elementary test, "not" can be applied. Apparently there are no operators like AND, OR, etc. to combine elementary tests.
+</p>
+<p>The <code>/I</code> switch makes the <code>==</code> and <code>equ</code> comparisons ignore case.
+</p>
+<p>An example:
+</p>
+
+<div class="code-box lang-Shell">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="k">if</span> not exist %targetpath% <span class="o">(</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">echo</span> Target path not found.
+</span></span><span class="line"><span class="cl">  <span class="nb">exit</span> /b
+</span></span><span class="line"><span class="cl"><span class="o">)</span></span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>Examples:
+</p>
+  <ul id="88970f62-c4ca-4324-a7a1-3921d546e9d8" class="bulleted-list">
+    <li><code>if not 1 equ 0 echo Not equal</code>
+    </li>
+    <li><code>if 1 equ 0 echo A &amp; echo B</code>
+    <p>Does nothing; both echo commands are subject to the condition.
+    </p>
+    </li>
+    <li><code>if not 1 equ 0 goto :mylabel</code>
+    </li>
+    <li><code>if not a geq b echo Not greater</code>
+    </li>
+    <li><code>if b geq a echo Greater</code>
+    </li>
+    <li><code>if b geq A echo Greater in a case-insensitive comparison</code>
+    </li>
+    <li><code>if B geq a echo Greater in a case-insensitive comparison</code>
+    </li>
+    <li><code>if 0 equ 00 echo Numerical equality</code>
+    </li>
+    <li><code>if not 0==00 echo String inequality</code>
+    </li>
+    <li><code>if 01 geq 1 echo Numerical comparison</code>
+    </li>
+    <li><code>if not "01" geq "1" echo String comparison</code>
+    </li>
+    <li><code>if 1 equ 0 (echo Equal) else echo Unequal</code>
+    <p>Notice the brackets around the positive then-part to make it work.
+    </p>
+    </li>
+    <li><code>if not a==A echo Case-sensitive inequality</code>
+    </li>
+    <li><code>if /i a==A echo Case-insensitive equality</code>
+    </li>
+    <li><code>if /i==/i echo This does not work</code>
+    </li>
+    <li><code>if "/i"=="/i" echo Equal, using quotation marks to prevent the literal meaning of /i</code>
+    </li>
+  </ul>
+<p>Links:
+</p>
+  <ul id="0b0938b9-18c4-4942-9ad5-e0ae3fd58509" class="bulleted-list">
+    <li><a href="http://ss64.com/nt/if.html">if at ss64.com</a>
+    </li>
+    <li><a href="https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/if">if at Microsoft</a>
+    </li>
+  </ul>
+<p>
+</p>
+
+<div class="code-box lang-Shell">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">$ <span class="k">if</span> /?
+</span></span><span class="line"><span class="cl">Performs conditional processing in batch programs.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">IF <span class="o">[</span>NOT<span class="o">]</span> ERRORLEVEL number <span class="nb">command</span>
+</span></span><span class="line"><span class="cl">IF <span class="o">[</span>NOT<span class="o">]</span> <span class="nv">string1</span><span class="o">==</span>string2 <span class="nb">command</span>
+</span></span><span class="line"><span class="cl">IF <span class="o">[</span>NOT<span class="o">]</span> EXIST filename <span class="nb">command</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  NOT               Specifies that Windows should carry out
+</span></span><span class="line"><span class="cl">                    the <span class="nb">command</span> only <span class="k">if</span> the condition is false.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  ERRORLEVEL number Specifies a <span class="nb">true</span> condition <span class="k">if</span> the last program run
+</span></span><span class="line"><span class="cl">                    returned an <span class="nb">exit</span> code equal to or greater than the number
+</span></span><span class="line"><span class="cl">                    specified.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nv">string1</span><span class="o">==</span>string2  Specifies a <span class="nb">true</span> condition <span class="k">if</span> the specified text strings
+</span></span><span class="line"><span class="cl">                    match.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  EXIST filename    Specifies a <span class="nb">true</span> condition <span class="k">if</span> the specified filename
+</span></span><span class="line"><span class="cl">                    exists.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nb">command</span>           Specifies the <span class="nb">command</span> to carry out <span class="k">if</span> the condition is
+</span></span><span class="line"><span class="cl">                    met.  Command can be followed by ELSE <span class="nb">command</span> which
+</span></span><span class="line"><span class="cl">                    will execute the <span class="nb">command</span> after the ELSE keyword <span class="k">if</span> the
+</span></span><span class="line"><span class="cl">                    specified condition is FALSE
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">The ELSE clause must occur on the same line as the <span class="nb">command</span> after the IF.  For
+</span></span><span class="line"><span class="cl">example:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    IF EXIST filename. <span class="o">(</span>
+</span></span><span class="line"><span class="cl">        del filename.
+</span></span><span class="line"><span class="cl">    <span class="o">)</span> ELSE <span class="o">(</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">echo</span> filename. missing.
+</span></span><span class="line"><span class="cl">    <span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">The following would NOT work because the del <span class="nb">command</span> needs to be terminated
+</span></span><span class="line"><span class="cl">by a newline:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    IF EXIST filename. del filename. ELSE <span class="nb">echo</span> filename. missing
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Nor would the following work, since the ELSE <span class="nb">command</span> must be on the same line
+</span></span><span class="line"><span class="cl">as the end of the IF command:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    IF EXIST filename. del filename.
+</span></span><span class="line"><span class="cl">    ELSE <span class="nb">echo</span> filename. missing
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">The following would work <span class="k">if</span> you want it all on one line:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    IF EXIST filename. <span class="o">(</span>del filename.<span class="o">)</span> ELSE <span class="nb">echo</span> filename. missing
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">If Command Extensions are enabled IF changes as follows:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    IF <span class="o">[</span>/I<span class="o">]</span> string1 compare-op string2 <span class="nb">command</span>
+</span></span><span class="line"><span class="cl">    IF CMDEXTVERSION number <span class="nb">command</span>
+</span></span><span class="line"><span class="cl">    IF DEFINED variable <span class="nb">command</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">where compare-op may be one of:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    EQU - equal
+</span></span><span class="line"><span class="cl">    NEQ - not equal
+</span></span><span class="line"><span class="cl">    LSS - less than
+</span></span><span class="line"><span class="cl">    LEQ - less than or equal
+</span></span><span class="line"><span class="cl">    GTR - greater than
+</span></span><span class="line"><span class="cl">    GEQ - greater than or equal
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">and the /I switch, <span class="k">if</span> specified, says to <span class="k">do</span> <span class="k">case</span> insensitive string
+</span></span><span class="line"><span class="cl">compares.  The /I switch can also be used on the <span class="nv">string1</span><span class="o">==</span>string2 form
+</span></span><span class="line"><span class="cl">of IF.  These comparisons are generic, in that <span class="k">if</span> both string1 and
+</span></span><span class="line"><span class="cl">string2 are both comprised of all numeric digits, <span class="k">then</span> the strings are
+</span></span><span class="line"><span class="cl">converted to numbers and a numeric comparison is performed.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">The CMDEXTVERSION conditional works just like ERRORLEVEL, except it is
+</span></span><span class="line"><span class="cl">comparing against an internal version number associated with the Command
+</span></span><span class="line"><span class="cl">Extensions.  The first version is 1.  It will be incremented by one when
+</span></span><span class="line"><span class="cl">significant enhancements are added to the Command Extensions.
+</span></span><span class="line"><span class="cl">CMDEXTVERSION conditional is never <span class="nb">true</span> when Command Extensions are
+</span></span><span class="line"><span class="cl">disabled.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">The DEFINED conditional works just like EXIST except it takes an
+</span></span><span class="line"><span class="cl">environment variable name and returns <span class="nb">true</span> <span class="k">if</span> the environment variable
+</span></span><span class="line"><span class="cl">is defined.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">%ERRORLEVEL% will expand into a string representation of
+</span></span><span class="line"><span class="cl">the current value of ERRORLEVEL, provided that there is not already
+</span></span><span class="line"><span class="cl">an environment variable with the name ERRORLEVEL, in which <span class="k">case</span> you
+</span></span><span class="line"><span class="cl">will get its value instead.  After running a program, the following
+</span></span><span class="line"><span class="cl">illustrates ERRORLEVEL use:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    goto answer%ERRORLEVEL%
+</span></span><span class="line"><span class="cl">    :answer0
+</span></span><span class="line"><span class="cl">    <span class="nb">echo</span> Program had <span class="k">return</span> code <span class="m">0</span>
+</span></span><span class="line"><span class="cl">    :answer1
+</span></span><span class="line"><span class="cl">    <span class="nb">echo</span> Program had <span class="k">return</span> code <span class="m">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">You can also use numerical comparisons above:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    IF %ERRORLEVEL% LEQ <span class="m">1</span> goto okay
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">%CMDCMDLINE% will expand into the original <span class="nb">command</span> line passed to
+</span></span><span class="line"><span class="cl">CMD.EXE prior to any processing by CMD.EXE, provided that there is not
+</span></span><span class="line"><span class="cl">already an environment variable with the name CMDCMDLINE, in which <span class="k">case</span>
+</span></span><span class="line"><span class="cl">you will get its value instead.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">%CMDEXTVERSION% will expand into a string representation of the
+</span></span><span class="line"><span class="cl">current value of CMDEXTVERSION, provided that there is not already
+</span></span><span class="line"><span class="cl">an environment variable with the name CMDEXTVERSION, in which <span class="k">case</span> you
+</span></span><span class="line"><span class="cl">will get its value instead.</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="if-3efa96b08834478eb9d87574e024e74f.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>Built-in commands:</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="assoc-919a7b5dbcee4cec9fd1983e81eb611f.html">ASSOC</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="break-a3d58a10ca22415c880f360a91e5c317.html">BREAK</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="call-2564ea9091d94506bbbdaa190a709112.html">CALL</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="cd-chdir-51f8baa67587422e83e7734186d3e82b.html">CD, CHDIR</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="cls-8c287099f78d443cb7f3928bb7ce94a5.html">CLS</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="color-012db9e2aa45442da6ccc76d3aa6871a.html">COLOR</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="copy-b7ceb52ddfc840168d9be463185382c8.html">COPY</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="del-erase-7467801d6f904c3d93d30c315afc01d6.html">DEL, ERASE</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="dir-4e5fd41eb3a5414db425f8f666a4b16e.html">DIR</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="date-158d36f1c9da476293b77ef1c825b016.html">DATE</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="echo-431d20db918648bd85a39584876868f8.html">ECHO</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="else-bd67e773d9cf44a59eebc8839dcfb7ad.html">ELSE</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="endlocal-064c3babba674d3889ebf0ed47da41ee.html">ENDLOCAL</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="exit-5bf17afc72c34152a69ac4f0cb929277.html">EXIT</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="for-bad676c158e747ff96145309fead1b63.html">FOR</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="ftype-8fab8c9ceb6844cc979763e27cbbf301.html">FTYPE</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="goto-987419c9b64d4421bfe238f9db65d492.html">GOTO</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><b>IF</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="md-mkdir-97dad359d350498cb02664e1786a5b40.html">MD, MKDIR</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="mklink-5603394a154f4814a31c7bcec6f9ec19.html">MKLINK</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="move-5c4b094e03024241aaf8af3375f612aa.html">MOVE</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="path-724f35d412174a7dbf5a79d582f48dc0.html">PATH</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="pause-505bd0f7c76d4854a732a16478224b47.html">PAUSE</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="popd-0a6db5c64bf04b648dbfc07eeaa04a74.html">POPD</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="prompt-dffefd5a9e97414c86e252afb7e4b128.html">PROMPT</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="pushd-78a3d516d23f4875b698207bbdc8c1bf.html">PUSHD</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="rd-rmdir-f29bae4770114b32801c1024b9b40080.html">RD, RMDIR</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="ren-rename-a112c317e0824eef93ce8d74d8e6bec7.html">REN, RENAME</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="rem-0ba8bb217e4648638214c5762f682b47.html">REM</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="set-540c344e1358419fb62ff4cc35e604b8.html">SET</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="setlocal-bbf053c93ff64f92b00f8c61650c395b.html">SETLOCAL</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="shift-4053d835d97844b3a5ac7ebe7f72554b.html">SHIFT</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="start-d249dd3735fa4f44970ff545f78d229f.html">START</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="time-7130bd4795354d56b9c69e60d0a4b4a7.html">TIME</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="title-262e9bcf551440feafd4f0cf585c593d.html">TITLE</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="type-027211636b8548f4abca0f6f632e0292.html">TYPE</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="ver-f81bbfb999bf4d2ca686eeaeee1c500b.html">VER</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="verify-8e56b95563a740bc9b916e670d50a373.html">VERIFY</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="vol-3d7f70972f674dfd9951e630b4ec3c40.html">VOL</a></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="introduction-846c7623625e434bb3c481641bf2e016.html">Introduction</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="how-a-command-line-is-interpreted-cac61c915fce40c89a25c98ec229c5d6.html">How a command line is interpreted</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="batch-reloading-98bc367236ef48559db589eddaa811ff.html">Batch reloading</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="environment-variables-01b28cfb0b9b45409515334357d5f9bf.html">Environment variables</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="switches-9e2a7d8c43bb46f29962b0d2f195e19c.html">Switches</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="error-level-c70d88bae6d545b7a5b5ca99e777b409.html">Error level</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="string-processing-20d44ad6fccd4a048e3464a4dd3d4570.html">String processing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><a href="command-line-arguments-6a6ffadba81b4cc6a979f7e1ee4ea4aa.html">Command-line arguments</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><a href="wildcards-2b952cca7aee49b2a4a709c4c4ad5aef.html">Wildcards</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><a href="user-input-5726d65b176c49ebb21d2daa271031f9.html">User input</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="-percent-tilde-f4263820c2db41e399c77259970464f1.html">%~ (percent tilde)</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="functions-f516efa981d9481ca4253d271451381d.html">Functions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="calculation-06c65868038c4e2ab21937d82bebc6c0.html">Calculation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="finding-files-af14c29c29d740609e9e8c887a2c3cb7.html">Finding files</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="keyboard-shortcuts-af2ffcc6632c4dada420d99695ca6c10.html">Keyboard shortcuts</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="paths-47408b417b4f4392a3bc79fe552b4895.html">Paths</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><a href="arrays-dc75afb35c164e29a9018d897be1f452.html">Arrays</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><a href="perl-one-liners-bdb9a0cee7bf4ca09a8bb650e6e2cad7.html">Perl one-liners</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="limitations-09c168245f2e40d99e684733fb760091.html">Limitations</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">19</span><b>Built-in commands</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">20</span><a href="external-commands-f83d61795cb74a38996cd6085d1d63cb.html">External commands</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">21</span><a href="legal-credits-fde438abeea34c909d226a9d31209ee8.html">Legal & credits</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

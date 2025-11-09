@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">How shapes images REALLY move on the Canvas</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/b4d96f8f08aa4ac5b8d9315e03a771db" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+<p><em>A problem: Canvas only remembers pixels, not shapes or images</em>
+</p>
+<p>This is an image of a circular beach ball, and of course, you can’t drag the ball around the image.
+</p>
+<img class="img" src="img/1fc8a4b08f1086cf259023629f0fb11aad9343c9.png.html">
+<p>It may surprise you that just like an image, if you draw a circle on a Canvas you cannot drag that circle around the canvas. That’s because the canvas won’t remember where it drew the circle.
+</p>
+
+<div class="code-box lang-JavaScript">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="c1">// this arc (==circle) is not draggable!!
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">context</span><span class="p">.</span><span class="nx">beginPath</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="nx">context</span><span class="p">.</span><span class="nx">arc</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="o">*</span><span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">context</span><span class="p">.</span><span class="nx">fillStyle</span><span class="o">=</span><span class="s1">'blue'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">context</span><span class="p">.</span><span class="nx">fill</span><span class="p">();</span></span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p><strong>What the Canvas DOESN’T know…</strong>
+</p>
+  <ul id="a6e79527-927f-4e92-b476-256b264b07ad" class="bulleted-list">
+    <li>…where you drew the circle (it does not know x,y =[20,30]).
+    </li>
+    <li>…the size of the circle (it does not know radius=15).
+    </li>
+    <li>…the color of the circle. (it does not know the circle is blue).
+    </li>
+  </ul>
+<p><strong>What the Canvas DOES know…</strong>
+</p>
+<p>Canvas knows the color of every pixel on it’s drawing surface.
+</p>
+<p>The canvas can tell you that at x,y==[20,30] there is a blue pixel, but it does not know if this blue pixel is part of a circle.
+</p>
+<p><strong>What this means…</strong>
+</p>
+<p>This means everything drawn on the Canvas is permanent: immovable and unchangeable.
+</p>
+  <ul id="ea18cdb9-5294-4969-9d3b-c4d1cd9207aa" class="bulleted-list">
+    <li>Canvas can’t move the circle or resize the circle.
+    </li>
+    <li>Canvas can’t recolor the circle or erase the circle.
+    </li>
+    <li>Canvas can’t say if the mouse is hovering over the circle.
+    </li>
+    <li>Canvas can’t say if the circle is colliding with another circle.
+    </li>
+    <li>Canvas can’t let a user drag the circle around the Canvas.
+    </li>
+  </ul>
+<p><strong>But Canvas can give the I-L-L-U-S-I-O-N of movement</strong>
+</p>
+<p>Canvas can give the <strong>illusion of movement</strong> by continuously erasing the circle and redrawing it in a different position. By redrawing the Canvas many times per second, the eye is fooled into seeing the circle move across the Canvas.
+</p>
+  <ul id="4f02f00b-fc86-4e5c-8b88-279335d38882" class="bulleted-list">
+    <li>Erase the canvas
+    </li>
+    <li>Update the circle’s position
+    </li>
+    <li>Redraw the circle in it’s new position
+    </li>
+    <li>Repeat, repeat, repeat …
+    </li>
+  </ul>
+<p>This code gives the <strong>illusion of movement</strong> by continuously redrawing a circle in new positions.
+</p>
+
+<div class="code-box lang-JavaScript">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="c1">// create a canvas
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">canvas</span><span class="o">=</span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">"canvas"</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">ctx</span><span class="o">=</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="s2">"2d"</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ctx</span><span class="p">.</span><span class="nx">fillStyle</span><span class="o">=</span><span class="s1">'red'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">canvas</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// a variable indicating a circle's X position
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">circleX</span><span class="o">=</span><span class="mi">20</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// start animating the circle across the canvas
+</span></span></span><span class="line"><span class="cl"><span class="c1">// by continuously erasing &amp; redrawing the circle
+</span></span></span><span class="line"><span class="cl"><span class="c1">// in new positions
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">requestAnimationFrame</span><span class="p">(</span><span class="nx">animate</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">animate</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// update the X position of the circle
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">circleX</span><span class="o">++</span><span class="p">;</span>      
+</span></span><span class="line"><span class="cl">    <span class="c1">// redraw the circle in it's new position
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">ctx</span><span class="p">.</span><span class="nx">clearRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">height</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">ctx</span><span class="p">.</span><span class="nx">beginPath</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">ctx</span><span class="p">.</span><span class="nx">arc</span><span class="p">(</span> <span class="nx">circleX</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="o">*</span><span class="mi">2</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">ctx</span><span class="p">.</span><span class="nx">fill</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// request another animate() loop
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">requestAnimationFrame</span><span class="p">(</span><span class="nx">animate</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="how-shapes-images-really-move-on-the-canvas-b4d96f8f08aa4ac5b8d9315e03a771db.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>Dragging path shapes images:</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="dragging-path-shapes-images-on-canvas-a1aecf74549c4fe889e4c60563e2b141.html">Dragging Path Shapes Images on Canvas</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><b>How shapes images REALLY move on the Canvas</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="dragging-circles-rectangles-around-the-canvas-b64aa0e74cde416fb7534ba5adb88c45.html">Dragging circles rectangles around the Canvas</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="dragging-irregular-shapes-around-the-canvas-f524f7eebf764f52b7d6173818f7d82a.html">Dragging irregular shapes around the Canvas</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="dragging-images-around-the-canvas-32efdb1cf2bf4730847aae18f694bf0c.html">Dragging images around the Canvas</a></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="getting-started-7d650957f57448d485d0f1426726d652.html">Getting started</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="images-ba65754ede34461eb1e1560e2d6309e4.html">Images</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="path-syntax-db570444b7a84c65af507de125251743.html">Path syntax</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="media-types-and-the-canvas-4ce6605a6537475291ee3480df7bacb9.html">Media types and the canvas</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="animation-43473e4727d0430a914dcd63a767322a.html">Animation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="collisions-and-intersections-c37198bed8f348ef8bfc2cebe79b5d8b.html">Collisions and intersections</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="paths-041fccaeeb964fce95770aaf8da6dad2.html">Paths</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><a href="text-0d20929db8564186bfedfbeecbb675d5.html">Text</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><a href="clearing-the-screen-28d114e4408844fc827c5f73d6238ff8.html">Clearing the screen</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><a href="navigating-along-a-path-69ada749d57144f89e7e47f98efde9a1.html">Navigating along a path</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><b>Dragging path shapes images</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="shadows-15ffc1665db0493fb2645df513042ee7.html">Shadows</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="charts-diagrams-55c84186869841c98d2d873c9b4a19c9.html">Charts diagrams</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="polygons-e6a83a07a60745f6884992715cb6dc6b.html">Polygons</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="transformations-90e27c4187894f0499f3a04940f3821a.html">Transformations</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="responsive-design-d29786c782594e778b8c65265f7b95e3.html">Responsive design</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><a href="compositing-de5b9aa74f444592b8f347684b3408b3.html">Compositing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><a href="pixel-manipulation-ac5cc01d563d4c52a3602801411c5860.html">Pixel manipulation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="contributors-bdca4d70e7e644fe95706e68527f05d6.html">Contributors</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

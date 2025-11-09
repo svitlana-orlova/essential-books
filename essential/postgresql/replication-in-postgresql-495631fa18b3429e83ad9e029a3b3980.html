@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">Replication in PostgreSQL</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/495631fa18b3429e83ad9e029a3b3980" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+  <ul id="8a7344f5-3e06-4f83-8220-9b5b9e8a9bbe" class="bulleted-list">
+    <li><strong>Configuring the Primary Server</strong>
+    </li>
+  </ul>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">- **Requirements:**
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    + Replication User for replication activities
+</span></span><span class="line"><span class="cl">    + Directory to store the WAL archives
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">- **Create Replication user**
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    `createuser -U postgres replication -P -c 5 --replication`
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">        + option -P will prompt you for new password
+</span></span><span class="line"><span class="cl">        + option -c is for maximum connections. 5 connections are enough for replication
+</span></span><span class="line"><span class="cl">        + -replication will grant replication privileges to the user
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">+ **Create a archive directory in data directory**
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    `mkdir $PGDATA/archive`
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">+ **Edit the pg_hba.conf file**
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    This is host base authentication file, contains the setting for client autherntication. Add below entry:
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">            #hosttype    database_name     user_name       hostname/IP      method
+</span></span><span class="line"><span class="cl">             host        replication       replication     &lt;slave-IP&gt;/32    md5</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+  <ul id="e950a917-060b-4636-b3ad-faf663aa740c" class="bulleted-list">
+    <li><strong>Edit the postgresql.conf file</strong>
+    </li>
+  </ul>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="n">This</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">configuration</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">PostgreSQL</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="o">`</span><span class="n">wal_level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hot_standby</span><span class="o">`</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">This</span><span class="w"> </span><span class="n">parameter</span><span class="w"> </span><span class="n">decides</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">behavior</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">slave</span><span class="w"> </span><span class="n">server</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="o">`</span><span class="n">hot_standby</span><span class="o">`</span><span class="w"> </span><span class="n">logs</span><span class="w"> </span><span class="n">what</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">required</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">accept</span><span class="w"> </span><span class="k">read</span><span class="w"> </span><span class="n">only</span><span class="w"> </span><span class="n">queries</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">slave</span><span class="w"> </span><span class="n">server</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="o">`</span><span class="n">streaming</span><span class="o">`</span><span class="w"> </span><span class="n">logs</span><span class="w"> </span><span class="n">what</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">required</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">just</span><span class="w"> </span><span class="n">apply</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">WAL</span><span class="s1">'s on slave.
+</span></span></span><span class="line"><span class="cl"><span class="s1">  
+</span></span></span><span class="line"><span class="cl"><span class="s1">      `archive` which logs what is required for archiving.
+</span></span></span><span class="line"><span class="cl"><span class="s1">  
+</span></span></span><span class="line"><span class="cl"><span class="s1">  `archive_mode=on`
+</span></span></span><span class="line"><span class="cl"><span class="s1">        
+</span></span></span><span class="line"><span class="cl"><span class="s1">  This parameters allows to send WAL segments to archive location using `archive_command` parameter.
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">  `archive_command = '</span><span class="n">test</span><span class="w"> </span><span class="o">!</span><span class="w"> </span><span class="o">-</span><span class="n">f</span><span class="w"> </span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="k">to</span><span class="o">/</span><span class="n">archivedir</span><span class="o">/%</span><span class="n">f</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">cp</span><span class="w"> </span><span class="o">%</span><span class="n">p</span><span class="w"> </span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="k">to</span><span class="o">/</span><span class="n">archivedir</span><span class="o">/%</span><span class="n">f</span><span class="s1">'`
+</span></span></span><span class="line"><span class="cl"><span class="s1">  
+</span></span></span><span class="line"><span class="cl"><span class="s1">  Basically what above `archive_command` does is it copies the WAL segments to archive directory.
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">  `wal_senders = 5`
+</span></span></span><span class="line"><span class="cl"><span class="s1">  This is maximum number of WAL sender processes.
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">  Now restart the primary server.</span></span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+  <ul id="1253abb1-e233-4d35-9bd1-b2d48f98544e" class="bulleted-list">
+    <li><strong>Backing up the primay server to the slave server</strong>
+    </li>
+  </ul>
+<p>Before making changes on the server stop the primary server.
+</p>
+<blockquote id="17499179-74dd-4425-b4d1-25ba01f49535" class="">Important: Don’t start the service again until all configuration and backup steps are complete. You must bring up the standby server in a state where it is ready to be a backup server. This means that all configuration settings must be in place and the databases must be already synchronized. Otherwise, streaming replication will fail to start`
+</blockquote>
+  <ul id="38780c11-4dd5-4b8c-ae67-a0e684265647" class="bulleted-list">
+    <li><strong>Now run the pg_basebackup utility</strong>
+    </li>
+  </ul>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="o">`</span><span class="n">pg_basebackup</span><span class="o">`</span><span class="w"> </span><span class="n">utility</span><span class="w"> </span><span class="n">copies</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="k">primary</span><span class="w"> </span><span class="n">server</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">directory</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">slave</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">directory</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">`</span><span class="err">$</span><span class="w"> </span><span class="n">pg_basebackup</span><span class="w"> </span><span class="o">-</span><span class="n">h</span><span class="w"> </span><span class="o">&lt;</span><span class="k">primary</span><span class="w"> </span><span class="n">IP</span><span class="o">&gt;</span><span class="w"> </span><span class="o">-</span><span class="n">D</span><span class="w"> </span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">postgresql</span><span class="o">/&lt;</span><span class="n">version</span><span class="o">&gt;/</span><span class="n">main</span><span class="w"> </span><span class="o">-</span><span class="n">U</span><span class="w"> </span><span class="n">replication</span><span class="w"> </span><span class="o">-</span><span class="n">v</span><span class="w"> </span><span class="o">-</span><span class="n">P</span><span class="w"> </span><span class="o">--</span><span class="n">xlog</span><span class="o">-</span><span class="n">method</span><span class="o">=</span><span class="n">stream</span><span class="o">`</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">-</span><span class="n">D</span><span class="p">:</span><span class="w"> </span><span class="n">This</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">tells</span><span class="w"> </span><span class="n">pg_basebackup</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">initial</span><span class="w"> </span><span class="n">backup</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">-</span><span class="n">h</span><span class="p">:</span><span class="w"> </span><span class="n">Specifies</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">system</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">look</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="k">primary</span><span class="w"> </span><span class="n">server</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">-</span><span class="n">xlog</span><span class="o">-</span><span class="n">method</span><span class="o">=</span><span class="n">stream</span><span class="p">:</span><span class="w"> </span><span class="n">This</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="k">force</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">pg_basebackup</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">open</span><span class="w"> </span><span class="n">another</span><span class="w"> </span><span class="n">connection</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">enough</span><span class="w"> </span><span class="n">xlog</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="n">backup</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">running</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                     </span><span class="n">It</span><span class="w"> </span><span class="n">also</span><span class="w"> </span><span class="n">ensures</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">fresh</span><span class="w"> </span><span class="n">backup</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">started</span><span class="w"> </span><span class="n">without</span><span class="w"> </span><span class="n">failing</span><span class="w"> </span><span class="n">back</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">archive</span><span class="p">.</span></span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+  <ul id="0d948058-c73e-4498-92ea-4e7beecd5305" class="bulleted-list">
+    <li><strong>Configuring the standby server</strong>
+    </li>
+  </ul>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="k">To</span><span class="w"> </span><span class="n">configure</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">standby</span><span class="w"> </span><span class="n">server</span><span class="p">,</span><span class="w"> </span><span class="n">you</span><span class="s1">'ll edit postgresql.conf and create a new configuration file named recovery.conf.
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">`hot_standby = on`
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">This specifies whether you are allowed to run queries while recovering
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">+ **Creating recovery.conf file**
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">    `standby_mode = on`
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">    Set the connection string to the primary server. Replace &lt;primary-external-IP&gt; with the external IP address of the primary server. Replace &lt;password&gt; with the password for the user named replication
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">    `primary_conninfo = '</span><span class="n">host</span><span class="o">=&lt;</span><span class="k">primary</span><span class="o">-</span><span class="n">external</span><span class="o">-</span><span class="n">IP</span><span class="o">&gt;</span><span class="w"> </span><span class="n">port</span><span class="o">=</span><span class="mi">5432</span><span class="w"> </span><span class="k">user</span><span class="o">=</span><span class="n">replication</span><span class="w"> </span><span class="n">password</span><span class="o">=&lt;</span><span class="n">password</span><span class="o">&gt;</span><span class="s1">'
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">    (Optional) Set the trigger file location:
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">    `trigger_file = '</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">postgresql</span><span class="p">.</span><span class="k">trigger</span><span class="p">.</span><span class="mi">5432</span><span class="s1">'`
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">    The `trigger_file` path that you specify is the location where you can add a file when you want the system to fail over to the standby server. The presence of the file "triggers" the failover. Alternatively, you can use the pg_ctl promote command to trigger failover.</span></span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+  <ul id="bf4c001a-e1f6-4fae-8b4b-9ca740159c94" class="bulleted-list">
+    <li><strong>Start the standby server</strong>
+    </li>
+  </ul>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">You now have everything in place and are ready to bring up the standby server</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p><strong>Attribution</strong>
+</p>
+<p>This article is substantially derived from and attributed to <a href="https://cloud.google.com/solutions/setup-postgres-hot-standby#create_a_user_for_replication">How to Set Up PostgreSQL for High Availability and Replication with Hot Standby</a>, with minor changes in formatting and examples and some text deleted. The source was published under the <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Public License 3.0</a>, which is maintained here.
+</p>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="replication-in-postgresql-495631fa18b3429e83ad9e029a3b3980.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>High Availability:</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><b>Replication in PostgreSQL</b></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="getting-started-b656c2d9b7f041f99104f7870c3bd3c9.html">Getting Started</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="json-support-49e8bfad122341c0a6af5fec9d248b3b.html">JSON Support</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="role-management-5d4907832722485aa0f85c47511443f9.html">Role Management</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="common-table-expressions-with-681a2c9efae74f189f80461c4c09c58a.html">Common Table Expressions WITH</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="accessing-data-programatically-f25f5b0103a74c7d8e939426f864b292.html">Accessing Data Programatically</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="backup-and-restore-6feaa1fce2a74554bc6cfd6fa87755f4.html">Backup and Restore</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="table-creation-75f908151ace407381442933da6164c1.html">Table Creation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><a href="insert-1b89e5745d0d4bdfab44b5312db9e0c9.html">INSERT</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><a href="update-0af4c7d78383485db40cd8742d4614ed.html">UPDATE</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><a href="dates-timestamps-and-intervals-c7bb4b02c1894ac9874a3063a6e701e9.html">Dates, Timestamps and Intervals</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="aggregate-functions-0ceb6cef14f04b099f879e98af207550.html">Aggregate Functions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="programming-with-plpgsql-0c02c8f26e29480e9bb2cdeb1f224d96.html">Programming with PLPGSQL</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="inheritance-c0eaf930378b47c0895c8a7b1ce51777.html">Inheritance</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><b>High Availability</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="triggers-and-trigger-functions-584f9f2e7a4f4f378080eb3de3eaf6d2.html">Triggers and Trigger Functions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="extension-dblink-and-postgres-fdw-1a613c3811be4622879f261a3852b802.html">EXTENSION dblink and postgres fdw</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><a href="window-functions-66100120d0d24226ab23554ee203d7db.html">Window Functions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><a href="postgres-tips-and-tricks-ba264bb2630a4be6beb77d92d929a0ce.html">Postgres Tips and Tricks</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="backup-script-for-a-production-db-5b31d6d9d8d344d785daedb02d8e7383.html">Backup script for a production DB</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">19</span><a href="comments-58746f677c4643f09125b5f23fcaace0.html">Comments</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">20</span><a href="export-to-csv-a31bb49fd2df4eec90a6864c51111958.html">Export to csv</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">21</span><a href="data-types-ae4c97208297442fbe50b7c9b974351b.html">Data Types</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">22</span><a href="recursive-queries-b6b11111255f4c388f25a412bc108e55.html">Recursive queries</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">23</span><a href="postgres-cryptographic-functions-468130e5ec364d5f995c0763643830c0.html">Postgres cryptographic functions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">24</span><a href="event-triggers-502c5a791bd9465786c027fcaa48a9e0.html">Event Triggers</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">25</span><a href="select-5ec4fe9320664e62b48b247fa2451cf9.html">SELECT</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">26</span><a href="connect-from-java-ed4d52f8abc34faebd5e08974843aa30.html">Connect from Java</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">27</span><a href="find-string-length-b2abeec84aaa476999b6e9ab17e6ddda.html">Find String Length</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">28</span><a href="coalesce-2a19f9bae6844155becb0d4da3888f1c.html">COALESCE</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">29</span><a href="contributors-17c104490ab54f59b03c3db31a4b0d10.html">Contributors</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

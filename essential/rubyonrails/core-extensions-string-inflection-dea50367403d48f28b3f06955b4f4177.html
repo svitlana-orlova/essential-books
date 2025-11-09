@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">Core Extensions String Inflection</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/dea50367403d48f28b3f06955b4f4177" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+  <h1 id="9471f0a3-8372-4af1-9e36-6695e0d30f41" class=""><a href="https://github.com/rails/rails/blob/v5.0.0/activesupport/lib/active_support/core_ext/string/inflections.rb#L31-L38">String#pluralize</a>
+  <a class="header-anchor" href="core-extensions-string-inflection-dea50367403d48f28b3f06955b4f4177.html#9471f0a3-8372-4af1-9e36-6695e0d30f41" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>Returns of plural form of the string. Optionally takes a <code>count</code> parameter and returns singular form if <code>count == 1</code>. Also accepts a <code>locale</code> parameter for language-specific pluralization.
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">'post'.pluralize             # =&gt; "posts"'octopus'.pluralize          # =&gt; "octopi"'sheep'.pluralize            # =&gt; "sheep"'words'.pluralize            # =&gt; "words"'the blue mailman'.pluralize # =&gt; "the blue mailmen"'CamelOctopus'.pluralize     # =&gt; "CamelOctopi"'apple'.pluralize(1)         # =&gt; "apple"'apple'.pluralize(2)         # =&gt; "apples"'ley'.pluralize(:es)         # =&gt; "leyes"'ley'.pluralize(1, :es)      # =&gt; "ley"</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+  <h1 id="4971ba8f-0b70-4d6b-a6fe-9462e8c124a3" class=""><a href="https://github.com/rails/rails/blob/v5.0.0/activesupport/lib/active_support/core_ext/string/inflections.rb#L54-L56">String#singularize</a>
+  <a class="header-anchor" href="core-extensions-string-inflection-dea50367403d48f28b3f06955b4f4177.html#4971ba8f-0b70-4d6b-a6fe-9462e8c124a3" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>Returns the singular form of the string. Accepts an optional <code>locale</code> parameter.
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">'posts'.singularize            # =&gt; "post"'octopi'.singularize           # =&gt; "octopus"'sheep'.singularize            # =&gt; "sheep"'word'.singularize             # =&gt; "word"'the blue mailmen'.singularize # =&gt; "the blue mailman"'CamelOctopi'.singularize      # =&gt; "CamelOctopus"'leyes'.singularize(:es)       # =&gt; "ley"</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+  <h1 id="4bbf04c4-329d-4c74-bf95-0529d993674b" class=""><a href="https://github.com/rails/rails/blob/v5.0.0/activesupport/lib/active_support/core_ext/string/inflections.rb#L65-L67">String#constantize</a>
+  <a class="header-anchor" href="core-extensions-string-inflection-dea50367403d48f28b3f06955b4f4177.html#4bbf04c4-329d-4c74-bf95-0529d993674b" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>Tries to find a declared constant with the name specified in the string. It raises a <code>NameError</code> when the name is not in CamelCase or is not initialized.
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">'Module'.constantize  # =&gt; Module'Class'.constantize   # =&gt; Class'blargle'.constantize # =&gt; NameError: wrong constant name blargle</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+  <h1 id="2ef8627e-b52e-4b1c-a029-a60f1cbaf796" class=""><a href="https://github.com/rails/rails/blob/v5.0.0/activesupport/lib/active_support/core_ext/string/inflections.rb#L76-L78">String#safe_constantize</a>
+  <a class="header-anchor" href="core-extensions-string-inflection-dea50367403d48f28b3f06955b4f4177.html#2ef8627e-b52e-4b1c-a029-a60f1cbaf796" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>Performs a <code>constantize</code> but returns <code>nil</code> instead of raising <code>NameError</code>.
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">'Module'.safe_constantize  # =&gt; Module'Class'.safe_constantize   # =&gt; Class'blargle'.safe_constantize # =&gt; nil</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+  <h1 id="7de67a73-e72b-4506-9d89-47f67ea3ea88" class=""><a href="https://github.com/rails/rails/blob/v5.0.0/activesupport/lib/active_support/core_ext/string/inflections.rb#L89-L97">String#camelize</a>
+  <a class="header-anchor" href="core-extensions-string-inflection-dea50367403d48f28b3f06955b4f4177.html#7de67a73-e72b-4506-9d89-47f67ea3ea88" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>Converts strings to UpperCamelCase by default, if <code>:lower</code> is given as param converts to lowerCamelCase instead.
+</p>
+<p>alias: <code>camelcase</code>
+</p>
+<p><strong>Note:</strong> will also convert <code>/</code> to <code>::</code> which is useful for converting paths to namespaces.
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">'active_record'.camelize                # =&gt; "ActiveRecord"'active_record'.camelize(:lower)        # =&gt; "activeRecord"'active_record/errors'.camelize         # =&gt; "ActiveRecord::Errors"'active_record/errors'.camelize(:lower) # =&gt; "activeRecord::Errors"</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+  <h1 id="a5f76b83-32cc-41b1-997a-8b1553438b4c" class=""><a href="https://github.com/rails/rails/blob/v5.0.0/activesupport/lib/active_support/core_ext/string/inflections.rb#L107-L110">String#titleize</a>
+  <a class="header-anchor" href="core-extensions-string-inflection-dea50367403d48f28b3f06955b4f4177.html#a5f76b83-32cc-41b1-997a-8b1553438b4c" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>Capitalizes all the words and replaces some characters in the string to create a nicer looking title.
+</p>
+<p>alias: <code>titlecase</code>
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">'man from the boondocks'.titleize # =&gt; "Man From The Boondocks"'x-men: the last stand'.titleize  # =&gt; "X Men: The Last Stand"</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+  <h1 id="66777ca8-9073-42ce-a29b-d1fe9fe14a59" class=""><a href="https://github.com/rails/rails/blob/v5.0.0/activesupport/lib/active_support/core_ext/string/inflections.rb#L118-L120">String#underscore</a>
+  <a class="header-anchor" href="core-extensions-string-inflection-dea50367403d48f28b3f06955b4f4177.html#66777ca8-9073-42ce-a29b-d1fe9fe14a59" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>Makes an underscored, lowercase form from the expression in the string. The reverse of <code>camelize</code>.
+</p>
+<p><strong>Note:</strong> <code>underscore</code> will also change <code>::</code> to <code>/</code> to convert namespaces to paths.
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">'ActiveModel'.underscore         # =&gt; "active_model"'ActiveModel::Errors'.underscore # =&gt; "active_model/errors"</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+  <h1 id="2be91cdc-9e71-46ad-865c-7ebe520d3dea" class=""><a href="https://github.com/rails/rails/blob/v5.0.0/activesupport/lib/active_support/core_ext/string/inflections.rb#L125-L127">String#dasherize</a>
+  <a class="header-anchor" href="core-extensions-string-inflection-dea50367403d48f28b3f06955b4f4177.html#2be91cdc-9e71-46ad-865c-7ebe520d3dea" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>Replaces underscores with dashes in the string.
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">'puni_puni'.dasherize # =&gt; "puni-puni"</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+  <h1 id="c1a2c849-e746-4050-aa9f-2030d4e09566" class=""><a href="https://github.com/rails/rails/blob/v5.0.0/activesupport/lib/active_support/core_ext/string/inflections.rb#L137-L139">String#demodulize</a>
+  <a class="header-anchor" href="core-extensions-string-inflection-dea50367403d48f28b3f06955b4f4177.html#c1a2c849-e746-4050-aa9f-2030d4e09566" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>Removes the module part from the constant expression in the string.
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">'ActiveRecord::CoreExtensions::String::Inflections'.demodulize # =&gt; "Inflections"'Inflections'.demodulize                                       # =&gt; "Inflections"'::Inflections'.demodulize                                     # =&gt; "Inflections"''.demodulize                                                  # =&gt; ''</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+  <h1 id="db3cdca5-444c-4844-89c2-2a046fe2fe3e" class=""><a href="https://github.com/rails/rails/blob/v5.0.0/activesupport/lib/active_support/core_ext/string/inflections.rb#L150-L152">String#deconstantize</a>
+  <a class="header-anchor" href="core-extensions-string-inflection-dea50367403d48f28b3f06955b4f4177.html#db3cdca5-444c-4844-89c2-2a046fe2fe3e" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>Removes the rightmost segment from the constant expression in the string.
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">'Net::HTTP'.deconstantize   # =&gt; "Net"'::Net::HTTP'.deconstantize # =&gt; "::Net"'String'.deconstantize      # =&gt; ""'::String'.deconstantize    # =&gt; ""''.deconstantize            # =&gt; ""</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+  <h1 id="1d0bdbe7-2ec8-4962-bb86-f682c847328b" class=""><a href="https://github.com/rails/rails/blob/v5.0.0/activesupport/lib/active_support/core_ext/string/inflections.rb#L181-L187">String#parameterize</a>
+  <a class="header-anchor" href="core-extensions-string-inflection-dea50367403d48f28b3f06955b4f4177.html#1d0bdbe7-2ec8-4962-bb86-f682c847328b" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>Replaces special characters in a string so that it may be used as part of a ‘pretty’ URL.
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">"Donald E. Knuth".parameterize # =&gt; "donald-e-knuth"</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>Preserve the case of the characters in a string with the <code>:preserve_case</code> argument.
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">"Donald E. Knuth".parameterize(preserve_case: true) # =&gt; "Donald-E-Knuth"</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>A very common use-case for <code>parameterize</code> is to override the <code>to_param</code> method of an ActiveRecord model to support more descriptive url slugs.
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">class Person &lt; ActiveRecord::Basedef to_param"#{id}-#{name.parameterize}"endendPerson.find(1).to_param # =&gt; "1-donald-e-knuth"</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+  <h1 id="fc466a9e-2d92-4a1c-9687-64bbd4b45bcd" class=""><a href="https://github.com/rails/rails/blob/v5.0.0/activesupport/lib/active_support/core_ext/string/inflections.rb#L195-L197">String#tableize</a>
+  <a class="header-anchor" href="core-extensions-string-inflection-dea50367403d48f28b3f06955b4f4177.html#fc466a9e-2d92-4a1c-9687-64bbd4b45bcd" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>Creates the name of a table like Rails does for models to table names. Pluralizes the last word in the string.
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">'RawScaledScorer'.tableize # =&gt; "raw_scaled_scorers"'ham_and_egg'.tableize     # =&gt; "ham_and_eggs"'fancyCategory'.tableize   # =&gt; "fancy_categories"</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+  <h1 id="df7b2d9c-0d17-475c-b9b8-f646dc5b11f5" class=""><a href="https://github.com/rails/rails/blob/v5.0.0/activesupport/lib/active_support/core_ext/string/inflections.rb#L205-L207">String#classify</a>
+  <a class="header-anchor" href="core-extensions-string-inflection-dea50367403d48f28b3f06955b4f4177.html#df7b2d9c-0d17-475c-b9b8-f646dc5b11f5" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>Returns a class name string from a plural table name like Rails does for table names to models.
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">'ham_and_eggs'.classify # =&gt; "HamAndEgg"'posts'.classify        # =&gt; "Post"</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+  <h1 id="f7c5dea8-6f91-4435-bf7a-99b2b7309556" class=""><a href="https://github.com/rails/rails/blob/v5.0.0/activesupport/lib/active_support/core_ext/string/inflections.rb#L221-L223">String#humanize</a>
+  <a class="header-anchor" href="core-extensions-string-inflection-dea50367403d48f28b3f06955b4f4177.html#f7c5dea8-6f91-4435-bf7a-99b2b7309556" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>Capitalizes the first word, turns underscores into spaces, and strips a trailing <code>_id</code> if present.
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">'employee_salary'.humanize              # =&gt; "Employee salary"'author_id'.humanize                    # =&gt; "Author"'author_id'.humanize(capitalize: false) # =&gt; "author"'_id'.humanize                          # =&gt; "Id"</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+  <h1 id="8809c97a-a997-46ba-aea9-2ff49a8903e4" class=""><a href="https://github.com/rails/rails/blob/v5.0.0/activesupport/lib/active_support/core_ext/string/inflections.rb#L230-L232">String#upcase_first</a>
+  <a class="header-anchor" href="core-extensions-string-inflection-dea50367403d48f28b3f06955b4f4177.html#8809c97a-a997-46ba-aea9-2ff49a8903e4" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>Converts just the first character to uppercase.
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">'what a Lovely Day'.upcase_first # =&gt; "What a Lovely Day"'w'.upcase_first                 # =&gt; "W"''.upcase_first                  # =&gt; ""</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+  <h1 id="75b6361e-fa3a-41fa-92d0-aa6694391d14" class=""><a href="https://github.com/rails/rails/blob/v5.0.0/activesupport/lib/active_support/core_ext/string/inflections.rb#L241-L243">String#foreign_key</a>
+  <a class="header-anchor" href="core-extensions-string-inflection-dea50367403d48f28b3f06955b4f4177.html#75b6361e-fa3a-41fa-92d0-aa6694391d14" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>Creates a foreign key name from a class name. Pass <code>false</code> param to disable adding <code>\_</code> between name and <code>id</code>.
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">'Message'.foreign_key        # =&gt; "message_id"'Message'.foreign_key(false) # =&gt; "messageid"'Admin::Post'.foreign_key    # =&gt; "post_id"</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="core-extensions-string-inflection-dea50367403d48f28b3f06955b4f4177.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>ActiveSupport:</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="activesupport-20ab7b25180d421e9144118ea43263ca.html">ActiveSupport</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="core-extensions-string-access-bd73335e952e45128e304aaf58125d51.html">Core Extensions String Access</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="core-extensions-string-to-datetime-conversion-7a55eb42bc624df586cbb1a623392211.html">Core Extensions String to DateTime Conversion</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="core-extensions-string-exclusion-731d793a8bf34b42a1189de2c0b409c8.html">Core Extensions String Exclusion</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="core-extensions-string-filters-1b2e565fa4824020806ae05db822a607.html">Core Extensions String Filters</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><b>Core Extensions String Inflection</b></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="getting-started-with-ruby-on-rails-10623f86a41b4d32858d8d63b262f565.html">Getting started with Ruby on Rails</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="routing-d191d13073b74e5887daca12cd59db78.html">Routing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="activerecord-16f87dfd4fd740ff98b674042f4a2f39.html">ActiveRecord</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="views-f3df96296f58414fb58d12ea569b8590.html">Views</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="activerecord-migrations-a3fc5651092a4de39569c3129179c417.html">ActiveRecord migrations</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="rails-best-practices-4e24aeae41964d0db517818819e2a0fa.html">Rails best practices</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="naming-conventions-20ad66c4d86e4f129b7db359ebf812bd.html">Naming conventions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><a href="actioncable-b014f6076c3247ca9251c5394c8e1c4d.html">ActionCable</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><a href="activemodel-871eddf746f044eb90d0117dd47a8f1e.html">ActiveModel</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><a href="user-authentication-in-rails-bf2b82ca3ebe4d0aa583138d19c75dd5.html">User Authentication in Rails</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="activerecord-associations-ccc33da12d284f6ab1cd4300b5b75243.html">ActiveRecord Associations</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="activerecord-validations-279176e71862466b8d2ae281b6c306eb.html">ActiveRecord validations</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="activerecord-query-interface-ddb17fca5d234381ab569caefe8888c7.html">ActiveRecord Query Interface</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="actionmailer-ee4bda1fe07949118bc84743506cb259.html">ActionMailer</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="rails-generate-commands-ed62c1994d3843b89a6c2ed015287b47.html">Rails generate commands</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="configuration-c9d63948c5a84504a26517d79b8a535c.html">Configuration</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><a href="i18n-internalization-b354d3834db846098b0ae58e843de7f1.html">I18N - internalization</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><a href="using-google-maps-with-rails-7e267db83c3b48bb94c6f7848e4c904b.html">Using Google Maps with Rails</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="file-uploads-2d95b9689ad045ed9f3528dd3ce475ad.html">File Uploads</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">19</span><a href="caching-585e7db7115240b3bd87d5d43801cfff.html">Caching</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">20</span><a href="actioncontroller-783bec47007f46d39eaba38f6e42669e.html">ActionController</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">21</span><a href="configuration-3d635ab35a7440bb91d29349c1165d21.html">Configuration</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">22</span><a href="safe-constantize-02b6c158b35449fcb2a378c57b49b0ac.html">Safe constantize</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">23</span><a href="rails-5-5d87602250934ce09d5918bea3b37f78.html">Rails 5</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">24</span><a href="authorization-with-cancan-f855f2f57646454ab2954e202bedc7da.html">Authorization with CanCan</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">25</span><a href="mongoid-4098c5a37cb94e9eabc9d527e18994fc.html">Mongoid</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">26</span><a href="gems-09d91144004b458b950a8b12a2ea3e75.html">Gems</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">27</span><a href="change-default-timezone-f4714d68e78d4861916df8041592ccfc.html">Change default timezone</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">28</span><a href="asset-pipeline-779211dc8f1b4e228fa74e02cf57c464.html">Asset pipeline</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">29</span><a href="upgrading-rails-b676b4b3eb0943d7b2940eda4ee170c3.html">Upgrading Rails</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">30</span><a href="activerecord-locking-4d6b000e3ba04700bad34345749eb687.html">ActiveRecord locking</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">31</span><a href="debugging-d78f055dcee0457e9e5a250f5f3bfe5f.html">Debugging</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">32</span><a href="configure-angular-with-rails-ca79a2491b334f878fe70f0aaed101d5.html">Configure Angular with Rails</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">33</span><a href="rails-logger-2b82cc7b560144d4b33b0235c7d23c83.html">Rails logger</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">34</span><a href="prawn-pdf-7c562db277354c42bb2cd499eb0ce5c6.html">Prawn PDF</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">35</span><a href="rails-api-f3785e382c5d4a44949d77dcd67b5b8a.html">Rails API</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">36</span><a href="deploying-a-rails-app-on-heroku-1ecfd7e0cc314661b3158c1854e8046b.html">Deploying a Rails app on Heroku</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">37</span><b>ActiveSupport</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">38</span><a href="form-helpers-32abda2ccab14e59bd6800cb68ebd109.html">Form Helpers</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">39</span><a href="activerecord-transactions-5dbb6a983cca47de99f245d81435d638.html">ActiveRecord transactions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">40</span><a href="rspec-and-ruby-on-rails-3a4c05bc14fe4b85b658b9c33915132c.html">RSpec and Ruby on Rails</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">41</span><a href="decorator-pattern-bc6209bbc2d14877ab42f61f46c8fb93.html">Decorator pattern</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">42</span><a href="elasticsearch-8436e0ae2a714ddb92e651cfdb32fc03.html">Elasticsearch</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">43</span><a href="react-with-rails-0a03b8fda913435b8c8819b8144cf0ba.html">React with Rails</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">44</span><a href="rails-cookbook-592d0e27620642e6a829d15345f9605c.html">Rails cookbook</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">45</span><a href="multi-purpose-activerecord-columns-5d893592df8b4149ade820a055803eb4.html">Multi-purpose ActiveRecord columns</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">46</span><a href="class-organization-764ca6f6b8a344a086c1397b12bb8a61.html">Class organization</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">47</span><a href="shallow-routing-78d9204327b6402db9d6420fb4ef5d10.html">Shallow Routing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">48</span><a href="model-states-aasm-8c285f846f1f4af6bd00a9516a0dbaac.html">Model states AASM</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">49</span><a href="rails-5-api-authentication-06b4d90fdd5d4c40b95a18655dbdaca1.html">Rails 5 API Authentication</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">50</span><a href="testing-rails-applications-0f471069a31845c38e8c3315aa7c03a4.html">Testing Rails Applications</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">51</span><a href="active-jobs-72f4abf1b80345759de3b89ec9ffe2bd.html">Active Jobs</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">52</span><a href="rails-frameworks-over-the-years-e4cf7937f4fc48d7b70588f7b4ebe003.html">Rails frameworks over the years</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">53</span><a href="nested-form-d3b8400f8375415fa0393ad984465959.html">Nested form</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">54</span><a href="factory-girl-332ac2938b00426a9b9f7a490acb0307.html">Factory Girl</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">55</span><a href="csv-4755ee9b828f45ab8a245e604decfc69.html">CSV</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">56</span><a href="tools-for-code-optimization-and-cleanup-a7dcedf285144d68b5443e33cc43688f.html">Tools for code optimization and cleanup</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">57</span><a href="activejob-e04f37c9aae34f10a728846b6bae8b2f.html">ActiveJob</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">58</span><a href="active-model-serializers-07d2ee3774fd4309a7a46faef57edf31.html">Active Model serializers</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">59</span><a href="rails-engine-modular-rails-d0975c67331c44e883094e52be8e047a.html">Rails Engine - Modular Rails</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">60</span><a href="single-table-inheritance-2cba00a870c249db999d07103d7ee250.html">Single Table inheritance</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">61</span><a href="activerecord-transactions-f2fb97f4aa4f473d83a7f2b220c21778.html">ActiveRecord transactions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">62</span><a href="turbolinks-d8b28015ab2e4a9d93221a45ab7625f4.html">Turbolinks</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">63</span><a href="friendly-id-30cc88bd63974d58b76bcc7129957724.html">Friendly ID</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">64</span><a href="securely-storing-authentications-keys-6f75c9e0bcce40a59eb841fcfb5ff00e.html">Securely storing authentications keys</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">65</span><a href="authenticate-api-using-devise-847b23b344dc43e4b406ff045450cf07.html">Authenticate API using Devise</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">66</span><a href="integrating-react.js-with-rails-using-hyperloop-ac2385b3700f4258ac7fe09522dc9520.html">Integrating React.js with Rails using Hyperloop</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">67</span><a href="change-a-default-rails-application-environment-15d01735bf9a41f8b4851b84e90ecc9d.html">Change a default Rails application environment</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">68</span><a href="reserved-words-5d93929d0b3445048519646ce812d6ca.html">Reserved words</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">69</span><a href="rails-engines-f2c0ed4f01d2493a9105d022b66e3885.html">Rails-Engines</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">70</span><a href="adding-an-amazon-rds-892566a4314a4d97a065f759fcaed2ad.html">Adding an Amazon RDS</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">71</span><a href="payment-features-in-rails-b678d7129ddb4993968953df49bc0b71.html">Payment features in Rails</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">72</span><a href="rails-on-docker-ac174a28eb654a8fa32cce461b09b56b.html">Rails on docker</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">73</span><a href="contributors-ba7475e399de4a5d9932317b782d1235.html">Contributors</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

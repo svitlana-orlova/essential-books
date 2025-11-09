@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">SC</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/fb658eb53f5a4f1a88f8471308f059b0" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+<p>Controls Windows services, supporting starting, stopping, querying and more. 
+</p>
+<p>A Windows service is a a program running in the background. A service is either hosted in its own process or it is hosted in an instance of svchost.exe process, often with multiple services in the same instance. 
+</p>
+<p>Processor time use of a particular service can be found using freely downloadable Process Explorer from Sysinternals, by going to properties of a service and then Threads tab. 
+</p>
+<p>Another command capable of controlling services is <a href="net-ccfe9218832b40029186f29dd87ef98e.html">NET</a>. <a href="tasklist-7501f14a6e7d4e00bb106c3366428ab5.html">TASKLIST</a> can list hosted services using <code>/svc</code> switch.
+</p>
+<p>Examples:
+</p>
+  <ul id="eda06bc9-d333-4a4e-9bb0-445ec2c4bb20" class="bulleted-list">
+    <li><code>sc start wuauserv</code>
+    <p>Starts wuauserv service.
+    </p>
+    </li>
+    <li><code>sc stop wuauserv</code>
+    </li>
+    <li><code>sc query wuauserv</code>
+    </li>
+    <li><code>sc query</code>
+    <p>Outputs information about all services.
+    </p>
+    </li>
+    <li><code>sc config SysMain start= disabled</code>
+    <p>Make sure SysMain service is disabled after start. SysMain is the SuperFetch service, causing repeated harddrive activity by trying to guess which programs to load into RAM in case they will be used, and loading them. Notice the mandatory lack of space before = and the mandatory space after =.
+    </p>
+    </li>
+  </ul>
+<p>Links:
+</p>
+  <ul id="575d4cb9-4c10-47aa-a0d3-2b822631df90" class="bulleted-list">
+    <li><a href="http://ss64.com/nt/sc.html">sc at ss64.com</a>
+    </li>
+    <li><a href="https://ss64.com/nt/syntax-services.html">Windows 7 Services at ss64.com</a>
+    </li>
+    <li><a href="https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/cc754599%28v%3dws.11%29">sc at Microsoft</a>
+    </li>
+  </ul>
+<p>
+</p>
+
+<div class="code-box lang-Shell">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">$ sc
+</span></span><span class="line"><span class="cl">DESCRIPTION:
+</span></span><span class="line"><span class="cl">        SC is a <span class="nb">command</span> line program used <span class="k">for</span> communicating with the
+</span></span><span class="line"><span class="cl">        Service Control Manager and services.
+</span></span><span class="line"><span class="cl">USAGE:
+</span></span><span class="line"><span class="cl">        sc &lt;server&gt; <span class="o">[</span>command<span class="o">]</span> <span class="o">[</span>service name<span class="o">]</span> &lt;option1&gt; &lt;option2&gt;...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        The option &lt;server&gt; has the form <span class="s2">"\\ServerName"</span>
+</span></span><span class="line"><span class="cl">        Further <span class="nb">help</span> on commands can be obtained by typing: <span class="s2">"sc [command]"</span>
+</span></span><span class="line"><span class="cl">        Commands:
+</span></span><span class="line"><span class="cl">          query-----------Queries the status <span class="k">for</span> a service, or
+</span></span><span class="line"><span class="cl">                          enumerates the status <span class="k">for</span> types of services.
+</span></span><span class="line"><span class="cl">          queryex---------Queries the extended status <span class="k">for</span> a service, or
+</span></span><span class="line"><span class="cl">                          enumerates the status <span class="k">for</span> types of services.
+</span></span><span class="line"><span class="cl">          start-----------Starts a service.
+</span></span><span class="line"><span class="cl">          pause-----------Sends a PAUSE control request to a service.
+</span></span><span class="line"><span class="cl">          interrogate-----Sends an INTERROGATE control request to a service.
+</span></span><span class="line"><span class="cl">          <span class="k">continue</span>--------Sends a CONTINUE control request to a service.
+</span></span><span class="line"><span class="cl">          stop------------Sends a STOP request to a service.
+</span></span><span class="line"><span class="cl">          config----------Changes the configuration of a service <span class="o">(</span>persistent<span class="o">)</span>.
+</span></span><span class="line"><span class="cl">          description-----Changes the description of a service.
+</span></span><span class="line"><span class="cl">          failure---------Changes the actions taken by a service upon failure.
+</span></span><span class="line"><span class="cl">          failureflag-----Changes the failure actions flag of a service.
+</span></span><span class="line"><span class="cl">          sidtype---------Changes the service SID <span class="nb">type</span> of a service.
+</span></span><span class="line"><span class="cl">          privs-----------Changes the required privileges of a service.
+</span></span><span class="line"><span class="cl">          managedaccount--Changes the service to mark the service account 
+</span></span><span class="line"><span class="cl">                          password as managed by LSA.
+</span></span><span class="line"><span class="cl">          qc--------------Queries the configuration information <span class="k">for</span> a service.
+</span></span><span class="line"><span class="cl">          qdescription----Queries the description <span class="k">for</span> a service.
+</span></span><span class="line"><span class="cl">          qfailure--------Queries the actions taken by a service upon failure.
+</span></span><span class="line"><span class="cl">          qfailureflag----Queries the failure actions flag of a service.
+</span></span><span class="line"><span class="cl">          qsidtype--------Queries the service SID <span class="nb">type</span> of a service.
+</span></span><span class="line"><span class="cl">          qprivs----------Queries the required privileges of a service.
+</span></span><span class="line"><span class="cl">          qtriggerinfo----Queries the trigger parameters of a service.
+</span></span><span class="line"><span class="cl">          qpreferrednode--Queries the preferred NUMA node of a service.
+</span></span><span class="line"><span class="cl">          qmanagedaccount-Queries whether a services uses an account with a 
+</span></span><span class="line"><span class="cl">                          password managed by LSA.
+</span></span><span class="line"><span class="cl">          qprotection-----Queries the process protection level of a service.
+</span></span><span class="line"><span class="cl">          quserservice----Queries <span class="k">for</span> a <span class="nb">local</span> instance of a user service template.
+</span></span><span class="line"><span class="cl">          delete----------Deletes a service <span class="o">(</span>from the registry<span class="o">)</span>.
+</span></span><span class="line"><span class="cl">          create----------Creates a service. <span class="o">(</span>adds it to the registry<span class="o">)</span>.
+</span></span><span class="line"><span class="cl">          control---------Sends a control to a service.
+</span></span><span class="line"><span class="cl">          sdshow----------Displays a service<span class="s1">'s security descriptor.
+</span></span></span><span class="line"><span class="cl"><span class="s1">          sdset-----------Sets a service'</span>s security descriptor.
+</span></span><span class="line"><span class="cl">          showsid---------Displays the service SID string corresponding to an arbitrary name.
+</span></span><span class="line"><span class="cl">          triggerinfo-----Configures the trigger parameters of a service.
+</span></span><span class="line"><span class="cl">          preferrednode---Sets the preferred NUMA node of a service.
+</span></span><span class="line"><span class="cl">          GetDisplayName--Gets the DisplayName <span class="k">for</span> a service.
+</span></span><span class="line"><span class="cl">          GetKeyName------Gets the ServiceKeyName <span class="k">for</span> a service.
+</span></span><span class="line"><span class="cl">          EnumDepend------Enumerates Service Dependencies.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        The following commands don<span class="err">'</span>t require a service name:
+</span></span><span class="line"><span class="cl">        sc &lt;server&gt; &lt;command&gt; &lt;option&gt;
+</span></span><span class="line"><span class="cl">          boot------------<span class="o">(</span>ok <span class="p">|</span> bad<span class="o">)</span> Indicates whether the last boot should
+</span></span><span class="line"><span class="cl">                          be saved as the last-known-good boot configuration
+</span></span><span class="line"><span class="cl">          Lock------------Locks the Service Database
+</span></span><span class="line"><span class="cl">          QueryLock-------Queries the LockStatus <span class="k">for</span> the SCManager Database
+</span></span><span class="line"><span class="cl">EXAMPLE:
+</span></span><span class="line"><span class="cl">        sc start MyService
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">QUERY and QUERYEX OPTIONS:
+</span></span><span class="line"><span class="cl">        If the query <span class="nb">command</span> is followed by a service name, the status
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> that service is returned.  Further options <span class="k">do</span> not apply in
+</span></span><span class="line"><span class="cl">        this <span class="k">case</span>.  If the query <span class="nb">command</span> is followed by nothing or one of
+</span></span><span class="line"><span class="cl">        the options listed below, the services are enumerated.
+</span></span><span class="line"><span class="cl">    <span class="nv">type</span><span class="o">=</span>    Type of services to enumerate <span class="o">(</span>driver, service, userservice, all<span class="o">)</span>
+</span></span><span class="line"><span class="cl">             <span class="o">(</span><span class="nv">default</span> <span class="o">=</span> service<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">state</span><span class="o">=</span>   State of services to enumerate <span class="o">(</span>inactive, all<span class="o">)</span>
+</span></span><span class="line"><span class="cl">             <span class="o">(</span><span class="nv">default</span> <span class="o">=</span> active<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">bufsize</span><span class="o">=</span> The size <span class="o">(</span>in bytes<span class="o">)</span> of the enumeration buffer
+</span></span><span class="line"><span class="cl">             <span class="o">(</span><span class="nv">default</span> <span class="o">=</span> 4096<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">ri</span><span class="o">=</span>      The resume index number at which to begin the enumeration
+</span></span><span class="line"><span class="cl">             <span class="o">(</span><span class="nv">default</span> <span class="o">=</span> 0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">group</span><span class="o">=</span>   Service group to enumerate
+</span></span><span class="line"><span class="cl">             <span class="o">(</span><span class="nv">default</span> <span class="o">=</span> all groups<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">SYNTAX EXAMPLES
+</span></span><span class="line"><span class="cl">sc query                - Enumerates status <span class="k">for</span> active services <span class="p">&amp;</span> drivers
+</span></span><span class="line"><span class="cl">sc query eventlog       - Displays status <span class="k">for</span> the eventlog service
+</span></span><span class="line"><span class="cl">sc queryex eventlog     - Displays extended status <span class="k">for</span> the eventlog service
+</span></span><span class="line"><span class="cl">sc query <span class="nv">type</span><span class="o">=</span> driver   - Enumerates only active drivers
+</span></span><span class="line"><span class="cl">sc query <span class="nv">type</span><span class="o">=</span> service  - Enumerates only Win32 services
+</span></span><span class="line"><span class="cl">sc query <span class="nv">state</span><span class="o">=</span> all     - Enumerates all services <span class="p">&amp;</span> drivers
+</span></span><span class="line"><span class="cl">sc query <span class="nv">bufsize</span><span class="o">=</span> <span class="m">50</span>    - Enumerates with a <span class="m">50</span> byte buffer
+</span></span><span class="line"><span class="cl">sc query <span class="nv">ri</span><span class="o">=</span> <span class="m">14</span>         - Enumerates with resume <span class="nv">index</span> <span class="o">=</span> <span class="m">14</span>
+</span></span><span class="line"><span class="cl">sc queryex <span class="nv">group</span><span class="o">=</span> <span class="s2">""</span>    - Enumerates active services not in a group
+</span></span><span class="line"><span class="cl">sc query <span class="nv">type</span><span class="o">=</span> interact - Enumerates all interactive services
+</span></span><span class="line"><span class="cl">sc query <span class="nv">type</span><span class="o">=</span> driver <span class="nv">group</span><span class="o">=</span> NDIS     - Enumerates all NDIS drivers</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="sc-fb658eb53f5a4f1a88f8471308f059b0.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>External commands:</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="arp-95cd30a1a8114aaabd5cd8f4c94225bd.html">ARP</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="at-3c1b763701794cd1b358c9907dee916c.html">AT</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="attrib-e07492afd3c8480ebad9d3b2600e38ce.html">ATTRIB</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="bcdedit-8691692600324e078d2db30fe0a0e73b.html">BCDEDIT</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="cacls-8823eb219e694f0d9ec7d1b295696f68.html">CACLS</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="chcp-dd5572c37d204906a49ac5bfa647b25c.html">CHCP</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="chkdsk-524b83fdc1ea4927917137b4764f0547.html">CHKDSK</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="chkntfs-3a15daab58bc4ec38ce0f5152c2678d3.html">CHKNTFS</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="choice-2dae8774e6a247d9a3ee3612b47c6b71.html">CHOICE</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="cipher-d8af8cdc579e4a55af2bde7911c6917b.html">CIPHER</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="clip-77e3c76c1850453db8d9cff9f65e5a0d.html">CLIP</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="cmd-1d3884b9a0c14d288a4354b4def1305d.html">CMD</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="comp-6a7c05701b2c4384bc2263ddb7e19170.html">COMP</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="compact-14cddbe801ed46c38e1e9147a8181144.html">COMPACT</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="convert-60fe217f7946423b988004111233bce6.html">CONVERT</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="debug-46e477829cd84267bf4cd61435cbfb76.html">DEBUG</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="diskcomp-176b83439dac490a8c87cd35716eb9f0.html">DISKCOMP</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="diskcopy-9626bd3ab0b04b0db1e0e07ab420f869.html">DISKCOPY</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="diskpart-ca53264b07544c5695847176e9792bdc.html">DISKPART</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="doskey-17dff637f97e4c0785af583b3f2a265c.html">DOSKEY</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="driverquery-3e93494424234b51bb2978988f03985d.html">DRIVERQUERY</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="expand-0b70d14f08a940d098cc8070fe919d83.html">EXPAND</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="fc-668b8288d4db4433a8995ad44cfe73ce.html">FC</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="find-a665188736f24231920eb6b80974242c.html">FIND</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="findstr-bf58a8295a724f53ae050c0932e819c9.html">FINDSTR</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="forfiles-46e2c40d44a642d7b82ca118d85c5cb9.html">FORFILES</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="format-1dc7c172b2a7480fb2306a30d5fe4539.html">FORMAT</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="fsutil-fb2a4456d7d04051b5fcf713b27820bf.html">FSUTIL</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="gpresult-f7b78a8732f04ff39c46402f55f78d4d.html">GPRESULT</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="graftabl-adfc47e1dc064b069d4af309bc49c63a.html">GRAFTABL</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="help-6db99ebbeb044b918741eaede9fa82a3.html">HELP</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="icacls-4dfbc9200fac49d2983cfdc935714853.html">ICACLS</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="ipconfig-c739bedf98d548f3b9564c5b86f23828.html">IPCONFIG</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="label-0e11679594dd43858a6a2b0a8463f7cb.html">LABEL</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="makecab-daa5581bb28d478ca871902f2ba24c2e.html">MAKECAB</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="mode-6684f05f55594896ad35e39b852883c0.html">MODE</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="more-50f3c12fa0f1476d85d06d9e76233ddf.html">MORE</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="net-ccfe9218832b40029186f29dd87ef98e.html">NET</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="openfiles-5d0b40c300064f8fb3dd793d433c6931.html">OPENFILES</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="ping-b36ea38057d44f61a7635c7cd44bc2ef.html">PING</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="recover-6a6b1edc70b542f8a37075c78b608466.html">RECOVER</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="reg-8361c1f0fb0a43bea37744d18e0f903b.html">REG</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="replace-40027602e854464aa28dfc7aa265d514.html">REPLACE</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="robocopy-a1f87888e1a94c20a8c8330474f09d9e.html">ROBOCOPY</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="rundll32-ba5fbe37e5f94c8f8563c4ba9008cd41.html">RUNDLL32</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><b>SC</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="schtasks-41f7e6d06e78426f909896ec5611065a.html">SCHTASKS</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="setx-dfc93a7754e94facb7ff153f98b6afdc.html">SETX</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="shutdown-232b25a66f33466e9389b5b2a00e0226.html">SHUTDOWN</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="sort-5bbb2d056a734e4fafa065aaf1bc6bd0.html">SORT</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="subst-0589cbc4e2b2459ca2c4b7bb6ab4b920.html">SUBST</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="systeminfo-64b1025ef3d34a14afff21c42c753af9.html">SYSTEMINFO</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="taskkill-bdbf5240fbff41cba67e4cb62e72a5a1.html">TASKKILL</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="tasklist-7501f14a6e7d4e00bb106c3366428ab5.html">TASKLIST</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="timeout-6dbcda7df51c4a4380c56c14a0075148.html">TIMEOUT</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="tree-f6a1e4d3145540269ec9215b579a55ba.html">TREE</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="where-a5c28a60ed5149e3894ea7d8c3c8fd8d.html">WHERE</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="wmic-19d7a8bc84c340b89632dcb2b0e24d26.html">WMIC</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="xcopy-d2a62cc49ed44189a543e73fcc457d24.html">XCOPY</a></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="introduction-846c7623625e434bb3c481641bf2e016.html">Introduction</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="how-a-command-line-is-interpreted-cac61c915fce40c89a25c98ec229c5d6.html">How a command line is interpreted</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="batch-reloading-98bc367236ef48559db589eddaa811ff.html">Batch reloading</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="environment-variables-01b28cfb0b9b45409515334357d5f9bf.html">Environment variables</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="switches-9e2a7d8c43bb46f29962b0d2f195e19c.html">Switches</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="error-level-c70d88bae6d545b7a5b5ca99e777b409.html">Error level</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="string-processing-20d44ad6fccd4a048e3464a4dd3d4570.html">String processing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><a href="command-line-arguments-6a6ffadba81b4cc6a979f7e1ee4ea4aa.html">Command-line arguments</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><a href="wildcards-2b952cca7aee49b2a4a709c4c4ad5aef.html">Wildcards</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><a href="user-input-5726d65b176c49ebb21d2daa271031f9.html">User input</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="-percent-tilde-f4263820c2db41e399c77259970464f1.html">%~ (percent tilde)</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="functions-f516efa981d9481ca4253d271451381d.html">Functions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="calculation-06c65868038c4e2ab21937d82bebc6c0.html">Calculation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="finding-files-af14c29c29d740609e9e8c887a2c3cb7.html">Finding files</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="keyboard-shortcuts-af2ffcc6632c4dada420d99695ca6c10.html">Keyboard shortcuts</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="paths-47408b417b4f4392a3bc79fe552b4895.html">Paths</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><a href="arrays-dc75afb35c164e29a9018d897be1f452.html">Arrays</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><a href="perl-one-liners-bdb9a0cee7bf4ca09a8bb650e6e2cad7.html">Perl one-liners</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="limitations-09c168245f2e40d99e684733fb760091.html">Limitations</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">19</span><a href="built-in-commands-34f80a6dd2c84337951597d48e342fec.html">Built-in commands</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">20</span><b>External commands</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">21</span><a href="legal-credits-fde438abeea34c909d226a9d31209ee8.html">Legal & credits</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">Format time like strftime</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/2c7392d399404940b8f7881ae23a6889" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+<p>If you prefer <code>strftime</code> style of formatting time values (as used in Python or Ruby) or porting code that uses that style, you can use one of <a href="https://godoc.org/?q=strftime">several libraries</a>.
+</p>
+<p>Here’s an example using <code>github.com/jehiah/go-strftime</code> package:
+</p>
+
+<div class="code-box lang-Go">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="nx">t</span> <span class="o">:=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Date</span><span class="p">(</span><span class="mi">2017</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">time</span><span class="p">.</span><span class="nx">UTC</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">strftime</span><span class="p">.</span><span class="nf">Format</span><span class="p">(</span><span class="s">"%Y-%m-%d %H:%M:%S"</span><span class="p">,</span> <span class="nx">t</span><span class="p">))</span></span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<blockquote id="b10c6f7c-6ef4-4010-83a2-ac63d0732d7f" class="">Side note on package naming: since the package name is strftime, the import path / repository path should be github.com/jehiah/strftime. It’s bad style to add go or go- to repository path.
+</blockquote>
+<p>Unfortunately, when it comes to parsing things are not as good. There are two packages: 
+</p>
+  <ul id="d21cd44b-643f-416e-8ae9-b25a473e715c" class="bulleted-list">
+    <li><a href="https://godoc.org/github.com/jeffjen/datefmt">https://godoc.org/github.com/jeffjen/datefmt</a>
+    </li>
+    <li><a href="https://godoc.org/github.com/knz/strtime">https://godoc.org/github.com/knz/strtime</a>
+    </li>
+  </ul>
+<p>but they both are cgo-wrappers around C libraries, which makes them more finicky to build, especially on Windows.
+</p>
+  <h2 id="f1620504-93ae-4582-a2d7-64a094c330e9" class="">List of <code>strftime</code> directives
+  <a class="header-anchor" href="format-time-like-strftime-2c7392d399404940b8f7881ae23a6889.html#f1620504-93ae-4582-a2d7-64a094c330e9" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h2>
+<div id="2bf47343-c237-4f8b-b0f6-9bebe81f3e76" class="collection-content">
+<h4 class="collection-title"></h4>
+<table class="collection-content">
+<thead>
+<tr>
+<th width="276">Code</th>
+<th width="307">Meaning</th>
+<th width="247">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr id="e004f507-b9f2-4528-877f-3f9f44ddfe70">
+<td class="cell-title col-type-title">%a</td>
+<td class="cell-*r=Z col-type-text">Weekday as locale’s abbreviated name.</td>
+<td class="cell-m}P; col-type-text">Mon</td>
+</tr>
+
+<tr id="e7b7a200-e497-41e8-941c-74104c262456">
+<td class="cell-title col-type-title">%A</td>
+<td class="cell-*r=Z col-type-text">Weekday as locale’s full name.</td>
+<td class="cell-m}P; col-type-text">Monday</td>
+</tr>
+
+<tr id="6ccb4fad-edbb-4f1d-a4f5-9d545a9f07b8">
+<td class="cell-title col-type-title">%b</td>
+<td class="cell-*r=Z col-type-text">The abbreviated month name</td>
+<td class="cell-m}P; col-type-text">Jan</td>
+</tr>
+
+<tr id="0146de3a-30f0-4f12-b912-b78000138ec2">
+<td class="cell-title col-type-title">%B</td>
+<td class="cell-*r=Z col-type-text">The full month name</td>
+<td class="cell-m}P; col-type-text">January</td>
+</tr>
+
+<tr id="9c01b9fc-aa5b-4f70-804c-15cd040a3e61">
+<td class="cell-title col-type-title">%d</td>
+<td class="cell-*r=Z col-type-text">Day of the month</td>
+<td class="cell-m}P; col-type-text">01..31</td>
+</tr>
+
+<tr id="44bbc572-274d-4738-a479-44744f3956aa">
+<td class="cell-title col-type-title">%e</td>
+<td class="cell-*r=Z col-type-text">Day of the month without a leading zero</td>
+<td class="cell-m}P; col-type-text">1..31</td>
+</tr>
+
+<tr id="f40840d4-aec0-4b80-b02e-b2e1e24534f5">
+<td class="cell-title col-type-title">%j</td>
+<td class="cell-*r=Z col-type-text">Day of the year</td>
+<td class="cell-m}P; col-type-text">001..366</td>
+</tr>
+
+<tr id="cbc5169d-0dff-42e3-98bf-be99b10393a7">
+<td class="cell-title col-type-title">%m</td>
+<td class="cell-*r=Z col-type-text">Month of the year</td>
+<td class="cell-m}P; col-type-text">01..12</td>
+</tr>
+
+<tr id="2c070fa2-145f-42c6-aa0c-0da51c99bfe0">
+<td class="cell-title col-type-title">%U</td>
+<td class="cell-*r=Z col-type-text">Week number of the current year, starting with the first Sunday as the first day of the first week</td>
+<td class="cell-m}P; col-type-text">00..53</td>
+</tr>
+
+<tr id="cfd31cf6-2801-450c-9735-0c1d23e31eab">
+<td class="cell-title col-type-title">%W</td>
+<td class="cell-*r=Z col-type-text">Week number of the current year, starting with the first Monday as the first day of the first week</td>
+<td class="cell-m}P; col-type-text">00..53</td>
+</tr>
+
+<tr id="14046c01-1d48-4e32-aca1-096441fdbba7">
+<td class="cell-title col-type-title">%w</td>
+<td class="cell-*r=Z col-type-text">Day of the week (Sunday is 0)</td>
+<td class="cell-m}P; col-type-text">0..6</td>
+</tr>
+
+<tr id="a66b074d-213f-419c-9f15-14f7ba2ecd66">
+<td class="cell-title col-type-title">%x</td>
+<td class="cell-*r=Z col-type-text">Preferred representation for the date alone, no time</td>
+<td class="cell-m}P; col-type-text"> </td>
+</tr>
+
+<tr id="2440cdc6-42be-4a4e-ade9-3841de4bc3fb">
+<td class="cell-title col-type-title">%y</td>
+<td class="cell-*r=Z col-type-text">Year without a century</td>
+<td class="cell-m}P; col-type-text">00..99</td>
+</tr>
+
+<tr id="e03e37bf-42cb-4016-bfd5-c1731338cdad">
+<td class="cell-title col-type-title">%Y</td>
+<td class="cell-*r=Z col-type-text">Year with century</td>
+<td class="cell-m}P; col-type-text"> </td>
+</tr>
+
+<tr id="27a7c062-eec3-4ac8-bba1-656db8dbc5b6">
+<td class="cell-title col-type-title"> </td>
+<td class="cell-*r=Z col-type-text"> </td>
+<td class="cell-m}P; col-type-text"> </td>
+</tr>
+
+<tr id="a5afc2d4-933c-4f4d-91fe-3e3bbef86a23">
+<td class="cell-title col-type-title">%H</td>
+<td class="cell-*r=Z col-type-text">Hour of the day, 24-hour clock</td>
+<td class="cell-m}P; col-type-text">00..23</td>
+</tr>
+
+<tr id="e8deef6f-b80d-411c-9285-69b824e6c1f8">
+<td class="cell-title col-type-title">%I</td>
+<td class="cell-*r=Z col-type-text">Hour of the day, 12-hour clock</td>
+<td class="cell-m}P; col-type-text">01..12</td>
+</tr>
+
+<tr id="6a9682aa-f418-4338-abf7-328279d2f819">
+<td class="cell-title col-type-title">%l</td>
+<td class="cell-*r=Z col-type-text">Hour of the day, 12-hour clock without a leading zero</td>
+<td class="cell-m}P; col-type-text">1..12</td>
+</tr>
+
+<tr id="e6503253-12ed-41ea-bbf4-a5fac36242fd">
+<td class="cell-title col-type-title">%M</td>
+<td class="cell-*r=Z col-type-text">Minute of the hour</td>
+<td class="cell-m}P; col-type-text">00..59</td>
+</tr>
+
+<tr id="c3924233-f51b-4370-bfb2-b2b53a2f1720">
+<td class="cell-title col-type-title">%P</td>
+<td class="cell-*r=Z col-type-text">Meridian indicator ("am" or "pm")</td>
+<td class="cell-m}P; col-type-text">am</td>
+</tr>
+
+<tr id="754be3c1-4d8c-46d6-b09f-bc07d36638c7">
+<td class="cell-title col-type-title">%p</td>
+<td class="cell-*r=Z col-type-text">Meridian indicator ("AM" or "PM")</td>
+<td class="cell-m}P; col-type-text">PM</td>
+</tr>
+
+<tr id="404b572e-1569-4456-8413-18dd16f03c51">
+<td class="cell-title col-type-title">%S</td>
+<td class="cell-*r=Z col-type-text">Second of the minute</td>
+<td class="cell-m}P; col-type-text">00..60</td>
+</tr>
+
+<tr id="2503f346-e392-4c90-a3a9-5ffe96fc4684">
+<td class="cell-title col-type-title">%X</td>
+<td class="cell-*r=Z col-type-text">Preferred representation for the time alone, no date</td>
+<td class="cell-m}P; col-type-text"> </td>
+</tr>
+
+<tr id="0d60d914-7ae1-41df-b61f-0b8676867338">
+<td class="cell-title col-type-title">%Z</td>
+<td class="cell-*r=Z col-type-text">Time zone name</td>
+<td class="cell-m}P; col-type-text"> </td>
+</tr>
+
+<tr id="606cf826-971f-4878-9a5c-7f29d9914d92">
+<td class="cell-title col-type-title"> </td>
+<td class="cell-*r=Z col-type-text"> </td>
+<td class="cell-m}P; col-type-text"> </td>
+</tr>
+
+<tr id="b236bf1e-f495-4049-aff6-ac5460050dbf">
+<td class="cell-title col-type-title">%c</td>
+<td class="cell-*r=Z col-type-text">The preferred local date and time representation</td>
+<td class="cell-m}P; col-type-text"> </td>
+</tr>
+
+<tr id="ccf899dc-c165-40ef-a5e5-066249f74690">
+<td class="cell-title col-type-title">%%</td>
+<td class="cell-*r=Z col-type-text">Literal "%" character</td>
+<td class="cell-m}P; col-type-text"> </td>
+</tr>
+
+</tbody>
+</table>
+</div>
+<p>You can also use <a href="http://www.strfti.me/">http://www.strfti.me/</a> service to help you build <code>strftime</code> formatting strings.
+</p>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="format-time-like-strftime-2c7392d399404940b8f7881ae23a6889.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>Time and date:</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="time-and-date-c4da053493334df995134741ae04f808.html#ca36f4b5-b2f7-47f0-843b-da620beb9a19">Get current time and date</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="time-and-date-c4da053493334df995134741ae04f808.html#783659b3-03a2-496e-9d65-feededbb7d12">Construct a time and date at a given moment in time</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="time-and-date-c4da053493334df995134741ae04f808.html#ca1af155-6a77-4e50-8cfb-eb3f1e0a239d">Compare two times for equality</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="time-and-date-c4da053493334df995134741ae04f808.html#1954b1dc-3c5f-40f7-82d3-7f1c894bcbc0">Add duration to time</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="time-and-date-c4da053493334df995134741ae04f808.html#da3d5b8e-fac4-487d-a7d5-d467d4a5a562">Subtract duration from time</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="time-and-date-c4da053493334df995134741ae04f808.html#527519f8-dd94-4b57-8db2-1a3f4098a626">Add years, months, days to time</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="time-and-date-c4da053493334df995134741ae04f808.html#28f3ba2b-3195-4463-bc57-354f14e05a73">Convert time to Unix representation of time</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="time-and-date-c4da053493334df995134741ae04f808.html#3e00c73d-a8d9-443f-a84c-91b41a72da64">Get year, month and day from time</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="format-time-2e74830fa1e7461f96e855dfb3cbc13f.html">Format time</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="parse-time-4e6e23c69bc6437f8806e708567f5140.html">Parse time</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><b>Format time like strftime</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="compare-time-and-date-46ee816e0e7d43e78bb9c0cb1c01f242.html">Compare time and date</a></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="getting-started-ba663c577a4a472e8c95fef8b4d8a8c6.html">Getting started</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="basic-types-2803d5d5229f4932af82a1dcc86eb8bf.html">Basic types</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="variables-5e911a698c43432dbf3ce33fc32dafe1.html">Variables</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="constants-cb80712dca7545da8e0b20762c637409.html">Constants</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="strings-ccc8d06958ae44319b21f9973716e3ca.html">Strings</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="pointers-1ef07599dd8247f493ba6dcba8ae7dbf.html">Pointers</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="arrays-58db8c9a56504deab2e61f1e0fa4a0a6.html">Arrays</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><a href="slices-f400553890d34185ba795870807c2615.html">Slices</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><a href="maps-80fb91dd63d445e28010b9f5e261da81.html">Maps</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><a href="structs-612802454798470ca5c5741d90543d22.html">Structs</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="interfaces-4f5f2959e72c431e995527b51ad7fd8e.html">Interfaces</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="empty-interface-c3315892508248fdb19b663bf8bff028.html">Empty interface</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="if-switch-goto-fd755f13f0fc4e75ad9b9ee675e557e8.html">if, switch, goto</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="for-while-loops-ad923a2fbd994701844af2d688d30548.html">for, while loops</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="range-statement-c522a62872884110bcc300db67e0e9ad.html">range statement</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="functions-6464727799a04611a891be7ca4877f8c.html">Functions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><a href="methods-503ddd46a4854315a88973b8db780fba.html">Methods</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><a href="error-handling-39927eb13c11419492e67e9fd5328d8b.html">Error handling</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="defer-20bfd8fa45454479954a6814eeeef716.html">Defer</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">19</span><a href="panic-and-recover-dda02e368b3048a5a69b81c56bfa6dbb.html">Panic and recover</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">20</span><a href="concurrency-16e8d8c3d77e44faaf6857a1df368ce8.html">Concurrency</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">21</span><a href="channels-and-select-4fac57c09168477aa12069484979f419.html">Channels and select</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">22</span><a href="mutex-41f795bf701d4784b3197349cdb8f2de.html">Mutex</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">23</span><a href="packages-6461fef8092a45158959bddbaad99bce.html">Packages</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">24</span><a href="files-and-io-7a55634fb8194a85bcc6036eeba61b39.html">Files and I/O</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">25</span><b>Time and date</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">26</span><a href="command-line-arguments-05239fc069c3463dabc532b9d808612e.html">Command line arguments</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">27</span><a href="logging-f7fca2011c3748a19e3b8d66235cbe59.html">Logging</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">28</span><a href="executing-commands-c290f0566c80467a9005ab3a4024ec1d.html">Executing commands</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">29</span><a href="hex-base64-encoding-b6e9fbb3165c4bcb907e469d86783aab.html">Hex, base64 encoding</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">30</span><a href="json-1479bc5a08b64dbb8aa0e2f5ed17782f.html">JSON</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">31</span><a href="xml-6744c6d0d620448dbe66e224f64b6f8b.html">XML</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">32</span><a href="csv-abb984fec0d04d74b2d494ed3206d1bc.html">CSV</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">33</span><a href="yaml-29bafea8c8a546ab92284378bb7dc364.html">YAML</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">34</span><a href="sql-fc416b38f6f341bfa311bf6c575c73a1.html">SQL</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">35</span><a href="http-client-710edf91b0f146629abbfcd96aba4d80.html">HTTP Client</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">36</span><a href="http-server-96e6137284ae4460a2827f456b4cf62c.html">HTTP Server</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">37</span><a href="text-and-html-templates-cabbd74152a74e298be4afcd41ed10b2.html">Text and HTML templates</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">38</span><a href="reflection-c7fea6b176b74c54ab35f2d8fdd56f13.html">Reflection</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">39</span><a href="context-b58d13145f924c11afcf00aa10d71364.html">Context</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">40</span><a href="package-fmt-6ccd64ac7a174e1ea35366e014d9972a.html">Package fmt</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">41</span><a href="os-signals-48f2d17d3a7644daafbaf0ca9c8b61ad.html">OS Signals</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">42</span><a href="testing-b55ab9b1d6e5499ea3014ba7e85d3efd.html">Testing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">43</span><a href="calling-c-from-go-with-cgo-d3b0419346904e0bbf6dc28b69fc93c6.html">Calling C from GO with cgo</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">44</span><a href="profiling-using-go-tool-pprof-83dc1f9b6ec04d25a2d2e7357b6bebba.html">Profiling using go tool pprof</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">45</span><a href="cross-compilation-41fdbdecca7b42c3b4b98e5ec0a96e13.html">Cross compilation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">46</span><a href="conditional-compilation-with-build-tags-d1980344374d45c082c914c2aafa50cf.html">Conditional compilation with build tags</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">47</span><a href="inlining-functions-c2af72789a074a3aacf8d308f898f32c.html">Inlining functions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">48</span><a href="sync.pool-for-better-performance-ec2352421ba7472ab82d9dcc71d2c389.html">sync.Pool for better performance</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">49</span><a href="gob-a09f2d8c9bba44e0acd0a9206e8f733f.html">gob</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">50</span><a href="plugin-9f2c4121df7e4b3f818131c49676387b.html">Plugin</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">51</span><a href="http-server-middleware-d8b9c9c2a49e4ba8a04cf7ff6ee2db0f.html">HTTP server middleware</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">52</span><a href="protobuf-in-go-b5c70cd2244f48a0b89aebc75ef45ad0.html">Protobuf in Go</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">53</span><a href="console-io-ddc28bcf51794ae5b021b8c0d9423497.html">Console I/O</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">54</span><a href="cryptography-301bb328156d420694ebf5489d2cb744.html">Cryptography</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">55</span><a href="images-png-jpeg-bmp-tiff-webp-vp8-gif-c84a45304ec3498081c67aa1ea0d9c49.html">Images (PNG, JPEG, BMP, TIFF, WEBP, VP8, GIF)</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">56</span><a href="the-go-command-f2028ab74a354cf2ba6a86acfb813356.html">The Go Command</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">57</span><a href="testing-code-with-ci-services-0ada5cfc7c4a4217af2e62d01df777de.html">Testing code with CI services</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">58</span><a href="windows-gui-programming-944154630ac54def857caa8b50dd1b59.html">Windows GUI programming</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">59</span><a href="contributors-22efc95459e8462488d6608f1e963a74.html">Contributors</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">Push a specific object to a remote branch</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/dc1b99cd939b4a5a9aca48b17df9520f" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+  <h1 id="c345213c-8117-42bf-838c-a1210959f833" class="">General syntax
+  <a class="header-anchor" href="push-a-specific-object-to-a-remote-branch-dc1b99cd939b4a5a9aca48b17df9520f.html#c345213c-8117-42bf-838c-a1210959f833" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">git push &lt;remotename&gt; &lt;object&gt;:&lt;remotebranchname&gt;</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+  <h2 id="92735944-5194-4eb8-9a56-acfc6e71f9b1" class="">Example
+  <a class="header-anchor" href="push-a-specific-object-to-a-remote-branch-dc1b99cd939b4a5a9aca48b17df9520f.html#92735944-5194-4eb8-9a56-acfc6e71f9b1" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h2>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">git push origin master:wip-yourname</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>Will push your master branch to the <code>wip-yourname</code> branch of origin (most of the time, the repository you cloned from).
+</p>
+<hr id="115e2549-9f2e-41e1-a34f-fdfea64149ed">
+  <h1 id="5c02e05a-a55f-410e-bc42-f8435bdd880e" class="">Delete remote branch
+  <a class="header-anchor" href="push-a-specific-object-to-a-remote-branch-dc1b99cd939b4a5a9aca48b17df9520f.html#5c02e05a-a55f-410e-bc42-f8435bdd880e" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>Deleting the remote branch is the equivalent of pushing an empty object to it.
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">git push &lt;remotename&gt; :&lt;remotebranchname&gt;</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+  <h2 id="361afd5d-c956-43b7-9039-067ab4bae184" class="">Example
+  <a class="header-anchor" href="push-a-specific-object-to-a-remote-branch-dc1b99cd939b4a5a9aca48b17df9520f.html#361afd5d-c956-43b7-9039-067ab4bae184" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h2>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">git push origin :wip-yourname</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>Will delete the remote branch <code>wip-yourname</code>
+</p>
+<p>Instead of using the colon, you can also use the –delete flag, which is better readable in some cases.
+</p>
+  <h2 id="c40a7eb6-aa9c-4cec-a056-5250eaee956f" class="">Example
+  <a class="header-anchor" href="push-a-specific-object-to-a-remote-branch-dc1b99cd939b4a5a9aca48b17df9520f.html#c40a7eb6-aa9c-4cec-a056-5250eaee956f" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h2>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">git push origin --delete wip-yourname</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<hr id="d4e24fab-5ae9-4c08-bb3e-4c9ea7e9e9b6">
+  <h1 id="b5d86bd5-5a9d-440e-8f16-0206064daa25" class="">Push a single commit
+  <a class="header-anchor" href="push-a-specific-object-to-a-remote-branch-dc1b99cd939b4a5a9aca48b17df9520f.html#b5d86bd5-5a9d-440e-8f16-0206064daa25" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>If you have a single commit in your branch that you want to push to a remote without pushing anything else, you can use the following
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">git push &lt;remotename&gt; &lt;commit SHA&gt;:&lt;remotebranchname&gt;</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+  <h2 id="c9cf27a6-db85-4236-aba2-6eef9838515c" class="">Example
+  <a class="header-anchor" href="push-a-specific-object-to-a-remote-branch-dc1b99cd939b4a5a9aca48b17df9520f.html#c9cf27a6-db85-4236-aba2-6eef9838515c" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h2>
+<p>Assuming a git history like this
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">eeb32bc Commit 1 - already pushed
+</span></span><span class="line"><span class="cl">347d700 Commit 2 - want to push
+</span></span><span class="line"><span class="cl">e539af8 Commit 3 - only local
+</span></span><span class="line"><span class="cl">5d339db Commit 4 - only local</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>to push only commit <em>347d700</em> to remote <em>master</em> use the following command
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">git push origin 347d700:master</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<hr id="eca04d28-d3a3-46cd-b0f0-447f34817b25">
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="push-a-specific-object-to-a-remote-branch-dc1b99cd939b4a5a9aca48b17df9520f.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>Pushing:</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="pushing-61862670816a48908143969777ef1679.html">Pushing</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><b>Push a specific object to a remote branch</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="push-3a1d8fbb7eba42acbf6a8aa76735a18d.html">Push</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="force-pushing-3402072dfd8448ea911332d9fa3f38c1.html">Force Pushing</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="push-tags-1a29a69abadc416fab6bbab0c0b9045f.html">Push tags</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="changing-the-default-push-behavior-775a9e032a8640139c3782411b60db80.html">Changing the default push behavior</a></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="getting-started-6a125e34a2b34705af0ac5e164ccfa24.html">Getting started</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="committing-b3581026b0bb4248be87b5784c64f255.html">Committing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="browsing-the-history-76b17b2395a94e898f82ec8a3ec62a50.html">Browsing the history</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="undoing-04ee78eba4e2451fa18f4b6132c7cd1d.html">Undoing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="staging-e3c469c11d8e447a97fa8f4b2670ad27.html">Staging</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="git-diff-2c45ad9ee679465d83a9561229837a80.html">Git diff</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="merging-df323286a5404216aaf6c85842881694.html">Merging</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><a href="ignoring-files-and-folders-dd79ffd3abcb4e0d8df180d202647136.html">Ignoring files and folders</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><a href="working-with-remotes-fa96b97d1a964c338c2bfcdeb06002f5.html">Working with remotes</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><a href="submodules-399affdf5c774f40a2038b6a5de16654.html">Submodules</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="aliases-9889cb019b9d43d8a05666c9bcb42680.html">Aliases</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="rebasing-313c84ebdd9a43c8b39578d72c422514.html">Rebasing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="configuration-8481aef215de40b9aa1d6e9cc919952f.html">Configuration</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="branching-853f7b3cf5b9463aad6d71114a0e45b9.html">Branching</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="rev-list-6a384b9703614f4381c28537ed4702c0.html">rev-list</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="squashing-98ad87b15a884d5c8a26b2e4ce89100b.html">Squashing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><a href="cherry-picking-0c23d9627cec403c8e267e0c3d99f3cd.html">Cherry picking</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><a href="recovering-fcc2ce7a78974ae19be56d71e9091623.html">Recovering</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="git-clean-8976333846544a9382aac14ea0da0a23.html">git clean</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">19</span><a href=".gitattributes-81dfe434dd0d4928aa7960cef0ee9e5d.html">.gitattributes</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">20</span><a href=".mailmap-d22ee6fd6d95424cbcc38ccee2d58c07.html">.mailmap</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">21</span><a href="different-workflows-2bd8ba8217f04cb9a3e53cffacb1c96a.html">Different workflows</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">22</span><a href="pulling-711b10b768c24da48501b8412d112f4e.html">Pulling</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">23</span><a href="hooks-55ea0a0e7756475f90734b7614f212f0.html">Hooks</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">24</span><a href="cloning-repositories-843837bd3d09465cab1017bd4b856e07.html">Cloning repositories</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">25</span><a href="stashing-19ee9c1fdb624f5d8a58791f695c4fbe.html">Stashing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">26</span><a href="subtrees-8473b8bd2cb640debfe0357c55d8e3ef.html">Subtrees</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">27</span><a href="renaming-02737ac15e314f62ae045faa549ff9dd.html">Renaming</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">28</span><b>Pushing</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">29</span><a href="internals-a5e863d86a0349fb947f6790e50412eb.html">Internals</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">30</span><a href="git-tfs-1d5abacde9e5475494b25f01773829dd.html">git-tfs</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">31</span><a href="empty-directories-in-git-4119551da28c4c5a81b70c6960db1d9f.html">Empty directories in git</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">32</span><a href="git-svn-be77aee7333a48fea261d614ce3010a8.html">git-svn</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">33</span><a href="archive-2ba4525fdf9c49d8b6b05f0fb0cf39b9.html">Archive</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">34</span><a href="rewriting-history-with-filter-branc-3b81263745564f6db255bee991395792.html">Rewriting history with filter-branc</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">35</span><a href="migrating-to-git-9448471ca81b44aca3f647fdaf38e1c4.html">Migrating to git</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">36</span><a href="show-8a3306f44d2d4548bcb34b7baf2979ff.html">Show</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">37</span><a href="resolving-merge-conflicts-b6fd813b163f447c861e0daae8e1d522.html">Resolving merge conflicts</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">38</span><a href="bundles-008196e2a8754d4794615a8cfa36d190.html">Bundles</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">39</span><a href="display-commit-history-graphically-with-gitk-5671aa618485459d88253c0b83dda989.html">Display commit history graphically with gitk</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">40</span><a href="bisecting-to-find-faulty-commits-f7de7d0406a040bf8ac103fda0d4efa3.html">Bisecting to find faulty commits</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">41</span><a href="blaming-72b490464c5845b2891fd04b342f5222.html">Blaming</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">42</span><a href="git-revisions-syntax-ed5f332ef2c74e6ea8164934948332c8.html">Git revisions syntax</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">43</span><a href="worktrees-164391a5bae54865a5d58275f23cce37.html">Worktrees</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">44</span><a href="git-remote-1a2cc6a43b0e478183fe655db778b697.html">Git remote</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">45</span><a href="git-large-file-storage-c750110127d84177bec299b76fff0b7f.html">Git large file storage</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">46</span><a href="git-patch-ad133dbfea4a4d4f8f980120a30ce624.html">git patch</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">47</span><a href="git-statistics-77f16c7fe9e64678a25f074954c0edb0.html">git statistics</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">48</span><a href="git-send-email-1b824b7d8b0d41e1958ea4fb45cb0000.html">git send-email</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">49</span><a href="git-gui-clients-2a595f0643c14c60929adb83b0926241.html">git gui clients</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">50</span><a href="reflog-restoring-commits-not-shown-in-git-log-d86b019eba874d0b98b75c661b59a7f3.html">reflog - restoring commits not shown in git log</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">51</span><a href="tortoisegit-65c822a379b74e8d8d8220d4e1935be2.html">TortoiseGit</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">52</span><a href="external-merge-and-diff-tools-b5fdbb9a13a646b1845519157dec5b74.html">External merge and diff tools</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">53</span><a href="update-object-name-in-reference-57fec9be9f674bc39b8d934aad839637.html">Update object name in reference</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">54</span><a href="git-branch-name-on-bash-ubuntu-08b340f2d6434ca2ab30da708aad3b1e.html">Git branch name on Bash Ubuntu</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">55</span><a href="git-client-side-hooks-f1df31fb1b3643ae88281d647461169a.html">Git client-side hooks</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">56</span><a href="git-rerer-94ebeaf3c7324f828de0b88362a1e049.html">Git rerer</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">57</span><a href="change-git-repository-name-df5f15ed88854ec1bd45d8dcea529bda.html">Change git repository name</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">58</span><a href="git-tagging-5b770b239cb74edb81da5a5f3542755a.html">git tagging</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">59</span><a href="tidying-up-your-local-and-remote-repository-2164816ca43b44b4b528dab69ce86743.html">tidying up your local and remote repository</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">60</span><a href="diff-tree-8db67d22889d4aef96a12e1d18ab323a.html">diff tree</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">61</span><a href="contributors-99d2b2ec937143379a894a25a15433d4.html">Contributors</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

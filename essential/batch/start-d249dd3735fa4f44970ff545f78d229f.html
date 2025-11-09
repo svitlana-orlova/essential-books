@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">START</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/d249dd3735fa4f44970ff545f78d229f" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+<p>Starts a program in new window, or opens a document. Uses an unclear algorithm to determine whether the first passed argument is a window title or a program to be executed; hypothesis: it uses the presence of quotes around the first argument as a hint that it is a window title.
+</p>
+<p>Examples:
+</p>
+  <ul id="a049f273-a8b9-473d-a105-ac6e2348e6bf" class="bulleted-list">
+    <li>start notepad.exe &amp; echo "Done."
+      <ul id="001a4fc3-0b08-4102-a454-a0759d5ae880" class="bulleted-list">
+        <li>Starts notepad.exe, proceeding to the next command without waiting for finishing the started one. Keywords: asynchronous.
+        </li>
+      </ul>
+    </li>
+    <li>start "notepad.exe"
+      <ul id="45cde5dc-aef4-4153-a4b5-f5408a02c3fe" class="bulleted-list">
+        <li>Launches a new console window with notepad.exe being its title, apparently an undesired outcome.
+        </li>
+      </ul>
+    </li>
+    <li>start "" "C:\Program Files\Internet Explorer\iexplore.exe"
+      <ul id="62e1d18e-ee51-4b89-a265-f9945da40693" class="bulleted-list">
+        <li>Starts Internet Explorer. The empty "" passed as the first argument is the window title of a console that actually does not get opened, or at least not visibly so.
+        </li>
+      </ul>
+    </li>
+    <li>start "C:\Program Files\Internet Explorer\iexplore.exe"
+      <ul id="5d88b06c-410f-4dd4-be99-38f6e30ff255" class="bulleted-list">
+        <li>Launches a new console window with "C:\Program Files\Internet Explorer\iexplore.exe" being its title, apparently an undesired outcome.
+        </li>
+      </ul>
+    </li>
+    <li>start /wait notepad.exe &amp; echo "Done."
+      <ul id="0acce72f-ddc6-499c-a52e-e102dc79bda6" class="bulleted-list">
+        <li>Starts notepad.exe, waiting for it to end before proceeding.
+        </li>
+      </ul>
+    </li>
+    <li>start /low notepad.exe &amp; echo "Done."
+      <ul id="ff0a214a-4a33-4f7b-8b99-f49269225f74" class="bulleted-list">
+        <li>As above, but starting the program with a low priority.
+        </li>
+      </ul>
+    </li>
+    <li>start "" MyFile.xls
+      <ul id="2857cff6-b8fd-4cea-97bd-f9800bd002b1" class="bulleted-list">
+        <li>Opens the document in the program assigned to open it.
+        </li>
+      </ul>
+    </li>
+    <li>start
+      <ul id="7fde5c15-e521-4beb-a3a4-59ab14beb77e" class="bulleted-list">
+        <li>Starts a new console (command-line window) in the same current folder.
+        </li>
+      </ul>
+    </li>
+    <li>start .
+      <ul id="42517bc3-6f23-4aba-ab79-0cb3ed1a1bef" class="bulleted-list">
+        <li>Opens the current folder in Windows Explorer.
+        </li>
+      </ul>
+    </li>
+    <li>start ..
+      <ul id="dc132941-ea49-43f6-8475-9e004dec2f03" class="bulleted-list">
+        <li>Opens the parent folder in Windows Explorer.
+        </li>
+      </ul>
+    </li>
+    <li>start "" "mailto:"
+      <ul id="42f6470c-5248-4c95-93be-be8a1c1623fb" class="bulleted-list">
+        <li>Starts the application for writing a new email.
+        </li>
+      </ul>
+    </li>
+    <li>start "" "mailto:joe.hoe@hoemail.com?subject=Notification&amp;body=Hello Joe, I'd like to..."
+      <ul id="5f59de2f-7635-4621-8ef6-d33c1da20b55" class="bulleted-list">
+        <li>Starts the application for writing a new email, specifying the to, subject and body of the new email.
+        </li>
+      </ul>
+    </li>
+    <li>start "" "mailto:joe.hoe@hoemail.com?subject=Notification&amp;body=Hello Joe,%0a%0aI'd like to..."
+      <ul id="b19f4053-5cb3-472e-b22a-aceb9de361a0" class="bulleted-list">
+        <li>As above, with newlines entered as %0a.
+        </li>
+      </ul>
+    </li>
+    <li>start /b TODO:example-application-where-this-is-useful
+      <ul id="42e12752-fc5c-4d56-ae2d-6ea5d39307c7" class="bulleted-list">
+        <li>Starts the application without opening a new console window, redirecting the output to the console from which the start command was called.
+        </li>
+      </ul>
+    </li>
+  </ul>
+<p>Links:
+</p>
+  <ul id="fb9d41dd-e5d1-43e4-8cff-3c5bb15d4e18" class="bulleted-list">
+    <li><a href="http://ss64.com/nt/start.html">start at ss64.com</a>
+    </li>
+    <li><a href="https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/start">start at Microsoft</a>
+    </li>
+    <li><a href="https://support.microsoft.com/en-us/help/287573/how-to-use-command-line-switches-to-create-a-pre-addressed-e-mail-message-in-outlook">How to use command line switches to create a pre-addressed e-mail message in Outlook</a>, support.microsoft.com
+    </li>
+  </ul>
+<p>
+</p>
+
+<div class="code-box lang-Shell">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">$ start /?
+</span></span><span class="line"><span class="cl">Starts a separate window to run a specified program or command.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">START <span class="o">[</span><span class="s2">"title"</span><span class="o">]</span> <span class="o">[</span>/D path<span class="o">]</span> <span class="o">[</span>/I<span class="o">]</span> <span class="o">[</span>/MIN<span class="o">]</span> <span class="o">[</span>/MAX<span class="o">]</span> <span class="o">[</span>/SEPARATE <span class="p">|</span> /SHARED<span class="o">]</span>
+</span></span><span class="line"><span class="cl">      <span class="o">[</span>/LOW <span class="p">|</span> /NORMAL <span class="p">|</span> /HIGH <span class="p">|</span> /REALTIME <span class="p">|</span> /ABOVENORMAL <span class="p">|</span> /BELOWNORMAL<span class="o">]</span>
+</span></span><span class="line"><span class="cl">      <span class="o">[</span>/NODE &lt;NUMA node&gt;<span class="o">]</span> <span class="o">[</span>/AFFINITY &lt;hex affinity mask&gt;<span class="o">]</span> <span class="o">[</span>/WAIT<span class="o">]</span> <span class="o">[</span>/B<span class="o">]</span>
+</span></span><span class="line"><span class="cl">      <span class="o">[</span>command/program<span class="o">]</span> <span class="o">[</span>parameters<span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="s2">"title"</span>     Title to display in window title bar.
+</span></span><span class="line"><span class="cl">    path        Starting directory.
+</span></span><span class="line"><span class="cl">    B           Start application without creating a new window. The
+</span></span><span class="line"><span class="cl">                application has ^C handling ignored. Unless the application
+</span></span><span class="line"><span class="cl">                enables ^C processing, ^Break is the only way to interrupt
+</span></span><span class="line"><span class="cl">                the application.
+</span></span><span class="line"><span class="cl">    I           The new environment will be the original environment passed
+</span></span><span class="line"><span class="cl">                to the cmd.exe and not the current environment.
+</span></span><span class="line"><span class="cl">    MIN         Start window minimized.
+</span></span><span class="line"><span class="cl">    MAX         Start window maximized.
+</span></span><span class="line"><span class="cl">    SEPARATE    Start 16-bit Windows program in separate memory space.
+</span></span><span class="line"><span class="cl">    SHARED      Start 16-bit Windows program in shared memory space.
+</span></span><span class="line"><span class="cl">    LOW         Start application in the IDLE priority class.
+</span></span><span class="line"><span class="cl">    NORMAL      Start application in the NORMAL priority class.
+</span></span><span class="line"><span class="cl">    HIGH        Start application in the HIGH priority class.
+</span></span><span class="line"><span class="cl">    REALTIME    Start application in the REALTIME priority class.
+</span></span><span class="line"><span class="cl">    ABOVENORMAL Start application in the ABOVENORMAL priority class.
+</span></span><span class="line"><span class="cl">    BELOWNORMAL Start application in the BELOWNORMAL priority class.
+</span></span><span class="line"><span class="cl">    NODE        Specifies the preferred Non-Uniform Memory Architecture <span class="o">(</span>NUMA<span class="o">)</span>
+</span></span><span class="line"><span class="cl">                node as a decimal integer.
+</span></span><span class="line"><span class="cl">    AFFINITY    Specifies the processor affinity mask as a hexadecimal number.
+</span></span><span class="line"><span class="cl">                The process is restricted to running on these processors.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                The affinity mask is interpreted differently when /AFFINITY and
+</span></span><span class="line"><span class="cl">                /NODE are combined.  Specify the affinity mask as <span class="k">if</span> the NUMA
+</span></span><span class="line"><span class="cl">                node<span class="err">'</span>s processor mask is right shifted to begin at bit zero.
+</span></span><span class="line"><span class="cl">                The process is restricted to running on those processors in
+</span></span><span class="line"><span class="cl">                common between the specified affinity mask and the NUMA node.
+</span></span><span class="line"><span class="cl">                If no processors are in common, the process is restricted to
+</span></span><span class="line"><span class="cl">                running on the specified NUMA node.
+</span></span><span class="line"><span class="cl">    WAIT        Start application and <span class="nb">wait</span> <span class="k">for</span> it to terminate.
+</span></span><span class="line"><span class="cl">    NEWWINDOW   Instead of starting application in a new tab, start it in a new
+</span></span><span class="line"><span class="cl">                window.
+</span></span><span class="line"><span class="cl">    command/program
+</span></span><span class="line"><span class="cl">                If it is an internal cmd <span class="nb">command</span> or a batch file <span class="k">then</span>
+</span></span><span class="line"><span class="cl">                the <span class="nb">command</span> processor is run with the /K switch to cmd.exe.
+</span></span><span class="line"><span class="cl">                This means that the window will remain after the <span class="nb">command</span>
+</span></span><span class="line"><span class="cl">                has been run.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                If it is not an internal cmd <span class="nb">command</span> or batch file <span class="k">then</span>
+</span></span><span class="line"><span class="cl">                it is a program and will run as either a windowed application
+</span></span><span class="line"><span class="cl">                or a console application.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    parameters  These are the parameters passed to the command/program.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">NOTE: The SEPARATE and SHARED options are not supported on 64-bit platforms.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Specifying /NODE allows processes to be created in a way that leverages memory
+</span></span><span class="line"><span class="cl">locality on NUMA systems.  For example, two processes that communicate with
+</span></span><span class="line"><span class="cl">each other heavily through shared memory can be created to share the same
+</span></span><span class="line"><span class="cl">preferred NUMA node in order to minimize memory latencies.  They allocate
+</span></span><span class="line"><span class="cl">memory from the same NUMA node when possible, and they are free to run on
+</span></span><span class="line"><span class="cl">processors outside the specified node.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    start /NODE <span class="m">1</span> application1.exe
+</span></span><span class="line"><span class="cl">    start /NODE <span class="m">1</span> application2.exe
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">These two processes can be further constrained to run on specific processors
+</span></span><span class="line"><span class="cl">within the same NUMA node.  In the following example, application1 runs on the
+</span></span><span class="line"><span class="cl">low-order two processors of the node, <span class="k">while</span> application2 runs on the next two
+</span></span><span class="line"><span class="cl">processors of the node.  This example assumes the specified node has at least
+</span></span><span class="line"><span class="cl">four logical processors.  Note that the node number can be changed to any valid
+</span></span><span class="line"><span class="cl">node number <span class="k">for</span> that computer without having to change the affinity mask.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    start /NODE <span class="m">1</span> /AFFINITY 0x3 application1.exe
+</span></span><span class="line"><span class="cl">    start /NODE <span class="m">1</span> /AFFINITY 0xc application2.exe
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">If Command Extensions are enabled, external <span class="nb">command</span> invocation
+</span></span><span class="line"><span class="cl">through the <span class="nb">command</span> line or the START <span class="nb">command</span> changes as follows:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">non-executable files may be invoked through their file association just
+</span></span><span class="line"><span class="cl">    by typing the name of the file as a command.  <span class="o">(</span>e.g.  WORD.DOC would
+</span></span><span class="line"><span class="cl">    launch the application associated with the .DOC file extension<span class="o">)</span>.
+</span></span><span class="line"><span class="cl">    See the ASSOC and FTYPE commands <span class="k">for</span> how to create these
+</span></span><span class="line"><span class="cl">    associations from within a <span class="nb">command</span> script.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">When executing an application that is a 32-bit GUI application, CMD.EXE
+</span></span><span class="line"><span class="cl">    does not <span class="nb">wait</span> <span class="k">for</span> the application to terminate before returning to
+</span></span><span class="line"><span class="cl">    the <span class="nb">command</span> prompt.  This new behavior does NOT occur <span class="k">if</span> executing
+</span></span><span class="line"><span class="cl">    within a <span class="nb">command</span> script.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">When executing a <span class="nb">command</span> line whose first token is the string <span class="s2">"CMD "</span>
+</span></span><span class="line"><span class="cl">    without an extension or path qualifier, <span class="k">then</span> <span class="s2">"CMD"</span> is replaced with
+</span></span><span class="line"><span class="cl">    the value of the COMSPEC variable.  This prevents picking up CMD.EXE
+</span></span><span class="line"><span class="cl">    from the current directory.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">When executing a <span class="nb">command</span> line whose first token does NOT contain an
+</span></span><span class="line"><span class="cl">    extension, <span class="k">then</span> CMD.EXE uses the value of the PATHEXT
+</span></span><span class="line"><span class="cl">    environment variable to determine which extensions to look <span class="k">for</span>
+</span></span><span class="line"><span class="cl">    and in what order.  The default value <span class="k">for</span> the PATHEXT variable
+</span></span><span class="line"><span class="cl">    is:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        .COM<span class="p">;</span>.EXE<span class="p">;</span>.BAT<span class="p">;</span>.CMD
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    Notice the syntax is the same as the PATH variable, with
+</span></span><span class="line"><span class="cl">    semicolons separating the different elements.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">When searching <span class="k">for</span> an executable, <span class="k">if</span> there is no match on any extension,
+</span></span><span class="line"><span class="cl"><span class="k">then</span> looks to see <span class="k">if</span> the name matches a directory name.  If it does, the
+</span></span><span class="line"><span class="cl">START <span class="nb">command</span> launches the Explorer on that path.  If <span class="k">done</span> from the
+</span></span><span class="line"><span class="cl"><span class="nb">command</span> line, it is the equivalent to doing a CD /D to that path.</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="start-d249dd3735fa4f44970ff545f78d229f.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>Built-in commands:</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="assoc-919a7b5dbcee4cec9fd1983e81eb611f.html">ASSOC</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="break-a3d58a10ca22415c880f360a91e5c317.html">BREAK</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="call-2564ea9091d94506bbbdaa190a709112.html">CALL</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="cd-chdir-51f8baa67587422e83e7734186d3e82b.html">CD, CHDIR</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="cls-8c287099f78d443cb7f3928bb7ce94a5.html">CLS</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="color-012db9e2aa45442da6ccc76d3aa6871a.html">COLOR</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="copy-b7ceb52ddfc840168d9be463185382c8.html">COPY</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="del-erase-7467801d6f904c3d93d30c315afc01d6.html">DEL, ERASE</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="dir-4e5fd41eb3a5414db425f8f666a4b16e.html">DIR</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="date-158d36f1c9da476293b77ef1c825b016.html">DATE</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="echo-431d20db918648bd85a39584876868f8.html">ECHO</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="else-bd67e773d9cf44a59eebc8839dcfb7ad.html">ELSE</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="endlocal-064c3babba674d3889ebf0ed47da41ee.html">ENDLOCAL</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="exit-5bf17afc72c34152a69ac4f0cb929277.html">EXIT</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="for-bad676c158e747ff96145309fead1b63.html">FOR</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="ftype-8fab8c9ceb6844cc979763e27cbbf301.html">FTYPE</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="goto-987419c9b64d4421bfe238f9db65d492.html">GOTO</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="if-3efa96b08834478eb9d87574e024e74f.html">IF</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="md-mkdir-97dad359d350498cb02664e1786a5b40.html">MD, MKDIR</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="mklink-5603394a154f4814a31c7bcec6f9ec19.html">MKLINK</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="move-5c4b094e03024241aaf8af3375f612aa.html">MOVE</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="path-724f35d412174a7dbf5a79d582f48dc0.html">PATH</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="pause-505bd0f7c76d4854a732a16478224b47.html">PAUSE</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="popd-0a6db5c64bf04b648dbfc07eeaa04a74.html">POPD</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="prompt-dffefd5a9e97414c86e252afb7e4b128.html">PROMPT</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="pushd-78a3d516d23f4875b698207bbdc8c1bf.html">PUSHD</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="rd-rmdir-f29bae4770114b32801c1024b9b40080.html">RD, RMDIR</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="ren-rename-a112c317e0824eef93ce8d74d8e6bec7.html">REN, RENAME</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="rem-0ba8bb217e4648638214c5762f682b47.html">REM</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="set-540c344e1358419fb62ff4cc35e604b8.html">SET</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="setlocal-bbf053c93ff64f92b00f8c61650c395b.html">SETLOCAL</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="shift-4053d835d97844b3a5ac7ebe7f72554b.html">SHIFT</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><b>START</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="time-7130bd4795354d56b9c69e60d0a4b4a7.html">TIME</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="title-262e9bcf551440feafd4f0cf585c593d.html">TITLE</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="type-027211636b8548f4abca0f6f632e0292.html">TYPE</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="ver-f81bbfb999bf4d2ca686eeaeee1c500b.html">VER</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="verify-8e56b95563a740bc9b916e670d50a373.html">VERIFY</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="vol-3d7f70972f674dfd9951e630b4ec3c40.html">VOL</a></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="introduction-846c7623625e434bb3c481641bf2e016.html">Introduction</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="how-a-command-line-is-interpreted-cac61c915fce40c89a25c98ec229c5d6.html">How a command line is interpreted</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="batch-reloading-98bc367236ef48559db589eddaa811ff.html">Batch reloading</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="environment-variables-01b28cfb0b9b45409515334357d5f9bf.html">Environment variables</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="switches-9e2a7d8c43bb46f29962b0d2f195e19c.html">Switches</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="error-level-c70d88bae6d545b7a5b5ca99e777b409.html">Error level</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="string-processing-20d44ad6fccd4a048e3464a4dd3d4570.html">String processing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><a href="command-line-arguments-6a6ffadba81b4cc6a979f7e1ee4ea4aa.html">Command-line arguments</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><a href="wildcards-2b952cca7aee49b2a4a709c4c4ad5aef.html">Wildcards</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><a href="user-input-5726d65b176c49ebb21d2daa271031f9.html">User input</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="-percent-tilde-f4263820c2db41e399c77259970464f1.html">%~ (percent tilde)</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="functions-f516efa981d9481ca4253d271451381d.html">Functions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="calculation-06c65868038c4e2ab21937d82bebc6c0.html">Calculation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="finding-files-af14c29c29d740609e9e8c887a2c3cb7.html">Finding files</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="keyboard-shortcuts-af2ffcc6632c4dada420d99695ca6c10.html">Keyboard shortcuts</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="paths-47408b417b4f4392a3bc79fe552b4895.html">Paths</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><a href="arrays-dc75afb35c164e29a9018d897be1f452.html">Arrays</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><a href="perl-one-liners-bdb9a0cee7bf4ca09a8bb650e6e2cad7.html">Perl one-liners</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="limitations-09c168245f2e40d99e684733fb760091.html">Limitations</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">19</span><b>Built-in commands</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">20</span><a href="external-commands-f83d61795cb74a38996cd6085d1d63cb.html">External commands</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">21</span><a href="legal-credits-fde438abeea34c909d226a9d31209ee8.html">Legal & credits</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

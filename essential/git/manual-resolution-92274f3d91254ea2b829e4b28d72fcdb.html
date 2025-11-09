@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">Manual Resolution</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/92274f3d91254ea2b829e4b28d72fcdb" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+<p>While performing a <code>git merge</code> you may find that git reports a “merge conflict” error. It will report to you which files have conflicts, and you will need to resolve the conflicts.
+</p>
+<p>A <code>git status</code> at any point will help you see what still needs editing with a helpful message like
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">On branch master
+</span></span><span class="line"><span class="cl">You have unmerged paths.
+</span></span><span class="line"><span class="cl">  (fix conflicts and run "git commit")
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Unmerged paths:
+</span></span><span class="line"><span class="cl">  (use "git add &lt;file&gt;..." to mark resolution)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    both modified:      index.html
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">no changes added to commit (use "git add" and/or "git commit -a")</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>Git leaves markers in the files to tell you where the conflict arose:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD: index.html #indicates the state of your current branch
+</span></span><span class="line"><span class="cl">&lt;div id="footer"&gt;contact : email@somedomain.com&lt;/div&gt;
+</span></span><span class="line"><span class="cl">========= #indicates break between conflicts
+</span></span><span class="line"><span class="cl">&lt;div id="footer"&gt;
+</span></span><span class="line"><span class="cl">please contact us at email@somedomain.com
+</span></span><span class="line"><span class="cl">&lt;/div&gt;
+</span></span><span class="line"><span class="cl">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; iss2: index.html #indicates the state of the other branch (iss2)</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>In order to resolve the conflicts, you must edit the area between the &lt;&lt;&lt;&lt;&lt;&lt; and &gt;&gt;&gt;&gt;&gt;&gt;&gt; markers appropriately, remove the status lines (the &lt;&lt;&lt;&lt;&lt;&lt;&lt;, &gt;&gt;&gt;&gt;&gt;&gt;&gt;, and ======== lines) completely. Then <code>git add index.html</code> to mark it resolved and <code>git commit</code> to finish the merge.
+</p>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="manual-resolution-92274f3d91254ea2b829e4b28d72fcdb.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>Resolving merge conflicts:</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="resolving-merge-conflicts-dd194d0e68fc4e3f9775f8a810455c7d.html">Resolving merge conflicts</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><b>Manual Resolution</b></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="getting-started-6a125e34a2b34705af0ac5e164ccfa24.html">Getting started</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="committing-b3581026b0bb4248be87b5784c64f255.html">Committing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="browsing-the-history-76b17b2395a94e898f82ec8a3ec62a50.html">Browsing the history</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="undoing-04ee78eba4e2451fa18f4b6132c7cd1d.html">Undoing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="staging-e3c469c11d8e447a97fa8f4b2670ad27.html">Staging</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="git-diff-2c45ad9ee679465d83a9561229837a80.html">Git diff</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="merging-df323286a5404216aaf6c85842881694.html">Merging</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><a href="ignoring-files-and-folders-dd79ffd3abcb4e0d8df180d202647136.html">Ignoring files and folders</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><a href="working-with-remotes-fa96b97d1a964c338c2bfcdeb06002f5.html">Working with remotes</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><a href="submodules-399affdf5c774f40a2038b6a5de16654.html">Submodules</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="aliases-9889cb019b9d43d8a05666c9bcb42680.html">Aliases</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="rebasing-313c84ebdd9a43c8b39578d72c422514.html">Rebasing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="configuration-8481aef215de40b9aa1d6e9cc919952f.html">Configuration</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="branching-853f7b3cf5b9463aad6d71114a0e45b9.html">Branching</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="rev-list-6a384b9703614f4381c28537ed4702c0.html">rev-list</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="squashing-98ad87b15a884d5c8a26b2e4ce89100b.html">Squashing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><a href="cherry-picking-0c23d9627cec403c8e267e0c3d99f3cd.html">Cherry picking</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><a href="recovering-fcc2ce7a78974ae19be56d71e9091623.html">Recovering</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="git-clean-8976333846544a9382aac14ea0da0a23.html">git clean</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">19</span><a href=".gitattributes-81dfe434dd0d4928aa7960cef0ee9e5d.html">.gitattributes</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">20</span><a href=".mailmap-d22ee6fd6d95424cbcc38ccee2d58c07.html">.mailmap</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">21</span><a href="different-workflows-2bd8ba8217f04cb9a3e53cffacb1c96a.html">Different workflows</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">22</span><a href="pulling-711b10b768c24da48501b8412d112f4e.html">Pulling</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">23</span><a href="hooks-55ea0a0e7756475f90734b7614f212f0.html">Hooks</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">24</span><a href="cloning-repositories-843837bd3d09465cab1017bd4b856e07.html">Cloning repositories</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">25</span><a href="stashing-19ee9c1fdb624f5d8a58791f695c4fbe.html">Stashing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">26</span><a href="subtrees-8473b8bd2cb640debfe0357c55d8e3ef.html">Subtrees</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">27</span><a href="renaming-02737ac15e314f62ae045faa549ff9dd.html">Renaming</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">28</span><a href="pushing-e3e963bd42f241c8a10a15304cf07d5a.html">Pushing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">29</span><a href="internals-a5e863d86a0349fb947f6790e50412eb.html">Internals</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">30</span><a href="git-tfs-1d5abacde9e5475494b25f01773829dd.html">git-tfs</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">31</span><a href="empty-directories-in-git-4119551da28c4c5a81b70c6960db1d9f.html">Empty directories in git</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">32</span><a href="git-svn-be77aee7333a48fea261d614ce3010a8.html">git-svn</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">33</span><a href="archive-2ba4525fdf9c49d8b6b05f0fb0cf39b9.html">Archive</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">34</span><a href="rewriting-history-with-filter-branc-3b81263745564f6db255bee991395792.html">Rewriting history with filter-branc</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">35</span><a href="migrating-to-git-9448471ca81b44aca3f647fdaf38e1c4.html">Migrating to git</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">36</span><a href="show-8a3306f44d2d4548bcb34b7baf2979ff.html">Show</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">37</span><b>Resolving merge conflicts</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">38</span><a href="bundles-008196e2a8754d4794615a8cfa36d190.html">Bundles</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">39</span><a href="display-commit-history-graphically-with-gitk-5671aa618485459d88253c0b83dda989.html">Display commit history graphically with gitk</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">40</span><a href="bisecting-to-find-faulty-commits-f7de7d0406a040bf8ac103fda0d4efa3.html">Bisecting to find faulty commits</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">41</span><a href="blaming-72b490464c5845b2891fd04b342f5222.html">Blaming</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">42</span><a href="git-revisions-syntax-ed5f332ef2c74e6ea8164934948332c8.html">Git revisions syntax</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">43</span><a href="worktrees-164391a5bae54865a5d58275f23cce37.html">Worktrees</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">44</span><a href="git-remote-1a2cc6a43b0e478183fe655db778b697.html">Git remote</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">45</span><a href="git-large-file-storage-c750110127d84177bec299b76fff0b7f.html">Git large file storage</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">46</span><a href="git-patch-ad133dbfea4a4d4f8f980120a30ce624.html">git patch</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">47</span><a href="git-statistics-77f16c7fe9e64678a25f074954c0edb0.html">git statistics</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">48</span><a href="git-send-email-1b824b7d8b0d41e1958ea4fb45cb0000.html">git send-email</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">49</span><a href="git-gui-clients-2a595f0643c14c60929adb83b0926241.html">git gui clients</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">50</span><a href="reflog-restoring-commits-not-shown-in-git-log-d86b019eba874d0b98b75c661b59a7f3.html">reflog - restoring commits not shown in git log</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">51</span><a href="tortoisegit-65c822a379b74e8d8d8220d4e1935be2.html">TortoiseGit</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">52</span><a href="external-merge-and-diff-tools-b5fdbb9a13a646b1845519157dec5b74.html">External merge and diff tools</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">53</span><a href="update-object-name-in-reference-57fec9be9f674bc39b8d934aad839637.html">Update object name in reference</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">54</span><a href="git-branch-name-on-bash-ubuntu-08b340f2d6434ca2ab30da708aad3b1e.html">Git branch name on Bash Ubuntu</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">55</span><a href="git-client-side-hooks-f1df31fb1b3643ae88281d647461169a.html">Git client-side hooks</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">56</span><a href="git-rerer-94ebeaf3c7324f828de0b88362a1e049.html">Git rerer</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">57</span><a href="change-git-repository-name-df5f15ed88854ec1bd45d8dcea529bda.html">Change git repository name</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">58</span><a href="git-tagging-5b770b239cb74edb81da5a5f3542755a.html">git tagging</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">59</span><a href="tidying-up-your-local-and-remote-repository-2164816ca43b44b4b528dab69ce86743.html">tidying up your local and remote repository</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">60</span><a href="diff-tree-8db67d22889d4aef96a12e1d18ab323a.html">diff tree</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">61</span><a href="contributors-99d2b2ec937143379a894a25a15433d4.html">Contributors</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

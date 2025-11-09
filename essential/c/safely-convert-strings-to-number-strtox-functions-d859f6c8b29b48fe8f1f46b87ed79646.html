@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">Safely convert Strings to Number strtoX functions</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/d859f6c8b29b48fe8f1f46b87ed79646" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+<p>Since C99 the C library has a set of safe conversion functions that interpret a string as a number. Their names are of the form <code>strtoX</code>, where <code>X</code> is one of <code>l</code>, <code>ul</code>, <code>d</code>, etc to determine the target type of the conversion
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">double strtod(char const* p, char** endptr);
+</span></span><span class="line"><span class="cl">long double strtold(char const* p, char** endptr);</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>They provide checking that a conversion had an over- or underflow:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">double ret = strtod(argv[1], 0); /* attempt conversion */
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/* check the conversion result. */
+</span></span><span class="line"><span class="cl">if ((ret == HUGE_VAL || ret == -HUGE_VAL) &amp;&amp; errno == ERANGE) 
+</span></span><span class="line"><span class="cl">    return;  /* numeric overflow in in string */
+</span></span><span class="line"><span class="cl">else if (ret == HUGE_VAL &amp;&amp; errno == ERANGE) 
+</span></span><span class="line"><span class="cl">    return; /* numeric underflow in in string */
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/* At this point we know that everything went fine so ret may be used */</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>If the string in fact contains no number at all, this usage of <code>strtod</code> returns <code>0.0</code>.
+</p>
+<p>If this is not satisfactory, the additional parameter <code>endptr</code> can be used. It is a pointer to pointer that will be pointed to the end of the detected number in the string. If it is set to <code>0</code>, as above, or <code>NULL</code>, it is simply ignored.
+</p>
+<p>This <code>endptr</code> parameter provides indicates if there has been a successful conversion and if so, where the number ended:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">char *check = 0;
+</span></span><span class="line"><span class="cl">double ret = strtod(argv[1], &amp;check); /* attempt conversion */
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/* check the conversion result. */
+</span></span><span class="line"><span class="cl">if (argv[1] == check) 
+</span></span><span class="line"><span class="cl">    return; /* No number was detected in string */
+</span></span><span class="line"><span class="cl">else if ((ret == HUGE_VAL || ret == -HUGE_VAL) &amp;&amp; errno == ERANGE) 
+</span></span><span class="line"><span class="cl">    return; /* numeric overflow in in string */
+</span></span><span class="line"><span class="cl">else if (ret == HUGE_VAL &amp;&amp; errno == ERANGE) 
+</span></span><span class="line"><span class="cl">    return; /* numeric underflow in in string */
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/* At this point we know that everything went fine so ret may be used */</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>There are analogous functions to convert to the wider integer types:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">long strtol(char const* p, char** endptr, int nbase);
+</span></span><span class="line"><span class="cl">long long strtoll(char const* p, char** endptr, int nbase);
+</span></span><span class="line"><span class="cl">unsigned long strtoul(char const* p, char** endptr, int nbase);
+</span></span><span class="line"><span class="cl">unsigned long long strtoull(char const* p, char** endptr, int nbase);</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>These functions have a third parameter <code>nbase</code> that holds the number base in which the number is written.
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">long a = strtol("101",   0, 2 ); /* a = 5L */
+</span></span><span class="line"><span class="cl">long b = strtol("101",   0, 8 ); /* b = 65L */
+</span></span><span class="line"><span class="cl">long c = strtol("101",   0, 10); /* c = 101L */
+</span></span><span class="line"><span class="cl">long d = strtol("101",   0, 16); /* d = 257L */
+</span></span><span class="line"><span class="cl">long e = strtol("101",   0, 0 ); /* e = 101L */
+</span></span><span class="line"><span class="cl">long f = strtol("0101",  0, 0 ); /* f = 65L */
+</span></span><span class="line"><span class="cl">long g = strtol("0x101", 0, 0 ); /* g = 257L */</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>The special value <code>0</code> for <code>nbase</code> means the string is interpreted in the same way as number literals are interpreted in a C program: a prefix of <code>0x</code> corresponds to a hexadecimal representation, otherwise a leading <code>0</code> is octal and all other numbers are seen as decimal.
+</p>
+<p>Thus the most practical way to interpret a command-line argument as a number would be
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">int main(int argc, char* argv[] {
+</span></span><span class="line"><span class="cl">    if (argc &lt; 1)
+</span></span><span class="line"><span class="cl">        return EXIT_FAILURE; /* No number given. */
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    /* use strtoull because size_t may be wide */
+</span></span><span class="line"><span class="cl">    size_t mySize = strtoull(argv[1], 0, 0);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    /* then check conversion results. */
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">     ...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    return EXIT_SUCCESS;
+</span></span><span class="line"><span class="cl">}</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>This means that the program can be called with a parameter in octal, decimal or hexadecimal.
+</p>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="safely-convert-strings-to-number-strtox-functions-d859f6c8b29b48fe8f1f46b87ed79646.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>Strings:</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="strings-12d438136b6840719d7f657210de32ed.html">Strings</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="tokenisation-strtok-strtok-r-and-strtok-s-f7f27f1bbf354931840005a9f5b6f519.html">Tokenisation strtok strtok r and strtok s</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="string-literals-158e06595dbf4c39b9ee93eb4640cd04.html">String literals</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="calculate-the-length-strlen-08d234e6bc4848c495001005a54f6e55.html">Calculate the Length strlen</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="basic-introduction-to-strings-d86d03b52c954f749575b469b6e38afb.html">Basic introduction to strings</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="copying-strings-2f0c15a424904b2db3aea44c4718c4af.html">Copying strings</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="creating-arrays-of-strings-2ad7f54201a2424790e06529e549b254.html">Creating Arrays of Strings</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="string-formatted-data-readwrite-613858efee0743ebb9b4304c9eefeccc.html">string formatted data readwrite</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="convert-strings-to-number-atoi-atof-dangerous-dont-use-them-2a95d8a1ae3747399807a32c3002b0ea.html">Convert Strings to Number atoi atof dangerous dont use them</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="iterating-over-the-characters-in-a-string-a4c30e15c28846c19279d9159ea91e7f.html">Iterating Over the Characters in a String</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="comparsion-strcmp-strncmp-strcasecmp-strncasecmp-d733fce4c4e14004ab2319f98ce5e19a.html">Comparsion strcmp strncmp strcasecmp strncasecmp</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="find-firstlast-occurrence-of-a-specific-character-strchr-strrchr-92ee9a817f0143b09231f3adfa45fc70.html">Find firstlast occurrence of a specific character strchr strrchr</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="copy-and-concatenation-strcpy-strcat-0b5acedeab0842bbbd407a94c06a088a.html">Copy and Concatenation strcpy strcat</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="strspn-and-strcspn-4efa3f5bc9254796b484e20b105c677b.html">strspn and strcspn</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><b>Safely convert Strings to Number strtoX functions</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="zeroing-out-a-string-51452dc9bd8848c8a63c41ad6461e149.html">Zeroing out a string</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="strstr-a68c6547a3ab4818b50f9291f89ec25a.html">strstr</a></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="getting-started-c88395f2cfa349179b1d77ad5ef5da03.html">Getting started</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="function-pointers-033ae01139fb4a869a8954971c729ce8.html">Function pointers</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="operators-218cbf42b3ba4b2abdabe522009865b7.html">Operators</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="data-types-af9762cdd0324a74a2b8b8413c2edefb.html">Data types</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="arrays-c613c743331e4cb083444963dbf825f3.html">Arrays</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="undefined-behavior-eff989d8e4d44f97952e6c58e46dfb73.html">Undefined behavior</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="random-numbers-44b99e73a03b41ccb5422de7e97ca081.html">Random numbers</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><a href="preprocessor-and-macros-68e74303cec64c9da46e83274bc84bf4.html">Preprocessor and macros</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><a href="signal-handling-6ae1f6f30a874becb9ca2ef03a059422.html">Signal handling</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><a href="variable-arguments-f3c545235f2c4d48a50ecd230eee34ae.html">Variable arguments</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="files-and-io-streams-9b4c9f4c5f4745ba86a9461b3aaa1198.html">Files and I/O streams</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="assertion-b81cd45faa264f1982387b90dd64a769.html">Assertion</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="linked-lists-fb6df079bba6489eac6a3ea61d24e7af.html">Linked lists</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="generic-selection-262dadd4365545db88b606e23e8e3a7b.html">Generic selection</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="x-macros-9dc6ce73bdfa4d4db5a1db84c9227865.html">X-macros</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="function-parameters-f4db91d9e5024cf2b8cc184cb2d19911.html">Function parameters</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><a href="pointers-1e14553b8aea44fba0fefbc893ff529a.html">Pointers</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><a href="structs-fceea03fc65b4f898e06817d0fcf3348.html">Structs</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="sequence-points-fcadea6adf3343958abc4c71f5599a2d.html">Sequence points</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">19</span><a href="command-line-arguments-690adfe71f944d2283ad47d3971f3325.html">Command-line arguments</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">20</span><a href="aliasing-and-effective-type-fb1c49daf858420f804f317776d975e9.html">Aliasing and effective type</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">21</span><a href="compilation-fe373c8adc774fbb9cebfe91a58a5732.html">Compilation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">22</span><a href="identifier-scope-92dc051b09a349309dda0fb318b57610.html">Identifier scope</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">23</span><a href="bit-fields-9104b65f88ef4b7789d3248fa4934ff0.html">Bit-fields</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">24</span><b>Strings</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">25</span><a href="comman-pitfalls-ce0d7992bb1e4e62ab262f99a9a2f78d.html">Comman pitfalls</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">26</span><a href="error-handling-b76c53dc91244a109817490e3504e93e.html">Error handling</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">27</span><a href="implicit-and-explicit-conversions-042e8ddfc9c44b7384320a569a4f0a8a.html">Implicit and explicit conversions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">28</span><a href="type-qualifiers-3615ca163d26480098f44da1a5c4bef4.html">Type qualifiers</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">29</span><a href="valgrind-873798b299a24a3f9d7ce6e95e01396f.html">Valgrind</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">30</span><a href="typedef-f9df1d91a33b4691861245ec5ebf45e8.html">Typedef</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">31</span><a href="selection-statements-218166d2ae4c4856827d6080353375ec.html">Selection statements</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">32</span><a href="declaration-vs.-definitio-d3fd04e6166e44c48df36eb488aec6fb.html">Declaration vs. definitio</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">33</span><a href="standard-math-476e4bcf22544ffd82b2b3dcbd9fdf01.html">Standard math</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">34</span><a href="boolean-70e63802c8af45739d3082507679f19d.html">Boolean</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">35</span><a href="literals-for-numbers-characters-and-strings-2042e9e8170e4e88a3c5041aec6ba49b.html">Literals for numbers, characters and strings</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">36</span><a href="storage-classes-a25d942bf1824a598930268903693536.html">Storage classes</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">37</span><a href="declarations-bbc16be7a6da4b3f9e55a68f0bcdb261.html">Declarations</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">38</span><a href="formatted-inputoutput-ae1ce0ef9ced4caa9c8df14041e087b0.html">Formatted Input/Output</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">39</span><a href="compound-literals-56054c40d551420f9fd8a44a9550fd1d.html">Compound literals</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">40</span><a href="inline-assembly-a32e93b8a17540b5b72fe58c30d058bb.html">Inline assembly</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">41</span><a href="threads-native-86031ef1ffce4374a32d1f1886dc6593.html">Threads native</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">42</span><a href="initialization-b0240e668da14190bbe5f47d5b561ed2.html">Initialization</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">43</span><a href="structure-padding-and-packing-898403c688614ecab6cf2fee9068ecce.html">Structure padding and packing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">44</span><a href="memory-management-5e44bd5433624b1a934bacecce2afc7f.html">Memory management</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">45</span><a href="implementation-defined-behaviour-5c0a653d4ce14234bf167d29dc2f993e.html">Implementation-defined behaviour</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">46</span><a href="atomics-ae726a5e8d1241b29bd8209da2cca404.html">Atomics</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">47</span><a href="iteration-statements-loops-for-while-do-while-c45bb8ecaf6d4f58b094cc6980d363e1.html">Iteration statements, loops, for, while, do-while</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">48</span><a href="enumerations-f0f16c2234d641258a8763fdd135ef20.html">Enumerations</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">49</span><a href="jump-statements-5e4385c8606f406eb1af53b610c5bf4a.html">Jump Statements</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">50</span><a href="create-and-include-header-files-e16223c3400e4968bddc3cc5edf4c5c0.html">Create and include header files</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">51</span><a href="testing-frameworks-8ed525aa8fab4ee49fff5b43085094dd.html">Testing frameworks</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">52</span><a href="ctype.h-characters-classification-f4f6d38472dd4d02aa47f083a22f6481.html">ctype.h characters classification</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">53</span><a href="pass-2d-arrays-to-functions-d4a53a793ec2426eac5024d51d19d403.html">Pass 2D-arrays to functions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">54</span><a href="side-effects-529782464aff47a0915aa90feded64cd.html">Side effects</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">55</span><a href="multi-character-character-sequences-19611889e7964311ab76561c41c4850a.html">Multi-character character sequences</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">56</span><a href="constrains-54f188adc5ec49d78bf71c5c08e72d2e.html">Constrains</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">57</span><a href="inlining-27ddd518401c43c0bb68381e630e5cfb.html">Inlining</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">58</span><a href="unions-109e287f796b4acd8b1bdae5f45129bd.html">Unions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">59</span><a href="multi-threading-dab23b65514a455aa0f6c63668012233.html">Multi-threading</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">60</span><a href="common-idioms-and-developer-practices-cb11a718ba934278a486b649224f5923.html">Common idioms and developer practices</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">61</span><a href="inter-process-communication-ipc-9d53db3a6a864febbbeaf4bfb502ed5f.html">Inter-process communication (IPC)</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">62</span><a href="comments-af5ef860337b4d68aa37de9259c85852.html">Comments</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">63</span><a href="contributors-5ebf8b4e135f4d2e8d6e1f6b532dedb7.html">Contributors</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

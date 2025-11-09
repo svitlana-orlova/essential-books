@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">How to build a pipeline for a customized Hello world with images.</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/cfc1bbf99d6c4c4db1a805ef8eea79a9" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+<p><strong>Step 1: Install Node.js</strong>
+</p>
+<p>The build pipeline you will be building is based in Node.js so you must ensure in the first instance that you have this installed. For instructions on how to install Node.js you can checkout the SO docs for that <a href="http://stackoverflow.com/documentation/node.js/1294/installing-node-js#t=2016090414320258735">here</a>
+</p>
+<p><strong>Step 2: Initialise your project as an node module</strong>
+</p>
+<p>Open your project folder on the command line and use the following command:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">npm init</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>For the purposes of this example you can feel free to take the defaults or if you’d like more info on what all this means you can check out <a href="http://stackoverflow.com/documentation/node.js/482/npm/2257/setting-up-a-package-configuration#t=201609041437481449862">this</a> SO doc on setting up package configuration.
+</p>
+<p><strong>Step 3: Install necessary npm packages</strong>
+</p>
+<p>Run the following command on the command line to install the packages necessary for this example:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">npm install --save react react-dom</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>Then for the dev dependencies run this command:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">npm install --save-dev babel-core babel-preset-react babel-preset-es2015 webpack babel-loader css-loader style-loader file-loader image-webpack-loader</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>Finally webpack and webpack-dev-server are things that are worth installing globally rather than as a dependency of your project, if you’d prefer to add it as a dependency then that will work to, I don’t. Here is the command to run:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">npm install --global webpack webpack-dev-server</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p><strong>Step 3: Add a .babelrc file to the root of your project</strong>
+</p>
+<p>This will setup babel to use the presets you’ve just installed. Your .babelrc file should look like this:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  "presets": ["react", "es2015"]
+</span></span><span class="line"><span class="cl">}</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p><strong>Step 4: Setup project directory structure</strong>
+</p>
+<p>Set yourself up a directory stucture that looks like the below in the root of your directory:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">|- node_modules
+</span></span><span class="line"><span class="cl">|- src/
+</span></span><span class="line"><span class="cl">  |- components/
+</span></span><span class="line"><span class="cl">  |- images/
+</span></span><span class="line"><span class="cl">  |- styles/
+</span></span><span class="line"><span class="cl">  |- index.html
+</span></span><span class="line"><span class="cl">  |- index.jsx
+</span></span><span class="line"><span class="cl">|- .babelrc
+</span></span><span class="line"><span class="cl">|- package.json</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>NOTE: The <code>node_modules</code>, <code>.babelrc</code> and <code>package.json</code> should all have already been there from previous steps I just included them so you can see where they fit.
+</p>
+<p><strong>Step 5: Populate the project with the Hello World project files</strong>
+</p>
+<p>This isn’t really important to the process of building a pipeline so I’ll just give you the code for these and you can copy paste them in:
+</p>
+<p><strong>src/components/HelloWorldComponent.jsx</strong>
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">import React, { Component } from 'react';
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">class HelloWorldComponent extends Component {
+</span></span><span class="line"><span class="cl">  constructor(props) {
+</span></span><span class="line"><span class="cl">    super(props);
+</span></span><span class="line"><span class="cl">    this.state = {name: 'Student'};
+</span></span><span class="line"><span class="cl">    this.handleChange = this.handleChange.bind(this);
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  handleChange(e) {
+</span></span><span class="line"><span class="cl">    this.setState({name: e.target.value});
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  render() {
+</span></span><span class="line"><span class="cl">    return (
+</span></span><span class="line"><span class="cl">      &lt;div&gt;
+</span></span><span class="line"><span class="cl">        &lt;div className="image-container"&gt;
+</span></span><span class="line"><span class="cl">          &lt;img src="./images/myImage.gif" /&gt;
+</span></span><span class="line"><span class="cl">        &lt;/div&gt;
+</span></span><span class="line"><span class="cl">        &lt;div className="form"&gt;
+</span></span><span class="line"><span class="cl">          &lt;input type="text" onChange={this.handleChange} /&gt;
+</span></span><span class="line"><span class="cl">          &lt;div&gt;
+</span></span><span class="line"><span class="cl">            My name is {this.state.name} and I'm a clever cloggs because I built a React build pipeline
+</span></span><span class="line"><span class="cl">          &lt;/div&gt;
+</span></span><span class="line"><span class="cl">        &lt;/div&gt;
+</span></span><span class="line"><span class="cl">      &lt;/div&gt;
+</span></span><span class="line"><span class="cl">    );
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">export default HelloWorldComponent;</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p><strong>src/images/myImage.gif</strong>
+</p>
+<p>Feel free to substitute this with any image you’d like it’s simply there to prove the point that we can bundle up images as well. If you provide your own image and you name it something different then you’ll have to update the <code>HelloWorldComponent.jsx</code> to reflect your changes. Equally if you choose an image with a different file extension then you need to modify the <code>test</code> property of the image loader in the webpack.config.js with appropriate regex to match your new file extension..
+</p>
+<p><strong>src/styles/styles.css</strong>
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">.form {
+</span></span><span class="line"><span class="cl">  margin: 25px;
+</span></span><span class="line"><span class="cl">  padding: 25px;
+</span></span><span class="line"><span class="cl">  border: 1px solid #ddd;
+</span></span><span class="line"><span class="cl">  background-color: #eaeaea;
+</span></span><span class="line"><span class="cl">  border-radius: 10px;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">.form div {
+</span></span><span class="line"><span class="cl">  padding-top: 25px;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">.image-container {
+</span></span><span class="line"><span class="cl">  display: flex;
+</span></span><span class="line"><span class="cl">  justify-content: center;
+</span></span><span class="line"><span class="cl">}</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p><strong>index.html</strong>
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">&lt;!DOCTYPE html&gt;
+</span></span><span class="line"><span class="cl">&lt;html lang="en"&gt;
+</span></span><span class="line"><span class="cl">&lt;head&gt;
+</span></span><span class="line"><span class="cl">  &lt;meta charset="UTF-8"&gt;
+</span></span><span class="line"><span class="cl">  &lt;title&gt;Learning to build a react pipeline&lt;/title&gt;
+</span></span><span class="line"><span class="cl">&lt;/head&gt;
+</span></span><span class="line"><span class="cl">&lt;body&gt;
+</span></span><span class="line"><span class="cl">  &lt;div id="content"&gt;&lt;/div&gt;
+</span></span><span class="line"><span class="cl">  &lt;script src="app.js"&gt;&lt;/script&gt;
+</span></span><span class="line"><span class="cl">&lt;/body&gt;
+</span></span><span class="line"><span class="cl">&lt;/html&gt;</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p><strong>index.jsx</strong>
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">import React from 'react';
+</span></span><span class="line"><span class="cl">import { render } from 'react-dom';
+</span></span><span class="line"><span class="cl">import HelloWorldComponent from './components/HelloWorldComponent.jsx';
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">require('./images/myImage.gif');
+</span></span><span class="line"><span class="cl">require('./styles/styles.css');
+</span></span><span class="line"><span class="cl">require('./index.html');
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">render(&lt;HelloWorldComponent /&gt;, document.getElementById('content'));</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p><strong>Step 6: Create webpack configuration</strong>
+</p>
+<p>Create a file called webpack.config.js in the root of your project and copy this code into it:
+</p>
+<p><strong>webpack.config.js</strong>
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">var path = require('path');
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">var config = {
+</span></span><span class="line"><span class="cl">  context: path.resolve(__dirname + '/src'),
+</span></span><span class="line"><span class="cl">  entry: './index.jsx',
+</span></span><span class="line"><span class="cl">  output: {
+</span></span><span class="line"><span class="cl">    filename: 'app.js',
+</span></span><span class="line"><span class="cl">    path: path.resolve(__dirname + '/dist'),
+</span></span><span class="line"><span class="cl">  },
+</span></span><span class="line"><span class="cl">  devServer: {
+</span></span><span class="line"><span class="cl">    contentBase: path.join(__dirname + '/dist'),
+</span></span><span class="line"><span class="cl">    port: 3000,
+</span></span><span class="line"><span class="cl">    open: true,
+</span></span><span class="line"><span class="cl">  },
+</span></span><span class="line"><span class="cl">  module: {
+</span></span><span class="line"><span class="cl">    loaders: [
+</span></span><span class="line"><span class="cl">      {
+</span></span><span class="line"><span class="cl">        test: /\.(js|jsx)$/,
+</span></span><span class="line"><span class="cl">        exclude: /node_modules/,
+</span></span><span class="line"><span class="cl">        loader: 'babel-loader'
+</span></span><span class="line"><span class="cl">      },
+</span></span><span class="line"><span class="cl">      {
+</span></span><span class="line"><span class="cl">        test: /\.css$/,
+</span></span><span class="line"><span class="cl">        loader: "style!css"
+</span></span><span class="line"><span class="cl">      },
+</span></span><span class="line"><span class="cl">      {
+</span></span><span class="line"><span class="cl">        test: /\.gif$/,
+</span></span><span class="line"><span class="cl">        loaders: [
+</span></span><span class="line"><span class="cl">          'file?name=[path][name].[ext]',
+</span></span><span class="line"><span class="cl">          'image-webpack',
+</span></span><span class="line"><span class="cl">        ]
+</span></span><span class="line"><span class="cl">      },
+</span></span><span class="line"><span class="cl">      { test: /\.(html)$/,
+</span></span><span class="line"><span class="cl">        loader: "file?name=[path][name].[ext]"
+</span></span><span class="line"><span class="cl">      }
+</span></span><span class="line"><span class="cl">    ],
+</span></span><span class="line"><span class="cl">  },
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">module.exports = config;</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p><strong>Step 7: Create npm tasks for your pipeline</strong>
+</p>
+<p>To do this you will need to add two properties to the scripts key of the JSON defined in the package.json file in the root of your project. Make your scripts key look like this:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">"scripts": {
+</span></span><span class="line"><span class="cl">  "start": "webpack-dev-server",
+</span></span><span class="line"><span class="cl">  "build": "webpack",
+</span></span><span class="line"><span class="cl">  "test": "echo \"Error: no test specified\" &amp;&amp; exit 1"
+</span></span><span class="line"><span class="cl">},</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>The <code>test</code> script will have already been there and you can choose whether to keep it or not, it’s not important to this example.
+</p>
+<p><strong>Step 8: Use the pipeline</strong>
+</p>
+<p>From the command line, if you are in the project root directory you should now be able to run the command:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">npm run build</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>This will bundle up the little application you’ve built and place it in the <code>dist/</code> directory that it will create in the root of your project folder.
+</p>
+<p>If you run the command:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">npm start</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>Then the application you’ve built will be served up in your default web browser inside of a webpack dev server instance.
+</p>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="how-to-build-a-pipeline-for-a-customized-hello-world-with-images.-cfc1bbf99d6c4c4db1a805ef8eea79a9.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>Basic webpack and babel setup:</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="how-to-setup-a-basic-webpack-react-and-babel-environment-5ada161ae93d47a39e1113ed8f5804e5.html">How to setup a basic webpack react and babel environment</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><b>How to build a pipeline for a customized Hello world with images.</b></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="getting-started-54e1310d46924318b4045f886461565a.html">Getting started</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="components-da8fafc65f35422090b192f7b2069ee8.html">Components</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="react-with-typescript-a412494709ed4600a460a5f24acfbd6a.html">React with TypeScript</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="state-in-react-6cafc1d7863342d6b702833db7d26eed.html">State in React</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="props-in-react-457619196bc54ffab9b6ef83a7c7ae4e.html">Props in react</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="react-component-lifecycle-3be1a9d383e846d7add61ee03c2e1899.html">React component lifecycle</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="forms-and-user-input-3731d999c1bc4c1ba0aad1d9fc9593cd.html">Forms and user input</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><a href="react-boilerpate-for-babel-and-webpack-d91668aeeb754c8389467b1d4f7a037b.html">React boilerpate for babel and webpack</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><a href="using-react-with-jquery-7a9b795a6e6a47be84283835a236c536.html">Using React with jQuery</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><a href="react-routing-d70042712e4c4340bb8bd5647d3f0de2.html">React routing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="communication-between-components-fe58dcb8c9784ad9bc8b66067b6739ab.html">Communication between components</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><b>Basic webpack and babel setup</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="react.createclass-vs.-extends-react.component-de02e09ab95b41ac9225187428487c3b.html">React.createClass vs. extends React.Component</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="react-ajax-call-a8bc3cbf7d9a4b5496324ea3f34b4215.html">React AJAX call</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="installation-d6b4365eb5e2455eb92324ce2c042efa.html">Installation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="communication-between-components-5163a4c021234f18b52c444de537938e.html">Communication between components</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><a href="stateless-functional-components-d6dde1b52eeb4b6387418b4354c7eb3d.html">Stateless functional components</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><a href="react-tools-fed8312431e94e36941f0b835aeea1e3.html">React tools</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="performance-5ad4bd79730c404fa84be8f9eb692c36.html">Performance</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">19</span><a href="introduction-to-server-side-rendering-ea8b8930641545dcadb06d60dc3f3886.html">Introduction to server-side rendering</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">20</span><a href="setting-up-react-environment-066cca80f2534328bdc050ac81ba02b8.html">Setting up React environment</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">21</span><a href="using-react-with-flow-866a5fd05a0b4ef5b0af0bf0ef5a0f69.html">Using React with Flow</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">22</span><a href="jsx-34c251a5b7b846718f7511f5330f0a43.html">JSX</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">23</span><a href="react-forms-019d61bd45f14dedba132dc288859c44.html">React Forms</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">24</span><a href="user-interface-solutions-ce60866333cc4b42bb6badecebad2004.html">User interface solutions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">25</span><a href="react-and-flux-edae1dcd128b4d41ab944aead7cf1ee1.html">React and Flux</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">26</span><a href="webpack-and-typescript-installation-c5841c99b28848b99d6b1734bb17732c.html">Webpack and TypeScript installation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">27</span><a href="how-and-why-to-use-keys-9f918454eff24d55aa16396edf968bd3.html">How and why to use keys</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">28</span><a href="keys-in-react-2b18d28b641948efaaca668f0278d521.html">Keys in React</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">29</span><a href="higher-order-components-hoc-7107118caf64488f8118718eda6e81ca.html">Higher Order Components (HOC)</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">30</span><a href="react-with-redux-24659cb7c4c64deaa32aa5fdc61ede53.html">React with redux</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">31</span><a href="contributors-9530c91670894e5a859d6b4424d423b7.html">Contributors</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

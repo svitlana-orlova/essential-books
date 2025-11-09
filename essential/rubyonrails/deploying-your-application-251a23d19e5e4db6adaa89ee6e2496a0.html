@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">Deploying your application</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/251a23d19e5e4db6adaa89ee6e2496a0" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+<p>Make sure you are in the directory that contains your Rails app, then create an app on Heroku.
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">$ heroku create example
+</span></span><span class="line"><span class="cl">Creating ⬢ example... done
+</span></span><span class="line"><span class="cl">https://example.herokuapp.com/ | https://git.heroku.com/example.git</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>The first URL of the ouput, http://example.herokuapp.com, is the location the app is available at. The second URL, git@heroku.com:example.git, is the remote git repository URL.
+</p>
+<p>This command should only be used on an initialized git repository. The heroku create command automatically adds a git remote named “heroku” pointing at this URL.
+</p>
+<p>The app name argument (“example”) is optional. If no app name is specified, a random name will be generated. Since Heroku app names are in a global namespace, you can expect that common names, like “blog” or “wiki”, will already be taken. It’s often easier to start with a default name and rename the app later.
+</p>
+<p>Next, deploy your code:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">$ git push heroku master
+</span></span><span class="line"><span class="cl">remote: Compressing source files... done.
+</span></span><span class="line"><span class="cl">remote: Building source:
+</span></span><span class="line"><span class="cl">remote:
+</span></span><span class="line"><span class="cl">remote: -----&gt; Ruby app detected
+</span></span><span class="line"><span class="cl">remote: -----&gt; Compiling Ruby/Rails
+</span></span><span class="line"><span class="cl">remote: -----&gt; Using Ruby version: ruby-2.3.1
+</span></span><span class="line"><span class="cl">remote: -----&gt; Installing dependencies using bundler 1.11.2
+</span></span><span class="line"><span class="cl">remote:        Running: bundle install --without development:test --path vendor/bundle --binstubs vendor/bundle/bin -j4 --deployment
+</span></span><span class="line"><span class="cl">remote:        Warning: the running version of Bundler is older than the version that created the lockfile. We suggest you upgrade to the latest version of Bundler by running `gem install bundler`.
+</span></span><span class="line"><span class="cl">remote:        Fetching gem metadata from https://rubygems.org/..........
+</span></span><span class="line"><span class="cl">remote:        Fetching version metadata from https://rubygems.org/...
+</span></span><span class="line"><span class="cl">remote:        Fetching dependency metadata from https://rubygems.org/..
+</span></span><span class="line"><span class="cl">remote:        Installing concurrent-ruby 1.0.2
+</span></span><span class="line"><span class="cl">remote:        Installing i18n 0.7.0
+</span></span><span class="line"><span class="cl">remote:        Installing rake 11.2.2
+</span></span><span class="line"><span class="cl">remote:        Installing minitest 5.9.0
+</span></span><span class="line"><span class="cl">remote:        Installing thread_safe 0.3.5
+</span></span><span class="line"><span class="cl">remote:        Installing builder 3.2.2
+</span></span><span class="line"><span class="cl">remote:        Installing mini_portile2 2.1.0
+</span></span><span class="line"><span class="cl">remote:        Installing erubis 2.7.0
+</span></span><span class="line"><span class="cl">remote:        Installing pkg-config 1.1.7
+</span></span><span class="line"><span class="cl">remote:        Installing rack 2.0.1
+</span></span><span class="line"><span class="cl">remote:        Installing nio4r 1.2.1 with native extensions
+</span></span><span class="line"><span class="cl">remote:        Installing websocket-extensions 0.1.2
+</span></span><span class="line"><span class="cl">remote:        Installing mime-types-data 3.2016.0521
+</span></span><span class="line"><span class="cl">remote:        Installing arel 7.0.0
+</span></span><span class="line"><span class="cl">remote:        Installing coffee-script-source 1.10.0
+</span></span><span class="line"><span class="cl">remote:        Installing execjs 2.7.0
+</span></span><span class="line"><span class="cl">remote:        Installing method_source 0.8.2
+</span></span><span class="line"><span class="cl">remote:        Installing thor 0.19.1
+</span></span><span class="line"><span class="cl">remote:        Installing multi_json 1.12.1
+</span></span><span class="line"><span class="cl">remote:        Installing puma 3.4.0 with native extensions
+</span></span><span class="line"><span class="cl">remote:        Installing pg 0.18.4 with native extensions
+</span></span><span class="line"><span class="cl">remote:        Using bundler 1.11.2
+</span></span><span class="line"><span class="cl">remote:        Installing sass 3.4.22
+</span></span><span class="line"><span class="cl">remote:        Installing tilt 2.0.5
+</span></span><span class="line"><span class="cl">remote:        Installing turbolinks-source 5.0.0
+</span></span><span class="line"><span class="cl">remote:        Installing tzinfo 1.2.2
+</span></span><span class="line"><span class="cl">remote:        Installing nokogiri 1.6.8 with native extensions
+</span></span><span class="line"><span class="cl">remote:        Installing rack-test 0.6.3
+</span></span><span class="line"><span class="cl">remote:        Installing sprockets 3.6.3
+</span></span><span class="line"><span class="cl">remote:        Installing websocket-driver 0.6.4 with native extensions
+</span></span><span class="line"><span class="cl">remote:        Installing mime-types 3.1
+</span></span><span class="line"><span class="cl">remote:        Installing coffee-script 2.4.1
+</span></span><span class="line"><span class="cl">remote:        Installing uglifier 3.0.0
+</span></span><span class="line"><span class="cl">remote:        Installing turbolinks 5.0.0
+</span></span><span class="line"><span class="cl">remote:        Installing activesupport 5.0.0
+</span></span><span class="line"><span class="cl">remote:        Installing mail 2.6.4
+</span></span><span class="line"><span class="cl">remote:        Installing globalid 0.3.6
+</span></span><span class="line"><span class="cl">remote:        Installing activemodel 5.0.0
+</span></span><span class="line"><span class="cl">remote:        Installing jbuilder 2.5.0
+</span></span><span class="line"><span class="cl">remote:        Installing activejob 5.0.0
+</span></span><span class="line"><span class="cl">remote:        Installing activerecord 5.0.0
+</span></span><span class="line"><span class="cl">remote:        Installing loofah 2.0.3
+</span></span><span class="line"><span class="cl">remote:        Installing rails-dom-testing 2.0.1
+</span></span><span class="line"><span class="cl">remote:        Installing rails-html-sanitizer 1.0.3
+</span></span><span class="line"><span class="cl">remote:        Installing actionview 5.0.0
+</span></span><span class="line"><span class="cl">remote:        Installing actionpack 5.0.0
+</span></span><span class="line"><span class="cl">remote:        Installing actionmailer 5.0.0
+</span></span><span class="line"><span class="cl">remote:        Installing railties 5.0.0
+</span></span><span class="line"><span class="cl">remote:        Installing actioncable 5.0.0
+</span></span><span class="line"><span class="cl">remote:        Installing sprockets-rails 3.1.1
+</span></span><span class="line"><span class="cl">remote:        Installing coffee-rails 4.2.1
+</span></span><span class="line"><span class="cl">remote:        Installing jquery-rails 4.1.1
+</span></span><span class="line"><span class="cl">remote:        Installing rails 5.0.0
+</span></span><span class="line"><span class="cl">remote:        Installing sass-rails 5.0.5
+</span></span><span class="line"><span class="cl">remote:        Bundle complete! 15 Gemfile dependencies, 54 gems now installed.
+</span></span><span class="line"><span class="cl">remote:        Gems in the groups development and test were not installed.
+</span></span><span class="line"><span class="cl">remote:        Bundled gems are installed into ./vendor/bundle.
+</span></span><span class="line"><span class="cl">remote:        Bundle completed (31.86s)
+</span></span><span class="line"><span class="cl">remote:        Cleaning up the bundler cache.
+</span></span><span class="line"><span class="cl">remote:        Warning: the running version of Bundler is older than the version that created the lockfile. We suggest you upgrade to the latest version of Bundler by running `gem install bundler`.
+</span></span><span class="line"><span class="cl">remote: -----&gt; Preparing app for Rails asset pipeline
+</span></span><span class="line"><span class="cl">remote:        Running: rake assets:precompile
+</span></span><span class="line"><span class="cl">remote:        I, [2016-07-08T17:08:57.046245 #1222]  INFO -- : Writing /tmp/build_49ba6c877f5502cd4029406e981f90b4/public/assets/application-1bf5315c71171ad5f9cbef00193d56b7e45263ddc64caf676ce988cfbb6570bd.js
+</span></span><span class="line"><span class="cl">remote:        I, [2016-07-08T17:08:57.046951 #1222]  INFO -- : Writing /tmp/build_49ba6c877f5502cd4029406e981f90b4/public/assets/application-1bf5315c71171ad5f9cbef00193d56b7e45263ddc64caf676ce988cfbb6570bd.js.gz
+</span></span><span class="line"><span class="cl">remote:        I, [2016-07-08T17:08:57.060208 #1222]  INFO -- : Writing /tmp/build_49ba6c877f5502cd4029406e981f90b4/public/assets/application-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css
+</span></span><span class="line"><span class="cl">remote:        I, [2016-07-08T17:08:57.060656 #1222]  INFO -- : Writing /tmp/build_49ba6c877f5502cd4029406e981f90b4/public/assets/application-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css.gz
+</span></span><span class="line"><span class="cl">remote:        Asset precompilation completed (4.06s)
+</span></span><span class="line"><span class="cl">remote:        Cleaning assets
+</span></span><span class="line"><span class="cl">remote:        Running: rake assets:clean
+</span></span><span class="line"><span class="cl">remote:
+</span></span><span class="line"><span class="cl">remote: ###### WARNING:
+</span></span><span class="line"><span class="cl">remote:        No Procfile detected, using the default web server.
+</span></span><span class="line"><span class="cl">remote:        We recommend explicitly declaring how to boot your server process via a Procfile.
+</span></span><span class="line"><span class="cl">remote:        https://devcenter.heroku.com/articles/ruby-default-web-server
+</span></span><span class="line"><span class="cl">remote:
+</span></span><span class="line"><span class="cl">remote: -----&gt; Discovering process types
+</span></span><span class="line"><span class="cl">remote:        Procfile declares types     -&gt; (none)
+</span></span><span class="line"><span class="cl">remote:        Default types for buildpack -&gt; console, rake, web, worker
+</span></span><span class="line"><span class="cl">remote:
+</span></span><span class="line"><span class="cl">remote: -----&gt; Compressing...
+</span></span><span class="line"><span class="cl">remote:        Done: 29.2M
+</span></span><span class="line"><span class="cl">remote: -----&gt; Launching...
+</span></span><span class="line"><span class="cl">remote:        Released v5
+</span></span><span class="line"><span class="cl">remote:        https://example.herokuapp.com/ deployed to Heroku
+</span></span><span class="line"><span class="cl">remote:
+</span></span><span class="line"><span class="cl">remote: Verifying deploy... done.
+</span></span><span class="line"><span class="cl">To https://git.heroku.com/example.git
+</span></span><span class="line"><span class="cl"> * [new branch]      master -&gt; master</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>If you are using the database in your application you need to manually migrate the database by running:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">$ heroku run rake db:migrate</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>Any commands after <code>heroku run</code> will be executed on a Heroku dyno. You can obtain an interactive shell session by running:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">$ heroku run bash</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>Ensure you have one dyno running the web process type:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">$ heroku ps:scale web=1</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>The heroku ps command lists the running dynos of your application:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">$ heroku ps
+</span></span><span class="line"><span class="cl">=== web (Standard-1X): bin/rails server -p $PORT -e $RAILS_ENV (1)
+</span></span><span class="line"><span class="cl">web.1: starting 2016/07/08 12:09:06 -0500 (~ 2s ago)</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>You can now visit the app in our browser with <code>heroku open</code>.
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">$ heroku open</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>Heroku gives you a default web URL in the <code>herokuapp.com</code> domain. When you are ready to scale up for production, you can add your own custom domain.
+</p>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="deploying-your-application-251a23d19e5e4db6adaa89ee6e2496a0.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>Deploying a Rails app on Heroku:</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="deploying-a-rails-app-on-heroku-b90a563b3df24780a292ed8c7d718a4e.html">Deploying a Rails app on Heroku</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><b>Deploying your application</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="managing-production-and-staging-environments-for-a-heroku-d114832af0544614872432585a82fbca.html">Managing Production and staging environments for a Heroku</a></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="getting-started-with-ruby-on-rails-10623f86a41b4d32858d8d63b262f565.html">Getting started with Ruby on Rails</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="routing-d191d13073b74e5887daca12cd59db78.html">Routing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="activerecord-16f87dfd4fd740ff98b674042f4a2f39.html">ActiveRecord</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="views-f3df96296f58414fb58d12ea569b8590.html">Views</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="activerecord-migrations-a3fc5651092a4de39569c3129179c417.html">ActiveRecord migrations</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="rails-best-practices-4e24aeae41964d0db517818819e2a0fa.html">Rails best practices</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="naming-conventions-20ad66c4d86e4f129b7db359ebf812bd.html">Naming conventions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><a href="actioncable-b014f6076c3247ca9251c5394c8e1c4d.html">ActionCable</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><a href="activemodel-871eddf746f044eb90d0117dd47a8f1e.html">ActiveModel</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><a href="user-authentication-in-rails-bf2b82ca3ebe4d0aa583138d19c75dd5.html">User Authentication in Rails</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="activerecord-associations-ccc33da12d284f6ab1cd4300b5b75243.html">ActiveRecord Associations</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="activerecord-validations-279176e71862466b8d2ae281b6c306eb.html">ActiveRecord validations</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="activerecord-query-interface-ddb17fca5d234381ab569caefe8888c7.html">ActiveRecord Query Interface</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="actionmailer-ee4bda1fe07949118bc84743506cb259.html">ActionMailer</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="rails-generate-commands-ed62c1994d3843b89a6c2ed015287b47.html">Rails generate commands</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="configuration-c9d63948c5a84504a26517d79b8a535c.html">Configuration</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><a href="i18n-internalization-b354d3834db846098b0ae58e843de7f1.html">I18N - internalization</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><a href="using-google-maps-with-rails-7e267db83c3b48bb94c6f7848e4c904b.html">Using Google Maps with Rails</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="file-uploads-2d95b9689ad045ed9f3528dd3ce475ad.html">File Uploads</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">19</span><a href="caching-585e7db7115240b3bd87d5d43801cfff.html">Caching</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">20</span><a href="actioncontroller-783bec47007f46d39eaba38f6e42669e.html">ActionController</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">21</span><a href="configuration-3d635ab35a7440bb91d29349c1165d21.html">Configuration</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">22</span><a href="safe-constantize-02b6c158b35449fcb2a378c57b49b0ac.html">Safe constantize</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">23</span><a href="rails-5-5d87602250934ce09d5918bea3b37f78.html">Rails 5</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">24</span><a href="authorization-with-cancan-f855f2f57646454ab2954e202bedc7da.html">Authorization with CanCan</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">25</span><a href="mongoid-4098c5a37cb94e9eabc9d527e18994fc.html">Mongoid</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">26</span><a href="gems-09d91144004b458b950a8b12a2ea3e75.html">Gems</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">27</span><a href="change-default-timezone-f4714d68e78d4861916df8041592ccfc.html">Change default timezone</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">28</span><a href="asset-pipeline-779211dc8f1b4e228fa74e02cf57c464.html">Asset pipeline</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">29</span><a href="upgrading-rails-b676b4b3eb0943d7b2940eda4ee170c3.html">Upgrading Rails</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">30</span><a href="activerecord-locking-4d6b000e3ba04700bad34345749eb687.html">ActiveRecord locking</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">31</span><a href="debugging-d78f055dcee0457e9e5a250f5f3bfe5f.html">Debugging</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">32</span><a href="configure-angular-with-rails-ca79a2491b334f878fe70f0aaed101d5.html">Configure Angular with Rails</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">33</span><a href="rails-logger-2b82cc7b560144d4b33b0235c7d23c83.html">Rails logger</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">34</span><a href="prawn-pdf-7c562db277354c42bb2cd499eb0ce5c6.html">Prawn PDF</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">35</span><a href="rails-api-f3785e382c5d4a44949d77dcd67b5b8a.html">Rails API</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">36</span><b>Deploying a Rails app on Heroku</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">37</span><a href="activesupport-4ea03f0707a64fa793ddda04c96baf41.html">ActiveSupport</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">38</span><a href="form-helpers-32abda2ccab14e59bd6800cb68ebd109.html">Form Helpers</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">39</span><a href="activerecord-transactions-5dbb6a983cca47de99f245d81435d638.html">ActiveRecord transactions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">40</span><a href="rspec-and-ruby-on-rails-3a4c05bc14fe4b85b658b9c33915132c.html">RSpec and Ruby on Rails</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">41</span><a href="decorator-pattern-bc6209bbc2d14877ab42f61f46c8fb93.html">Decorator pattern</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">42</span><a href="elasticsearch-8436e0ae2a714ddb92e651cfdb32fc03.html">Elasticsearch</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">43</span><a href="react-with-rails-0a03b8fda913435b8c8819b8144cf0ba.html">React with Rails</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">44</span><a href="rails-cookbook-592d0e27620642e6a829d15345f9605c.html">Rails cookbook</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">45</span><a href="multi-purpose-activerecord-columns-5d893592df8b4149ade820a055803eb4.html">Multi-purpose ActiveRecord columns</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">46</span><a href="class-organization-764ca6f6b8a344a086c1397b12bb8a61.html">Class organization</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">47</span><a href="shallow-routing-78d9204327b6402db9d6420fb4ef5d10.html">Shallow Routing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">48</span><a href="model-states-aasm-8c285f846f1f4af6bd00a9516a0dbaac.html">Model states AASM</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">49</span><a href="rails-5-api-authentication-06b4d90fdd5d4c40b95a18655dbdaca1.html">Rails 5 API Authentication</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">50</span><a href="testing-rails-applications-0f471069a31845c38e8c3315aa7c03a4.html">Testing Rails Applications</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">51</span><a href="active-jobs-72f4abf1b80345759de3b89ec9ffe2bd.html">Active Jobs</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">52</span><a href="rails-frameworks-over-the-years-e4cf7937f4fc48d7b70588f7b4ebe003.html">Rails frameworks over the years</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">53</span><a href="nested-form-d3b8400f8375415fa0393ad984465959.html">Nested form</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">54</span><a href="factory-girl-332ac2938b00426a9b9f7a490acb0307.html">Factory Girl</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">55</span><a href="csv-4755ee9b828f45ab8a245e604decfc69.html">CSV</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">56</span><a href="tools-for-code-optimization-and-cleanup-a7dcedf285144d68b5443e33cc43688f.html">Tools for code optimization and cleanup</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">57</span><a href="activejob-e04f37c9aae34f10a728846b6bae8b2f.html">ActiveJob</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">58</span><a href="active-model-serializers-07d2ee3774fd4309a7a46faef57edf31.html">Active Model serializers</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">59</span><a href="rails-engine-modular-rails-d0975c67331c44e883094e52be8e047a.html">Rails Engine - Modular Rails</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">60</span><a href="single-table-inheritance-2cba00a870c249db999d07103d7ee250.html">Single Table inheritance</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">61</span><a href="activerecord-transactions-f2fb97f4aa4f473d83a7f2b220c21778.html">ActiveRecord transactions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">62</span><a href="turbolinks-d8b28015ab2e4a9d93221a45ab7625f4.html">Turbolinks</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">63</span><a href="friendly-id-30cc88bd63974d58b76bcc7129957724.html">Friendly ID</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">64</span><a href="securely-storing-authentications-keys-6f75c9e0bcce40a59eb841fcfb5ff00e.html">Securely storing authentications keys</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">65</span><a href="authenticate-api-using-devise-847b23b344dc43e4b406ff045450cf07.html">Authenticate API using Devise</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">66</span><a href="integrating-react.js-with-rails-using-hyperloop-ac2385b3700f4258ac7fe09522dc9520.html">Integrating React.js with Rails using Hyperloop</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">67</span><a href="change-a-default-rails-application-environment-15d01735bf9a41f8b4851b84e90ecc9d.html">Change a default Rails application environment</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">68</span><a href="reserved-words-5d93929d0b3445048519646ce812d6ca.html">Reserved words</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">69</span><a href="rails-engines-f2c0ed4f01d2493a9105d022b66e3885.html">Rails-Engines</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">70</span><a href="adding-an-amazon-rds-892566a4314a4d97a065f759fcaed2ad.html">Adding an Amazon RDS</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">71</span><a href="payment-features-in-rails-b678d7129ddb4993968953df49bc0b71.html">Payment features in Rails</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">72</span><a href="rails-on-docker-ac174a28eb654a8fa32cce461b09b56b.html">Rails on docker</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">73</span><a href="contributors-ba7475e399de4a5d9932317b782d1235.html">Contributors</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

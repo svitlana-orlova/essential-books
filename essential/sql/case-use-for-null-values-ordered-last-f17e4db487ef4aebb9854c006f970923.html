@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">CASE use for NULL values ordered last</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/f17e4db487ef4aebb9854c006f970923" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+<p>in this way ‘0’ representing the known values ​​are ranked first, ‘1’ representing the NULL values ​​are sorted by the last:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">SELECT ID
+</span></span><span class="line"><span class="cl">      ,REGION
+</span></span><span class="line"><span class="cl">      ,CITY
+</span></span><span class="line"><span class="cl">      ,DEPARTMENT
+</span></span><span class="line"><span class="cl">      ,EMPLOYEES_NUMBER
+</span></span><span class="line"><span class="cl">  FROM DEPT
+</span></span><span class="line"><span class="cl">  ORDER BY 
+</span></span><span class="line"><span class="cl">  CASE WHEN REGION IS NULL THEN 1 
+</span></span><span class="line"><span class="cl">  ELSE 0
+</span></span><span class="line"><span class="cl">  END, 
+</span></span><span class="line"><span class="cl">  REGION</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>ID | REGION |CITY |DEPARTMENT|EMPLOYEES_NUMBER|
+—— | —— |—— |—— |—— |
+10 | Mid-Atlantic |Philadelphia |RESEARCH |13|
+14 | Mid-Atlantic |New York |SALES |12 |
+9 | Midwest |Chicago |SALES |8 |
+12 | New England |Boston |MARKETING |9|
+5 | West |Los Angeles |RESEARCH |11 |
+15 | NULL |San Francisco |MARKETING |12|
+4 | NULL |Chicago |INNOVATION |11 |
+2 | NULL |Detroit |HUMAN RESOURCES |9|
+</p>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="case-use-for-null-values-ordered-last-f17e4db487ef4aebb9854c006f970923.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>CASE:</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="case-6c30ab90314b4f6f81dbd11f685e1410.html">CASE</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="use-case-to-count-the-number-of-rows-in-a-column-match-a-condition.-33edada14dbb4fd49c1bbe08bcf79ce6.html">Use CASE to COUNT the number of rows in a column match a condition.</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="searched-case-in-select-matches-a-boolean-expression-cb143d38d44b4cc9ba225a84d68e90a2.html">Searched CASE in SELECT Matches a boolean expression</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="case-in-a-clause-order-by-553f713d55df4c6f90e96a0dc9ce6e3b.html">CASE in a clause ORDER BY</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="shorthand-case-in-select-8ee859371cce42589596487e4302fac9.html">Shorthand CASE in SELECT</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="using-case-in-update-7d50ecec537345d89e343a922cc3416f.html">Using CASE in UPDATE</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><b>CASE use for NULL values ordered last</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="case-in-order-by-clause-to-sort-records-by-lowest-value-of-2-columns-b5f150dcd10b462db49df3da1119af46.html">CASE in ORDER BY clause to sort records by lowest value of 2 columns</a></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="getting-started-with-sql-5191d1f9c4fb4686aebeac6595e60da0.html">Getting started with SQL</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="select-258e2fb4c9bb4aaf92ecb9b8fc34247b.html">SELECT</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="join-a110b9fb5ca447839f24944c39372a15.html">JOIN</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="example-databases-and-tables-07b14533f5734db19f1402fbcfa349c6.html">Example Databases and Tables</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="update-ebe531bb4b384b8e803dbd6ed7e2c35d.html">UPDATE</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="indexes-91cd3c4f4abe4afd95fb980a82f1b915.html">Indexes</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="create-table-2bd9fb0488fc49d6884bab3cf352d0b1.html">CREATE TABLE</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><a href="union-union-all-a166da28a18e467b8bad3fe383f8b9f8.html">UNION, UNION ALL</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><a href="alter-table-d59d8794a6f84b48a28d188ce00c0fa0.html">ALTER TABLE</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><b>CASE</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="insert-ea3e10a704a94088aee1651ee9529c40.html">INSERT</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="primary-keys-aea3972d67d74992aa3a2bdcfb7ad4e6.html">Primary Keys</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="order-by-aaeb95b431a0434f80e9535e0037c6fd.html">ORDER BY</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="group-by-44a79833d5294dbda98b07fb1d894bff.html">GROUP BY</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="filter-results-using-where-and-having-90eeb290b12b4e3c8d6f5ab6e78841b3.html">Filter results using WHERE and HAVING</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="window-fnctions-111e9c7185a74cb192e681b82c8dad2c.html">Window Fnctions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><a href="common-table-expressions-208cbc7bc00e45fba39d962b71299d49.html">Common Table Expressions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><a href="views-8b3eec959e204b228bf7f4b932be64fa.html">Views</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="like-operator-4ea1c2d2ed214d2ba233e3d96fe5ba00.html">LIKE operator</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">19</span><a href="functions-aggregate-5c98fb2831be4b5fa5b6bd824afed93b.html">Functions Aggregate</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">20</span><a href="delete-b7de7c354291410da6e3451eb8a8e8a5.html">DELETE</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">21</span><a href="string-functions-98b5a6ddfca54233936ed3902c5fb491.html">String Functions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">22</span><a href="data-types-c1ff4006e872427b9454c8faa8237566.html">Data Types</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">23</span><a href="and-or-operators-407b3d1d6ee34bb69f259cd22db2f79f.html">AND OR operators</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">24</span><a href="triggers-56d55a9021b24426a4c02120910cfb8d.html">Triggers</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">25</span><a href="truncate-c7a6e7d1bcff477ead6d3f9a72de62a2.html">TRUNCATE</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">26</span><a href="merge-f6b7476f5cad4ad0902a62538b392ecb.html">MERGE</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">27</span><a href="foreign-keys-010680eb9c5c4acf831ade5ca99567ca.html">Foreign Keys</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">28</span><a href="finding-duplicates-on-a-column-subset-with-detail-16e26ec8dcc7443a8fe24d8a4e03fae6.html">Finding Duplicates on a Column Subset with Detail</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">29</span><a href="sequence-0413cdf835884a92b18faef996085628.html">Sequence</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">30</span><a href="comments-acdc8b9daac14bddbf23265732926aa3.html">Comments</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">31</span><a href="subqueries-e4ce18be832a4dd29a28ef6df2533fa5.html">Subqueries</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">32</span><a href="execution-blocks-d3eaa6f291f7452dadd3ef7c324c79a9.html">Execution blocks</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">33</span><a href="stored-procedures-39f7d0a0ca6b456f877d7b0da4ab364a.html">Stored Procedures</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">34</span><a href="drop-table-dcb3461fe44448a8b68309d15977b98b.html">DROP Table</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">35</span><a href="row-number-5e9393cb225446bf99c5b362ec875ad9.html">Row number</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">36</span><a href="transactions-db9bcca6192844a6baea87f1a8aad7bb.html">Transactions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">37</span><a href="create-function-c7add74d833c4731ada8001a682748ca.html">CREATE FUNCTION</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">38</span><a href="sql-group-by-vs.-distinct-6cfaa40166f24aef94d0ec7358d75463.html">SQL Group by vs. Distinct</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">39</span><a href="table-design-97e109697e5146aba39d4135a52b04fe.html">Table Design</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">40</span><a href="cross-apply-and-outer-apply-81d7eb8593b64e05b0ece5fa7d1ba7db.html">CROSS APPLY and OUTER APPLY</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">41</span><a href="synonyms-d4be36b3e0824a3a843766b42ad1856b.html">Synonyms</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">42</span><a href="create-database-2c1fe926b2534c0eb18c786e3bccaeca.html">CREATE database</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">43</span><a href="skip-take-pagination-509bb6f94f364041878fd56bf359581e.html">SKIP TAKE pagination</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">44</span><a href="explain-and-describe-7cb6a11df47041bb8b33f3b8d7d8a49a.html">EXPLAIN and DESCRIBE</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">45</span><a href="information-schema-42e0611a4089464ca60d087eb3ece1b9.html">Information Schema</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">46</span><a href="in-clause-375fed7cd5dd4f248715c255f83da986.html">IN clause</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">47</span><a href="null-4e6caccf4b6a42fa990ea07e965ec022.html">NULL</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">48</span><a href="sql-injection-33e992015094441cb61b88719352289c.html">SQL Injection</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">49</span><a href="cascading-delete-3aae8746e40c4865b96e2af416f4eb77.html">Cascading Delete</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">50</span><a href="order-of-execution-5b24fdea8c604983b135f74def26df25.html">Order of Execution</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">51</span><a href="drop-or-delete-database-383c437d704c4892a70fc94b70b36d23.html">DROP or DELETE database</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">52</span><a href="except-8b1785351562406f85a3b7545e419ee8.html">EXCEPT</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">53</span><a href="trycatch-da5bf25e39344638b3728eb6c7e44a7b.html">TRYCATCH</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">54</span><a href="xml-4e9d5cac44864652a53271cab0b0ec0e.html">XML</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">55</span><a href="grant-and-revoke-99486182dfe44338936288f5b9ba21be.html">GRANT and REVOKE</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">56</span><a href="functions-scalarsingle-row-29f78610bf3046ff94ed091aa6432ec6.html">Functions ScalarSingle Row</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">57</span><a href="relational-algebra-ad9adb14035e4f269537e3c9762e8494.html">Relational Algebra</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">58</span><a href="exists-clause-5f15e0fb544547a3b07e6f3caed4f24f.html">EXISTS CLAUSE</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">59</span><a href="materialized-views-bff093c33c2c4f54a85eed55d3097cff.html">Materialized Views</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">60</span><a href="functions-analytic-1cf3f0eb9e084b83a5c94dac889c17f7.html">Functions Analytic</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">61</span><a href="sql-cursor-2974479c567b478da2d6dc55734bd3a2.html">SQL CURSOR</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">62</span><a href="identifier-84f461bcfb954b98bf17c41d3f3a727c.html">Identifier</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">63</span><a href="clean-code-in-sql-0e90c0988b99404b8501959301837566.html">Clean Code in SQL</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">64</span><a href="contributors-b8640a96c9d547b28d62ead109594866.html">Contributors</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">GroupBy</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/5d109225b512437ca146986fe90960da" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">var persons = new[] {
+</span></span><span class="line"><span class="cl">    new { Name="Fizz", Job="Developer"},
+</span></span><span class="line"><span class="cl">    new { Name="Buzz", Job="Developer"},
+</span></span><span class="line"><span class="cl">    new { Name="Foo", Job="Astronaut"},
+</span></span><span class="line"><span class="cl">    new { Name="Bar", Job="Astronaut"},
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">var groupedByJob = persons.GroupBy(p =&gt; p.Job);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">foreach(var theGroup in groupedByJob)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    Console.WriteLine(
+</span></span><span class="line"><span class="cl">        "{0} are {1}s", 
+</span></span><span class="line"><span class="cl">        string.Join(",", theGroup.Select(g =&gt; g.Name).ToArray()),
+</span></span><span class="line"><span class="cl">        theGroup.Key);
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">//Fizz,Buzz are Developers
+</span></span><span class="line"><span class="cl">//Foo,Bar are Astronauts</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>Group invoices by country, generating a new object with the number of record, total paid, and average paid
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">var a = db.Invoices.GroupBy(i =&gt; i.Country)
+</span></span><span class="line"><span class="cl">          .Select(g =&gt; new { Country = g.Key,
+</span></span><span class="line"><span class="cl">                             Count = g.Count(),
+</span></span><span class="line"><span class="cl">                             Total = g.Sum(i =&gt; i.Paid),
+</span></span><span class="line"><span class="cl">                             Average = g.Average(i =&gt; i.Paid) });</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>If we want only the totals, no group
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">var a = db.Invoices.GroupBy(i =&gt; 1)
+</span></span><span class="line"><span class="cl">          .Select(g =&gt; new { Count = g.Count(),
+</span></span><span class="line"><span class="cl">                             Total = g.Sum(i =&gt; i.Paid),
+</span></span><span class="line"><span class="cl">                             Average = g.Average(i =&gt; i.Paid) });</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>If we need several counts
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">var a = db.Invoices.GroupBy(g =&gt; 1)
+</span></span><span class="line"><span class="cl">          .Select(g =&gt; new { High = g.Count(i =&gt; i.Paid &gt;= 1000),
+</span></span><span class="line"><span class="cl">                             Low = g.Count(i =&gt; i.Paid &lt; 1000),
+</span></span><span class="line"><span class="cl">                             Sum = g.Sum(i =&gt; i.Paid) });</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="groupby-5d109225b512437ca146986fe90960da.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>LINQ:</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="linq-ff2b8b9eeeb84432bee22c2580660d35.html">LINQ</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="selectmany-flat-map-8919787a024f4cbdac53d7d306ddaee4.html">SelectMany flat map</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="where-filter-764a46af1bb54a53a4af39e4a235f076.html">Where filter</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="any-2e4b14a2076e4cd2addebd42ed1b7b14.html">Any</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="groupjoin-a3009d8ea4d34f79b5d7db87da6fbb17.html">GroupJoin</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="tolookup-73d9b26e6ca840bcb786c276f40a2c6b.html">ToLookup</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="except-bd9f6d2b5b444489bca2c4442b3d0b61.html">Except</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="zip-2313439bdddd45faae3a73e343284ea2.html">Zip</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="aggregate-fold-044439fa281d4dfcaf0123ff74266b28.html">Aggregate fold</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="concat-826395fbb69d4964b5b428e57bd45634.html">Concat</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="count-2faf71a6f4c944a2859f429f1de72663.html">Count</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="distinct-3feb815c2c7a4693bac4d5cfc99df00f.html">Distinct</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="intersect-a23d23b9f7fb4c30b0c0accd6346082d.html">Intersect</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="sequenceequal-d68a4d757af547149e57c6a1342e9567.html">SequenceEqual</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="min-4280e78879c6472d93cfaa6b4975ad64.html">Min</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="cast-aa8dcf72ed40406c86879b6d97100913.html">Cast</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="all-12eca9236dbd4c7c900bd6c55e05606a.html">All</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="sum-28a545d41ccc42fea7a0678113f83eca.html">Sum</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="select-map-7e10a048a92f45a7a343a9f54bce68ef.html">Select map</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="firstordefault-70648deaf83841e585e02444697e8bc8.html">FirstOrDefault</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="take-a3a370b52bcc42de9862f08603d50815.html">Take</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="singleordefault-932151ecae354c2f9361c175c5595e51.html">SingleOrDefault</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="reverse-5ad5d5a969364c30bc3f4fc648cfc00a.html">Reverse</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="oftype-b3d1014288b54bf8958e0a740daeecba.html">OfType</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="max-6390b8adb90e455fa7673f5ca3e13f46.html">Max</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="skip-6cae911f4be041ba829120636aa6d436.html">Skip</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="average-d2064f43ac2d4cfeb40b187423fcabc9.html">Average</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="lastordefault-fe1633ccc1ce45358e48ffc2eb0d2201.html">LastOrDefault</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="last-505f33ee0bbd4daab99e75c792bb1990.html">Last</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><b>GroupBy</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="todictionary-d587912e0da6433e987b983bd6f37082.html">ToDictionary</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="union-61a651330a8b43389c1712f64266a7f3.html">Union</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="toarray-a3d93e42b75d47fbad7c2d89e9d96738.html">ToArray</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="tolist-52a2989a91d840f38a74f9e28a5cb39c.html">ToList</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="single-80112872d7eb4a1aac54455663fefb58.html">Single</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="elementat-ceb13601c5a7476fafe68a82c25c11fc.html">ElementAt</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="elementatordefault-7d181dc50dcf45819f74532aa21c48a4.html">ElementAtOrDefault</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="skipwhile-3b80cd4b291a4b90bc39ae45f2bb00ba.html">SkipWhile</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="takewhile-c58e84afd9114fea8a59fd6ab9dee4cc.html">TakeWhile</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="defaultifempty-ae02ca61d6464871bdbd8094439666bd.html">DefaultIfEmpty</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="first-find-8a407185c15849038767112ccae936d5.html">First find</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="contains-20f7d0e402bd42cb95555277905569b7.html">Contains</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="join-ae396a141d7e478894e08a9a152d0bb8.html">Join</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="orderbydescending-05326bfbe5f04679ae14c07285dc5b3d.html">OrderByDescending</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="orderby-788d3ce2409e45a4bd0e6bc0f403086e.html">OrderBy</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="empty-a44fb73c5b0b4b82b72f37bffe6195e8.html">Empty</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="thenby-7ddd43aa54e5425d83543f4248a47af5.html">ThenBy</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="range-7f11e5fcdcd540428706ad3d192807d4.html">Range</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="left-outer-join-9759fe6a70a748a2815c64eafe458ef3.html">Left Outer Join</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="repeat-fec450c2c830411bb4ccc5fde1392657.html">Repeat</a></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="getting-started-820442f17223423ca49f93fa52cf3ad7.html">Getting started</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="collections-fa73b3d022d64a51bebb42841b7f95a4.html">Collections</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="xmlserializer-f325a25a1498455e9dd1d3833aa957f9.html">XmlSerializer</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="http-clients-2a28de72302f4f7883046adcd7189a32.html">HTTP clients</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="exceptions-fb28bc7fe61f4ac8b19d4670cd051e98.html">Exceptions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><b>LINQ</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="networking-5019b4e4cd6944b7a82505bcb1274fb1.html">Networking</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><a href="nuget-packaging-system-9a394e05193448fdae9f33da92c04fbe.html">NuGet packaging system</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><a href="reflection-4bda71fdad0d41b690bdb47b4f14bed7.html">Reflection</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><a href="dictionaries-e22cb3bcf3f444019c363c8a0904b3ad.html">Dictionaries</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="http-servers-059956554ee04127b3a580bfa8b84e47.html">HTTP Servers</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="settings-c118455e068e4dd39b14ac47a50a2b0e.html">Settings</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="task-parallel-library-tpl-8fb3262de5fa4d3b86badae1d9f482b0.html">Task Parallel Library (TPL)</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="custom-types-0ccb57df12d44086b00e2e437157652b.html">Custom types</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="datetime-parsing-2d62c5ec1c774b119525fc3101ad48c9.html">DateTime parsing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="memory-management-14c88a947b1345dc9cf2d5a6b03bcf14.html">Memory management</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><a href="managed-extensibility-framework-15fdca899d9444a39f0a3306d537fbd4.html">Managed Extensibility Framework</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><a href="speech-recognition-engine-f6facffd3c1a4d758afeca083f1c320b.html">Speech Recognition Engine</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="system.reflection.emit-778bc6b52d2f430db96d32a23351064e.html">System.Reflection.Emit</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">19</span><a href="system.runtime.caching.memorycache-36ec1eee8fca49be9ec24afd299cc91e.html">System.Runtime.Caching.MemoryCache</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">20</span><a href="json-serialization-b7cfb8cb434849e4a04a0ba6eacab118.html">JSON Serialization</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">21</span><a href="tpl-dataflow-b3f43cee54864d44aa91ecaaf72cc072.html">TPL Dataflow</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">22</span><a href="file-inputoutput-820bac49e379434f91706f6bd2664ac2.html">File Input/Output</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">23</span><a href="platform-invoke-babb556e2d0b42239e90ef7f40ca7705.html">Platform invoke</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">24</span><a href="code-contracts-4d4ce76293e1476bad263eca55fc31ca.html">Code contracts</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">25</span><a href="vb-forms-5571106dd8ec4a50a8fd711dda8e0a69.html">VB Forms</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">26</span><a href="foreach-3cda890bb69d472da191dcfd3616e832.html">ForEach</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">27</span><a href="strings-10e9af4bfd8b4668bcc18a1d2ce2433e.html">Strings</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">28</span><a href="expression-trees-31abdfd950d6441ea8cbdc351ce38467.html">Expression Trees</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">29</span><a href="threading-9d9ea739686f4cf6adfefffb126a440e.html">Threading</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">30</span><a href="system.diagnostics-18dcfe20840e4ca3b30d2265cd6f3453.html">System.Diagnostics</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">31</span><a href="ado.net-979090b00d04478aad39b7311edd9afb.html">ADO.NET</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">32</span><a href="clr-e9a0f79030d1483b92122fd37ce5f54c.html">CLR</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">33</span><a href="process-and-thread-affinity-setting-b4b4834d3ff140e29a90ddac3a7f4364.html">Process and Thread affinity setting</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">34</span><a href="dependency-injection-13fcd1ea9ee94041b996ee82c3fe1e11.html">Dependency Injection</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">35</span><a href="task-parallel-library-tpl-392fa5c447d64cff9709e8d068082cc4.html">Task Parallel Library (TPL)</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">36</span><a href="system.io-17dfbeabe6d94fe98b76cf3666038aec.html">System.IO</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">37</span><a href="unit-testing-79ddd6cb0e0a455695fdc28289626981.html">Unit Testing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">38</span><a href="serial-ports-13cc7af077b14d3491b3fbb702596d72.html">Serial Ports</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">39</span><a href="system.io.file-6f3b2b42b01e4ceda29a8cc1049169f6.html">System.IO.File</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">40</span><a href="synchronization-contexts-44d59605d50a42aaab91c7977fd8a8b4.html">Synchronization contexts</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">41</span><a href="using-progresst-and-iprogresst-4541582af23340f58dc4eb0d6c1eb10e.html">Using Progress<T> and IProgress<T></a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">42</span><a href="readonlycollections-f8ca8ac1616e45278aece0317d92b890.html">ReadOnlyCollections</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">43</span><a href="regular-expressions-fe958aa5191d44da9d9841ba1dde934f.html">Regular expressions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">44</span><a href="system.net.mail-729ad137501c428aa6841cab5be722ce.html">System.Net.Mail</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">45</span><a href="encryption-cryptography-b7cd86c14d1b4e0a847890678a901422.html">Encryption, cryptography</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">46</span><a href="parallel-process-d7a3662e5f0a4776aabd4c48cbde30a5.html">Parallel process</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">47</span><a href="json-with-newtonsoft.json-0271bfe7c37a4696a45bc1e49994cf18.html">JSON with Newtonsoft.Json</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">48</span><a href=".net-cor-c8781654f14149b3940ce450c22a3af7.html">.NET Cor</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">49</span><a href="jit-compiler-89ba4d3d6adb486581cb543bb0cf3f66.html">JIT compiler</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">50</span><a href="stack-and-heap-fc35a31fb4a14387bb6be20e80d8c4c4.html">Stack and heap</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">51</span><a href="sha1-3d72526cfdd645728bbd50165f36a8da.html">SHA1</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">52</span><a href="sha1-42e3249854de43f99f2f92fd72b66fd4.html">SHA1</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">53</span><a href="garbage-collection-4cd15e8ed40c46799ced0cfcb5a44695.html">Garbage Collection</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">54</span><a href="reading-and-writing-zip-files-7a6daccd42844458a4223162f3088238.html">Reading and writing ZIP files</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">55</span><a href="stderr-stream-4d6337c3ed634dd785713c5ded909939.html">StdErr stream</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">56</span><a href="upload-file-and-post-data-to-webserver-524d9bfb5233406284c4edd378f0520f.html">Upload file and POST data to webserver</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">57</span><a href="acronym-glossary-84b65762d2134fb9912590a5928c1c07.html">Acronym Glossary</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">58</span><a href="contributors-aa68115c9ad64924adf59ec4480b7d6b.html">Contributors</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

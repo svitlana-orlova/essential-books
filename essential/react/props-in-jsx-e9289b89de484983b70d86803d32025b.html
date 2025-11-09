@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">Props in JSX</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/e9289b89de484983b70d86803d32025b" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+<p>There are several different ways to specify props in JSX.
+</p>
+  <h1 id="d508e101-f97f-44e1-9d50-7e6d6a3bd4f7" class="">JavaScript Expressions
+  <a class="header-anchor" href="props-in-jsx-e9289b89de484983b70d86803d32025b.html#d508e101-f97f-44e1-9d50-7e6d6a3bd4f7" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>You can pass <strong>any JavaScript expression</strong> as a prop, by surrounding it with <code>{}</code>. For example, in this JSX:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">&lt;MyComponent count={1 + 2 + 3 + 4} /&gt;</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>Inside the <code>MyComponent</code>, the value of <code>props.count</code> will be <code>10</code>, because the expression <code>1 + 2 + 3 + 4</code> gets evaluated.
+</p>
+<p>If statements and for loops are not expressions in JavaScript, so they can’t be used in JSX directly.
+</p>
+<hr id="c5559155-e5ab-4f94-9ed8-6fe471508358">
+  <h1 id="9d7f97ac-f945-4800-90d6-d96e611d2f1a" class="">String Literals
+  <a class="header-anchor" href="props-in-jsx-e9289b89de484983b70d86803d32025b.html#9d7f97ac-f945-4800-90d6-d96e611d2f1a" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>Of course, you can just pass any <code>string literal</code> as a <code>prop</code> too. These two JSX expressions are equivalent:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">&lt;MyComponent message="hello world" /&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;MyComponent message={'hello world'} /&gt;</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>When you pass a string literal, its value is HTML-unescaped. So these two JSX expressions are equivalent:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">&lt;MyComponent message="&amp;lt;3" /&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;MyComponent message={'&lt;3'} /&gt;</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>This behavior is usually not relevant. It’s only mentioned here for completeness.
+</p>
+<hr id="bebeb1f4-21ff-4772-9711-99a7439ce4bf">
+  <h1 id="cb01f999-f57d-44e5-af1f-b49288362827" class="">Props Default Value
+  <a class="header-anchor" href="props-in-jsx-e9289b89de484983b70d86803d32025b.html#cb01f999-f57d-44e5-af1f-b49288362827" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>If you pass no value for a prop, <strong>it defaults to </strong><code><strong>true</strong></code>. These two JSX expressions are equivalent:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">&lt;MyTextBox autocomplete /&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;MyTextBox autocomplete={true} /&gt;</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>However, the React team says in their docs <strong>using this approach is not recommended</strong>, because it can be confused with the ES6 object shorthand <code>{foo}</code> which is short for <code>{foo: foo}</code> rather than <code>{foo: true}</code>. They say this behavior is just there so that it matches the behavior of HTML.
+</p>
+<hr id="d5e83013-ca25-4097-9dba-29b80eeca4b3">
+  <h1 id="d25ab60c-bbed-49a2-a68b-b2b9c50caedd" class="">Spread Attributes
+  <a class="header-anchor" href="props-in-jsx-e9289b89de484983b70d86803d32025b.html#d25ab60c-bbed-49a2-a68b-b2b9c50caedd" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>If you already have props as an object, and you want to pass it in JSX, you can use <code>...</code> as a spread operator to pass the whole props object. These two components are equivalent:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">function Case1() {
+</span></span><span class="line"><span class="cl">  return &lt;Greeting firstName="Kaloyab" lastName="Kosev" /&gt;;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">function Case2() {
+</span></span><span class="line"><span class="cl">  const person = {firstName: 'Kaloyan', lastName: 'Kosev'};
+</span></span><span class="line"><span class="cl">  return &lt;Greeting {...person} /&gt;;
+</span></span><span class="line"><span class="cl">}</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="props-in-jsx-e9289b89de484983b70d86803d32025b.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>JSX:</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="jsx-c59f7bd46e6b45a0a9b70c281cd0f8ce.html">JSX</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><b>Props in JSX</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="children-in-jsx-81381e1c995446f79cd7d74f4e789161.html">Children in JSX</a></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="getting-started-54e1310d46924318b4045f886461565a.html">Getting started</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="components-da8fafc65f35422090b192f7b2069ee8.html">Components</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="react-with-typescript-a412494709ed4600a460a5f24acfbd6a.html">React with TypeScript</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="state-in-react-6cafc1d7863342d6b702833db7d26eed.html">State in React</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="props-in-react-457619196bc54ffab9b6ef83a7c7ae4e.html">Props in react</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="react-component-lifecycle-3be1a9d383e846d7add61ee03c2e1899.html">React component lifecycle</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="forms-and-user-input-3731d999c1bc4c1ba0aad1d9fc9593cd.html">Forms and user input</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><a href="react-boilerpate-for-babel-and-webpack-d91668aeeb754c8389467b1d4f7a037b.html">React boilerpate for babel and webpack</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><a href="using-react-with-jquery-7a9b795a6e6a47be84283835a236c536.html">Using React with jQuery</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><a href="react-routing-d70042712e4c4340bb8bd5647d3f0de2.html">React routing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="communication-between-components-fe58dcb8c9784ad9bc8b66067b6739ab.html">Communication between components</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="basic-webpack-and-babel-setup-9c40f65e1bdc4f72a972d646271de386.html">Basic webpack and babel setup</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="react.createclass-vs.-extends-react.component-de02e09ab95b41ac9225187428487c3b.html">React.createClass vs. extends React.Component</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="react-ajax-call-a8bc3cbf7d9a4b5496324ea3f34b4215.html">React AJAX call</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="installation-d6b4365eb5e2455eb92324ce2c042efa.html">Installation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="communication-between-components-5163a4c021234f18b52c444de537938e.html">Communication between components</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><a href="stateless-functional-components-d6dde1b52eeb4b6387418b4354c7eb3d.html">Stateless functional components</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><a href="react-tools-fed8312431e94e36941f0b835aeea1e3.html">React tools</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="performance-5ad4bd79730c404fa84be8f9eb692c36.html">Performance</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">19</span><a href="introduction-to-server-side-rendering-ea8b8930641545dcadb06d60dc3f3886.html">Introduction to server-side rendering</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">20</span><a href="setting-up-react-environment-066cca80f2534328bdc050ac81ba02b8.html">Setting up React environment</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">21</span><a href="using-react-with-flow-866a5fd05a0b4ef5b0af0bf0ef5a0f69.html">Using React with Flow</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">22</span><b>JSX</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">23</span><a href="react-forms-019d61bd45f14dedba132dc288859c44.html">React Forms</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">24</span><a href="user-interface-solutions-ce60866333cc4b42bb6badecebad2004.html">User interface solutions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">25</span><a href="react-and-flux-edae1dcd128b4d41ab944aead7cf1ee1.html">React and Flux</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">26</span><a href="webpack-and-typescript-installation-c5841c99b28848b99d6b1734bb17732c.html">Webpack and TypeScript installation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">27</span><a href="how-and-why-to-use-keys-9f918454eff24d55aa16396edf968bd3.html">How and why to use keys</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">28</span><a href="keys-in-react-2b18d28b641948efaaca668f0278d521.html">Keys in React</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">29</span><a href="higher-order-components-hoc-7107118caf64488f8118718eda6e81ca.html">Higher Order Components (HOC)</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">30</span><a href="react-with-redux-24659cb7c4c64deaa32aa5fdc61ede53.html">React with redux</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">31</span><a href="contributors-9530c91670894e5a859d6b4424d423b7.html">Contributors</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

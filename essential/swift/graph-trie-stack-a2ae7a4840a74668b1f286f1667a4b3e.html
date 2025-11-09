@@ -1,0 +1,837 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">Graph Trie Stack</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/a2ae7a4840a74668b1f286f1667a4b3e" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+  <h2 id="7613511c-9e5d-4873-b7b3-641025cad0be" class=""><strong>Graph</strong>
+  <a class="header-anchor" href="graph-trie-stack-a2ae7a4840a74668b1f286f1667a4b3e.html#7613511c-9e5d-4873-b7b3-641025cad0be" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h2>
+<p>In computer science, a graph is an abstract data type that is meant to implement the undirected graph and directed graph concepts from mathematics. A graph data structure consists of a finite (and possibly mutable) set of vertices or nodes or points, together with a set of unordered pairs of these vertices for an undirected graph or a set of ordered pairs for a directed graph. These pairs are known as edges, arcs, or lines for an undirected graph and as arrows, directed edges, directed arcs, or directed lines for a directed graph. The vertices may be part of the graph structure, or may be external entities represented by integer indices or references. A graph data structure may also associate to each edge some edge value, such as a symbolic label or a numeric attribute (cost, capacity, length, etc.). (Wikipedia, <a href="https://en.wikipedia.org/wiki/Graph_(abstract_data_type)">source</a>)
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">//
+</span></span><span class="line"><span class="cl">//  GraphFactory.swift
+</span></span><span class="line"><span class="cl">//  SwiftStructures
+</span></span><span class="line"><span class="cl">//
+</span></span><span class="line"><span class="cl">//  Created by Wayne Bishop on 6/7/14.
+</span></span><span class="line"><span class="cl">//  Copyright (c) 2014 Arbutus Software Inc. All rights reserved.
+</span></span><span class="line"><span class="cl">//
+</span></span><span class="line"><span class="cl">import Foundation
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">public class SwiftGraph {
+</span></span><span class="line"><span class="cl">   
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    //declare a default directed graph canvas
+</span></span><span class="line"><span class="cl">    private var canvas: Array&lt;Vertex&gt;
+</span></span><span class="line"><span class="cl">    public var isDirected: Bool
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    init() {
+</span></span><span class="line"><span class="cl">        canvas = Array&lt;Vertex&gt;()
+</span></span><span class="line"><span class="cl">        isDirected = true
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    //create a new vertex
+</span></span><span class="line"><span class="cl">    func addVertex(key: String) -&gt; Vertex {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        //set the key
+</span></span><span class="line"><span class="cl">        let childVertex: Vertex = Vertex()
+</span></span><span class="line"><span class="cl">        childVertex.key = key
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        //add the vertex to the graph canvas
+</span></span><span class="line"><span class="cl">        canvas.append(childVertex)
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return childVertex
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    //add edge to source vertex
+</span></span><span class="line"><span class="cl">    func addEdge(source: Vertex, neighbor: Vertex, weight: Int) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        //create a new edge
+</span></span><span class="line"><span class="cl">        let newEdge = Edge()
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        //establish the default properties
+</span></span><span class="line"><span class="cl">        newEdge.neighbor = neighbor
+</span></span><span class="line"><span class="cl">        newEdge.weight = weight
+</span></span><span class="line"><span class="cl">        source.neighbors.append(newEdge)
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        print("The neighbor of vertex: \(source.key as String!) is \(neighbor.key as String!)..")
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        //check condition for an undirected graph
+</span></span><span class="line"><span class="cl">        if isDirected == false {
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">           //create a new reversed edge
+</span></span><span class="line"><span class="cl">           let reverseEdge = Edge()
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">           //establish the reversed properties
+</span></span><span class="line"><span class="cl">           reverseEdge.neighbor = source
+</span></span><span class="line"><span class="cl">           reverseEdge.weight = weight
+</span></span><span class="line"><span class="cl">           neighbor.neighbors.append(reverseEdge)
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">           print("The neighbor of vertex: \(neighbor.key as String!) is \(source.key as String!)..")
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    /* reverse the sequence of paths given the shortest path.
+</span></span><span class="line"><span class="cl">       process analagous to reversing a linked list. */
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    func reversePath(_ head: Path!, source: Vertex) -&gt; Path! {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        guard head != nil else {
+</span></span><span class="line"><span class="cl">            return head
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        //mutated copy
+</span></span><span class="line"><span class="cl">        var output = head
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        var current: Path! = output
+</span></span><span class="line"><span class="cl">        var prev: Path!
+</span></span><span class="line"><span class="cl">        var next: Path!
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        while(current != nil) {
+</span></span><span class="line"><span class="cl">            next = current.previous
+</span></span><span class="line"><span class="cl">            current.previous = prev
+</span></span><span class="line"><span class="cl">            prev = current
+</span></span><span class="line"><span class="cl">            current = next
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        //append the source path to the sequence
+</span></span><span class="line"><span class="cl">        let sourcePath: Path = Path()
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        sourcePath.destination = source
+</span></span><span class="line"><span class="cl">        sourcePath.previous = prev
+</span></span><span class="line"><span class="cl">        sourcePath.total = nil
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        output = sourcePath
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return output
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    //process Dijkstra's shortest path algorthim
+</span></span><span class="line"><span class="cl">    func processDijkstra(_ source: Vertex, destination: Vertex) -&gt; Path? {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        var frontier: Array&lt;Path&gt; = Array&lt;Path&gt;()
+</span></span><span class="line"><span class="cl">        var finalPaths: Array&lt;Path&gt; = Array&lt;Path&gt;()
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        //use source edges to create the frontier
+</span></span><span class="line"><span class="cl">        for e in source.neighbors {
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            let newPath: Path = Path()
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            newPath.destination = e.neighbor
+</span></span><span class="line"><span class="cl">            newPath.previous = nil
+</span></span><span class="line"><span class="cl">            newPath.total = e.weight
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            //add the new path to the frontier
+</span></span><span class="line"><span class="cl">            frontier.append(newPath)
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        //construct the best path
+</span></span><span class="line"><span class="cl">        var bestPath: Path = Path()
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        while frontier.count != 0 {
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            //support path changes using the greedy approach
+</span></span><span class="line"><span class="cl">            bestPath = Path()
+</span></span><span class="line"><span class="cl">            var pathIndex: Int = 0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            for x in 0..&lt;frontier.count {
+</span></span><span class="line"><span class="cl">               
+</span></span><span class="line"><span class="cl">                let itemPath: Path = frontier[x]
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                if  (bestPath.total == nil) || (itemPath.total &lt; bestPath.total) {
+</span></span><span class="line"><span class="cl">                    bestPath = itemPath
+</span></span><span class="line"><span class="cl">                    pathIndex = x
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            //enumerate the bestPath edges
+</span></span><span class="line"><span class="cl">            for e in bestPath.destination.neighbors {
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                let newPath: Path = Path()
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                newPath.destination = e.neighbor
+</span></span><span class="line"><span class="cl">                newPath.previous = bestPath
+</span></span><span class="line"><span class="cl">                newPath.total = bestPath.total + e.weight
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                //add the new path to the frontier
+</span></span><span class="line"><span class="cl">                frontier.append(newPath)
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            //preserve the bestPath
+</span></span><span class="line"><span class="cl">            finalPaths.append(bestPath)
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            //remove the bestPath from the frontier
+</span></span><span class="line"><span class="cl">            //frontier.removeAtIndex(pathIndex) - Swift2
+</span></span><span class="line"><span class="cl">            frontier.remove(at: pathIndex)
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        } //end while
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">        //establish the shortest path as an optional
+</span></span><span class="line"><span class="cl">        var shortestPath: Path! = Path()
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        for itemPath in finalPaths {
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            if (itemPath.destination.key == destination.key) {
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                if  (shortestPath.total == nil) || (itemPath.total &lt; shortestPath.total) {
+</span></span><span class="line"><span class="cl">                    shortestPath = itemPath
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return shortestPath
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    ///an optimized version of Dijkstra's shortest path algorthim
+</span></span><span class="line"><span class="cl">    func processDijkstraWithHeap(_ source: Vertex, destination: Vertex) -&gt; Path! {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        let frontier: PathHeap = PathHeap()
+</span></span><span class="line"><span class="cl">        let finalPaths: PathHeap = PathHeap()
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        //use source edges to create the frontier
+</span></span><span class="line"><span class="cl">        for e in source.neighbors {
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            let newPath: Path = Path()
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            newPath.destination = e.neighbor
+</span></span><span class="line"><span class="cl">            newPath.previous = nil
+</span></span><span class="line"><span class="cl">            newPath.total = e.weight
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            //add the new path to the frontier
+</span></span><span class="line"><span class="cl">            frontier.enQueue(newPath)
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        //construct the best path
+</span></span><span class="line"><span class="cl">        var bestPath: Path = Path()
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        while frontier.count != 0 {
+</span></span><span class="line"><span class="cl">                        
+</span></span><span class="line"><span class="cl">            //use the greedy approach to obtain the best path
+</span></span><span class="line"><span class="cl">            bestPath = Path()
+</span></span><span class="line"><span class="cl">            bestPath = frontier.peek()
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            //enumerate the bestPath edges
+</span></span><span class="line"><span class="cl">            for e in bestPath.destination.neighbors {
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                let newPath: Path = Path()
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                newPath.destination = e.neighbor
+</span></span><span class="line"><span class="cl">                newPath.previous = bestPath
+</span></span><span class="line"><span class="cl">                newPath.total = bestPath.total + e.weight
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                //add the new path to the frontier
+</span></span><span class="line"><span class="cl">                frontier.enQueue(newPath)
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            //preserve the bestPaths that match destination
+</span></span><span class="line"><span class="cl">            if (bestPath.destination.key == destination.key) {
+</span></span><span class="line"><span class="cl">                finalPaths.enQueue(bestPath)
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            //remove the bestPath from the frontier
+</span></span><span class="line"><span class="cl">            frontier.deQueue()
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        } //end while
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        //obtain the shortest path from the heap
+</span></span><span class="line"><span class="cl">        var shortestPath: Path! = Path()
+</span></span><span class="line"><span class="cl">        shortestPath = finalPaths.peek()
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return shortestPath
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    //MARK: traversal algorithms
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    //bfs traversal with inout closure function
+</span></span><span class="line"><span class="cl">    func traverse(_ startingv: Vertex, formula: (_ node: inout Vertex) -&gt; ()) {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        //establish a new queue
+</span></span><span class="line"><span class="cl">        let graphQueue: Queue&lt;Vertex&gt; = Queue&lt;Vertex&gt;()
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        //queue a starting vertex
+</span></span><span class="line"><span class="cl">        graphQueue.enQueue(startingv)
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        while !graphQueue.isEmpty() {
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            //traverse the next queued vertex
+</span></span><span class="line"><span class="cl">            var vitem: Vertex = graphQueue.deQueue() as Vertex!
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            //add unvisited vertices to the queue
+</span></span><span class="line"><span class="cl">            for e in vitem.neighbors {
+</span></span><span class="line"><span class="cl">                if e.neighbor.visited == false {
+</span></span><span class="line"><span class="cl">                    print("adding vertex: \(e.neighbor.key!) to queue..")
+</span></span><span class="line"><span class="cl">                    graphQueue.enQueue(e.neighbor)
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            /*
+</span></span><span class="line"><span class="cl">            notes: this demonstrates how to invoke a closure with an inout parameter.
+</span></span><span class="line"><span class="cl">            By passing by reference no return value is required.
+</span></span><span class="line"><span class="cl">            */
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            //invoke formula
+</span></span><span class="line"><span class="cl">            formula(&amp;vitem)
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        } //end while
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        print("graph traversal complete..")
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    //breadth first search
+</span></span><span class="line"><span class="cl">    func traverse(_ startingv: Vertex) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        //establish a new queue
+</span></span><span class="line"><span class="cl">        let graphQueue: Queue&lt;Vertex&gt; = Queue&lt;Vertex&gt;()
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        //queue a starting vertex
+</span></span><span class="line"><span class="cl">        graphQueue.enQueue(startingv)
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        while !graphQueue.isEmpty() {
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            //traverse the next queued vertex
+</span></span><span class="line"><span class="cl">            let vitem = graphQueue.deQueue() as Vertex!
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            guard vitem != nil else {
+</span></span><span class="line"><span class="cl">                return
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            //add unvisited vertices to the queue
+</span></span><span class="line"><span class="cl">            for e in vitem!.neighbors {
+</span></span><span class="line"><span class="cl">                if e.neighbor.visited == false {
+</span></span><span class="line"><span class="cl">                    print("adding vertex: \(e.neighbor.key!) to queue..")
+</span></span><span class="line"><span class="cl">                    graphQueue.enQueue(e.neighbor)
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            vitem!.visited = true
+</span></span><span class="line"><span class="cl">            print("traversed vertex: \(vitem!.key!)..")
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        } //end while
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        print("graph traversal complete..")
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    } //end function
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    //use bfs with trailing closure to update all values
+</span></span><span class="line"><span class="cl">    func update(startingv: Vertex, formula:((Vertex) -&gt; Bool)) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        //establish a new queue
+</span></span><span class="line"><span class="cl">        let graphQueue: Queue&lt;Vertex&gt; = Queue&lt;Vertex&gt;()
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        //queue a starting vertex
+</span></span><span class="line"><span class="cl">        graphQueue.enQueue(startingv)
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        while !graphQueue.isEmpty() {
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            //traverse the next queued vertex
+</span></span><span class="line"><span class="cl">            let vitem = graphQueue.deQueue() as Vertex!            
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            guard vitem != nil else {
+</span></span><span class="line"><span class="cl">                return
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            //add unvisited vertices to the queue
+</span></span><span class="line"><span class="cl">            for e in vitem!.neighbors {
+</span></span><span class="line"><span class="cl">                if e.neighbor.visited == false {
+</span></span><span class="line"><span class="cl">                    print("adding vertex: \(e.neighbor.key!) to queue..")
+</span></span><span class="line"><span class="cl">                    graphQueue.enQueue(e.neighbor)
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            //apply formula..
+</span></span><span class="line"><span class="cl">            if formula(vitem!) == false {
+</span></span><span class="line"><span class="cl">                print("formula unable to update: \(vitem!.key)")
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            else {
+</span></span><span class="line"><span class="cl">                print("traversed vertex: \(vitem!.key!)..")
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            vitem!.visited = true
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        } //end while
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        print("graph traversal complete..")
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">}</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+  <h2 id="43fad728-fad7-4ed3-a0b8-6649c5e4c397" class=""><strong>Trie</strong>
+  <a class="header-anchor" href="graph-trie-stack-a2ae7a4840a74668b1f286f1667a4b3e.html#43fad728-fad7-4ed3-a0b8-6649c5e4c397" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h2>
+<p>In computer science, a trie, also called digital tree and sometimes radix tree or prefix tree (as they can be searched by prefixes), is a kind of search tree—an ordered tree data structure that is used to store a dynamic set or associative array where the keys are usually strings. (Wikipedia, <a href="https://en.wikipedia.org/wiki/Trie">source</a>)
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">//
+</span></span><span class="line"><span class="cl">//  Trie.swift
+</span></span><span class="line"><span class="cl">//  SwiftStructures
+</span></span><span class="line"><span class="cl">//
+</span></span><span class="line"><span class="cl">//  Created by Wayne Bishop on 10/14/14.
+</span></span><span class="line"><span class="cl">//  Copyright (c) 2014 Arbutus Software Inc. All rights reserved.
+</span></span><span class="line"><span class="cl">//
+</span></span><span class="line"><span class="cl">import Foundation
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">public class Trie {
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    private var root: TrieNode!
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    init(){
+</span></span><span class="line"><span class="cl">        root = TrieNode()
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    //builds a tree hierarchy of dictionary content
+</span></span><span class="line"><span class="cl">    func append(word keyword: String) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        //trivial case
+</span></span><span class="line"><span class="cl">        guard keyword.length &gt; 0 else {
+</span></span><span class="line"><span class="cl">            return
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        var current: TrieNode = root
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        while keyword.length != current.level {
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            var childToUse: TrieNode!
+</span></span><span class="line"><span class="cl">            let searchKey = keyword.substring(to: current.level + 1)
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            //print("current has \(current.children.count) children..")
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            //iterate through child nodes
+</span></span><span class="line"><span class="cl">            for child in current.children {
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                if (child.key == searchKey) {
+</span></span><span class="line"><span class="cl">                    childToUse = child
+</span></span><span class="line"><span class="cl">                    break
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            //new node
+</span></span><span class="line"><span class="cl">            if childToUse == nil {
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                childToUse = TrieNode()
+</span></span><span class="line"><span class="cl">                childToUse.key = searchKey
+</span></span><span class="line"><span class="cl">                childToUse.level = current.level + 1
+</span></span><span class="line"><span class="cl">                current.children.append(childToUse)
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            current = childToUse
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        } //end while
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        //final end of word check
+</span></span><span class="line"><span class="cl">        if (keyword.length == current.level) {
+</span></span><span class="line"><span class="cl">            current.isFinal = true
+</span></span><span class="line"><span class="cl">            print("end of word reached!")
+</span></span><span class="line"><span class="cl">            return
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    } //end function
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    //find words based on the prefix
+</span></span><span class="line"><span class="cl">    func search(forWord keyword: String) -&gt; Array&lt;String&gt;! {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        //trivial case
+</span></span><span class="line"><span class="cl">        guard keyword.length &gt; 0 else {
+</span></span><span class="line"><span class="cl">            return nil
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        var current: TrieNode = root
+</span></span><span class="line"><span class="cl">        var wordList = Array&lt;String&gt;()
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        while keyword.length != current.level {
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            var childToUse: TrieNode!
+</span></span><span class="line"><span class="cl">            let searchKey = keyword.substring(to: current.level + 1)
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            //print("looking for prefix: \(searchKey)..")
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            //iterate through any child nodes
+</span></span><span class="line"><span class="cl">            for child in current.children {
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                if (child.key == searchKey) {
+</span></span><span class="line"><span class="cl">                    childToUse = child
+</span></span><span class="line"><span class="cl">                    current = childToUse
+</span></span><span class="line"><span class="cl">                    break
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">            if childToUse == nil {
+</span></span><span class="line"><span class="cl">               return nil
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        } //end while
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        //retrieve the keyword and any descendants
+</span></span><span class="line"><span class="cl">        if ((current.key == keyword) &amp;&amp; (current.isFinal)) {
+</span></span><span class="line"><span class="cl">            wordList.append(current.key)
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        //include only children that are words
+</span></span><span class="line"><span class="cl">        for child in current.children {
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            if (child.isFinal == true) {
+</span></span><span class="line"><span class="cl">                wordList.append(child.key)
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return wordList
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    } //end function
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">}</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>(GitHub, <a href="https://github.com/waynewbishop/SwiftStructures/blob/master/Source/Factories/Trie.swift">source</a>)
+</p>
+  <h2 id="a4d945c4-c584-4792-8cab-2406a0d1ff8b" class=""><strong>Stack</strong>
+  <a class="header-anchor" href="graph-trie-stack-a2ae7a4840a74668b1f286f1667a4b3e.html#a4d945c4-c584-4792-8cab-2406a0d1ff8b" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h2>
+<p>In computer science, a stack is an abstract data type that serves as a collection of elements, with two principal operations: push, which adds an element to the collection, and pop, which removes the most recently added element that was not yet removed. The order in which elements come off a stack gives rise to its alternative name, LIFO (for last in, first out). Additionally, a peek operation may give access to the top without modifying the stack. (Wikipedia, <a href="https://en.wikipedia.org/wiki/Stack_(abstract_data_type)">source</a>)
+</p>
+<p>See license info below and original code source at (<a href="https://github.com/waynewbishop/SwiftStructures/blob/master/Source/Factories/Stack.swift">github</a>)
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">//
+</span></span><span class="line"><span class="cl">//  Stack.swift
+</span></span><span class="line"><span class="cl">//  SwiftStructures
+</span></span><span class="line"><span class="cl">//
+</span></span><span class="line"><span class="cl">//  Created by Wayne Bishop on 8/1/14.
+</span></span><span class="line"><span class="cl">//  Copyright (c) 2014 Arbutus Software Inc. All rights reserved.
+</span></span><span class="line"><span class="cl">//
+</span></span><span class="line"><span class="cl">import Foundation
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">class Stack&lt;T&gt; {
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    private var top: Node&lt;T&gt;
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    init() {
+</span></span><span class="line"><span class="cl">        top = Node&lt;T&gt;()
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    //the number of items - O(n)
+</span></span><span class="line"><span class="cl">    var count: Int {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        //return trivial case
+</span></span><span class="line"><span class="cl">        guard top.key != nil else {
+</span></span><span class="line"><span class="cl">          return 0
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        var current = top
+</span></span><span class="line"><span class="cl">        var x: Int = 1
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        //cycle through list
+</span></span><span class="line"><span class="cl">        while current.next != nil {
+</span></span><span class="line"><span class="cl">            current = current.next!
+</span></span><span class="line"><span class="cl">            x += 1
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        return x        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    //add item to the stack
+</span></span><span class="line"><span class="cl">    func push(withKey key: T) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        //return trivial case
+</span></span><span class="line"><span class="cl">        guard top.key != nil else {
+</span></span><span class="line"><span class="cl">            top.key = key
+</span></span><span class="line"><span class="cl">            return
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        //create new item
+</span></span><span class="line"><span class="cl">        let childToUse = Node&lt;T&gt;()
+</span></span><span class="line"><span class="cl">        childToUse.key = key
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        //set new created item at top
+</span></span><span class="line"><span class="cl">        childToUse.next = top
+</span></span><span class="line"><span class="cl">        top = childToUse        
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    //remove item from the stack
+</span></span><span class="line"><span class="cl">    func pop() {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if self.count &gt; 1 {
+</span></span><span class="line"><span class="cl">            top = top.next
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        else {
+</span></span><span class="line"><span class="cl">            top.key = nil
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    //retrieve the top most item
+</span></span><span class="line"><span class="cl">    func peek() -&gt; T! {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        //determine instance
+</span></span><span class="line"><span class="cl">        if let topitem = top.key {
+</span></span><span class="line"><span class="cl">            return topitem
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        else {
+</span></span><span class="line"><span class="cl">            return nil
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    //check for value
+</span></span><span class="line"><span class="cl">    func isEmpty() -&gt; Bool {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if self.count == 0 {
+</span></span><span class="line"><span class="cl">            return true
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        else {
+</span></span><span class="line"><span class="cl">            return false
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">}</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<blockquote id="05aeac02-f7de-46b2-b2a9-308dcab97857" class="">The MIT License (MIT)
+</blockquote>
+<p>Copyright (c) 2015, Wayne Bishop &amp; Arbutus Software Inc.
+</p>
+<p>Permission is hereby granted, free of charge, to any person obtaining &gt; a copy of this software and associated documentation files (the &gt; “Software”), to deal in the Software without restriction, including &gt; without limitation the rights to use, copy, modify, merge, publish, &gt; distribute, sublicense, and/or sell copies of the Software, and to &gt; permit persons to whom the Software is furnished to do so, subject to &gt; the following conditions:
+</p>
+<p>The above copyright notice and this permission notice shall be &gt; included in all copies or substantial portions of the Software.
+</p>
+<p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, &gt; EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF &gt; MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. &gt; IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY &gt; CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, &gt; TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE &gt; SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+</p>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="graph-trie-stack-a2ae7a4840a74668b1f286f1667a4b3e.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>Algorithms with Swift:</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="algorithms-with-swift-877a9a0f6c104e9d8bdb3cc2915c2b71.html">Algorithms with Swift</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="sorting-f7ef1c23b978474bb8357ed8dad7b0d6.html">Sorting</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="insertion-sort-8bede447ce80444c82d12632b3456cc9.html">Insertion Sort</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="selection-sort-53cdd7261e8b40b784486603b743fbd9.html">Selection sort</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="asymptotic-analysis-028b4cd7aa4e4a498c97ea4ee879b0e3.html">Asymptotic analysis</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="quick-sort-on-log-n-complexity-time-be52f167db0d47089c5956231f34906d.html">Quick Sort - On log n complexity time</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><b>Graph Trie Stack</b></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="getting-started-4743a9b33ba144068fd892f831177a73.html">Getting started</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="switch-40e2faa75ff34654a114f19b837c574b.html">Switch</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="json-743fc1c3bc9c43868bb837bb9430112f.html">JSON</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="enums-85fc985ed4f6470ca50ed230fb7f7029.html">Enums</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="protocols-b3a03a8183e54085b4624a9e0b487f4a.html">Protocols</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="structs-5b89258ebcc14c2bb7ec53d72cea9e9e.html">Structs</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="closures-752e5fcf89e9482f8ab540b382d1513b.html">Closures</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><a href="error-handling-0bbae4020f8d4c5392842bfa4e450424.html">Error Handling</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><a href="arrays-9f9ac14237464907b806661ae15321d3.html">Arrays</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><a href="dictionaries-4007debc66664d3f8faa5ba1ed7a30fb.html">Dictionaries</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="extensions-2ebad6939dff4aebbb972b78d049b25e.html">Extensions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="sets-08b06e18c5f34e40a0be39eaaab9fdc5.html">Sets</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="working-with-c-and-objective-c-c7a9a16fd6604db78d5b012a3f06c296.html">Working with C and Objective-C</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="functions-aec11d9f8e7749ff9784b941666239e5.html">Functions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="numbers-8e0cbefabb1346a7ae475d4863fae390.html">Numbers</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="classes-9926a5407aa34e8ba8800d25223917b7.html">Classes</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><a href="conditionals-cfa2de35cd0048e5aa49c7bc809cd199.html">Conditionals</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><a href="variables-properties-75f61437dd574152ba5de1d11169b6f5.html">Variables, properties</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="optionals-ab64a7f2ccc34ffd98cacb7cc7d65a64.html">Optionals</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">19</span><a href="tuples-346889aabbe6424893829d44810882db.html">Tuples</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">20</span><a href="booleans-6eadf5185b934d649bc20e88e97a1ad5.html">Booleans</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">21</span><a href="memory-management-45e8edb6720b4879a3f9bdeeebc97a9f.html">Memory management</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">22</span><a href="generics-5367e1b7d8c942c1a35c1508743d5105.html">Generics</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">23</span><a href="advanced-operators-ab0095d7f3304c2a956440c927e04cdd.html">Advanced operators</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">24</span><a href="access-control-995be3028fbf4acc9c9bdb5cfdd0521f.html">Access control</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">25</span><a href="associated-objects-e9e7dd9789074c6194c8873542c4221d.html">Associated objects</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">26</span><a href="loops-9f9717578f394d949d24c0b8b7100e34.html">Loops</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">27</span><a href="reflection-b51b495df6534e2bb92d5af0d351982e.html">Reflection</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">28</span><a href="optionset-9da019f7f53842a4bf9fa95e812e2233.html">OptionSet</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">29</span><a href="method-swizzling-b5d22e1900564916bf50cc1dc2f38c0e.html">Method swizzling</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">30</span><a href="concurrency-f3aea850966d47e0bbd28564c5d35715.html">Concurrency</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">31</span><a href="initializers-e80e058ccecb4b11af4ab91c85302b9d.html">Initializers</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">32</span><a href="getting-started-with-protocol-oriented-programming-2f2b8c00b4d84005976471297a1f77f4.html">Getting started with Protocol Oriented Programming</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">33</span><a href="functional-programming-a95c626d6b55449a91a2173c29e1c6a7.html">Functional programming</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">34</span><a href="style-convent-41f7ad7847df4ba797500c3f2e60ce1b.html">Style convent</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">35</span><a href="type-casting-e1154a97185d4fcd81a86d4e1e7d3a99.html">Type casting</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">36</span><a href="logging-in-swift-9455a2c2402a4a708aeb9762505167c3.html">Logging in Swift</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">37</span><a href="performance-77ad070cdd394425a996cc8967f74b4e.html">Performance</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">38</span><a href="rxswift-9667daa48e9a40c684985fd2b4e46a1e.html">RxSwift</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">39</span><a href="the-defer-statement-67e4333db244489f94a95033eda1d62f.html">The defer statement</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">40</span><a href="design-patterns-creational-00935eb8d31643d49d14f133a4cf1c91.html">Design Patterns - Creational</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">41</span><a href="swift-package-manager-41bf5b927d0a4e59af5d5b1468ffec68.html">Swift Package Manager</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">42</span><a href="nsregularexpression-18f008442ce54c049bd79a256ae07a77.html">NSRegularExpression</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">43</span><a href="documentation-markup-2f6abffd81514ec29a322f5da3b5a767.html">Documentation markup</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">44</span><a href="aes-encryption-35e9a1fb1c654c4db44bbecc6cd9f6bd.html">AES encryption</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">45</span><a href="pbkdf2-key-derivation-2e9691dd08114161964f0af0c454280b.html">PBKDF2 key derivation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">46</span><a href="typealias-cb46a7446c2643e6ba4b4058eb63b196.html">Typealias</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">47</span><a href="cryptographic-hashing-1beb1f798f574bf18bcbe6737d583cda.html">Cryptographic hashing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">48</span><a href="dependency-injection-9ae8b97828e644f1af9c629e5306665c.html">Dependency Injection</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">49</span><a href="functions-as-first-class-citizens-10e2f070401842058a9300bc8fa64375.html">Functions as first class citizens</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">50</span><a href="blocks-bec5b2af554c4a6c87b2a65a4523f654.html">Blocks</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">51</span><a href="caching-on-disk-space-41dd6dc28607497893068747c2240710.html">Caching on disk space</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">52</span><b>Algorithms with Swift</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">53</span><a href="unsafe-buffer-pointers-1a7a68fa5ed74026bd096c438ee3c996.html">Unsafe buffer pointers</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">54</span><a href="swift-advance-functions-298a699840b44079ae0ef0fc31d96e18.html">Swift Advance functions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">55</span><a href="completion-handler-d04ea4c21d9649c5b9111de41c18c770.html">Completion Handler</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">56</span><a href="design-patterns-structural-d9d0d23b68624787ba04328a8305821b.html">Design Patterns - Structural</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">57</span><a href="swift-http-server-by-kitura-2a4061429c5f402d939e888df54da249.html">Swift HTTP server by Kitura</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">58</span><a href="generate-uiimage-of-initials-from-string-3b5feb34031d402a804d16d2d230a001.html">Generate UIImage of Initials from string</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">59</span><a href="contributors-66275fb391444a6ba878f81e4a354aa6.html">Contributors</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

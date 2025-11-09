@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">Predefined Macros</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/f2e95e9433f44411abe4525ccf819496" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+<p>A predefined macro is a macro that is already understood by the C pre processor without the program needing to define it. Examples include
+</p>
+  <h2 id="1bf9ed87-8ec6-447f-90a0-ca1ade2529ea" class="">Mandatory Pre-Defined Macros
+  <a class="header-anchor" href="predefined-macros-f2e95e9433f44411abe4525ccf819496.html#1bf9ed87-8ec6-447f-90a0-ca1ade2529ea" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h2>
+  <ul id="be311e11-ee16-4ef0-9cea-8cb24113cfaf" class="bulleted-list">
+    <li><code>__FILE__</code>, which gives the file name of the current source file (a string literal),
+    </li>
+    <li><code>__LINE__</code> for the current line number (an integer constant),
+    </li>
+    <li><code>__DATE__</code> for the compilation date (a string literal),
+    </li>
+    <li><code>__TIME__</code> for the compilation time (a string literal).
+    </li>
+  </ul>
+<p>There’s also a related predefined identifier, <code>__func__</code> (ISO/IEC 9899:2011 §6.4.2.2), which is <em>not</em> a macro:
+</p>
+<blockquote id="529e352d-0bad-42a1-9ec1-5942de503491" class="">The identifier __func__ shall be implicitly declared by the translator as if, immediately following the opening brace of each function definition, the declaration:
+</blockquote>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">static const char __func__[] = "function-name";</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>appeared, where <em>function-name</em> is the name of the lexically-enclosing function.
+</p>
+<p><code>__FILE__</code>, <code>__LINE__</code> and <code>__func__</code> are especially useful for debugging purposes. For example:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">fprintf(stderr, "%s: %s: %d: Denominator is 0", __FILE__, __func__, __LINE__);</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>Pre-C99 compilers, may or may not support <code>__func__</code> or may have a macro that acts the same that is named differently. For example, gcc used <code>__FUNCTION__</code> in C89 mode.
+</p>
+<p>The below macros allow to ask for detail on the implementation:
+</p>
+  <ul id="bafd3651-a5f4-4778-8b96-be1123998334" class="bulleted-list">
+    <li><code>__STDC_VERSION__</code> The version of the C Standard implemented. This is a constant integer using the format <code>yyyymmL</code> (the value <code>201112L</code> for C11, the value <code>199901L</code> for C99; it wasn’t defined for C89/C90)
+    </li>
+    <li><code>__STDC_HOSTED__</code> <code>1</code> if it’s a hosted implementation, else <code>0</code>.
+    </li>
+    <li><code>__STDC__</code> If <code>1</code>, the implementation conforms to the C Standard.
+    </li>
+  </ul>
+  <h2 id="e99acc0f-bd86-4825-80bd-8bf2ed4a4511" class="">Other Pre-Defined Macros (non mandatory)
+  <a class="header-anchor" href="predefined-macros-f2e95e9433f44411abe4525ccf819496.html#e99acc0f-bd86-4825-80bd-8bf2ed4a4511" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h2>
+<p>ISO/IEC 9899:2011 §6.10.9.2 Environment macros:
+</p>
+<blockquote id="e382b3ce-d37f-41d0-8d91-cc6034c1c130" class="">
+</blockquote>
+  <ul id="b678b24c-f715-429c-a230-b99bfda10d5e" class="bulleted-list">
+    <li><code>__STDC_ISO_10646__</code> An integer constant of the form <code>yyyymmL</code> (for example, 199712L). If this symbol is defined, then every character in the Unicode required set, when stored in an object of type <code>wchar_t</code>, has the same value as the short identifier of that character. The Unicode required set consists of all the characters that are defined by ISO/IEC 10646, along with all amendments and technical corrigenda, as of the specified year and month. If some other encoding is used, the macro shall not be defined and the actual encoding used is implementation-defined.
+    </li>
+    <li><code>__STDC_MB_MIGHT_NEQ_WC__</code> The integer constant 1, intended to indicate that, in the encoding for <code>wchar_t</code>, a member of the basic character set need not have a code value equal to its value when used as the lone character in an integer character constant.
+    </li>
+    <li><code>__STDC_UTF_16__</code> The integer constant 1, intended to indicate that values of type <code>char16_t</code> are UTF−16 encoded. If some other encoding is used, the macro shall not be defined and the actual encoding used is implementation-defined.
+    </li>
+    <li><code>__STDC_UTF_32__</code> The integer constant 1, intended to indicate that values of type <code>char32_t</code> are UTF−32 encoded. If some other encoding is used, the macro shall not be defined and the actual encoding used is implementation-defined.
+    </li>
+  </ul>
+<p>ISO/IEC 9899:2011 §6.10.8.3 Conditional feature macros
+</p>
+<blockquote id="c3a4d9ca-b3d9-4c07-bad1-2558684bc319" class="">
+</blockquote>
+  <ul id="9140c22b-dd5b-4412-8631-39e944df39e7" class="bulleted-list">
+    <li><code>__STDC_ANALYZABLE__</code> The integer constant 1, intended to indicate conformance to the specifications in annex L (Analyzability).
+    </li>
+    <li><code>__STDC_IEC_559__</code> The integer constant 1, intended to indicate conformance to the specifications in annex F (IEC 60559 floating-point arithmetic).
+    </li>
+    <li><code>__STDC_IEC_559_COMPLEX__</code> The integer constant 1, intended to indicate adherence to the specifications in annex G (IEC 60559 compatible complex arithmetic).
+    </li>
+    <li><code>__STDC_LIB_EXT1__</code> The integer constant <code>201112L</code>, intended to indicate support for the extensions defined in annex K (Bounds-checking interfaces).
+    </li>
+    <li><code>__STDC_NO_ATOMICS__</code> The integer constant 1, intended to indicate that the implementation does not support atomic types (including the <code>_Atomic</code> type qualifier) and the <code>&lt;stdatomic.h&gt;</code> header.
+    </li>
+    <li><code>__STDC_NO_COMPLEX__</code> The integer constant 1, intended to indicate that the implementation does not support complex types or the <code>&lt;complex.h&gt;</code> header.
+    </li>
+    <li><code>__STDC_NO_THREADS__</code> The integer constant 1, intended to indicate that the implementation does not support the <code>&lt;threads.h&gt;</code> header.
+    </li>
+    <li><code>__STDC_NO_VLA__</code> The integer constant 1, intended to indicate that the implementation does not support variable length arrays or variably modified types.
+    </li>
+  </ul>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="predefined-macros-f2e95e9433f44411abe4525ccf819496.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>Preprocessor and macros:</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="preprocessor-and-macros-c2c2cbd071724ae7a1a261b713f833a3.html">Preprocessor and Macros</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="header-include-guards-c45f439f3f8046a79fec6e1e91aab4d5.html">Header Include Guards</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="if-0-to-block-out-code-sections-5ac972699fc74a07898429e458c4d4b9.html">if 0 to block out code sections</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="function-like-macros-14e4d1676bf04159ad0d42b923faadac.html">Function-like macros</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="source-file-inclusion-c9514a3b6a704aba8647fac197b86084.html">Source file inclusion</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="conditional-inclusion-and-conditional-function-signature-modification-af240c6957864dfca2a4bc66f0b842c4.html">Conditional inclusion and conditional function signature modification</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="cplusplus-for-using-c-externals-in-c-code-compiled-with-c-name-mangling-b2724256584a49de9889e38d8a3c4f31.html">cplusplus for using C externals in C code compiled with C - name mangling</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="token-pasting-d4dec269a5884b0f97ab82f7a9380c49.html">Token pasting</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><b>Predefined Macros</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="variadic-arguments-macro-37250f84b8e646fcaa8b995d71c65938.html">Variadic arguments macro</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="macro-replacement-a0a5364f8eed41d38296fc36f0e7959f.html">Macro Replacement</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="error-directive-f192e28a4e284aaca733a5333464d5d9.html">Error directive</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="foreach-implementation-8596ed91d0c240ac9fe2fe110e3fc333.html">FOREACH implementation</a></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="getting-started-c88395f2cfa349179b1d77ad5ef5da03.html">Getting started</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="function-pointers-033ae01139fb4a869a8954971c729ce8.html">Function pointers</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="operators-218cbf42b3ba4b2abdabe522009865b7.html">Operators</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="data-types-af9762cdd0324a74a2b8b8413c2edefb.html">Data types</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="arrays-c613c743331e4cb083444963dbf825f3.html">Arrays</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="undefined-behavior-eff989d8e4d44f97952e6c58e46dfb73.html">Undefined behavior</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="random-numbers-44b99e73a03b41ccb5422de7e97ca081.html">Random numbers</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><b>Preprocessor and macros</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><a href="signal-handling-6ae1f6f30a874becb9ca2ef03a059422.html">Signal handling</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><a href="variable-arguments-f3c545235f2c4d48a50ecd230eee34ae.html">Variable arguments</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="files-and-io-streams-9b4c9f4c5f4745ba86a9461b3aaa1198.html">Files and I/O streams</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="assertion-b81cd45faa264f1982387b90dd64a769.html">Assertion</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="linked-lists-fb6df079bba6489eac6a3ea61d24e7af.html">Linked lists</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="generic-selection-262dadd4365545db88b606e23e8e3a7b.html">Generic selection</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="x-macros-9dc6ce73bdfa4d4db5a1db84c9227865.html">X-macros</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="function-parameters-f4db91d9e5024cf2b8cc184cb2d19911.html">Function parameters</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><a href="pointers-1e14553b8aea44fba0fefbc893ff529a.html">Pointers</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><a href="structs-fceea03fc65b4f898e06817d0fcf3348.html">Structs</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="sequence-points-fcadea6adf3343958abc4c71f5599a2d.html">Sequence points</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">19</span><a href="command-line-arguments-690adfe71f944d2283ad47d3971f3325.html">Command-line arguments</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">20</span><a href="aliasing-and-effective-type-fb1c49daf858420f804f317776d975e9.html">Aliasing and effective type</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">21</span><a href="compilation-fe373c8adc774fbb9cebfe91a58a5732.html">Compilation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">22</span><a href="identifier-scope-92dc051b09a349309dda0fb318b57610.html">Identifier scope</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">23</span><a href="bit-fields-9104b65f88ef4b7789d3248fa4934ff0.html">Bit-fields</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">24</span><a href="strings-f3ac34eb110d486b9e306bd30082bba0.html">Strings</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">25</span><a href="comman-pitfalls-ce0d7992bb1e4e62ab262f99a9a2f78d.html">Comman pitfalls</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">26</span><a href="error-handling-b76c53dc91244a109817490e3504e93e.html">Error handling</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">27</span><a href="implicit-and-explicit-conversions-042e8ddfc9c44b7384320a569a4f0a8a.html">Implicit and explicit conversions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">28</span><a href="type-qualifiers-3615ca163d26480098f44da1a5c4bef4.html">Type qualifiers</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">29</span><a href="valgrind-873798b299a24a3f9d7ce6e95e01396f.html">Valgrind</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">30</span><a href="typedef-f9df1d91a33b4691861245ec5ebf45e8.html">Typedef</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">31</span><a href="selection-statements-218166d2ae4c4856827d6080353375ec.html">Selection statements</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">32</span><a href="declaration-vs.-definitio-d3fd04e6166e44c48df36eb488aec6fb.html">Declaration vs. definitio</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">33</span><a href="standard-math-476e4bcf22544ffd82b2b3dcbd9fdf01.html">Standard math</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">34</span><a href="boolean-70e63802c8af45739d3082507679f19d.html">Boolean</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">35</span><a href="literals-for-numbers-characters-and-strings-2042e9e8170e4e88a3c5041aec6ba49b.html">Literals for numbers, characters and strings</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">36</span><a href="storage-classes-a25d942bf1824a598930268903693536.html">Storage classes</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">37</span><a href="declarations-bbc16be7a6da4b3f9e55a68f0bcdb261.html">Declarations</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">38</span><a href="formatted-inputoutput-ae1ce0ef9ced4caa9c8df14041e087b0.html">Formatted Input/Output</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">39</span><a href="compound-literals-56054c40d551420f9fd8a44a9550fd1d.html">Compound literals</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">40</span><a href="inline-assembly-a32e93b8a17540b5b72fe58c30d058bb.html">Inline assembly</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">41</span><a href="threads-native-86031ef1ffce4374a32d1f1886dc6593.html">Threads native</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">42</span><a href="initialization-b0240e668da14190bbe5f47d5b561ed2.html">Initialization</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">43</span><a href="structure-padding-and-packing-898403c688614ecab6cf2fee9068ecce.html">Structure padding and packing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">44</span><a href="memory-management-5e44bd5433624b1a934bacecce2afc7f.html">Memory management</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">45</span><a href="implementation-defined-behaviour-5c0a653d4ce14234bf167d29dc2f993e.html">Implementation-defined behaviour</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">46</span><a href="atomics-ae726a5e8d1241b29bd8209da2cca404.html">Atomics</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">47</span><a href="iteration-statements-loops-for-while-do-while-c45bb8ecaf6d4f58b094cc6980d363e1.html">Iteration statements, loops, for, while, do-while</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">48</span><a href="enumerations-f0f16c2234d641258a8763fdd135ef20.html">Enumerations</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">49</span><a href="jump-statements-5e4385c8606f406eb1af53b610c5bf4a.html">Jump Statements</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">50</span><a href="create-and-include-header-files-e16223c3400e4968bddc3cc5edf4c5c0.html">Create and include header files</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">51</span><a href="testing-frameworks-8ed525aa8fab4ee49fff5b43085094dd.html">Testing frameworks</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">52</span><a href="ctype.h-characters-classification-f4f6d38472dd4d02aa47f083a22f6481.html">ctype.h characters classification</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">53</span><a href="pass-2d-arrays-to-functions-d4a53a793ec2426eac5024d51d19d403.html">Pass 2D-arrays to functions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">54</span><a href="side-effects-529782464aff47a0915aa90feded64cd.html">Side effects</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">55</span><a href="multi-character-character-sequences-19611889e7964311ab76561c41c4850a.html">Multi-character character sequences</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">56</span><a href="constrains-54f188adc5ec49d78bf71c5c08e72d2e.html">Constrains</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">57</span><a href="inlining-27ddd518401c43c0bb68381e630e5cfb.html">Inlining</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">58</span><a href="unions-109e287f796b4acd8b1bdae5f45129bd.html">Unions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">59</span><a href="multi-threading-dab23b65514a455aa0f6c63668012233.html">Multi-threading</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">60</span><a href="common-idioms-and-developer-practices-cb11a718ba934278a486b649224f5923.html">Common idioms and developer practices</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">61</span><a href="inter-process-communication-ipc-9d53db3a6a864febbbeaf4bfb502ed5f.html">Inter-process communication (IPC)</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">62</span><a href="comments-af5ef860337b4d68aa37de9259c85852.html">Comments</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">63</span><a href="contributors-5ebf8b4e135f4d2e8d6e1f6b532dedb7.html">Contributors</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

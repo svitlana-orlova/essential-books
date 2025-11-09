@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">Dijkstras Shortest Path Algorithm</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/332b894c29e04699b035a7bbee6ba9b3" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+<p><em>Before proceeding, it is recommended to have a brief idea about Adjacency Matrix and BFS</em>
+</p>
+<p><a href="https://en.wikipedia.org/wiki/Dijkstra's_algorithm">Dijkstra’s algorithm</a> is known as single-source shortest path algorithm. It is used for finding the shortest paths between nodes in a graph, which may represent, for example, road networks. It was conceived by <a href="https://en.wikipedia.org/wiki/Edsger_W._Dijkstra">Edsger W. Dijkstra</a> in 1956 and published three years later.
+</p>
+<p>We can find shortest path using Breadth First Search (BFS) searching algorithm. This algorithm works fine, but the problem is, it assumes the cost of traversing each path is same, that means the cost of each edge is same. Dijkstra’s algorithm helps us to find the shortest path where the cost of each path is not the same.
+</p>
+<p>At first we will see, how to modify BFS to write Dijkstra’s algorithm, then we will add priority queue to make it a complete Dijkstra’s algorithm.
+</p>
+<p>Let’s say, the distance of each node from the source is kept in <strong>d[]</strong> array. As in, <strong>d[3]</strong> represents that <strong>d[3]</strong> time is taken to reach <strong>node 3</strong> from <strong>source</strong>. If we don’t know the distance, we will store <em>infinity</em> in <strong>d[3]</strong>. Also, let <strong>cost[u][v]</strong> represent the cost of <strong>u-v</strong>. That means it takes <strong>cost[u][v]</strong> to go from <strong>u</strong> node to <strong>v</strong> node.
+</p>
+<img class="img" src="img/d6c4851b1f69606fafe717910ab3bee82a8cb2c9.png.html">
+<p>We need to understand Edge Relaxation. Let’s say, from your house, that is <strong>source</strong>, it takes <em>10</em> minutes to go to place <strong>A</strong>. And it takes <em>25</em> minutes to go to place <strong>B</strong>. We have,
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">d[A] = 10
+</span></span><span class="line"><span class="cl">d[B] = 25</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>Now let’s say it takes <em>7</em> minutes to go from place <strong>A</strong> to place <strong>B</strong>, that means:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">cost[A][B] = 7</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>Then we can go to place <strong>B</strong> from <strong>source</strong> by going to place <strong>A</strong> from <strong>source</strong> and then from place <strong>A</strong>, going to place <strong>B</strong>, which will take <em>10 + 7 = 17</em> minutes, instead of <em>25</em> minutes. So,
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">d[A] + cost[A][B] &lt; d[B]</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>Then we update,
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">d[B] = d[A] + cost[A][B]</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>This is called relaxation. We will go from node <strong>u</strong> to node <strong>v</strong> and if <strong>d[u] + cost[u][v] &lt; d[v]</strong> then we will update <strong>d[v] = d[u] + cost[u][v]</strong>.
+</p>
+<p>In BFS, we didn’t need to visit any node twice. We only checked if a node is visited or not. If it was not visited, we pushed the node in queue, marked it as visited and incremented the distance by 1. In Dijkstra, we can push a node in queue and instead of updating it with visited, we <em>relax</em> or update the new edge. Let’s look at one example:
+</p>
+<img class="img" src="img/08ce36db4e7be0ebb77f01362d0a54094c275a12.png.html">
+<p>Let’s assume, <strong>Node 1</strong> is the <strong>Source</strong>. Then,
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">d[1] = 0
+</span></span><span class="line"><span class="cl">d[2] = d[3] = d[4] = infinity (or a large value)</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>We set, <strong>d[2], d[3]</strong> and <strong>d[4]</strong> to <em>infinity</em> because we don’t know the distance yet. And the distance of <strong>source</strong> is of course <em>0</em>. Now, we go to other nodes from <strong>source</strong> and if we can update them, then we’ll push them in the queue. Say for example, we’ll traverse <strong>edge 1-2</strong>. As <strong>d[1] + 2 &lt; d[2]</strong> which will make <strong>d[2] = 2</strong>. Similarly, we’ll traverse <strong>edge 1-3</strong> which makes <strong>d[3] = 5</strong>.
+</p>
+<p>We can clearly see that <em>5</em> is not the shortest distance we can cross to go to <strong>node 3</strong>. So traversing a node only once, like BFS, doesn’t work here. If we go from <strong>node 2</strong> to <strong>node 3</strong> using <strong>edge 2-3</strong>, we can update <strong>d[3] = d[2] + 1 = 3</strong>. So we can see that one node can be updated many times. How many times you ask? The maximum number of times a node can be updated is the number of in-degree of a node.
+</p>
+<p>Let’s see the pseudo-code for visiting any node multiple times. We will simply modify BFS:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">procedure BFSmodified(G, source):
+</span></span><span class="line"><span class="cl">Q = queue()
+</span></span><span class="line"><span class="cl">distance[] = infinity
+</span></span><span class="line"><span class="cl">Q.enqueue(source)
+</span></span><span class="line"><span class="cl">distance[source]=0
+</span></span><span class="line"><span class="cl">while Q is not empty
+</span></span><span class="line"><span class="cl">    u &lt;- Q.pop()
+</span></span><span class="line"><span class="cl">    for all edges from u to v in G.adjacentEdges(v) do
+</span></span><span class="line"><span class="cl">        if distance[u] + cost[u][v] &lt; distance[v]
+</span></span><span class="line"><span class="cl">            distance[v] = distance[u] + cost[u][v]
+</span></span><span class="line"><span class="cl">        end if
+</span></span><span class="line"><span class="cl">    end for
+</span></span><span class="line"><span class="cl">end while
+</span></span><span class="line"><span class="cl">Return distance</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>This can be used to find the shortest path of all node from the source. The complexity of this code is not so good. Here’s why,
+</p>
+<p>In BFS, when we go from <strong>node 1</strong> to all other nodes, we follow <em>first come, first serve</em> method. For example, we went to <strong>node 3</strong> from <strong>source</strong> before processing <strong>node 2</strong>. If we go to <strong>node 3</strong> from <strong>source</strong>, we update <strong>node 4</strong> as <strong>5 + 3 = 8</strong>. When we again update <strong>node 3</strong> from <strong>node 2</strong>, we need to update <strong>node 4</strong> as <strong>3 + 3 = 6</strong> again! So <strong>node 4</strong> is updated twice.
+</p>
+<p><em>Dijkstra</em> proposed, instead of going for <em>First come, first serve</em> method, if we update the nearest nodes first, then it’ll take less updates. If we processed <strong>node 2</strong> before, then <strong>node 3</strong> would have been updated before, and after updating <strong>node 4</strong> accordingly, we’d easily get the shortest distance! The idea is to choose from the queue, the node, that is closest to the <strong>source</strong>. So we will use <em>Priority Queue</em> here so that when we pop the queue, it will bring us the closest node <strong>u</strong> from <strong>source</strong>. How will it do that? It’ll check the value of <strong>d[u]</strong> with it.
+</p>
+<p>Let’s see the pseudo-code:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">procedure dijkstra(G, source):
+</span></span><span class="line"><span class="cl">Q = priority_queue()
+</span></span><span class="line"><span class="cl">distance[] = infinity
+</span></span><span class="line"><span class="cl">Q.enqueue(source)
+</span></span><span class="line"><span class="cl">distance[source] = 0
+</span></span><span class="line"><span class="cl">while Q is not empty
+</span></span><span class="line"><span class="cl">    u &lt;- nodes in Q with minimum distance[]
+</span></span><span class="line"><span class="cl">    remove u from the Q
+</span></span><span class="line"><span class="cl">    for all edges from u to v in G.adjacentEdges(v) do
+</span></span><span class="line"><span class="cl">        if distance[u] + cost[u][v] &lt; distance[v]
+</span></span><span class="line"><span class="cl">            distance[v] = distance[u] + cost[u][v]
+</span></span><span class="line"><span class="cl">            Q.enqueue(v)
+</span></span><span class="line"><span class="cl">        end if
+</span></span><span class="line"><span class="cl">    end for
+</span></span><span class="line"><span class="cl">end while
+</span></span><span class="line"><span class="cl">Return distance</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>The pseudo-code returns distance of all other nodes from the <strong>source</strong>. If we want to know distance of a single node <strong>v</strong>, we can simply return the value when <strong>v</strong> is popped from the queue.
+</p>
+<p>Now, does Dijkstra’s Algorithm work when there’s a negative edge? If there’s a negative cycle, then infinity loop will occur, as it will keep reducing the cost every time. Even if there is a negative edge, Dijkstra won’t work, unless we return right after the target is popped. But then, it won’t be a Dijkstra algorithm. We’ll need <a href="http://stackoverflow.com/documentation/algorithm/4791/bellman-ford-algorithm/24021/single-source-shortest-path-algorithm-given-there-is-a-negative-cycle-in-a-grap">Bellman–Ford</a> algorithm for processing negative edge/cycle.
+</p>
+<p><strong>Complexity:</strong>
+</p>
+<p>The complexity of BFS is <strong>O(log(V+E))</strong> where <strong>V</strong> is the number of nodes and <strong>E</strong> is the number of edges. For Dijkstra, the complexity is similar, but sorting of <em>Priority Queue</em> takes <strong>O(logV)</strong>. So the total complexity is: <strong>O(Vlog(V)+E)</strong>
+</p>
+<p>Below is a Java example to solve Dijkstra’s Shortest Path Algorithm using Adjacency Matrix
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">import java.util.*;
+</span></span><span class="line"><span class="cl">import java.lang.*;
+</span></span><span class="line"><span class="cl">import java.io.*;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">class ShortestPath
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    static final int V=9;
+</span></span><span class="line"><span class="cl">    int minDistance(int dist[], Boolean sptSet[])
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">        int min = Integer.MAX_VALUE, min_index=-1;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for (int v = 0; v &lt; V; v++)
+</span></span><span class="line"><span class="cl">            if (sptSet[v] == false &amp;&amp; dist[v] &lt;= min)
+</span></span><span class="line"><span class="cl">            {
+</span></span><span class="line"><span class="cl">                min = dist[v];
+</span></span><span class="line"><span class="cl">                min_index = v;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        return min_index;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    void printSolution(int dist[], int n)
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">        System.out.println("Vertex Distance from Source");
+</span></span><span class="line"><span class="cl">        for (int i = 0; i &lt; V; i++)
+</span></span><span class="line"><span class="cl">            System.out.println(i+" \t\t "+dist[i]);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    void dijkstra(int graph[][], int src)
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        Boolean sptSet[] = new Boolean[V];
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for (int i = 0; i &lt; V; i++)
+</span></span><span class="line"><span class="cl">        {
+</span></span><span class="line"><span class="cl">            dist[i] = Integer.MAX_VALUE;
+</span></span><span class="line"><span class="cl">            sptSet[i] = false;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        dist[src] = 0;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for (int count = 0; count &lt; V-1; count++)
+</span></span><span class="line"><span class="cl">        {
+</span></span><span class="line"><span class="cl">            int u = minDistance(dist, sptSet);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            sptSet[u] = true;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            for (int v = 0; v &lt; V; v++)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                if (!sptSet[v] &amp;&amp; graph[u][v]!=0 &amp;&amp;
+</span></span><span class="line"><span class="cl">                        dist[u] != Integer.MAX_VALUE &amp;&amp;
+</span></span><span class="line"><span class="cl">                        dist[u]+graph[u][v] &lt; dist[v])
+</span></span><span class="line"><span class="cl">                    dist[v] = dist[u] + graph[u][v];
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        printSolution(dist, V);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    public static void main (String[] args)
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">    int graph[][] = new int[][]{{0, 4, 0, 0, 0, 0, 0, 8, 0},
+</span></span><span class="line"><span class="cl">                                {4, 0, 8, 0, 0, 0, 0, 11, 0},
+</span></span><span class="line"><span class="cl">                                {0, 8, 0, 7, 0, 4, 0, 0, 2},
+</span></span><span class="line"><span class="cl">                                {0, 0, 7, 0, 9, 14, 0, 0, 0},
+</span></span><span class="line"><span class="cl">                                {0, 0, 0, 9, 0, 10, 0, 0, 0},
+</span></span><span class="line"><span class="cl">                                {0, 0, 4, 14, 10, 0, 2, 0, 0},
+</span></span><span class="line"><span class="cl">                                {0, 0, 0, 0, 0, 2, 0, 1, 6},
+</span></span><span class="line"><span class="cl">                                {8, 11, 0, 0, 0, 0, 1, 0, 7},
+</span></span><span class="line"><span class="cl">                                {0, 0, 2, 0, 0, 0, 6, 7, 0}
+</span></span><span class="line"><span class="cl">                                };
+</span></span><span class="line"><span class="cl">        ShortestPath t = new ShortestPath();
+</span></span><span class="line"><span class="cl">        t.dijkstra(graph, 0);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>Expected output of the program is
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">Vertex   Distance from Source
+</span></span><span class="line"><span class="cl">0                0
+</span></span><span class="line"><span class="cl">1                4
+</span></span><span class="line"><span class="cl">2                12
+</span></span><span class="line"><span class="cl">3                19
+</span></span><span class="line"><span class="cl">4                21
+</span></span><span class="line"><span class="cl">5                11
+</span></span><span class="line"><span class="cl">6                9
+</span></span><span class="line"><span class="cl">7                8
+</span></span><span class="line"><span class="cl">8                14</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="dijkstras-shortest-path-algorithm-332b894c29e04699b035a7bbee6ba9b3.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>Dijkstras Algorithm:</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="dijkstras-algorithm-059b92722d374eb09ec4885111c067cc.html">Dijkstras Algorithm</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><b>Dijkstras Shortest Path Algorithm</b></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="getting-started-91fee7b5614e44ac9c692c43b78c7706.html">Getting started</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="sorting-1b2f4c664ea64d7ba266531792730534.html">Sorting</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="bubble-sort-6eb693f8f70b45c9a6db644dea3bc144.html">Bubble sort</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="algorithm-complexity-ee1a453958894a51bc451ed4ce501170.html">Algorithm complexity</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="graphs-8ae5c9b5b80d4e27930b0dbbf5b2a075.html">Graphs</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="dynamic-programming-0483f45cfa31493ebd1bb9e924123210.html">Dynamic programming</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="kruskals-algorithm-e737c451edb24ee18b504891f751f559.html">Kruskals algorithm</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><a href="greedy-algorithms-fb292c5c1e2c4d169d29fce0aff04b2b.html">Greedy algorithms</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><a href="searching-c8277fc46841459e81f4c90a99fd83fa.html">Searching</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><a href="big-o-notation-adfec1cf49414483b98d9550de7e3916.html">Big O notation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="bellman-for-algorithm-2bfd570fdc074daab3b2a794ef12f08e.html">Bellman-For Algorithm</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="merge-sort-a034d8c3224b46dcbc26d44b569e39e0.html">Merge Sort</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="binary-search-trees-8c1be63050c94162b355a5d6917f9e65.html">Binary Search Trees</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="trees-56228e72edf04f14b6c71d113093b22a.html">Trees</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="insertion-sort-2885c26f551147a5900d5d725326f99d.html">Insertion Sort</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="hash-functions-e800516eb244400089c70041f1acd148.html">Hash Functions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><a href="traveling-salesman-7c62ae2de3344dc4a641184b79672747.html">Traveling Salesman</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><a href="substring-search-ec9d0bba8ded4256866e28adfde6676e.html">Substring Search</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><b>Dijkstras Algorithm</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">19</span><a href="floyd-warshall-algorithm-07b6aee186e24b06953393f2f24dd419.html">Floyd-Warshall Algorithm</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">20</span><a href="breadth-first-search-3104f50ab7e241fe97d7f6e02201ccb8.html">Breadth-First Search</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">21</span><a href="bucket-sort-aed1f400b221406780e62fda841c33f0.html">Bucket Sort</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">22</span><a href="quicksort-a747cf00d05a41329b344cea62968a38.html">Quicksort</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">23</span><a href="depth-first-search-0abdd157bda84285b8a75aa4dd7e132b.html">Depth-First Search</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">24</span><a href="knapsack-problem-e79c088d5ede4b22b5dc16273a672796.html">Knapsack Problem</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">25</span><a href="counting-sort-721fb53cf2404ce6aaaa9f4be08c3460.html">Counting Sort</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">26</span><a href="cycle-sort-38ae0e5d81ea45b2b7f48eb197662514.html">Cycle Sort</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">27</span><a href="heap-sort-c06d75d61a6d48da8e094d63502dedee.html">Heap Sort</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">28</span><a href="prims-algorithm-3cca89f64b6c48b0957b2efc26b23041.html">Prims Algorithm</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">29</span><a href="matrix-exponentiation-db10fdd2ea0b4236ae1494781b2f7586.html">Matrix Exponentiation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">30</span><a href="pigeonhole-sort-9bd5a67d2c304b51a6b7b9eb3583b888.html">Pigeonhole Sort</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">31</span><a href="radix-sort-29a89f00863f40848ec5db4c455fc788.html">Radix Sort</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">32</span><a href="equation-solving-2734ccd8075a412f8976e67dfd9416da.html">Equation Solving</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">33</span><a href="odd-even-sort-a5ee928035d04aac89a2decbe44f483e.html">Odd-Even Sort</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">34</span><a href="pseudocode-790101e3fd8c47e3bcc454b18dc2fd9a.html">Pseudocode</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">35</span><a href="catalan-number-algorithm-aa2725ade1d140edab4f0042fe8e222f.html">Catalan Number Algorithm</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">36</span><a href="integer-partition-algorithm-7261d2a39d9d43cb9e3a4b432a018d9e.html">Integer Partition Algorithm</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">37</span><a href="a-pathfinding-7e7202cf172e479eb1d42842091d8b3e.html">A* Pathfinding</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">38</span><a href="shell-sort-ee3641188538481787be3e716db337cb.html">Shell Sort</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">39</span><a href="selection-sort-4ee11beba38d47e382277414b7e09239.html">Selection Sort</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">40</span><a href="pancake-sort-f82e52a5bc1541068c592d323c6aa2f1.html">Pancake Sort</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">41</span><a href="longest-common-subsequence-547abd24965c44ceb5f0e452aeea3821.html">Longest Common Subsequence</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">42</span><a href="longest-increasing-subsequence-d33782abd4ee4ba9938d2922e11247be.html">Longest Increasing Subsequence</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">43</span><a href="maximum-path-sum-algorithm-0c0e3472dac8416a833b40ef5e725f54.html">Maximum Path Sum Algorithm</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">44</span><a href="maxiumum-subarray-algorithm-c677c53060364f08810c5e2b963b6ded.html">Maxiumum Subarray Algorithm</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">45</span><a href="dynamic-time-warping-d1c46e3a31cb41e0acf1907b405548a3.html">Dynamic Time Warping</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">46</span><a href="pascal-triangle-24e66a7fc2cb4c77b4245e08b603ee59.html">Pascal Triangle</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">47</span><a href="line-drawing-15b863c228b54b319379ff8091b43c28.html">Line drawing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">48</span><a href="shortest-common-supersequence-5eb1332d741d47f8ad4cda01f28ef2ed.html">Shortest Common Supersequence</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">49</span><a href="sliding-window-algorithm-88259ac245264ea5b9e9d03f7dd06c8e.html">Sliding Window Algorithm</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">50</span><a href="application-of-greedy-techniqe-0652a44d8a6347b5b7cfaf85d0c3655a.html">Application of greedy techniqe</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">51</span><a href="online-algorithms-61f46cc6d7e04aebae8a47f4eb52c2bc.html">Online algorithms</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">52</span><a href="fast-fourier-transform-a3747844afb94883bbb2bea5662e919d.html">Fast Fourier Transform</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">53</span><a href="a-path-finding-algorithm-e567adff577f4fa6849a1a112f689048.html">A* Path-finding Algorithm</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">54</span><a href="check-if-tree-is-bst-c96af0bea3eb4385a6740f83049a23fd.html">Check if tree is BST</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">55</span><a href="binary-tree-traversal-1357e1664a6143aba4f0d9cbd7ba53de.html">Binary tree traversal</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">56</span><a href="lowest-common-ancestor-of-a-binary-tree-e7f8518091d140758feb5b5f495422a9.html">Lowest common ancestor of a binary tree</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">57</span><a href="graph-traversal-2a8a00f4a54041b487f7465c42e6a071.html">Graph Traversal</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">58</span><a href="minimum-vertex-cover-f11f3084c84d4f6e91d08c55df0d8c59.html">Minimum Vertex Cover</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">59</span><a href="multi-threaded-algorithms-491070bf06ff4de8bf7f3e121c11c49f.html">Multi-threaded Algorithms</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">60</span><a href="print-mxn-matrix-in-square-wise-2a95e83b1c1e40d2b8e08917aa02703e.html">Print MxN matrix in square wise</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">61</span><a href="check-two-strings-are-anagrams-a30ef1622edd4b1290d725d5049ed098.html">Check two strings are anagrams</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">62</span><a href="edit-distance-dynamic-algorithm-eaba21c76ac1482fbdc29410e7140b3d.html">Edit Distance Dynamic Algorithm</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">63</span><a href="applications-of-dynamic-programming-1f7d7534a5224df6a49544f1c3e4179d.html">Applications of Dynamic Programming</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">64</span><a href="knuth-moriss-pratt-924ef53cfe524d0f82331cbc0f7eb8f7.html">Knuth Moriss Pratt</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">65</span><a href="contributors-d9ba24fd508b4ddc9d8c15467083ba43.html">Contributors</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

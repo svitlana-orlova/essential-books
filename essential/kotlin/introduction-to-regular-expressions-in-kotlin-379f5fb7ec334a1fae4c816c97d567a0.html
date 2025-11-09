@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">Introduction to regular expressions in Kotlin</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/379f5fb7ec334a1fae4c816c97d567a0" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+<p>This post shows how to use most of the functions in the <code>Regex</code> class, work with null safely related to the <code>Regex</code> functions, and how raw strings makes it easier to write and read regex patterns.
+</p>
+  <h1 id="1c6cd6e1-812b-4e35-bab7-0bcab619e004" class="">The RegEx class
+  <a class="header-anchor" href="introduction-to-regular-expressions-in-kotlin-379f5fb7ec334a1fae4c816c97d567a0.html#1c6cd6e1-812b-4e35-bab7-0bcab619e004" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>To work with regular expressions in Kotlin, you need to use the <code>Regex(pattern: String)</code> class and invoke functions like <code>find(..)</code> or <code>replace(..)</code> on that regex object.
+</p>
+<p>An example on how to use the <code>Regex</code> class that returns true if the <code>input</code> string contains c or d:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">val regex = Regex(pattern = "c|d")
+</span></span><span class="line"><span class="cl">val matched = regex.containsMatchIn(input = "abc")    // matched: true</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>The essential thing to understand with all the <code>Regex</code> functions is that the result is based on matching the regex <code>pattern</code> and the <code>input</code> string. Some of the functions requires a full match, while the rest requires only a partial match. The <code>containsMatchIn(..)</code> function used in the example requires a partial match and is explained later in this post.
+</p>
+  <h1 id="de4a62ec-66af-4191-a41f-4aa313bce64a" class="">Null safety with regular expressions
+  <a class="header-anchor" href="introduction-to-regular-expressions-in-kotlin-379f5fb7ec334a1fae4c816c97d567a0.html#de4a62ec-66af-4191-a41f-4aa313bce64a" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>Both <code>find(..)</code> and <code>matchEntire(..)</code> will return a <code>MatchResult?</code> object. The <code>?</code> character after <code>MatchResult</code> is necessary for Kotlin to handle <a href="https://kotlinlang.org/docs/reference/null-safety.html">null safely</a>.
+</p>
+<p>An example that demonstrates how Kotlin handles null safely from a <code>Regex</code> function, when the <code>find(..)</code> function returns null:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">val matchResult = 
+</span></span><span class="line"><span class="cl">    Regex("c|d").find("efg")           // matchResult: null
+</span></span><span class="line"><span class="cl">val a = matchResult?.value             // a: null
+</span></span><span class="line"><span class="cl">val b = matchResult?.value.orEmpty()   // b: ""
+</span></span><span class="line"><span class="cl">a?.toUpperCase()                       // Still needs question mark. =&gt; null    
+</span></span><span class="line"><span class="cl">b.toUpperCase()                        // Accesses the function directly. =&gt; ""</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>With the <code>orEmpty()</code> function, <code>b</code> can’t be null and the <code>?</code> character is unnecessary when you call functions on <code>b</code>.
+</p>
+<p>If you don’t care about this safe handling of null values, Kotlin allows you to work with null values like in Java with the <code>!!</code> characters:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">a!!.toUpperCase()                      // =&gt; KotlinNullPointerException</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+  <h1 id="0f663be4-425f-4d1f-9a61-ac86e5956571" class="">Raw strings in regex patterns
+  <a class="header-anchor" href="introduction-to-regular-expressions-in-kotlin-379f5fb7ec334a1fae4c816c97d567a0.html#0f663be4-425f-4d1f-9a61-ac86e5956571" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>Kotlin provides an improvement over Java with a <a href="https://kotlinlang.org/docs/reference/basic-types.html#string-literals">raw string</a> that makes it possible to write pure regex patterns without double backslashes, that are necessary with a Java string. A raw string is represented with a triple quote:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">"""\d{3}-\d{3}-\d{4}""" // raw Kotlin string
+</span></span><span class="line"><span class="cl">"\\d{3}-\\d{3}-\\d{4}"  // standard Java string</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+  <h1 id="138295d9-6c90-42ca-bc7d-f4b65671aa03" class="">find(input: CharSequence, startIndex: Int): MatchResult?
+  <a class="header-anchor" href="introduction-to-regular-expressions-in-kotlin-379f5fb7ec334a1fae4c816c97d567a0.html#138295d9-6c90-42ca-bc7d-f4b65671aa03" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>The <code>input</code> string will be matched against the <code>pattern</code> in the <code>Regex</code> object. It returns a <code>Matchresult?</code> object with the first matched text after the <code>startIndex</code>, or <code>null</code> if the pattern didn’t match the <code>input</code> string. The result string is retrieved from the <code>MatchResult?</code> object’s <code>value</code> property. The <code>startIndex</code> parameter is optional with the default value 0.
+</p>
+<p>To extract the first valid phone number from a string with contact details:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">val phoneNumber :String? = Regex(pattern = """\d{3}-\d{3}-\d{4}""")
+</span></span><span class="line"><span class="cl">    .find(input = "phone: 123-456-7890, e..")?.value // phoneNumber: 123-456-7890</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>With no valid phone number in the <code>input</code> string, the variable <code>phoneNumber</code> will be <code>null</code>.
+</p>
+  <h1 id="2197be43-45b6-4a3f-ac66-a14151a16e5f" class="">findAll(input: CharSequence, startIndex: Int): Sequence
+  <a class="header-anchor" href="introduction-to-regular-expressions-in-kotlin-379f5fb7ec334a1fae4c816c97d567a0.html#2197be43-45b6-4a3f-ac66-a14151a16e5f" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>Returns all the matches from the <code>input</code> string that matches the regex <code>pattern</code>.
+</p>
+<p>To print out all numbers separated with space, from a text with letters and digits:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">val matchedResults = Regex(pattern = """\d+""").findAll(input = "ab12cd34ef")
+</span></span><span class="line"><span class="cl">val result = StringBuilder()
+</span></span><span class="line"><span class="cl">for (matchedText in matchedResults) {
+</span></span><span class="line"><span class="cl">    result.append(matchedText.value + " ")
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">println(result) // =&gt; 12 34</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>The <code>matchedResults</code> variable is a sequence with <code>MatchResult</code> objects. With an <code>input</code> string without digits, the <code>findAll(..)</code> function will return an empty sequence.
+</p>
+  <h1 id="c092b5de-e5f0-4146-a416-f99e0f0568a5" class="">matchEntire(input: CharSequence): MatchResult?
+  <a class="header-anchor" href="introduction-to-regular-expressions-in-kotlin-379f5fb7ec334a1fae4c816c97d567a0.html#c092b5de-e5f0-4146-a416-f99e0f0568a5" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>If all the characters in the <code>input</code> string matches the regex <code>pattern</code>, a string equal to the <code>input</code> will be returned. Else, <code>null</code> will be returned.
+</p>
+<p>Returns the input string if the whole input string is a number:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">val a = Regex("""\d+""").matchEntire("100")?.value             // a: 100
+</span></span><span class="line"><span class="cl">val b = Regex("""\d+""").matchEntire("100 dollars")?.value     // b: null</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+  <h1 id="7b0508e1-cc50-40de-960b-7f1105be8d9f" class="">matches(input: CharSequence): Boolean
+  <a class="header-anchor" href="introduction-to-regular-expressions-in-kotlin-379f5fb7ec334a1fae4c816c97d567a0.html#7b0508e1-cc50-40de-960b-7f1105be8d9f" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>Returns true if the whole input string matches the regex pattern. False otherwise.
+</p>
+<p>Tests if two strings contains only digits:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">val regex = Regex(pattern = """\d+""")
+</span></span><span class="line"><span class="cl">regex.matches(input = "50")             // =&gt; true
+</span></span><span class="line"><span class="cl">regex.matches(input = "50 dollars")     // =&gt; false</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+  <h1 id="992943cc-4dae-49ff-8f75-82a1f9df34be" class="">containsMatchIn(input: CharSequence): Boolean
+  <a class="header-anchor" href="introduction-to-regular-expressions-in-kotlin-379f5fb7ec334a1fae4c816c97d567a0.html#992943cc-4dae-49ff-8f75-82a1f9df34be" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>Returns true if part of the input string matches the regex pattern. False otherwise.
+</p>
+<p>Test if two strings contains at least one digit:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">Regex("""\d+""").containsMatchIn("50 dollars")       // =&gt; true
+</span></span><span class="line"><span class="cl">Regex("""\d+""").containsMatchIn("Fifty dollars")    // =&gt; false</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+  <h1 id="395978a9-2447-4c35-ad35-c3c563ef2c99" class="">split(input: CharSequence, limit: Int): List
+  <a class="header-anchor" href="introduction-to-regular-expressions-in-kotlin-379f5fb7ec334a1fae4c816c97d567a0.html#395978a9-2447-4c35-ad35-c3c563ef2c99" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>Returns a new list without all the regex matches.
+</p>
+<p>To return lists without digits:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">val a = Regex("""\d+""").split("ab12cd34ef")     // a: [ab, cd, ef]
+</span></span><span class="line"><span class="cl">val b = Regex("""\d+""").split("This is a test") // b: [This is a test]</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>There is one element in the list for each split. The first <code>input</code> string has three numbers. That results in a list with three elements.
+</p>
+  <h1 id="6e92fc6c-c9d9-4506-ba56-eb7f439121d2" class="">replace(input: CharSequence, replacement: String): String
+  <a class="header-anchor" href="introduction-to-regular-expressions-in-kotlin-379f5fb7ec334a1fae4c816c97d567a0.html#6e92fc6c-c9d9-4506-ba56-eb7f439121d2" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>Replaces all matches of the regex <code>pattern</code> in the <code>input</code> string with the replacement string.
+</p>
+<p>To replace all digits in a string with an x:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">val result = Regex("""\d+""").replace("ab12cd34ef", "x") // result: abxcdxef</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="introduction-to-regular-expressions-in-kotlin-379f5fb7ec334a1fae4c816c97d567a0.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>Regex:</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="idioms-for-regex-matching-in-when-expression-6b36fe3de9d14362a7887f71da7eb9ee.html">Idioms for Regex Matching in When Expression</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><b>Introduction to regular expressions in Kotlin</b></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="getting-started-with-kotlin-bf06f0639d354ff393ad8c89caa1b064.html">Getting started with Kotlin</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="extension-methods-ee8e0a58ce4d49f295cf589d789b64da.html">Extension Methods</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="java-8-stream-equivalents-9714a7803ee84e3d95bb973e02de4953.html">Java 8 Stream Equivalents</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="interfaces-1caac65fa4f54488ad6e0bd2a6e67806.html">Interfaces</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="generics-7281119ad541456a97f405918821013e.html">Generics</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="functions-90982c6515f54292b06836b5b5bca394.html">Functions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="null-safety-80bde4e75e0e4d44988869827930ae4c.html">Null safety</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><a href="idioms-6b53e97440cc4aadaa35242fe987be21.html">Idioms</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><a href="enum-64d7f30ae7744b029b819540827f0b16.html">Enum</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><a href="reflection-7b416f2bf26d4f2087fe64ec020e1f51.html">Reflection</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="configuring-kotlin-build-e6ec2d6343a446d2acc76037ff62cb66.html">Configuring Kotlin build</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="conditional-statements-82527ce951fc40d4a4713651f67a34fc.html">Conditional Statements</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="loops-716dedee50c945519864fe349c4d8440.html">Loops</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="logging-6bea5b0cfdb64aefb0225744e194ca39.html">Logging</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="annotations-445f7a571e8a475698ce49fae305153c.html">Annotations</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="class-inheritance-8d0f8f9a0e914551b7d3823bfb56a679.html">Class Inheritance</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><a href="arrays-a57555d7337040f181b7a942632f3821.html">Arrays</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><a href="vararg-parameters-in-functions-6b7a5a4b6b094ff7880c500c3f66ff92.html">Vararg Parameters In Functions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="basic-lambdas-c87a3e01adad43f28d7a9d5cac84d110.html">Basic Lambdas</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">19</span><a href="type-safe-builders-83469c67be7b4caeb8d7577c63088f72.html">Type-Safe Builders</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">20</span><a href="kotlin-caveats-391a9aac912b4a51b760da788ee5a397.html">Kotlin Caveats</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">21</span><a href="junit-94c4fd366fad419e90ca41fafaf8b5db.html">JUnit</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">22</span><a href="exceptions-414c9278cc1d4a7684f123a39297c8ae.html">Exceptions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">23</span><a href="strings-16e8a0607187407e95eb8ef4095522cc.html">Strings</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">24</span><b>Regex</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">25</span><a href="collections-0fc3a590ba5f4e128e7c750e8ecc961d.html">Collections</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">26</span><a href="type-aliases-a3cc130634734220aecd82dd08eb51fb.html">Type aliases</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">27</span><a href="kotlin-android-extensions-a3bc1338335b44709bc6e404b755af2b.html">Kotlin Android Extensions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">28</span><a href="visibility-modifiers-289317b15df044eda3f53a0515b870a6.html">Visibility Modifiers</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">29</span><a href="dsl-building-65a73e608d334409b198cf2968df0b79.html">DSL Building</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">30</span><a href="kotlin-for-java-developers-4c7e663c2eba44a5aaf17872e3395001.html">Kotlin for Java Developers</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">31</span><a href="ranges-7d03ab7adf0740cda346e96855ec1330.html">Ranges</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">32</span><a href="recyclerview-403fb950f4ce476bb9d7932c7cbc7960.html">RecyclerView</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">33</span><a href="singletons-835e74a4f35b4d01b478b03db962feef.html">Singletons</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">34</span><a href="delegated-properties-a03ca250570245c49719ab00e6080e3a.html">Delegated properties</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">35</span><a href="class-delegation-b878c32df6154eb09797a851f3adeaf7.html">Class Delegation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">36</span><a href="basics-of-kotlin-b6abbc4b28854b32a2015028dc8d3f2c.html">Basics of Kotlin</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">37</span><a href="coroutines-816a9f9a31764638bb37c3fa017f03ea.html">coroutines</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">38</span><a href="contributors-715bbf1b83e54ab69259a92a040e3e47.html">Contributors</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

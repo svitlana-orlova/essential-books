@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">Perl one-liners</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/bdb9a0cee7bf4ca09a8bb650e6e2cad7" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+<p>Some tasks can be conveniently achieved with Perl one-liners. Perl is a scripting language originating in the environment of another operating system. Since many Windows computing environments have Perl installed, Perl one-liners are a natural and compact extension of Windows batch scripting.
+</p>
+<p>Examples:
+</p>
+  <ul id="bc49d218-d1e7-4bcc-bd0a-25d90497b928" class="bulleted-list">
+    <li><code>echo "abcbbc"| perl -pe "s/a.*?c/ac/"</code>
+      <ul id="f15cb1ec-bd9a-4287-ab7c-b5faca8f8bda" class="bulleted-list">
+        <li>Lets Perl act as sed, the utility that supports textual replacements specified using regular expressions.
+        </li>
+      </ul>
+    </li>
+    <li><code>echo a b| perl -lane "print $F[1]"</code>
+      <ul id="59cc2402-6230-4080-ae45-874e713fc41d" class="bulleted-list">
+        <li>Lets Perl act as cut command, displaying the 2nd field or column of the line, in this case b. Use <code>$F[2]</code> to display 3rd field; indexing starts at zero. Native solution: <code><a href="for-bad676c158e747ff96145309fead1b63.html">FOR</a></code><code> /f</code>.
+        </li>
+      </ul>
+    </li>
+    <li><code>perl -ne "print if /\x22hello\x22/" file.txt</code>
+      <ul id="acb15044-0b68-44bd-8ae7-b8af3aa24c7c" class="bulleted-list">
+        <li>Acts as grep or <a href="findstr-bf58a8295a724f53ae050c0932e819c9.html">FINDSTR</a>, outputting the lines in <code>file.txt</code> that match the regular expression after if. Uses the powerful Perl regular expressions, more powerful than those of <a href="findstr-bf58a8295a724f53ae050c0932e819c9.html">FINDSTR</a>.
+        </li>
+      </ul>
+    </li>
+    <li><code>perl -ne "$. &lt;= 10 and print" MyFile.txt</code>
+      <ul id="a16e9567-2c93-43e4-9862-5de0b6fa0a4a" class="bulleted-list">
+        <li>Lets Perl act as head -10 command, outputting the first 10 lines of the file.
+        </li>
+      </ul>
+    </li>
+    <li><code>perl -e "sleep 5"</code>
+      <ul id="05173063-0724-4b83-8e2d-4fd7db5ea377" class="bulleted-list">
+        <li>Waits for 5 seconds.
+        </li>
+      </ul>
+    </li>
+    <li><code>for /f %i in ('perl -MPOSIX -le "print strftime '%Y-%m-%d', localtime"') do @set isodate=%i</code>
+      <ul id="f36e78fe-48d3-4381-baab-5ecc250f7639" class="bulleted-list">
+        <li>Gets current date in the ISO format into <code>isodate</code> variable.
+        </li>
+      </ul>
+    </li>
+    <li><code>perl -MWin32::Clipboard -e "print Win32::Clipboard-&gt;Get()"</code>
+      <ul id="2e789097-04e0-40b4-99a4-cc2b6bfd94f3" class="bulleted-list">
+        <li>Outputs the text content of the clipboard. When stored to getclip.bat, yields a handy getclip command to complement <a href="clip-77e3c76c1850453db8d9cff9f65e5a0d.html">CLIP</a> command.
+        </li>
+      </ul>
+    </li>
+    <li><code>perl -MText::Diff -e "print diff 'File1.txt', 'File2.txt'"</code>
+      <ul id="46591fd4-e338-40c0-829e-3c0c6315a78f" class="bulleted-list">
+        <li>Outputs differences between two files in a format similar to diff command known from other operating systems, including context lines, lines starting with + and lines starting with -.
+        </li>
+      </ul>
+    </li>
+  </ul>
+<p>On the web, Perl one-liners are often posted in the command-line conventions of another operating system, including the use of apostrophe (<code>'</code>) to surround the arguments instead of Windows quotation marks. These need to be tweaked for Windows.
+</p>
+<p>Links:
+</p>
+  <ul id="7e7b7ffc-be45-4750-ac8b-d5a25da9958d" class="bulleted-list">
+    <li><a href="https://gist.github.com/mischapeters/1e8eef09a0aafd4f24f0">Perl One-Liners by Peteris Krumins at github.com</a>
+    </li>
+    <li><a href="http://stackoverflow.com/questions/660624/why-doesnt-my-perl-one-liner-work-on-windows">Why doesn't my Perl one-liner work on Windows? at stackoverflow.com</a>
+    </li>
+    <li><a href="https://en.wikipedia.org/wiki/One-liner_program#Perl">W:One-liner program#Perl</a>
+    </li>
+  </ul>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="perl-one-liners-bdb9a0cee7bf4ca09a8bb650e6e2cad7.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>Perl one-liners:</b></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="introduction-846c7623625e434bb3c481641bf2e016.html">Introduction</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="how-a-command-line-is-interpreted-cac61c915fce40c89a25c98ec229c5d6.html">How a command line is interpreted</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="batch-reloading-98bc367236ef48559db589eddaa811ff.html">Batch reloading</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="environment-variables-01b28cfb0b9b45409515334357d5f9bf.html">Environment variables</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="switches-9e2a7d8c43bb46f29962b0d2f195e19c.html">Switches</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="error-level-c70d88bae6d545b7a5b5ca99e777b409.html">Error level</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="string-processing-20d44ad6fccd4a048e3464a4dd3d4570.html">String processing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><a href="command-line-arguments-6a6ffadba81b4cc6a979f7e1ee4ea4aa.html">Command-line arguments</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><a href="wildcards-2b952cca7aee49b2a4a709c4c4ad5aef.html">Wildcards</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><a href="user-input-5726d65b176c49ebb21d2daa271031f9.html">User input</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="-percent-tilde-f4263820c2db41e399c77259970464f1.html">%~ (percent tilde)</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="functions-f516efa981d9481ca4253d271451381d.html">Functions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="calculation-06c65868038c4e2ab21937d82bebc6c0.html">Calculation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="finding-files-af14c29c29d740609e9e8c887a2c3cb7.html">Finding files</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="keyboard-shortcuts-af2ffcc6632c4dada420d99695ca6c10.html">Keyboard shortcuts</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="paths-47408b417b4f4392a3bc79fe552b4895.html">Paths</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><a href="arrays-dc75afb35c164e29a9018d897be1f452.html">Arrays</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><b>Perl one-liners</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="limitations-09c168245f2e40d99e684733fb760091.html">Limitations</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">19</span><a href="built-in-commands-34f80a6dd2c84337951597d48e342fec.html">Built-in commands</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">20</span><a href="external-commands-f83d61795cb74a38996cd6085d1d63cb.html">External commands</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">21</span><a href="legal-credits-fde438abeea34c909d226a9d31209ee8.html">Legal & credits</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

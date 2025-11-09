@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">WMIC</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/19d7a8bc84c340b89632dcb2b0e24d26" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+<p>Starts Windows Management Instrumentation Command-line (WMIC), or with arguments given, passes the arguments as commands to WMIC.
+</p>
+<p>Examples:
+</p>
+  <ul id="15bbc6af-4056-4805-9bfa-43c120243230" class="bulleted-list">
+    <li><code>wmic logicaldisk get caption,description</code>
+    <p>Lists drives (disks) accessible under a drive letter, whether local hard drives, CD-ROM drives, removable flash drives, network drives or drives created using <a href="subst-0589cbc4e2b2459ca2c4b7bb6ab4b920.html">SUBST</a>.
+    </p>
+    
+<div class="code-box lang-Shell">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">Caption  Description
+</span></span><span class="line"><span class="cl">C:       Local Fixed Disk</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+    </li>
+    <li><code>wmic</code> and press <code>Control+C</code>
+    <p>Enters wmic and then interrupts it. A side effect is that the console buffer becomes very wide, and the screen becomes horizontally re-sizable with the mouse as a consequence. This is the result of wmic setting a high number of columns of the console, which you can verify using <code>mode on</code>. You can achieve a similar result by typing  <code>mode 1500</code>. See also <a href="mode-6684f05f55594896ad35e39b852883c0.html">MODE</a>.
+    </p>
+    </li>
+  </ul>
+<p>Links:
+</p>
+  <ul id="23120c8a-4611-4cc4-8b43-aae6908301f5" class="bulleted-list">
+    <li><a href="http://ss64.com/nt/wmic.html">wmic at ss64.com</a>
+    </li>
+    <li><a href="https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/wmic">wmic at Microsoft</a>
+    </li>
+  </ul>
+<p>
+</p>
+
+<div class="code-box lang-Shell">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">$ wmic /?
+</span></span><span class="line"><span class="cl">WMIC is deprecated.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>global switches<span class="o">]</span> &lt;command&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">The following global switches are available:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/NAMESPACE           Path <span class="k">for</span> the namespace the <span class="nb">alias</span> operate against.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/ROLE                Path <span class="k">for</span> the role containing the <span class="nb">alias</span> definitions.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/NODE                Servers the <span class="nb">alias</span> will operate against.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/IMPLEVEL            Client impersonation level.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/AUTHLEVEL           Client authentication level.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/LOCALE              Language id the client should use.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/PRIVILEGES          Enable or disable all privileges.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/TRACE               Outputs debugging information to stderr.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/RECORD              Logs all input commands and output.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/INTERACTIVE         Sets or resets the interactive mode.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/FAILFAST            Sets or resets the FailFast mode.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/USER                User to be used during the session.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/PASSWORD            Password to be used <span class="k">for</span> session login.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/OUTPUT              Specifies the mode <span class="k">for</span> output redirection.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/APPEND              Specifies the mode <span class="k">for</span> output redirection.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/AGGREGATE           Sets or resets aggregate mode.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/AUTHORITY           Specifies the &lt;authority type&gt; <span class="k">for</span> the connection.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/?<span class="o">[</span>:&lt;BRIEF<span class="p">|</span>FULL&gt;<span class="o">]</span>    Usage information.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">For more information on a specific global switch, type: switch-name /?
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">The following alias/es are available in the current role:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ALIAS                    - Access to the aliases available on the <span class="nb">local</span> system
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">BASEBOARD                - Base board <span class="o">(</span>also known as a motherboard or system board<span class="o">)</span> management.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">BIOS                     - Basic input/output services <span class="o">(</span>BIOS<span class="o">)</span> management.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">BOOTCONFIG               - Boot configuration management.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">CDROM                    - CD-ROM management.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">COMPUTERSYSTEM           - Computer system management.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">CPU                      - CPU management.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">CSPRODUCT                - Computer system product information from SMBIOS. 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">DATAFILE                 - DataFile Management.  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">DCOMAPP                  - DCOM Application management.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">DESKTOP                  - User<span class="s1">'s Desktop management.
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">DESKTOPMONITOR           - Desktop Monitor management.
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">DEVICEMEMORYADDRESS      - Device memory addresses management.
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">DISKDRIVE                - Physical disk drive management. 
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">DISKQUOTA                - Disk space usage for NTFS volumes.
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">DMACHANNEL               - Direct memory access (DMA) channel management.
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">ENVIRONMENT              - System environment settings management.
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">FSDIR                    - Filesystem directory entry management. 
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">GROUP                    - Group account management. 
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">IDECONTROLLER            - IDE Controller management.  
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">IRQ                      - Interrupt request line (IRQ) management. 
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">JOB                      - Provides  access to the jobs scheduled using the schedule service. 
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">LOADORDER                - Management of system services that define execution dependencies. 
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">LOGICALDISK              - Local storage device management.
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">LOGON                    - LOGON Sessions.  
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">MEMCACHE                 - Cache memory management.
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">MEMORYCHIP               - Memory chip information.
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">MEMPHYSICAL              - Computer system'</span>s physical memory management. 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">NETCLIENT                - Network Client management.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">NETLOGIN                 - Network login information <span class="o">(</span>of a particular user<span class="o">)</span> management. 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">NETPROTOCOL              - Protocols <span class="o">(</span>and their network characteristics<span class="o">)</span> management.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">NETUSE                   - Active network connection management.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">NIC                      - Network Interface Controller <span class="o">(</span>NIC<span class="o">)</span> management.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">NICCONFIG                - Network adapter management. 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">NTDOMAIN                 - NT Domain management.  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">NTEVENT                  - Entries in the NT Event Log.  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">NTEVENTLOG               - NT eventlog file management. 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ONBOARDDEVICE            - Management of common adapter devices built into the motherboard <span class="o">(</span>system board<span class="o">)</span>.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">OS                       - Installed Operating System/s management. 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">PAGEFILE                 - Virtual memory file swapping management. 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">PAGEFILESET              - Page file settings management. 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">PARTITION                - Management of partitioned areas of a physical disk.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">PORT                     - I/O port management.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">PORTCONNECTOR            - Physical connection ports management.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">PRINTER                  - Printer device management. 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">PRINTERCONFIG            - Printer device configuration management.  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">PRINTJOB                 - Print job management. 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">PROCESS                  - Process management. 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">PRODUCT                  - Installation package task management. 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">QFE                      - Quick Fix Engineering.  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">QUOTASETTING             - Setting information <span class="k">for</span> disk quotas on a volume. 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">RDACCOUNT                - Remote Desktop connection permission management.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">RDNIC                    - Remote Desktop connection management on a specific network adapter.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">RDPERMISSIONS            - Permissions to a specific Remote Desktop connection.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">RDTOGGLE                 - Turning Remote Desktop listener on or off remotely.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">RECOVEROS                - Information that will be gathered from memory when the operating system fails. 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">REGISTRY                 - Computer system registry management.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">SCSICONTROLLER           - SCSI Controller management.  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">SERVER                   - Server information management. 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">SERVICE                  - Service application management. 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">SHADOWCOPY               - Shadow copy management.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">SHADOWSTORAGE            - Shadow copy storage area management.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">SHARE                    - Shared resource management. 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">SOFTWAREELEMENT          - Management of the  elements of a software product installed on a system.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">SOFTWAREFEATURE          - Management of software product subsets of SoftwareElement. 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">SOUNDDEV                 - Sound Device management.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">STARTUP                  - Management of commands that run automatically when users log onto the computer system.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">SYSACCOUNT               - System account management.  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">SYSDRIVER                - Management of the system driver <span class="k">for</span> a base service.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">SYSTEMENCLOSURE          - Physical system enclosure management.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">SYSTEMSLOT               - Management of physical connection points including ports,  slots and peripherals, and proprietary connections points.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">TAPEDRIVE                - Tape drive management.  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">TEMPERATURE              - Data management of a temperature sensor <span class="o">(</span>electronic thermometer<span class="o">)</span>.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">TIMEZONE                 - Time zone data management. 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">UPS                      - Uninterruptible power supply <span class="o">(</span>UPS<span class="o">)</span> management. 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">USERACCOUNT              - User account management.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">VOLTAGE                  - Voltage sensor <span class="o">(</span>electronic voltmeter<span class="o">)</span> data management.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">VOLUME                   - Local storage volume management.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">VOLUMEQUOTASETTING       - Associates the disk quota setting with a specific disk volume. 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">VOLUMEUSERQUOTA          - Per user storage volume quota management.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">WMISET                   - WMI service operational parameters management. 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">For more information on a specific alias, type: <span class="nb">alias</span> /?
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">CLASS     - Escapes to full WMI schema.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">PATH      - Escapes to full WMI object paths.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">CONTEXT   - Displays the state of all the global switches.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">QUIT/EXIT - Exits the program.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">For more information on CLASS/PATH/CONTEXT, type: <span class="o">(</span>CLASS <span class="p">|</span> PATH <span class="p">|</span> CONTEXT<span class="o">)</span> /?</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="wmic-19d7a8bc84c340b89632dcb2b0e24d26.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>External commands:</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="arp-95cd30a1a8114aaabd5cd8f4c94225bd.html">ARP</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="at-3c1b763701794cd1b358c9907dee916c.html">AT</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="attrib-e07492afd3c8480ebad9d3b2600e38ce.html">ATTRIB</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="bcdedit-8691692600324e078d2db30fe0a0e73b.html">BCDEDIT</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="cacls-8823eb219e694f0d9ec7d1b295696f68.html">CACLS</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="chcp-dd5572c37d204906a49ac5bfa647b25c.html">CHCP</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="chkdsk-524b83fdc1ea4927917137b4764f0547.html">CHKDSK</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="chkntfs-3a15daab58bc4ec38ce0f5152c2678d3.html">CHKNTFS</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="choice-2dae8774e6a247d9a3ee3612b47c6b71.html">CHOICE</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="cipher-d8af8cdc579e4a55af2bde7911c6917b.html">CIPHER</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="clip-77e3c76c1850453db8d9cff9f65e5a0d.html">CLIP</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="cmd-1d3884b9a0c14d288a4354b4def1305d.html">CMD</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="comp-6a7c05701b2c4384bc2263ddb7e19170.html">COMP</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="compact-14cddbe801ed46c38e1e9147a8181144.html">COMPACT</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="convert-60fe217f7946423b988004111233bce6.html">CONVERT</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="debug-46e477829cd84267bf4cd61435cbfb76.html">DEBUG</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="diskcomp-176b83439dac490a8c87cd35716eb9f0.html">DISKCOMP</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="diskcopy-9626bd3ab0b04b0db1e0e07ab420f869.html">DISKCOPY</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="diskpart-ca53264b07544c5695847176e9792bdc.html">DISKPART</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="doskey-17dff637f97e4c0785af583b3f2a265c.html">DOSKEY</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="driverquery-3e93494424234b51bb2978988f03985d.html">DRIVERQUERY</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="expand-0b70d14f08a940d098cc8070fe919d83.html">EXPAND</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="fc-668b8288d4db4433a8995ad44cfe73ce.html">FC</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="find-a665188736f24231920eb6b80974242c.html">FIND</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="findstr-bf58a8295a724f53ae050c0932e819c9.html">FINDSTR</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="forfiles-46e2c40d44a642d7b82ca118d85c5cb9.html">FORFILES</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="format-1dc7c172b2a7480fb2306a30d5fe4539.html">FORMAT</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="fsutil-fb2a4456d7d04051b5fcf713b27820bf.html">FSUTIL</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="gpresult-f7b78a8732f04ff39c46402f55f78d4d.html">GPRESULT</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="graftabl-adfc47e1dc064b069d4af309bc49c63a.html">GRAFTABL</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="help-6db99ebbeb044b918741eaede9fa82a3.html">HELP</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="icacls-4dfbc9200fac49d2983cfdc935714853.html">ICACLS</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="ipconfig-c739bedf98d548f3b9564c5b86f23828.html">IPCONFIG</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="label-0e11679594dd43858a6a2b0a8463f7cb.html">LABEL</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="makecab-daa5581bb28d478ca871902f2ba24c2e.html">MAKECAB</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="mode-6684f05f55594896ad35e39b852883c0.html">MODE</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="more-50f3c12fa0f1476d85d06d9e76233ddf.html">MORE</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="net-ccfe9218832b40029186f29dd87ef98e.html">NET</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="openfiles-5d0b40c300064f8fb3dd793d433c6931.html">OPENFILES</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="ping-b36ea38057d44f61a7635c7cd44bc2ef.html">PING</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="recover-6a6b1edc70b542f8a37075c78b608466.html">RECOVER</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="reg-8361c1f0fb0a43bea37744d18e0f903b.html">REG</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="replace-40027602e854464aa28dfc7aa265d514.html">REPLACE</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="robocopy-a1f87888e1a94c20a8c8330474f09d9e.html">ROBOCOPY</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="rundll32-ba5fbe37e5f94c8f8563c4ba9008cd41.html">RUNDLL32</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="sc-fb658eb53f5a4f1a88f8471308f059b0.html">SC</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="schtasks-41f7e6d06e78426f909896ec5611065a.html">SCHTASKS</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="setx-dfc93a7754e94facb7ff153f98b6afdc.html">SETX</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="shutdown-232b25a66f33466e9389b5b2a00e0226.html">SHUTDOWN</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="sort-5bbb2d056a734e4fafa065aaf1bc6bd0.html">SORT</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="subst-0589cbc4e2b2459ca2c4b7bb6ab4b920.html">SUBST</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="systeminfo-64b1025ef3d34a14afff21c42c753af9.html">SYSTEMINFO</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="taskkill-bdbf5240fbff41cba67e4cb62e72a5a1.html">TASKKILL</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="tasklist-7501f14a6e7d4e00bb106c3366428ab5.html">TASKLIST</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="timeout-6dbcda7df51c4a4380c56c14a0075148.html">TIMEOUT</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="tree-f6a1e4d3145540269ec9215b579a55ba.html">TREE</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="where-a5c28a60ed5149e3894ea7d8c3c8fd8d.html">WHERE</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><b>WMIC</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="xcopy-d2a62cc49ed44189a543e73fcc457d24.html">XCOPY</a></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="introduction-846c7623625e434bb3c481641bf2e016.html">Introduction</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="how-a-command-line-is-interpreted-cac61c915fce40c89a25c98ec229c5d6.html">How a command line is interpreted</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="batch-reloading-98bc367236ef48559db589eddaa811ff.html">Batch reloading</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="environment-variables-01b28cfb0b9b45409515334357d5f9bf.html">Environment variables</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="switches-9e2a7d8c43bb46f29962b0d2f195e19c.html">Switches</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="error-level-c70d88bae6d545b7a5b5ca99e777b409.html">Error level</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="string-processing-20d44ad6fccd4a048e3464a4dd3d4570.html">String processing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><a href="command-line-arguments-6a6ffadba81b4cc6a979f7e1ee4ea4aa.html">Command-line arguments</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><a href="wildcards-2b952cca7aee49b2a4a709c4c4ad5aef.html">Wildcards</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><a href="user-input-5726d65b176c49ebb21d2daa271031f9.html">User input</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="-percent-tilde-f4263820c2db41e399c77259970464f1.html">%~ (percent tilde)</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="functions-f516efa981d9481ca4253d271451381d.html">Functions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="calculation-06c65868038c4e2ab21937d82bebc6c0.html">Calculation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="finding-files-af14c29c29d740609e9e8c887a2c3cb7.html">Finding files</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="keyboard-shortcuts-af2ffcc6632c4dada420d99695ca6c10.html">Keyboard shortcuts</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="paths-47408b417b4f4392a3bc79fe552b4895.html">Paths</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><a href="arrays-dc75afb35c164e29a9018d897be1f452.html">Arrays</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><a href="perl-one-liners-bdb9a0cee7bf4ca09a8bb650e6e2cad7.html">Perl one-liners</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="limitations-09c168245f2e40d99e684733fb760091.html">Limitations</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">19</span><a href="built-in-commands-34f80a6dd2c84337951597d48e342fec.html">Built-in commands</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">20</span><b>External commands</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">21</span><a href="legal-credits-fde438abeea34c909d226a9d31209ee8.html">Legal & credits</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

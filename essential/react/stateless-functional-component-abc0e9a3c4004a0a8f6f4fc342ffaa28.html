@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">Stateless Functional Component</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/abc0e9a3c4004a0a8f6f4fc342ffaa28" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+<p>Components let you split the UI into <em>independent</em>, <em>reusable</em> pieces. This is the beauty of React; we can separate a page into many small reusable <strong>components</strong>.
+</p>
+<p>Prior to React v14 we could create a stateful React component using <code>React.Component</code> (in ES6), or <code>React.createClass</code> (in ES5), irrespective of whether it requires any state to manage data or not.
+</p>
+<p>React v14 introduced a simpler way to define components, usually referred to as <strong>stateless functional components</strong>. These components use plain JavaScript functions.
+</p>
+<p>For example:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">function Welcome(props) {
+</span></span><span class="line"><span class="cl">  return &lt;h1&gt;Hello, {props.name}&lt;/h1&gt;;
+</span></span><span class="line"><span class="cl">}</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>This function is a valid React component because it accepts a single <code>props</code> object argument with data and returns a React element. We call such components <strong>functional</strong> because they are literally JavaScript <em>functions</em>.
+</p>
+<p>Stateless functional components typically focus on UI; state should be managed by higher-level “container” components, or via Flux/Redux etc. Stateless functional components don’t support state or lifecycle methods.
+</p>
+<p>Benefits:
+</p>
+  <ol id="6d12e6ae-6a31-495a-82b9-4e3b3f74cfca" class="numbered-list" start="1">
+    <li>No class overhead
+    </li>
+    <li>Don’t have to worry about <code>this</code> keyword
+    </li>
+    <li>Easy to write and easy to understand
+    </li>
+    <li>Don’t have to worry about managing state values
+    </li>
+    <li>Performance improvement
+    </li>
+  </ol>
+<p><strong>Summary</strong>: If you are writing a React component that doesn’t require state and would like to create a reusable UI, instead of creating a standard React Component you can write it as a <strong>stateless functional component</strong>.
+</p>
+<p><strong>Let’s take a simple example :</strong>
+</p>
+<p>Let’s say we have a page that can register a user, search for registered users, or display a list of all the registered users.
+</p>
+<p>This is entry point of the application, <code>index.js</code>:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">import React from 'react';
+</span></span><span class="line"><span class="cl">import ReactDOM from 'react-dom';
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">import HomePage from './homepage'
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ReactDOM.render(
+</span></span><span class="line"><span class="cl">    &lt;HomePage/&gt;,
+</span></span><span class="line"><span class="cl">    document.getElementById('app')
+</span></span><span class="line"><span class="cl">);</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>The <code>HomePage</code> component provides the UI to register and search for users. Note that it is a typical React component including state, UI, and behavioral code. The data for the list of registered users is stored in the <code>state</code> variable, but our reusable <code>List</code> (shown below) encapsulates the UI code for the list.
+</p>
+<p><code>homepage.js</code>:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">import React from 'react'
+</span></span><span class="line"><span class="cl">import {Component} from 'react';
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">import List from './list';
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">export default class Temp extends Component{
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    constructor(props) {
+</span></span><span class="line"><span class="cl">        super();
+</span></span><span class="line"><span class="cl">        this.state={users:[], showSearchResult: false, searchResult: []};
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    registerClick(){
+</span></span><span class="line"><span class="cl">        let users = this.state.users.slice();
+</span></span><span class="line"><span class="cl">        if(users.indexOf(this.refs.mail_id.value) == -1){
+</span></span><span class="line"><span class="cl">            users.push(this.refs.mail_id.value);
+</span></span><span class="line"><span class="cl">            this.refs.mail_id.value = '';
+</span></span><span class="line"><span class="cl">            this.setState({users});
+</span></span><span class="line"><span class="cl">        }else{
+</span></span><span class="line"><span class="cl">            alert('user already registered');
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    searchClick(){
+</span></span><span class="line"><span class="cl">        let users = this.state.users;
+</span></span><span class="line"><span class="cl">        let index = users.indexOf(this.refs.search.value); 
+</span></span><span class="line"><span class="cl">        if(index &gt;= 0){
+</span></span><span class="line"><span class="cl">            this.setState({searchResult: users[index], showSearchResult: true});
+</span></span><span class="line"><span class="cl">        }else{
+</span></span><span class="line"><span class="cl">            alert('no user found with this mail id');
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    hideSearchResult(){
+</span></span><span class="line"><span class="cl">        this.setState({showSearchResult: false});
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    render() {
+</span></span><span class="line"><span class="cl">        return (
+</span></span><span class="line"><span class="cl">            &lt;div&gt;
+</span></span><span class="line"><span class="cl">                &lt;input placeholder='email-id' ref='mail_id'/&gt;
+</span></span><span class="line"><span class="cl">                &lt;input type='submit' value='Click here to register' onClick={this.registerClick.bind(this)}/&gt;
+</span></span><span class="line"><span class="cl">                &lt;input style={{marginLeft: '100px'}} placeholder='search' ref='search'/&gt;
+</span></span><span class="line"><span class="cl">                &lt;input type='submit' value='Click here to register' onClick={this.searchClick.bind(this)}/&gt;
+</span></span><span class="line"><span class="cl">                {this.state.showSearchResult ?
+</span></span><span class="line"><span class="cl">                    &lt;div&gt;
+</span></span><span class="line"><span class="cl">                        Search Result:
+</span></span><span class="line"><span class="cl">                        &lt;List users={[this.state.searchResult]}/&gt;
+</span></span><span class="line"><span class="cl">                        &lt;p onClick={this.hideSearchResult.bind(this)}&gt;Close this&lt;/p&gt;
+</span></span><span class="line"><span class="cl">                    &lt;/div&gt;
+</span></span><span class="line"><span class="cl">                    :
+</span></span><span class="line"><span class="cl">                    &lt;div&gt;
+</span></span><span class="line"><span class="cl">                        Registered users:
+</span></span><span class="line"><span class="cl">                        &lt;br/&gt;
+</span></span><span class="line"><span class="cl">                        {this.state.users.length ? 
+</span></span><span class="line"><span class="cl">                            &lt;List users={this.state.users}/&gt;
+</span></span><span class="line"><span class="cl">                            :
+</span></span><span class="line"><span class="cl">                            "no user is registered"
+</span></span><span class="line"><span class="cl">                        }
+</span></span><span class="line"><span class="cl">                    &lt;/div&gt;
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            &lt;/div&gt;
+</span></span><span class="line"><span class="cl">        );
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>Finally, our <strong>stateless functional component</strong> <code>List</code>, which is used display both the list of registered users <em>and</em> the search results, but without maintaining any state itself.
+</p>
+<p><code>list.js</code>:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">import React from 'react';
+</span></span><span class="line"><span class="cl">var colors = ['#6A1B9A', '#76FF03', '#4527A0'];
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">var List = (props) =&gt; {
+</span></span><span class="line"><span class="cl">    return(
+</span></span><span class="line"><span class="cl">        &lt;div&gt;
+</span></span><span class="line"><span class="cl">            {
+</span></span><span class="line"><span class="cl">                props.users.map((user, i)=&gt;{
+</span></span><span class="line"><span class="cl">                    return(
+</span></span><span class="line"><span class="cl">                        &lt;div key={i} style={{color: colors[i%3]}}&gt;
+</span></span><span class="line"><span class="cl">                            {user}
+</span></span><span class="line"><span class="cl">                        &lt;/div&gt;
+</span></span><span class="line"><span class="cl">                    );                
+</span></span><span class="line"><span class="cl">                })
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        &lt;/div&gt;
+</span></span><span class="line"><span class="cl">    );
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">export default List;</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>Reference: https://facebook.github.io/react/docs/components-and-props.html
+</p>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="stateless-functional-component-abc0e9a3c4004a0a8f6f4fc342ffaa28.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>Stateless functional components:</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="stateless-functional-components-25c3e5f3661745dd8260b54e179e86fa.html">Stateless Functional Components</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><b>Stateless Functional Component</b></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="getting-started-54e1310d46924318b4045f886461565a.html">Getting started</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="components-da8fafc65f35422090b192f7b2069ee8.html">Components</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="react-with-typescript-a412494709ed4600a460a5f24acfbd6a.html">React with TypeScript</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="state-in-react-6cafc1d7863342d6b702833db7d26eed.html">State in React</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="props-in-react-457619196bc54ffab9b6ef83a7c7ae4e.html">Props in react</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="react-component-lifecycle-3be1a9d383e846d7add61ee03c2e1899.html">React component lifecycle</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="forms-and-user-input-3731d999c1bc4c1ba0aad1d9fc9593cd.html">Forms and user input</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><a href="react-boilerpate-for-babel-and-webpack-d91668aeeb754c8389467b1d4f7a037b.html">React boilerpate for babel and webpack</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><a href="using-react-with-jquery-7a9b795a6e6a47be84283835a236c536.html">Using React with jQuery</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><a href="react-routing-d70042712e4c4340bb8bd5647d3f0de2.html">React routing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="communication-between-components-fe58dcb8c9784ad9bc8b66067b6739ab.html">Communication between components</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="basic-webpack-and-babel-setup-9c40f65e1bdc4f72a972d646271de386.html">Basic webpack and babel setup</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="react.createclass-vs.-extends-react.component-de02e09ab95b41ac9225187428487c3b.html">React.createClass vs. extends React.Component</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="react-ajax-call-a8bc3cbf7d9a4b5496324ea3f34b4215.html">React AJAX call</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="installation-d6b4365eb5e2455eb92324ce2c042efa.html">Installation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="communication-between-components-5163a4c021234f18b52c444de537938e.html">Communication between components</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><b>Stateless functional components</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><a href="react-tools-fed8312431e94e36941f0b835aeea1e3.html">React tools</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="performance-5ad4bd79730c404fa84be8f9eb692c36.html">Performance</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">19</span><a href="introduction-to-server-side-rendering-ea8b8930641545dcadb06d60dc3f3886.html">Introduction to server-side rendering</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">20</span><a href="setting-up-react-environment-066cca80f2534328bdc050ac81ba02b8.html">Setting up React environment</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">21</span><a href="using-react-with-flow-866a5fd05a0b4ef5b0af0bf0ef5a0f69.html">Using React with Flow</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">22</span><a href="jsx-34c251a5b7b846718f7511f5330f0a43.html">JSX</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">23</span><a href="react-forms-019d61bd45f14dedba132dc288859c44.html">React Forms</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">24</span><a href="user-interface-solutions-ce60866333cc4b42bb6badecebad2004.html">User interface solutions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">25</span><a href="react-and-flux-edae1dcd128b4d41ab944aead7cf1ee1.html">React and Flux</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">26</span><a href="webpack-and-typescript-installation-c5841c99b28848b99d6b1734bb17732c.html">Webpack and TypeScript installation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">27</span><a href="how-and-why-to-use-keys-9f918454eff24d55aa16396edf968bd3.html">How and why to use keys</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">28</span><a href="keys-in-react-2b18d28b641948efaaca668f0278d521.html">Keys in React</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">29</span><a href="higher-order-components-hoc-7107118caf64488f8118718eda6e81ca.html">Higher Order Components (HOC)</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">30</span><a href="react-with-redux-24659cb7c4c64deaa32aa5fdc61ede53.html">React with redux</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">31</span><a href="contributors-9530c91670894e5a859d6b4424d423b7.html">Contributors</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

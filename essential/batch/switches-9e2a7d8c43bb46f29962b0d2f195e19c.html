@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">Switches</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/9e2a7d8c43bb46f29962b0d2f195e19c" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+<p>Most Windows commands provide switches AKA options to direct their behavior.
+</p>
+<p>Observations:
+</p>
+  <ul id="f4f9b1f9-c3e0-4be5-83c2-64bd75715c73" class="bulleted-list">
+    <li>Switches most often consist of a single-letter; some switches consist of a sequence of multiple letters.
+    </li>
+    <li>Switches are preceded with a slash (<code>/</code>) rather than, as in some other operating systems, with a minus sign (<code>-</code>).
+    </li>
+    <li>Switches are case-insensitive rather than, as in some other operating systems, case-sensitive.
+    </li>
+    <li>If a command from another operating system is ported to Windows (such as <code>grep</code>), it usually retains the option conventions from the original operating system, including the use of minus sign and case-sensitivity.
+    </li>
+  </ul>
+<p>Examples:
+</p>
+  <ul id="16afe8af-de51-46ce-9cf1-6173ff9817f9" class="bulleted-list">
+    <li><code>dir /?</code>
+    <p>Displays the help. This option is provided by many commands.
+    </p>
+    </li>
+    <li><code>dir /b /s</code>
+    <p>Lists all files and folders in the current folder recursively. Two switches are used: <code>/b</code> and <code>/s</code>.
+    </p>
+    </li>
+    <li><code>dir /bs</code>
+    <p>Does not work; switches cannot be accumulated behind a single slash.
+    </p>
+    </li>
+    <li><code>findstr /ric:"id: *[0-9]*" File.txt</code>
+    <p>Unlike many other commands, <code>findstr</code> allows the accumulation of switches behind a single slash. Indeed, r, i and c are single-letter switches.
+    </p>
+    </li>
+    <li><code>dir/b/s</code>
+    <p>Works. In <code>dir</code>, removing whitespace between the command and the first switch or between the switches does not make a difference; thus, does the same as <code>dir /b /s</code>.
+    </p>
+    </li>
+    <li><code>tree/f/a</code>
+    <p>Does not work, unlike <code>tree /f /a</code>. In tree, separation by whitespace is mandatory. Nor does find/i/v work.
+    </p>
+    </li>
+    <li><code>dir /od</code>
+    <p>The switch letter o is further modified by a single letter specifying that ordering should be by date. The letter d is not a switch by itself. Similar cases include <code>dir /ad</code> and more <code>/t4</code>.
+    </p>
+    </li>
+    <li><code>dir /B /S</code>
+    <p>The switches are case-insensitive, unlike in some other operating systems.
+    </p>
+    </li>
+    <li><code>sort /r file.txt</code>
+    <p>Sorts the file in a reverse order.
+    </p>
+    </li>
+    <li><code>sort /reverse file.txt</code>
+    <p>Sort allows the switch string to be longer than a single-letter.
+    </p>
+    </li>
+    <li><code>sort /reve file.txt</code>
+    <p>Sort allows the specified switch string to be a sub-string of the complete long name of the switch. Thus, does the same as the above.
+    </p>
+    </li>
+    <li><code>sort /reva file.txt</code>
+    <p>Does not work, since <code>reva</code> is not a sub-string of <code>reverse</code>.
+    </p>
+    </li>
+    <li><code>taskkill /im AcroRd32.exe</code>
+    <p><code>Taskkill</code> requires a multi-letter switch name for <code>/im</code>; shortening to <code>/i</code> does not work.
+    </p>
+    </li>
+    <li><code>java -version</code>
+    <p>Java, which originated in the environment of another operating system family, uses the minus convention for its switches AKA options.
+    </p>
+    </li>
+    <li><code>grep --help</code>
+    <p>If GNU grep is installed, it requires multi-letter switches to be preceded by two dashes.
+    </p>
+    </li>
+  </ul>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="switches-9e2a7d8c43bb46f29962b0d2f195e19c.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>Switches:</b></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="introduction-846c7623625e434bb3c481641bf2e016.html">Introduction</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="how-a-command-line-is-interpreted-cac61c915fce40c89a25c98ec229c5d6.html">How a command line is interpreted</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="batch-reloading-98bc367236ef48559db589eddaa811ff.html">Batch reloading</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="environment-variables-01b28cfb0b9b45409515334357d5f9bf.html">Environment variables</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><b>Switches</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="error-level-c70d88bae6d545b7a5b5ca99e777b409.html">Error level</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="string-processing-20d44ad6fccd4a048e3464a4dd3d4570.html">String processing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><a href="command-line-arguments-6a6ffadba81b4cc6a979f7e1ee4ea4aa.html">Command-line arguments</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><a href="wildcards-2b952cca7aee49b2a4a709c4c4ad5aef.html">Wildcards</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><a href="user-input-5726d65b176c49ebb21d2daa271031f9.html">User input</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="-percent-tilde-f4263820c2db41e399c77259970464f1.html">%~ (percent tilde)</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="functions-f516efa981d9481ca4253d271451381d.html">Functions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="calculation-06c65868038c4e2ab21937d82bebc6c0.html">Calculation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="finding-files-af14c29c29d740609e9e8c887a2c3cb7.html">Finding files</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="keyboard-shortcuts-af2ffcc6632c4dada420d99695ca6c10.html">Keyboard shortcuts</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="paths-47408b417b4f4392a3bc79fe552b4895.html">Paths</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><a href="arrays-dc75afb35c164e29a9018d897be1f452.html">Arrays</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><a href="perl-one-liners-bdb9a0cee7bf4ca09a8bb650e6e2cad7.html">Perl one-liners</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="limitations-09c168245f2e40d99e684733fb760091.html">Limitations</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">19</span><a href="built-in-commands-34f80a6dd2c84337951597d48e342fec.html">Built-in commands</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">20</span><a href="external-commands-f83d61795cb74a38996cd6085d1d63cb.html">External commands</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">21</span><a href="legal-credits-fde438abeea34c909d226a9d31209ee8.html">Legal & credits</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">Dependency Injection with View Controllers</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/07494ab4ea1548fa87623f74b9c9b79c" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+  <h1 id="13eb632b-6e14-4609-a893-f75e38aa1ee2" class="">Dependenct Injection Intro
+  <a class="header-anchor" href="dependency-injection-with-view-controllers-07494ab4ea1548fa87623f74b9c9b79c.html#13eb632b-6e14-4609-a893-f75e38aa1ee2" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>An application is composed of many objects that collaborate with each other. Objects usually depend on other objects to perform some task. When an object is responsible for referencing its own dependencies it leads to a highly coupled, hard-to-test and hard-to-change code.
+</p>
+<p>Dependency injection is a software design pattern that implements inversion of control for resolving dependencies. An injection is passing of dependency to a dependent object that would use it. This allows a separation of client’s dependencies from the client’s behaviour, which allows the application to be loosely coupled.
+</p>
+<p><strong>Not to be confused with the above definition - a dependency injection simply means giving an object its instance variables.</strong>
+</p>
+<p>It’s that simple, but it provides a lot of benefits:
+</p>
+  <ul id="d01708f0-e904-4b88-812b-aa170eee3359" class="bulleted-list">
+    <li>easier to test your code (using automated tests like unit and UI tests)
+    </li>
+    <li>when used in tandem with protocol-oriented programming it makes it easy to change the implementation of a certain class - easier to refactor
+    </li>
+    <li>it makes the code more modular and reusable
+    </li>
+  </ul>
+<p>There are three most commonly used ways Dependency Injection (DI) can be implemented in an application:
+</p>
+  <ol id="96e4b959-acf1-4f0b-ad5e-1efa91e67109" class="numbered-list" start="1">
+    <li>Initializer injection
+    </li>
+    <li>Property injection
+    </li>
+    <li>Using third party DI frameworks (like Swinject, Cleanse, Dip or Typhoon)
+    </li>
+  </ol>
+<p><a href="http://www.jamesshore.com/Blog/Dependency-Injection-Demystified.html">There is an interesting article</a> with links to more articles about Dependency Injection so check it out if you want to dig deeper into DI and Inversion of Control principle.
+</p>
+<p>Let’s show how to use DI with View Controllers - an every day task for an average iOS developer.
+</p>
+  <h1 id="cfea8b7f-49dd-43d5-9e0c-c62dbb946c32" class="">Example Without DI
+  <a class="header-anchor" href="dependency-injection-with-view-controllers-07494ab4ea1548fa87623f74b9c9b79c.html#cfea8b7f-49dd-43d5-9e0c-c62dbb946c32" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>We’ll have two View Controllers: <strong>LoginViewController</strong> and <strong>TimelineViewController</strong>. LoginViewController is used to login and upon successful loign, it will switch to the TimelineViewController. Both view controllers are dependent on the <strong>FirebaseNetworkService</strong>.
+</p>
+<p><strong>LoginViewController</strong>
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">class LoginViewController: UIViewController {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    var networkService = FirebaseNetworkService()
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    override func viewDidLoad() {
+</span></span><span class="line"><span class="cl">        super.viewDidLoad()
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p><strong>TimelineViewController</strong>
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">class TimelineViewController: UIViewController {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    var networkService = FirebaseNetworkService()
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    override func viewDidLoad() {
+</span></span><span class="line"><span class="cl">        super.viewDidLoad()
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    @IBAction func logoutButtonPressed(_ sender: UIButton) {
+</span></span><span class="line"><span class="cl">        networkService.logutCurrentUser()
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p><strong>FirebaseNetworkService</strong>
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">class FirebaseNetworkService {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    func loginUser(username: String, passwordHash: String) {
+</span></span><span class="line"><span class="cl">        // Implementation not important for this example
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    func logutCurrentUser() {
+</span></span><span class="line"><span class="cl">        // Implementation not important for this example
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>This example is very simple, but let’s assume you have 10 or 15 different view controller and some of them are also dependent on the FirebaseNetworkService. At some moment you want to change Firebase as your backend service with your company’s in-house backend service. To do that you’ll have to go through every view controller and change FirebaseNetworkService with CompanyNetworkService. And if some of the methods in the CompanyNetworkService have changed, you’ll have a lot of work to do.
+</p>
+<p>Unit and UI testing is not the scope of this example, but if you wanted to unit test view controllers with tightly coupled dependencies, you would have a really hard time doing so.
+</p>
+<p>Let’s rewrite this example and inject Network Service to our view controllers.
+</p>
+  <h1 id="4719705f-e260-4a6e-be47-fe04a1a32405" class="">Example with Dependancy Injection
+  <a class="header-anchor" href="dependency-injection-with-view-controllers-07494ab4ea1548fa87623f74b9c9b79c.html#4719705f-e260-4a6e-be47-fe04a1a32405" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>To make the best out of the Dependency Injection, let’s define the functionality of the Network Service in a protocol. This way, view controllers dependent on a network service won’t even have to know about the real implementation of it.
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">protocol NetworkService {
+</span></span><span class="line"><span class="cl">    func loginUser(username: String, passwordHash: String)
+</span></span><span class="line"><span class="cl">    func logutCurrentUser()
+</span></span><span class="line"><span class="cl">}</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>Add an implementation of the NetworkService protocol:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">class FirebaseNetworkServiceImpl: NetworkService {
+</span></span><span class="line"><span class="cl">    func loginUser(username: String, passwordHash: String) {
+</span></span><span class="line"><span class="cl">        // Firebase implementation
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    func logutCurrentUser() {
+</span></span><span class="line"><span class="cl">        // Firebase implementation
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>Let’s change LoginViewController and TimelineViewController to use new NetworkService protocol instead of FirebaseNetworkService.
+</p>
+<p><strong>LoginViewController</strong>
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">class LoginViewController: UIViewController {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    // No need to initialize it here since an implementation
+</span></span><span class="line"><span class="cl">    // of the NetworkService protocol will be injected
+</span></span><span class="line"><span class="cl">    var networkService: NetworkService?
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    override func viewDidLoad() {
+</span></span><span class="line"><span class="cl">        super.viewDidLoad()
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p><strong>TimelineViewController</strong>
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">class TimelineViewController: UIViewController {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    var networkService: NetworkService?
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    override func viewDidLoad() {
+</span></span><span class="line"><span class="cl">        super.viewDidLoad()
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    @IBAction func logoutButtonPressed(_ sender: UIButton) {
+</span></span><span class="line"><span class="cl">        networkService?.logutCurrentUser()
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>Now, the question is: How do we inject the correct NetworkService implementation in the LoginViewController and TimelineViewController?
+</p>
+<p>Since LoginViewController is the starting view controller and will show every time the application starts, we can inject all dependencies in the <strong>AppDelegate</strong>.
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -&gt; Bool {
+</span></span><span class="line"><span class="cl">    // This logic will be different based on your project's structure or whether
+</span></span><span class="line"><span class="cl">    // you have a navigation controller or tab bar controller for your starting view controller
+</span></span><span class="line"><span class="cl">    if let loginVC = window?.rootViewController as? LoginViewController {
+</span></span><span class="line"><span class="cl">        loginVC.networkService = FirebaseNetworkServiceImpl()
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    return true
+</span></span><span class="line"><span class="cl">}</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>In the AppDelegate we are simply taking the reference to the first view controller (LoginViewController) and injecting the NetworkService implementation using the property injection method.
+</p>
+<p>Now, the next task is to inject the NetworkService implementation in the TimelineViewController. The easiest way is to do that when LoginViewController is transitioning to the TimlineViewController.
+</p>
+<p>We’ll add the injection code in the prepareForSegue method in the LoginViewController (if you are using a different approach to navigate through view controllers, place the injection code there).
+</p>
+<p>Our LoginViewController class looks like this now:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">class LoginViewController: UIViewController {
+</span></span><span class="line"><span class="cl">    // No need to initialize it here since an implementation
+</span></span><span class="line"><span class="cl">    // of the NetworkService protocol will be injected
+</span></span><span class="line"><span class="cl">    var networkService: NetworkService?
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    override func viewDidLoad() {
+</span></span><span class="line"><span class="cl">        super.viewDidLoad()
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+</span></span><span class="line"><span class="cl">        if segue.identifier == "TimelineViewController" {
+</span></span><span class="line"><span class="cl">            if let timelineVC = segue.destination as? TimelineViewController {
+</span></span><span class="line"><span class="cl">                // Injecting the NetworkService implementation
+</span></span><span class="line"><span class="cl">                timelineVC.networkService = networkService
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p><strong>We are done and it’s that easy.</strong>
+</p>
+<p>Now imagine we want to switch our NetworkService implementation from Firebase to our custom company’s backend implementation. All we would have to do is:
+</p>
+<p><strong>Add new NetworkService implementation class:</strong>
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">class CompanyNetworkServiceImpl: NetworkService {
+</span></span><span class="line"><span class="cl">    func loginUser(username: String, passwordHash: String) {
+</span></span><span class="line"><span class="cl">        // Company API implementation
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    func logutCurrentUser() {
+</span></span><span class="line"><span class="cl">        // Company API implementation
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p><strong>Switch the FirebaseNetworkServiceImpl with the new implementation in the AppDelegate:</strong>
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -&gt; Bool {
+</span></span><span class="line"><span class="cl">        // This logic will be different based on your project's structure or whether
+</span></span><span class="line"><span class="cl">        // you have a navigation controller or tab bar controller for your starting view controller
+</span></span><span class="line"><span class="cl">        if let loginVC = window?.rootViewController as? LoginViewController {
+</span></span><span class="line"><span class="cl">            loginVC.networkService = CompanyNetworkServiceImpl()
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return true
+</span></span><span class="line"><span class="cl">    }</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>That’s it, we have switched the whole underlaying implementation of the NetworkService protocol without even touching LoginViewController or TimelineViewController.
+</p>
+<p>As this is a simple example, you might not see all the benefits right now, but if you try to use DI in your projects, you’ll see the benefits and will always use Dependency Injection.
+</p>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="dependency-injection-with-view-controllers-07494ab4ea1548fa87623f74b9c9b79c.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>Dependency Injection:</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="dependency-injection-fc04f1bab8be4c7287db1f7f33108ab0.html">Dependency Injection</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><b>Dependency Injection with View Controllers</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="dependency-injection-types-ad1b0ac7e9804a66a658b8a6ee7293b3.html">Dependency Injection Types</a></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="getting-started-4743a9b33ba144068fd892f831177a73.html">Getting started</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="switch-40e2faa75ff34654a114f19b837c574b.html">Switch</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="json-743fc1c3bc9c43868bb837bb9430112f.html">JSON</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="enums-85fc985ed4f6470ca50ed230fb7f7029.html">Enums</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="protocols-b3a03a8183e54085b4624a9e0b487f4a.html">Protocols</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="structs-5b89258ebcc14c2bb7ec53d72cea9e9e.html">Structs</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="closures-752e5fcf89e9482f8ab540b382d1513b.html">Closures</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><a href="error-handling-0bbae4020f8d4c5392842bfa4e450424.html">Error Handling</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><a href="arrays-9f9ac14237464907b806661ae15321d3.html">Arrays</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><a href="dictionaries-4007debc66664d3f8faa5ba1ed7a30fb.html">Dictionaries</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="extensions-2ebad6939dff4aebbb972b78d049b25e.html">Extensions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="sets-08b06e18c5f34e40a0be39eaaab9fdc5.html">Sets</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="working-with-c-and-objective-c-c7a9a16fd6604db78d5b012a3f06c296.html">Working with C and Objective-C</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="functions-aec11d9f8e7749ff9784b941666239e5.html">Functions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="numbers-8e0cbefabb1346a7ae475d4863fae390.html">Numbers</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="classes-9926a5407aa34e8ba8800d25223917b7.html">Classes</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><a href="conditionals-cfa2de35cd0048e5aa49c7bc809cd199.html">Conditionals</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><a href="variables-properties-75f61437dd574152ba5de1d11169b6f5.html">Variables, properties</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="optionals-ab64a7f2ccc34ffd98cacb7cc7d65a64.html">Optionals</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">19</span><a href="tuples-346889aabbe6424893829d44810882db.html">Tuples</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">20</span><a href="booleans-6eadf5185b934d649bc20e88e97a1ad5.html">Booleans</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">21</span><a href="memory-management-45e8edb6720b4879a3f9bdeeebc97a9f.html">Memory management</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">22</span><a href="generics-5367e1b7d8c942c1a35c1508743d5105.html">Generics</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">23</span><a href="advanced-operators-ab0095d7f3304c2a956440c927e04cdd.html">Advanced operators</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">24</span><a href="access-control-995be3028fbf4acc9c9bdb5cfdd0521f.html">Access control</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">25</span><a href="associated-objects-e9e7dd9789074c6194c8873542c4221d.html">Associated objects</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">26</span><a href="loops-9f9717578f394d949d24c0b8b7100e34.html">Loops</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">27</span><a href="reflection-b51b495df6534e2bb92d5af0d351982e.html">Reflection</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">28</span><a href="optionset-9da019f7f53842a4bf9fa95e812e2233.html">OptionSet</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">29</span><a href="method-swizzling-b5d22e1900564916bf50cc1dc2f38c0e.html">Method swizzling</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">30</span><a href="concurrency-f3aea850966d47e0bbd28564c5d35715.html">Concurrency</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">31</span><a href="initializers-e80e058ccecb4b11af4ab91c85302b9d.html">Initializers</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">32</span><a href="getting-started-with-protocol-oriented-programming-2f2b8c00b4d84005976471297a1f77f4.html">Getting started with Protocol Oriented Programming</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">33</span><a href="functional-programming-a95c626d6b55449a91a2173c29e1c6a7.html">Functional programming</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">34</span><a href="style-convent-41f7ad7847df4ba797500c3f2e60ce1b.html">Style convent</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">35</span><a href="type-casting-e1154a97185d4fcd81a86d4e1e7d3a99.html">Type casting</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">36</span><a href="logging-in-swift-9455a2c2402a4a708aeb9762505167c3.html">Logging in Swift</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">37</span><a href="performance-77ad070cdd394425a996cc8967f74b4e.html">Performance</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">38</span><a href="rxswift-9667daa48e9a40c684985fd2b4e46a1e.html">RxSwift</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">39</span><a href="the-defer-statement-67e4333db244489f94a95033eda1d62f.html">The defer statement</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">40</span><a href="design-patterns-creational-00935eb8d31643d49d14f133a4cf1c91.html">Design Patterns - Creational</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">41</span><a href="swift-package-manager-41bf5b927d0a4e59af5d5b1468ffec68.html">Swift Package Manager</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">42</span><a href="nsregularexpression-18f008442ce54c049bd79a256ae07a77.html">NSRegularExpression</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">43</span><a href="documentation-markup-2f6abffd81514ec29a322f5da3b5a767.html">Documentation markup</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">44</span><a href="aes-encryption-35e9a1fb1c654c4db44bbecc6cd9f6bd.html">AES encryption</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">45</span><a href="pbkdf2-key-derivation-2e9691dd08114161964f0af0c454280b.html">PBKDF2 key derivation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">46</span><a href="typealias-cb46a7446c2643e6ba4b4058eb63b196.html">Typealias</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">47</span><a href="cryptographic-hashing-1beb1f798f574bf18bcbe6737d583cda.html">Cryptographic hashing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">48</span><b>Dependency Injection</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">49</span><a href="functions-as-first-class-citizens-10e2f070401842058a9300bc8fa64375.html">Functions as first class citizens</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">50</span><a href="blocks-bec5b2af554c4a6c87b2a65a4523f654.html">Blocks</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">51</span><a href="caching-on-disk-space-41dd6dc28607497893068747c2240710.html">Caching on disk space</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">52</span><a href="algorithms-with-swift-36fdcbe2b28e4eae96d0f3255977fddc.html">Algorithms with Swift</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">53</span><a href="unsafe-buffer-pointers-1a7a68fa5ed74026bd096c438ee3c996.html">Unsafe buffer pointers</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">54</span><a href="swift-advance-functions-298a699840b44079ae0ef0fc31d96e18.html">Swift Advance functions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">55</span><a href="completion-handler-d04ea4c21d9649c5b9111de41c18c770.html">Completion Handler</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">56</span><a href="design-patterns-structural-d9d0d23b68624787ba04328a8305821b.html">Design Patterns - Structural</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">57</span><a href="swift-http-server-by-kitura-2a4061429c5f402d939e888df54da249.html">Swift HTTP server by Kitura</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">58</span><a href="generate-uiimage-of-initials-from-string-3b5feb34031d402a804d16d2d230a001.html">Generate UIImage of Initials from string</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">59</span><a href="contributors-66275fb391444a6ba878f81e4a354aa6.html">Contributors</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

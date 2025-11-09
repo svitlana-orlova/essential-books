@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">Handling http method, accessing query strings &amp; request body</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/2f90f3ba9eab401699dbb119feab6665" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+<p>Here are a simple example of some common tasks related to developing an API, differentiating between the HTTP Method of the request, accessing query string values and accessing the request body.
+</p>
+<p>Resources
+</p>
+  <ul id="2d1ac18a-32df-481b-9d01-bca0385b5922" class="bulleted-list">
+    <li><a href="https://golang.org/pkg/net/http/#Handler">http.Handler interface</a>
+    </li>
+    <li><a href="https://golang.org/pkg/net/http/#ResponseWriter">http.ResponseWriter</a>
+    </li>
+    <li><a href="https://golang.org/pkg/net/http/#Request">http.Request</a>
+    </li>
+    <li><a href="https://golang.org/pkg/net/http/#pkg-constants">Available Method and Status constants</a>
+    </li>
+  </ul>
+<p>
+</p>
+
+<div class="code-box lang-Go">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s">"fmt"</span>
+</span></span><span class="line"><span class="cl">    <span class="s">"io/ioutil"</span>
+</span></span><span class="line"><span class="cl">    <span class="s">"log"</span>
+</span></span><span class="line"><span class="cl">    <span class="s">"net/http"</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">customHandler</span> <span class="kd">struct</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// ServeHTTP implements the http.Handler interface in the net/http package
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">h</span> <span class="nx">customHandler</span><span class="p">)</span> <span class="nf">ServeHTTP</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// ParseForm will parse query string values and make r.Form available
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">r</span><span class="p">.</span><span class="nf">ParseForm</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// r.Form is map of query string parameters
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// its' type is url.Values, which in turn is a map[string][]string
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">queryMap</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">Form</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">switch</span> <span class="nx">r</span><span class="p">.</span><span class="nx">Method</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="nx">http</span><span class="p">.</span><span class="nx">MethodGet</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Handle GET requests
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">w</span><span class="p">.</span><span class="nf">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">w</span><span class="p">.</span><span class="nf">Write</span><span class="p">([]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">"Query string values: %s"</span><span class="p">,</span> <span class="nx">queryMap</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="nx">http</span><span class="p">.</span><span class="nx">MethodPost</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Handle POST requests
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">body</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">ioutil</span><span class="p">.</span><span class="nf">ReadAll</span><span class="p">(</span><span class="nx">r</span><span class="p">.</span><span class="nx">Body</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// Error occurred while parsing request body
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">w</span><span class="p">.</span><span class="nf">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">w</span><span class="p">.</span><span class="nf">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">w</span><span class="p">.</span><span class="nf">Write</span><span class="p">([]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">"Query string values: %s\nBody posted: %s"</span><span class="p">,</span> <span class="nx">queryMap</span><span class="p">,</span> <span class="nx">body</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Other HTTP methods (eg PUT, PATCH, etc) are not handled by the above
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// so inform the client with appropriate status code
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">w</span><span class="p">.</span><span class="nf">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusMethodNotAllowed</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// All URLs will be handled by this function
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// http.Handle, similarly to http.HandleFunc
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// uses the DefaultServeMux
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">http</span><span class="p">.</span><span class="nf">Handle</span><span class="p">(</span><span class="s">"/"</span><span class="p">,</span> <span class="nx">customHandler</span><span class="p">{})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Continue to process new requests until an error occurs
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nf">ListenAndServe</span><span class="p">(</span><span class="s">":8080"</span><span class="p">,</span> <span class="kc">nil</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>Sample curl output:
+</p>
+
+<div class="code-box lang-Shell">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">$ curl -i <span class="s1">'localhost:8080?city=Seattle&amp;state=WA'</span> -H <span class="s1">'Content-Type: text/plain'</span> -X GET
+</span></span><span class="line"><span class="cl">HTTP/1.1 <span class="m">200</span> OK
+</span></span><span class="line"><span class="cl">Date: Fri, <span class="m">02</span> Sep <span class="m">2016</span> 16:36:24 GMT
+</span></span><span class="line"><span class="cl">Content-Length: <span class="m">51</span>
+</span></span><span class="line"><span class="cl">Content-Type: text/plain<span class="p">;</span> <span class="nv">charset</span><span class="o">=</span>utf-8
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Query string values: map<span class="o">[</span>city:<span class="o">[</span>Seattle<span class="o">]</span> state:<span class="o">[</span>WA<span class="o">]]</span>%
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ curl -i <span class="s1">'localhost:8080?city=Seattle&amp;state=WA'</span> -H <span class="s1">'Content-Type: text/plain'</span> -X POST -d <span class="s2">"some post data"</span>
+</span></span><span class="line"><span class="cl">HTTP/1.1 <span class="m">200</span> OK
+</span></span><span class="line"><span class="cl">Date: Fri, <span class="m">02</span> Sep <span class="m">2016</span> 16:36:35 GMT
+</span></span><span class="line"><span class="cl">Content-Length: <span class="m">79</span>
+</span></span><span class="line"><span class="cl">Content-Type: text/plain<span class="p">;</span> <span class="nv">charset</span><span class="o">=</span>utf-8
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Query string values: map<span class="o">[</span>city:<span class="o">[</span>Seattle<span class="o">]</span> state:<span class="o">[</span>WA<span class="o">]]</span>
+</span></span><span class="line"><span class="cl">Body posted: some post data%
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ curl -i <span class="s1">'localhost:8080?city=Seattle&amp;state=WA'</span> -H <span class="s1">'Content-Type: text/plain'</span> -X PUT
+</span></span><span class="line"><span class="cl">HTTP/1.1 <span class="m">405</span> Method Not Allowed
+</span></span><span class="line"><span class="cl">Date: Fri, <span class="m">02</span> Sep <span class="m">2016</span> 16:36:41 GMT
+</span></span><span class="line"><span class="cl">Content-Length: <span class="m">0</span>
+</span></span><span class="line"><span class="cl">Content-Type: text/plain<span class="p">;</span> <span class="nv">charset</span><span class="o">=</span>utf-8</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="handling-http-method-accessing-query-strings-request-body-2f90f3ba9eab401699dbb119feab6665.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>HTTP Server:</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="http-server-96e6137284ae4460a2827f456b4cf62c.html#3dafe91a-49e7-47d3-9510-e514639535ee">http.ServeMux provides a multiplexer which calls handlers for HTTP requests.</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="hello-world-27c868d1c46347f9b2f7f4b55f40d1f5.html">Hello World</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="create-a-https-server-277e3470a2124ea9817a2d4923f947fa.html">Create a HTTPS Server</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="http-hello-world-with-custom-server-and-mux-bbe16c965ef44181be05a223f3521f4a.html">HTTP Hello World with custom server and mux</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="responding-to-an-http-request-using-templates-87dcd962c2a54283a88d814f6a56feb9.html">Responding to an HTTP Request using Templates</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="serving-content-using-servemux-c7b6aa1587b2407b918a3312a4d5ae2f.html">Serving content using ServeMux</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="using-a-handler-function-a1ce5808a18849b6a8393729d05b19f6.html">Using a handler function</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><b>Handling http method, accessing query strings & request body</b></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="getting-started-ba663c577a4a472e8c95fef8b4d8a8c6.html">Getting started</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="basic-types-2803d5d5229f4932af82a1dcc86eb8bf.html">Basic types</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="variables-5e911a698c43432dbf3ce33fc32dafe1.html">Variables</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="constants-cb80712dca7545da8e0b20762c637409.html">Constants</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="strings-ccc8d06958ae44319b21f9973716e3ca.html">Strings</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="pointers-1ef07599dd8247f493ba6dcba8ae7dbf.html">Pointers</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="arrays-58db8c9a56504deab2e61f1e0fa4a0a6.html">Arrays</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><a href="slices-f400553890d34185ba795870807c2615.html">Slices</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><a href="maps-80fb91dd63d445e28010b9f5e261da81.html">Maps</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><a href="structs-612802454798470ca5c5741d90543d22.html">Structs</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="interfaces-4f5f2959e72c431e995527b51ad7fd8e.html">Interfaces</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="empty-interface-c3315892508248fdb19b663bf8bff028.html">Empty interface</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="if-switch-goto-fd755f13f0fc4e75ad9b9ee675e557e8.html">if, switch, goto</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="for-while-loops-ad923a2fbd994701844af2d688d30548.html">for, while loops</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="range-statement-c522a62872884110bcc300db67e0e9ad.html">range statement</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="functions-6464727799a04611a891be7ca4877f8c.html">Functions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><a href="methods-503ddd46a4854315a88973b8db780fba.html">Methods</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><a href="error-handling-39927eb13c11419492e67e9fd5328d8b.html">Error handling</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="defer-20bfd8fa45454479954a6814eeeef716.html">Defer</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">19</span><a href="panic-and-recover-dda02e368b3048a5a69b81c56bfa6dbb.html">Panic and recover</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">20</span><a href="concurrency-16e8d8c3d77e44faaf6857a1df368ce8.html">Concurrency</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">21</span><a href="channels-and-select-4fac57c09168477aa12069484979f419.html">Channels and select</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">22</span><a href="mutex-41f795bf701d4784b3197349cdb8f2de.html">Mutex</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">23</span><a href="packages-6461fef8092a45158959bddbaad99bce.html">Packages</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">24</span><a href="files-and-io-7a55634fb8194a85bcc6036eeba61b39.html">Files and I/O</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">25</span><a href="time-and-date-c4da053493334df995134741ae04f808.html">Time and date</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">26</span><a href="command-line-arguments-05239fc069c3463dabc532b9d808612e.html">Command line arguments</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">27</span><a href="logging-f7fca2011c3748a19e3b8d66235cbe59.html">Logging</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">28</span><a href="executing-commands-c290f0566c80467a9005ab3a4024ec1d.html">Executing commands</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">29</span><a href="hex-base64-encoding-b6e9fbb3165c4bcb907e469d86783aab.html">Hex, base64 encoding</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">30</span><a href="json-1479bc5a08b64dbb8aa0e2f5ed17782f.html">JSON</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">31</span><a href="xml-6744c6d0d620448dbe66e224f64b6f8b.html">XML</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">32</span><a href="csv-abb984fec0d04d74b2d494ed3206d1bc.html">CSV</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">33</span><a href="yaml-29bafea8c8a546ab92284378bb7dc364.html">YAML</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">34</span><a href="sql-fc416b38f6f341bfa311bf6c575c73a1.html">SQL</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">35</span><a href="http-client-710edf91b0f146629abbfcd96aba4d80.html">HTTP Client</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">36</span><b>HTTP Server</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">37</span><a href="text-and-html-templates-cabbd74152a74e298be4afcd41ed10b2.html">Text and HTML templates</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">38</span><a href="reflection-c7fea6b176b74c54ab35f2d8fdd56f13.html">Reflection</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">39</span><a href="context-b58d13145f924c11afcf00aa10d71364.html">Context</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">40</span><a href="package-fmt-6ccd64ac7a174e1ea35366e014d9972a.html">Package fmt</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">41</span><a href="os-signals-48f2d17d3a7644daafbaf0ca9c8b61ad.html">OS Signals</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">42</span><a href="testing-b55ab9b1d6e5499ea3014ba7e85d3efd.html">Testing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">43</span><a href="calling-c-from-go-with-cgo-d3b0419346904e0bbf6dc28b69fc93c6.html">Calling C from GO with cgo</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">44</span><a href="profiling-using-go-tool-pprof-83dc1f9b6ec04d25a2d2e7357b6bebba.html">Profiling using go tool pprof</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">45</span><a href="cross-compilation-41fdbdecca7b42c3b4b98e5ec0a96e13.html">Cross compilation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">46</span><a href="conditional-compilation-with-build-tags-d1980344374d45c082c914c2aafa50cf.html">Conditional compilation with build tags</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">47</span><a href="inlining-functions-c2af72789a074a3aacf8d308f898f32c.html">Inlining functions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">48</span><a href="sync.pool-for-better-performance-ec2352421ba7472ab82d9dcc71d2c389.html">sync.Pool for better performance</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">49</span><a href="gob-a09f2d8c9bba44e0acd0a9206e8f733f.html">gob</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">50</span><a href="plugin-9f2c4121df7e4b3f818131c49676387b.html">Plugin</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">51</span><a href="http-server-middleware-d8b9c9c2a49e4ba8a04cf7ff6ee2db0f.html">HTTP server middleware</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">52</span><a href="protobuf-in-go-b5c70cd2244f48a0b89aebc75ef45ad0.html">Protobuf in Go</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">53</span><a href="console-io-ddc28bcf51794ae5b021b8c0d9423497.html">Console I/O</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">54</span><a href="cryptography-301bb328156d420694ebf5489d2cb744.html">Cryptography</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">55</span><a href="images-png-jpeg-bmp-tiff-webp-vp8-gif-c84a45304ec3498081c67aa1ea0d9c49.html">Images (PNG, JPEG, BMP, TIFF, WEBP, VP8, GIF)</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">56</span><a href="the-go-command-f2028ab74a354cf2ba6a86acfb813356.html">The Go Command</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">57</span><a href="testing-code-with-ci-services-0ada5cfc7c4a4217af2e62d01df777de.html">Testing code with CI services</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">58</span><a href="windows-gui-programming-944154630ac54def857caa8b50dd1b59.html">Windows GUI programming</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">59</span><a href="contributors-22efc95459e8462488d6608f1e963a74.html">Contributors</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

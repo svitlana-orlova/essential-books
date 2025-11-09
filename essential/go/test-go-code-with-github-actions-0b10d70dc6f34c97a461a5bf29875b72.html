@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">Test Go code with GitHub actions</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/0b10d70dc6f34c97a461a5bf29875b72" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+<p>GitHub Actions allow you to run code in your repository, on GitHub servers, after every push. 
+</p>
+<p>This can be used for many things. This article discusses how to use it for running tests (as a replacement for hosted CI services like travis.ci).
+</p>
+<p>A GitHub Action is defined by a <code>Dockerfile</code> in some GitHub repository. Since you can have multiple actions, you create a directory for each action.
+</p>
+<p>An action is triggered by a workflow description in <code>.github/main.workflow</code> file in a repository.
+</p>
+<p>Workflow is specific to each repository, actions can be shared.
+</p>
+<p>A workflow running time (a sum of all actions in a workflow) is limited to 1 hr.
+</p>
+  <h1 id="0d64d8d3-8ca7-4168-bb36-0f0494b4f7f5" class="">Workflow
+  <a class="header-anchor" href="test-go-code-with-github-actions-0b10d70dc6f34c97a461a5bf29875b72.html#0d64d8d3-8ca7-4168-bb36-0f0494b4f7f5" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>Here's the simplest workflow: 
+</p>
+
+<div class="code-box lang-Go">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="nx">workflow</span> <span class="s">"run go test on push"</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">on</span> <span class="p">=</span> <span class="s">"push"</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">resolves</span> <span class="p">=</span> <span class="p">[</span><span class="s">"test"</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">action</span> <span class="s">"test"</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">uses</span> <span class="p">=</span> <span class="s">"kjk/siser/action-go-test@master"</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>Explaining <code>workflow</code> section:
+</p>
+  <ul id="3c51810e-d5a4-4561-8606-d3cc553c7aff" class="bulleted-list">
+    <li><code>run go test on push</code> is human-readable name of the workflow. It documents what the action is for
+    </li>
+    <li><code>on = "push"</code> says that workflow will be executed on each push (including pushes into branches)
+    </li>
+    <li><code>resolves = ["test"]</code> specifies a list of actions to execute. We just have one and it refers to <code>action "test"</code>
+    </li>
+  </ul>
+<p>For a full list of options see <a href="https://developer.github.com/actions/managing-workflows/workflow-configuration-options/">documentation</a>.
+</p>
+<p>
+</p>
+<p>Explaining: <code>action</code> section:
+</p>
+  <ul id="6677fd8a-08d1-479b-b4cc-483cdec1f44b" class="bulleted-list">
+    <li><code>test</code> is a name by which we can refer an action from a workflow
+    </li>
+    <li><code>uses</code> specifies a location of the action
+    </li>
+  </ul>
+<p>For more information see <a href="https://developer.github.com/actions/creating-github-actions/creating-a-new-action/">documentation</a>.
+</p>
+<p>
+</p>
+<p>Actions can be re-used. <code>"kjk/siser/action-go-test@master"</code> specifies an action in <a href="https://github.com/kjk/siser/tree/master/action-go-test">https://github.com/kjk/siser/tree/master/action-go-test</a>. <code>@master</code> says that <code>master</code> branch should be used.
+</p>
+<p>For simplicity I put the action in the same repository that uses the action but I could, for example, create a separate repository just for actions and re-use them in multiple repos.
+</p>
+  <h1 id="a18d0cf3-6ee7-401a-b79b-4aebdfef0b91" class="">Action
+  <a class="header-anchor" href="test-go-code-with-github-actions-0b10d70dc6f34c97a461a5bf29875b72.html#a18d0cf3-6ee7-401a-b79b-4aebdfef0b91" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>Actions are Docker containers (describing docker is beyond the scope of this article).
+</p>
+<p>Docker containers are infinitely flexible: you can run any logic in the container.
+</p>
+<p>Our goal is to simply run <code>go test</code> on our code.
+</p>
+<p><code>Dockerfile</code> describes how to build a container (with <code>docker build</code>).
+</p>
+<p>Our <code>action-go-test/Dockerfile</code> is the simplest possible:
+</p>
+
+<div class="code-box lang-Docker">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> golang:latest</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">LABEL</span> <span class="s2">"name"</span><span class="o">=</span><span class="s2">"Go test"</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">LABEL</span> <span class="s2">"com.github.actions.name"</span><span class="o">=</span><span class="s2">"Go test"</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">LABEL</span> <span class="s2">"com.github.actions.description"</span><span class="o">=</span><span class="s2">"Run go test on code"</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">LABEL</span> <span class="s2">"com.github.actions.icon"</span><span class="o">=</span><span class="s2">"package"</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">LABEL</span> <span class="s2">"com.github.actions.color"</span><span class="o">=</span><span class="s2">"#E0EBF5"</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> entrypoint.sh /entrypoint.sh<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENTRYPOINT</span> <span class="p">[</span><span class="s2">"/entrypoint.sh"</span><span class="p">]</span></span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>There is an existing, publicly available <code>golang:latest</code> <a href="https://hub.docker.com/_/golang">docker image</a> in official Docker hub repository of images.
+</p>
+<p>You can use specific versions like <code>golang:1.11.6</code>. We ask for the latest.
+</p>
+<p><code>LABEL</code> statement are for just documentation.
+</p>
+<p>A file <code>action-go-test/entrypoint.sh</code> describes the code that will be executed when we run the container with <code>docker run</code>. It runs <code>go test</code>:
+</p>
+
+<div class="code-box lang-Bash">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="nb">set</span> -e
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">GOPATH</span><span class="o">=</span>/tmp
+</span></span><span class="line"><span class="cl">go test</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>To note:
+</p>
+  <ul id="29c48392-1026-4b5d-b27a-aa8ef8f3ad30" class="bulleted-list">
+    <li><code>set -e</code> tells bash to stop execution when a command fails, as opposed to continue executing the rest of the script. If a compilation fails, you don't want to run the test. In our case we only have one command <code>go test</code> so it makes no difference, but it's a good habit to have in case we'll expand the script in the future
+    </li>
+    <li><code>export GOPATH=</code> exists because our package uses go modules. <code>golang:latest</code> image has a working directory (where our code will be mounted) inside <code>GOPATH</code> and that's not allowed for modules, so we change the <code>GOPATH</code> 
+    </li>
+  </ul>
+<p>Now in the commit list you'll see:
+</p>
+<img class="img" src="img/1154726494021d3c222b7655ce6b606b1b6d14c5.png.html">
+<p>Yellow dot means: "action execution in progress".
+</p>
+<p>Green check mark means: "action finished running successfully".
+</p>
+<p>Red cross means: "action failed".
+</p>
+<p>When you click on them, you'll see a short summary of checks:
+</p>
+<img class="img" src="img/4e28aad42ac3853d31827e7c0d82de6ec66c6e89.png.html">
+<p>
+</p>
+<p>Link <code>details</code> points to a page like <a href="https://github.com/kjk/siser/runs/81810467">https://github.com/kjk/siser/runs/81810467</a> showing a log of action execution.
+</p>
+<p>Actions can do a lot more. See <a href="https://github.com/sdras/awesome-actions">awesome actions</a> list and <a href="https://github.com/marketplace?type=actions">actions in GitHub Marketplace</a> for more inspiration.
+</p>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="test-go-code-with-github-actions-0b10d70dc6f34c97a461a5bf29875b72.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>Testing code with CI services:</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><b>Test Go code with GitHub actions</b></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="getting-started-ba663c577a4a472e8c95fef8b4d8a8c6.html">Getting started</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="basic-types-2803d5d5229f4932af82a1dcc86eb8bf.html">Basic types</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="variables-5e911a698c43432dbf3ce33fc32dafe1.html">Variables</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="constants-cb80712dca7545da8e0b20762c637409.html">Constants</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="strings-ccc8d06958ae44319b21f9973716e3ca.html">Strings</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="pointers-1ef07599dd8247f493ba6dcba8ae7dbf.html">Pointers</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="arrays-58db8c9a56504deab2e61f1e0fa4a0a6.html">Arrays</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><a href="slices-f400553890d34185ba795870807c2615.html">Slices</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><a href="maps-80fb91dd63d445e28010b9f5e261da81.html">Maps</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><a href="structs-612802454798470ca5c5741d90543d22.html">Structs</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="interfaces-4f5f2959e72c431e995527b51ad7fd8e.html">Interfaces</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="empty-interface-c3315892508248fdb19b663bf8bff028.html">Empty interface</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="if-switch-goto-fd755f13f0fc4e75ad9b9ee675e557e8.html">if, switch, goto</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="for-while-loops-ad923a2fbd994701844af2d688d30548.html">for, while loops</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="range-statement-c522a62872884110bcc300db67e0e9ad.html">range statement</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="functions-6464727799a04611a891be7ca4877f8c.html">Functions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><a href="methods-503ddd46a4854315a88973b8db780fba.html">Methods</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><a href="error-handling-39927eb13c11419492e67e9fd5328d8b.html">Error handling</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="defer-20bfd8fa45454479954a6814eeeef716.html">Defer</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">19</span><a href="panic-and-recover-dda02e368b3048a5a69b81c56bfa6dbb.html">Panic and recover</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">20</span><a href="concurrency-16e8d8c3d77e44faaf6857a1df368ce8.html">Concurrency</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">21</span><a href="channels-and-select-4fac57c09168477aa12069484979f419.html">Channels and select</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">22</span><a href="mutex-41f795bf701d4784b3197349cdb8f2de.html">Mutex</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">23</span><a href="packages-6461fef8092a45158959bddbaad99bce.html">Packages</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">24</span><a href="files-and-io-7a55634fb8194a85bcc6036eeba61b39.html">Files and I/O</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">25</span><a href="time-and-date-c4da053493334df995134741ae04f808.html">Time and date</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">26</span><a href="command-line-arguments-05239fc069c3463dabc532b9d808612e.html">Command line arguments</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">27</span><a href="logging-f7fca2011c3748a19e3b8d66235cbe59.html">Logging</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">28</span><a href="executing-commands-c290f0566c80467a9005ab3a4024ec1d.html">Executing commands</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">29</span><a href="hex-base64-encoding-b6e9fbb3165c4bcb907e469d86783aab.html">Hex, base64 encoding</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">30</span><a href="json-1479bc5a08b64dbb8aa0e2f5ed17782f.html">JSON</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">31</span><a href="xml-6744c6d0d620448dbe66e224f64b6f8b.html">XML</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">32</span><a href="csv-abb984fec0d04d74b2d494ed3206d1bc.html">CSV</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">33</span><a href="yaml-29bafea8c8a546ab92284378bb7dc364.html">YAML</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">34</span><a href="sql-fc416b38f6f341bfa311bf6c575c73a1.html">SQL</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">35</span><a href="http-client-710edf91b0f146629abbfcd96aba4d80.html">HTTP Client</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">36</span><a href="http-server-96e6137284ae4460a2827f456b4cf62c.html">HTTP Server</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">37</span><a href="text-and-html-templates-cabbd74152a74e298be4afcd41ed10b2.html">Text and HTML templates</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">38</span><a href="reflection-c7fea6b176b74c54ab35f2d8fdd56f13.html">Reflection</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">39</span><a href="context-b58d13145f924c11afcf00aa10d71364.html">Context</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">40</span><a href="package-fmt-6ccd64ac7a174e1ea35366e014d9972a.html">Package fmt</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">41</span><a href="os-signals-48f2d17d3a7644daafbaf0ca9c8b61ad.html">OS Signals</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">42</span><a href="testing-b55ab9b1d6e5499ea3014ba7e85d3efd.html">Testing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">43</span><a href="calling-c-from-go-with-cgo-d3b0419346904e0bbf6dc28b69fc93c6.html">Calling C from GO with cgo</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">44</span><a href="profiling-using-go-tool-pprof-83dc1f9b6ec04d25a2d2e7357b6bebba.html">Profiling using go tool pprof</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">45</span><a href="cross-compilation-41fdbdecca7b42c3b4b98e5ec0a96e13.html">Cross compilation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">46</span><a href="conditional-compilation-with-build-tags-d1980344374d45c082c914c2aafa50cf.html">Conditional compilation with build tags</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">47</span><a href="inlining-functions-c2af72789a074a3aacf8d308f898f32c.html">Inlining functions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">48</span><a href="sync.pool-for-better-performance-ec2352421ba7472ab82d9dcc71d2c389.html">sync.Pool for better performance</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">49</span><a href="gob-a09f2d8c9bba44e0acd0a9206e8f733f.html">gob</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">50</span><a href="plugin-9f2c4121df7e4b3f818131c49676387b.html">Plugin</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">51</span><a href="http-server-middleware-d8b9c9c2a49e4ba8a04cf7ff6ee2db0f.html">HTTP server middleware</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">52</span><a href="protobuf-in-go-b5c70cd2244f48a0b89aebc75ef45ad0.html">Protobuf in Go</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">53</span><a href="console-io-ddc28bcf51794ae5b021b8c0d9423497.html">Console I/O</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">54</span><a href="cryptography-301bb328156d420694ebf5489d2cb744.html">Cryptography</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">55</span><a href="images-png-jpeg-bmp-tiff-webp-vp8-gif-c84a45304ec3498081c67aa1ea0d9c49.html">Images (PNG, JPEG, BMP, TIFF, WEBP, VP8, GIF)</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">56</span><a href="the-go-command-f2028ab74a354cf2ba6a86acfb813356.html">The Go Command</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">57</span><b>Testing code with CI services</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">58</span><a href="windows-gui-programming-944154630ac54def857caa8b50dd1b59.html">Windows GUI programming</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">59</span><a href="contributors-22efc95459e8462488d6608f1e963a74.html">Contributors</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

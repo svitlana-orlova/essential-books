@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">react-starter project</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/ade379d142f7414cb8d89f9198695fbf" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+<p><strong>About this Project</strong>
+</p>
+<p>This is simple boilerplate project. This post will guide you to set up the environment for ReactJs + Webpack + Bable.
+</p>
+<p><strong>Lets get Started</strong>
+</p>
+<p>we will need node package manager for fire up express server and manage dependencies throughout the project. if you are new to node package manager, you can check <a href="https://docs.npmjs.com/getting-started/what-is-npm">here</a>. Note : Installing node package manager is require here.
+</p>
+<p>Create a folder with suitable name and navigate into it from terminal or by GUI.Then go to terminal and type <code>npm init</code> this will create a package.json file, Nothing scary , it will ask you few question like name of your project ,version, description, entry point, git repository, author, license etc. Here entry point is important because node will initially look for it when you run the project. At the end it will ask you to verify the information you provide. You can type <em>yes</em> or modify it. Well that’s it , our <em>package.json</em> file is ready.
+</p>
+<p><strong>Express server setup</strong> run <em>npm install express@4 –save</em>. This is all the dependencies we needed for this project.Here save flag is important, without it <em>package.js</em> file will not be updated. Main task of <em>package.json</em> is to store list of dependencies. It will add express version 4. Your <em>package.json</em> will look like `
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">"dependencies": {
+</span></span><span class="line"><span class="cl">    "express": "^4.13.4",
+</span></span><span class="line"><span class="cl">     .............
+</span></span><span class="line"><span class="cl">  },`</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>After complete download you can see there is <em>node_modules</em> folder and sub folder of our dependencies. Now on the root of project create new file <em>server.js</em> file. Now we are setting express server. I am going to past all the code and explain it later.
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">var express = require('express');
+</span></span><span class="line"><span class="cl">// Create our app
+</span></span><span class="line"><span class="cl">var app = express();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">app.use(express.static('public'));
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">app.listen(3000, function () {
+</span></span><span class="line"><span class="cl">  console.log('Express server is using port:3000');
+</span></span><span class="line"><span class="cl">});</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p><em>var express = require(‘express’);</em> this will gave you the access of entire express api.
+</p>
+<p><em>var app = express();</em> will call express library as function. <em>app.use();</em> let the add the functionality to your express application. <em>app.use(express.static(‘public’));</em> will specify the folder name that will be expose in our web server. <em>app.listen(port, function(){})</em> will here our port will be <em>3000</em> and function we are calling will verify that out web server is running properly. That’s it express server is set up.
+</p>
+<p>Now go to our project and create a new folder public and create <em>index.html</em> file. <em>index.html</em> is the default file for you application and Express server will look for this file. The <em>index.html</em> is simple html file which looks like
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">&lt;!DOCTYPE html&gt;
+</span></span><span class="line"><span class="cl">&lt;html&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;head&gt;
+</span></span><span class="line"><span class="cl">  &lt;meta charset="UTF-8"/&gt;
+</span></span><span class="line"><span class="cl">&lt;/head&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;body&gt;
+</span></span><span class="line"><span class="cl">  &lt;h1&gt;hello World&lt;/h1&gt;
+</span></span><span class="line"><span class="cl">&lt;/body&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;/html&gt;</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>And go to the project path through the terminal and type <em>node server.js</em>. Then you will see * console.log(‘Express server is using port:3000’);*.
+</p>
+<p>Go to the browser and type <em>http://localhost:3000</em> in nav bar you will see <em>hello World</em>.
+</p>
+<p>Now go inside the public folder and create a new file <em>app.jsx</em>. JSX is a preprocessor step that adds XML syntax to your JavaScript.You can definitely use React without JSX but JSX makes React a lot more elegant. Here is the sample code for <em>app.jsx</em>
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">ReactDOM.render(
+</span></span><span class="line"><span class="cl">  &lt;h1&gt;Hello World!!!&lt;/h1&gt;,
+</span></span><span class="line"><span class="cl">  document.getElementById('app')
+</span></span><span class="line"><span class="cl">);</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>Now go to <em>index.html</em> and modify the code , it should looks like this
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">&lt;!DOCTYPE html&gt;
+</span></span><span class="line"><span class="cl">&lt;html&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;head&gt;
+</span></span><span class="line"><span class="cl">  &lt;meta charset="UTF-8"/&gt;
+</span></span><span class="line"><span class="cl">  &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23                                              /browser.min.js"&gt;&lt;/script&gt;
+</span></span><span class="line"><span class="cl">  &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react.js"&gt;                           &lt;/script&gt;
+</span></span><span class="line"><span class="cl">  &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"&gt;    &lt;/script&gt;
+</span></span><span class="line"><span class="cl">&lt;/head&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;body&gt;
+</span></span><span class="line"><span class="cl">  &lt;div id="app"&gt;&lt;/div&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  &lt;script type="text/babel" src="app.jsx"&gt;&lt;/script&gt;
+</span></span><span class="line"><span class="cl">&lt;/body&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;/html&gt;</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>With this in place you are all done, I hope you find it simple.
+</p>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="react-starter-project-ade379d142f7414cb8d89f9198695fbf.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>React boilerpate for babel and webpack:</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="react-boilerplate-react-babel-webpack-2768a1c49c9d48ffb79d3925613ec7a1.html">React Boilerplate React Babel Webpack</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="setting-up-the-project-e57917857d3c407fa4eef11379430ecd.html">Setting up the project</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><b>react-starter project</b></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="getting-started-54e1310d46924318b4045f886461565a.html">Getting started</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="components-da8fafc65f35422090b192f7b2069ee8.html">Components</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="react-with-typescript-a412494709ed4600a460a5f24acfbd6a.html">React with TypeScript</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="state-in-react-6cafc1d7863342d6b702833db7d26eed.html">State in React</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="props-in-react-457619196bc54ffab9b6ef83a7c7ae4e.html">Props in react</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="react-component-lifecycle-3be1a9d383e846d7add61ee03c2e1899.html">React component lifecycle</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="forms-and-user-input-3731d999c1bc4c1ba0aad1d9fc9593cd.html">Forms and user input</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><b>React boilerpate for babel and webpack</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><a href="using-react-with-jquery-7a9b795a6e6a47be84283835a236c536.html">Using React with jQuery</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><a href="react-routing-d70042712e4c4340bb8bd5647d3f0de2.html">React routing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="communication-between-components-fe58dcb8c9784ad9bc8b66067b6739ab.html">Communication between components</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="basic-webpack-and-babel-setup-9c40f65e1bdc4f72a972d646271de386.html">Basic webpack and babel setup</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="react.createclass-vs.-extends-react.component-de02e09ab95b41ac9225187428487c3b.html">React.createClass vs. extends React.Component</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="react-ajax-call-a8bc3cbf7d9a4b5496324ea3f34b4215.html">React AJAX call</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="installation-d6b4365eb5e2455eb92324ce2c042efa.html">Installation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="communication-between-components-5163a4c021234f18b52c444de537938e.html">Communication between components</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><a href="stateless-functional-components-d6dde1b52eeb4b6387418b4354c7eb3d.html">Stateless functional components</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><a href="react-tools-fed8312431e94e36941f0b835aeea1e3.html">React tools</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="performance-5ad4bd79730c404fa84be8f9eb692c36.html">Performance</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">19</span><a href="introduction-to-server-side-rendering-ea8b8930641545dcadb06d60dc3f3886.html">Introduction to server-side rendering</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">20</span><a href="setting-up-react-environment-066cca80f2534328bdc050ac81ba02b8.html">Setting up React environment</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">21</span><a href="using-react-with-flow-866a5fd05a0b4ef5b0af0bf0ef5a0f69.html">Using React with Flow</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">22</span><a href="jsx-34c251a5b7b846718f7511f5330f0a43.html">JSX</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">23</span><a href="react-forms-019d61bd45f14dedba132dc288859c44.html">React Forms</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">24</span><a href="user-interface-solutions-ce60866333cc4b42bb6badecebad2004.html">User interface solutions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">25</span><a href="react-and-flux-edae1dcd128b4d41ab944aead7cf1ee1.html">React and Flux</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">26</span><a href="webpack-and-typescript-installation-c5841c99b28848b99d6b1734bb17732c.html">Webpack and TypeScript installation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">27</span><a href="how-and-why-to-use-keys-9f918454eff24d55aa16396edf968bd3.html">How and why to use keys</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">28</span><a href="keys-in-react-2b18d28b641948efaaca668f0278d521.html">Keys in React</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">29</span><a href="higher-order-components-hoc-7107118caf64488f8118718eda6e81ca.html">Higher Order Components (HOC)</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">30</span><a href="react-with-redux-24659cb7c4c64deaa32aa5fdc61ede53.html">React with redux</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">31</span><a href="contributors-9530c91670894e5a859d6b4424d423b7.html">Contributors</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

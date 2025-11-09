@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">Introduction To Knuth-Morris-Pratt KMP Algorithm</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/9e69da83fd1743dba31b4f119ca3155c" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+<p>Suppose that we have a <em>text</em> and a <em>pattern</em>. We need to determine if the pattern exists in the text or not. For example:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">+-------+---+---+---+---+---+---+---+---+
+</span></span><span class="line"><span class="cl">| Index | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+</span></span><span class="line"><span class="cl">+-------+---+---+---+---+---+---+---+---+
+</span></span><span class="line"><span class="cl">|  Text | a | b | c | b | c | g | l | x |
+</span></span><span class="line"><span class="cl">+-------+---+---+---+---+---+---+---+---+
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">+---------+---+---+---+---+
+</span></span><span class="line"><span class="cl">| Index   | 0 | 1 | 2 | 3 |
+</span></span><span class="line"><span class="cl">+---------+---+---+---+---+
+</span></span><span class="line"><span class="cl">| Pattern | b | c | g | l |
+</span></span><span class="line"><span class="cl">+---------+---+---+---+---+</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>This <em>pattern</em> does exist in the <em>text</em>. So our substring search should return <strong>3</strong>, the index of the position from which this <em>pattern</em> starts. So how does our brute force substring search procedure work?
+</p>
+<p>What we usually do is: we start from the <strong>0th</strong> index of the <em>text</em> and the <strong>0th</strong> index of our *pattern and we compare <strong>Text[0]</strong> with <strong>Pattern[0]</strong>. Since they are not a match, we go to the next index of our <em>text</em> and we compare <strong>Text[1]</strong> with <strong>Pattern[0]</strong>. Since this is a match, we increment the index of our <em>pattern</em> and the index of the <em>Text</em> also. We compare <strong>Text[2]</strong> with <strong>Pattern[1]</strong>. They are also a match. Following the same procedure stated before, we now compare <strong>Text[3]</strong> with <strong>Pattern[2]</strong>. As they do not match, we start from the next position where we started finding the match. That is index <strong>2</strong> of the <em>Text</em>. We compare <strong>Text[2]</strong> with <strong>Pattern[0]</strong>. They don’t match. Then incrementing index of the <em>Text</em>, we compare <strong>Text[3]</strong> with <strong>Pattern[0]</strong>. They match. Again <strong>Text[4]</strong> and <strong>Pattern[1]</strong> match, <strong>Text[5]</strong> and <strong>Pattern[2]</strong> match and <strong>Text[6]</strong> and <strong>Pattern[3]</strong> match. Since we’ve reached the end of our <em>Pattern</em>, we now return the index from which our match started, that is <strong>3</strong>. If our <em>pattern</em> was: <code>bcgll</code>, that means if the <em>pattern</em> didn’t exist in our <em>text</em>, our search should return exception or <strong>-1</strong> or any other predefined value. We can clearly see that, in the worst case, this algorithm would take <code>O(mn)</code> time where <strong>m</strong> is the length of the <em>Text</em> and <strong>n</strong> is the length of the <em>Pattern</em>. How do we reduce this time complexity? This is where KMP Substring Search Algorithm comes into the picture.
+</p>
+<p>The <a href="https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm">Knuth-Morris-Pratt String Searching Algorithm</a> or KMP Algorithm searches for occurrences of a “Pattern” within a main “Text” by employing the observation that when a mismatch occurs, the word itself embodies sufficient information to determine where the next match could begin, thus bypassing re-examination of previously matched characters. The algorithm was conceived in 1970 by <a href="https://en.wikipedia.org/wiki/Donald_Knuth">Donuld Knuth</a> and <a href="https://en.wikipedia.org/wiki/Vaughan_Pratt">Vaughan Pratt</a> and independently by <a href="https://en.wikipedia.org/wiki/James_H._Morris">James H. Morris</a>. The trio published it jointly in 1977.
+</p>
+<p>Let’s extend our example <em>Text</em> and <em>Pattern</em> for better understanding:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">+-------+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+</span></span><span class="line"><span class="cl">| Index |0 |1 |2 |3 |4 |5 |6 |7 |8 |9 |10|11|12|13|14|15|16|17|18|19|20|21|22|
+</span></span><span class="line"><span class="cl">+-------+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+</span></span><span class="line"><span class="cl">|  Text |a |b |c |x |a |b |c |d |a |b |x |a |b |c |d |a |b |c |d |a |b |c |y |
+</span></span><span class="line"><span class="cl">+-------+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">+---------+---+---+---+---+---+---+---+---+
+</span></span><span class="line"><span class="cl">|  Index  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+</span></span><span class="line"><span class="cl">+---------+---+---+---+---+---+---+---+---+
+</span></span><span class="line"><span class="cl">| Pattern | a | b | c | d | a | b | c | y |
+</span></span><span class="line"><span class="cl">+---------+---+---+---+---+---+---+---+---+</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>At first, our <em>Text</em> and <em>Pattern</em> matches till index <strong>2</strong>. <strong>Text[3]</strong> and <strong>Pattern[3]</strong> doesn’t match. So our aim is to not go backwards in this <em>Text</em>, that is, in case of a mismatch, we don’t want our matching to begin again from the position that we started matching with. To achieve that, we’ll look for a <strong>suffix</strong> in our <em>Pattern</em> right before our mismatch occurred (substring <strong>abc</strong>), which is also a <strong>prefix</strong> of the substring of our <em>Pattern</em>. For our example, since all the characters are unique, there is no suffix, that is the prefix of our matched substring. So what that means is, our next comparison will start from index <strong>0</strong>. Hold on for a bit, you’ll understand why we did this. Next, we compare <strong>Text[3]</strong> with <strong>Pattern[0]</strong> and it doesn’t match. After that, for <em>Text</em> from index <strong>4</strong> to index <strong>9</strong> and for <em>Pattern</em> from index <strong>0</strong> to index <strong>5</strong>, we find a match. We find a mismatch in <strong>Text[10]</strong> and <strong>Pattern[6]</strong>. So we take the substring from <em>Pattern</em> right before the point where mismatch occurs (substring <strong>abcdabc</strong>), we check for a suffix, that is also a prefix of this substring. We can see here <strong>ab</strong> is both the suffix and prefix of this substring. What that means is, since we’ve matched until <strong>Text[10]</strong>, the characters right before the mismatch is <strong>ab</strong>. What we can infer from it is that since <strong>ab</strong> is also a prefix of the substring we took, we don’t have to check <strong>ab</strong> again and the next check can start from <strong>Text[10]</strong> and <strong>Pattern[2]</strong>. We didn’t have to look back to the whole <em>Text</em>, we can start directly from where our mismatch occurred. Now we check <strong>Text[10]</strong> and <strong>Pattern[2]</strong>, since it’s a mismatch, and the substring before mismatch (<strong>abc</strong>) doesn’t contain a suffix which is also a prefix, we check <strong>Text[10]</strong> and <strong>Pattern[0]</strong>, they don’t match. After that for <em>Text</em> from index <strong>11</strong> to index <strong>17</strong> and for <em>Pattern</em> from index <strong>0</strong> to index <strong>6</strong>. We find a mismatch in <strong>Text[18]</strong> and <strong>Pattern[7]</strong>. So again we check the substring before mismatch (substring <strong>abcdabc</strong>) and find <strong>abc</strong> is both the suffix and the prefix. So since we matched till <strong>Pattern[7]</strong>, <strong>abc</strong> must be before <strong>Text[18]</strong>. That means, we don’t need to compare until <strong>Text[17]</strong> and our comparison will start from <strong>Text[18]</strong> and <strong>Pattern[3]</strong>. Thus we will find a match and we’ll return <strong>15</strong> which is our starting index of the match. This is how our KMP Substring Search works using suffix and prefix information.
+</p>
+<p>Now, how do we efficiently compute if suffix is same as prefix and at what point to start the check if there is a mismatch of character between <em>Text</em> and <em>Pattern</em>. Let’s take a look at an example:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">+---------+---+---+---+---+---+---+---+---+
+</span></span><span class="line"><span class="cl">|  Index  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+</span></span><span class="line"><span class="cl">+---------+---+---+---+---+---+---+---+---+
+</span></span><span class="line"><span class="cl">| Pattern | a | b | c | d | a | b | c | a |
+</span></span><span class="line"><span class="cl">+---------+---+---+---+---+---+---+---+---+</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>We’ll generate an array containing the required information. Let’s call the array <strong>S</strong>. The size of the array will be same as the length of the pattern. Since the first letter of the <em>Pattern</em> can’t be the suffix of any prefix, we’ll put <strong>S[0]</strong> = <strong>0</strong>. We take <strong>i</strong> = <strong>1</strong> and <strong>j</strong> = <strong>0</strong> at first. At each step we compare <strong>Pattern[i]</strong> and <strong>Pattern[j]</strong> and increment <strong>i</strong>. If there is a match we put <strong>S[i]</strong> = <strong>j</strong> + <strong>1</strong> and increment <strong>j</strong>, if there is a mismatch, we check the previous value position of <strong>j</strong> (if available) and set <strong>j</strong> = <strong>S[j-1]</strong> (if <strong>j</strong> is not equal to <strong>0</strong>), we keep doing this until <strong>S[j]</strong> doesn’t match with <strong>S[i]</strong> or <strong>j</strong> doesn’t become <strong>0</strong>. For the later one, we put <strong>S[i]</strong> = <strong>0</strong>. For our example:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">j   i
+</span></span><span class="line"><span class="cl">+---------+---+---+---+---+---+---+---+---+
+</span></span><span class="line"><span class="cl">|  Index  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+</span></span><span class="line"><span class="cl">+---------+---+---+---+---+---+---+---+---+
+</span></span><span class="line"><span class="cl">| Pattern | a | b | c | d | a | b | c | a |
+</span></span><span class="line"><span class="cl">+---------+---+---+---+---+---+---+---+---+</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p><strong>Pattern[j]</strong> and <strong>Pattern[i]</strong> don’t match, so we increment <strong>i</strong> and since <strong>j</strong> is <strong>0</strong>, we don’t check the previous value and put <strong>Pattern[i]</strong> = <strong>0</strong>. If we keep incrementing <strong>i</strong>, for <strong>i</strong> = <strong>4</strong>, we’ll get a match, so we put <strong>S[i]</strong> = <strong>S[4]</strong> = <strong>j</strong> + <strong>1</strong> = <strong>0</strong> + <strong>1</strong> = <strong>1</strong> and increment <strong>j</strong> and <strong>i</strong>. Our array will look like:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">j               i
+</span></span><span class="line"><span class="cl">+---------+---+---+---+---+---+---+---+---+
+</span></span><span class="line"><span class="cl">|  Index  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+</span></span><span class="line"><span class="cl">+---------+---+---+---+---+---+---+---+---+
+</span></span><span class="line"><span class="cl">| Pattern | a | b | c | d | a | b | c | a |
+</span></span><span class="line"><span class="cl">+---------+---+---+---+---+---+---+---+---+
+</span></span><span class="line"><span class="cl">|    S    | 0 | 0 | 0 | 0 | 1 |   |   |   |
+</span></span><span class="line"><span class="cl">+---------+---+---+---+---+---+---+---+---+</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>Since <strong>Pattern[1]</strong> and <strong>Pattern[5]</strong> is a match, we put <strong>S[i]</strong> = <strong>S[5]</strong> = <strong>j</strong> + <strong>1</strong> = <strong>1</strong> + <strong>1</strong> = <strong>2</strong>. If we continue, we’ll find a mismatch for <strong>j</strong> = <strong>3</strong> and <strong>i</strong> = <strong>7</strong>. Since <strong>j</strong> is not equal to <strong>0</strong>, we put <strong>j</strong> = <strong>S[j-1]</strong>. And we’ll compare the characters at <strong>i</strong> and <strong>j</strong> are same or not, since they are same, we’ll put <strong>S[i]</strong> = <strong>j</strong> + 1. Our completed array will look like:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">+---------+---+---+---+---+---+---+---+---+
+</span></span><span class="line"><span class="cl">|    S    | 0 | 0 | 0 | 0 | 1 | 2 | 3 | 1 |
+</span></span><span class="line"><span class="cl">+---------+---+---+---+---+---+---+---+---+</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>This is our required array. Here a nonzero-value of <strong>S[i]</strong> means there is a <strong>S[i]</strong> length suffix same as the prefix in that substring (substring from <strong>0</strong> to <strong>i</strong>) and the next comparison will start from <strong>S[i]</strong> + <strong>1</strong> position of the <em>Pattern</em>. Our algorithm to generate the array would look like:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">Procedure GenerateSuffixArray(Pattern):
+</span></span><span class="line"><span class="cl">i := 1
+</span></span><span class="line"><span class="cl">j := 0
+</span></span><span class="line"><span class="cl">n := Pattern.length
+</span></span><span class="line"><span class="cl">while i is less than n
+</span></span><span class="line"><span class="cl">    if Pattern[i] is equal to Pattern[j]
+</span></span><span class="line"><span class="cl">        S[i] := j + 1
+</span></span><span class="line"><span class="cl">        j := j + 1
+</span></span><span class="line"><span class="cl">        i := i + 1
+</span></span><span class="line"><span class="cl">    else
+</span></span><span class="line"><span class="cl">        if j is not equal to 0
+</span></span><span class="line"><span class="cl">            j := S[j-1]
+</span></span><span class="line"><span class="cl">        else
+</span></span><span class="line"><span class="cl">            S[i] := 0
+</span></span><span class="line"><span class="cl">            i := i + 1
+</span></span><span class="line"><span class="cl">        end if
+</span></span><span class="line"><span class="cl">    end if
+</span></span><span class="line"><span class="cl">end while</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>The time complexity to build this array is <code>O(n)</code> and the space complexity is also <code>O(n)</code>. To make sure if you have completely understood the algorithm, try to generate an array for pattern <code>aabaabaa</code> and check if the result matches with <a href="https://i.stack.imgur.com/4aqZk.jpg">this</a> one.
+</p>
+<p>Now let’s do a substring search using the following example:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">+---------+---+---+---+---+---+---+---+---+---+---+---+---+
+</span></span><span class="line"><span class="cl">|  Index  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |10 |11 |
+</span></span><span class="line"><span class="cl">+---------+---+---+---+---+---+---+---+---+---+---+---+---+
+</span></span><span class="line"><span class="cl">|   Text  | a | b | x | a | b | c | a | b | c | a | b | y |
+</span></span><span class="line"><span class="cl">+---------+---+---+---+---+---+---+---+---+---+---+---+---+
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">+---------+---+---+---+---+---+---+
+</span></span><span class="line"><span class="cl">|  Index  | 0 | 1 | 2 | 3 | 4 | 5 |
+</span></span><span class="line"><span class="cl">+---------+---+---+---+---+---+---+
+</span></span><span class="line"><span class="cl">| Pattern | a | b | c | a | b | y |
+</span></span><span class="line"><span class="cl">+---------+---+---+---+---+---+---+
+</span></span><span class="line"><span class="cl">|    S    | 0 | 0 | 0 | 1 | 2 | 0 |
+</span></span><span class="line"><span class="cl">+---------+---+---+---+---+---+---+</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>We have a <em>Text</em>, a <em>Pattern</em> and a pre-calculated array <em>S</em> using our logic defined before. We compare <strong>Text[0]</strong> and <strong>Pattern[0]</strong> and they are same. <strong>Text[1]</strong> and <strong>Pattern[1]</strong> are same. <strong>Text[2]</strong> and <strong>Pattern[2]</strong> are not same. We check the value at the position right before the mismatch. Since <strong>S[1]</strong> is <strong>0</strong>, there is no suffix that is same as the prefix in our substring and our comparison starts at position <strong>S[1]</strong>, which is <strong>0</strong>. So <strong>Pattern[0]</strong> is not same as <strong>Text[2]</strong>, so we move on. <strong>Text[3]</strong> is same as <strong>Pattern[0]</strong> and there is a match till <strong>Text[8]</strong> and <strong>Pattern[5]</strong>. We go one step back in the <strong>S</strong> array and find <strong>2</strong>. So this means there is a prefix of length <strong>2</strong> which is also the suffix of this substring (<strong>abcab)</strong> which is <strong>ab</strong>. That also means that there is an <strong>ab</strong> before <strong>Text[8]</strong>. So we can safely ignore <strong>Pattern[0]</strong> and <strong>Pattern[1]</strong> and start our next comparison from <strong>Pattern[2]</strong> and <strong>Text[8]</strong>. If we continue, we’ll find the <em>Pattern</em> in the <em>Text</em>. Our procedure will look like:
+</p>
+
+<div class="code-box lang-Plain Text">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">Procedure KMP(Text, Pattern)
+</span></span><span class="line"><span class="cl">GenerateSuffixArray(Pattern)
+</span></span><span class="line"><span class="cl">m := Text.Length
+</span></span><span class="line"><span class="cl">n := Pattern.Length
+</span></span><span class="line"><span class="cl">i := 0
+</span></span><span class="line"><span class="cl">j := 0
+</span></span><span class="line"><span class="cl">while i is less than m
+</span></span><span class="line"><span class="cl">    if Pattern[j] is equal to Text[i]
+</span></span><span class="line"><span class="cl">        j := j + 1
+</span></span><span class="line"><span class="cl">        i := i + 1
+</span></span><span class="line"><span class="cl">    if j is equal to n
+</span></span><span class="line"><span class="cl">        Return (j-i)
+</span></span><span class="line"><span class="cl">    else if i &lt; m and Pattern[j] is not equal t Text[i]
+</span></span><span class="line"><span class="cl">        if j is not equal to 0
+</span></span><span class="line"><span class="cl">            j = S[j-1]
+</span></span><span class="line"><span class="cl">        else
+</span></span><span class="line"><span class="cl">            i := i + 1
+</span></span><span class="line"><span class="cl">        end if
+</span></span><span class="line"><span class="cl">    end if
+</span></span><span class="line"><span class="cl">end while
+</span></span><span class="line"><span class="cl">Return -1</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>The time complexity of this algorithm apart from the Suffix Array Calculation is <code>O(m)</code>. Since <em>GenerateSuffixArray</em> takes <code>O(n)</code>, the total time complexity of KMP Algorithm is: <code>O(m+n)</code>.
+</p>
+<p>PS: If you want to find multiple occurrences of <em>Pattern</em> in the <em>Text</em>, instead of returning the value, print it/store it and set <code>j := S[j-1]</code>. Also keep a <code>flag</code> to track whether you have found any occurrence or not and handle it accordingly.
+</p>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="introduction-to-knuth-morris-pratt-kmp-algorithm-9e69da83fd1743dba31b4f119ca3155c.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>Substring Search:</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="substring-search-7451d6751780461eabd58fdc87b23073.html">Substring Search</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><b>Introduction To Knuth-Morris-Pratt KMP Algorithm</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="introduction-to-rabin-karp-algorithm-e11d5cd56de347a6a93ffa6e907f2a8b.html">Introduction to Rabin-Karp Algorithm</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="kmp-algorithm-in-c-de0748a30d564d269e43c6f0fedc01fe.html">KMP Algorithm in C</a></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="python-implementation-of-kmp-algorithm.-d87c729f306e40cb902bab0ef26c20ea.html">Python Implementation of KMP algorithm.</a></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="getting-started-91fee7b5614e44ac9c692c43b78c7706.html">Getting started</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="sorting-1b2f4c664ea64d7ba266531792730534.html">Sorting</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="bubble-sort-6eb693f8f70b45c9a6db644dea3bc144.html">Bubble sort</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="algorithm-complexity-ee1a453958894a51bc451ed4ce501170.html">Algorithm complexity</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="graphs-8ae5c9b5b80d4e27930b0dbbf5b2a075.html">Graphs</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="dynamic-programming-0483f45cfa31493ebd1bb9e924123210.html">Dynamic programming</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="kruskals-algorithm-e737c451edb24ee18b504891f751f559.html">Kruskals algorithm</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><a href="greedy-algorithms-fb292c5c1e2c4d169d29fce0aff04b2b.html">Greedy algorithms</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><a href="searching-c8277fc46841459e81f4c90a99fd83fa.html">Searching</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><a href="big-o-notation-adfec1cf49414483b98d9550de7e3916.html">Big O notation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="bellman-for-algorithm-2bfd570fdc074daab3b2a794ef12f08e.html">Bellman-For Algorithm</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="merge-sort-a034d8c3224b46dcbc26d44b569e39e0.html">Merge Sort</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="binary-search-trees-8c1be63050c94162b355a5d6917f9e65.html">Binary Search Trees</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="trees-56228e72edf04f14b6c71d113093b22a.html">Trees</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="insertion-sort-2885c26f551147a5900d5d725326f99d.html">Insertion Sort</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="hash-functions-e800516eb244400089c70041f1acd148.html">Hash Functions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><a href="traveling-salesman-7c62ae2de3344dc4a641184b79672747.html">Traveling Salesman</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><b>Substring Search</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="dijkstras-algorithm-f00ac53f26f54356bd05744ca9c233b1.html">Dijkstras Algorithm</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">19</span><a href="floyd-warshall-algorithm-07b6aee186e24b06953393f2f24dd419.html">Floyd-Warshall Algorithm</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">20</span><a href="breadth-first-search-3104f50ab7e241fe97d7f6e02201ccb8.html">Breadth-First Search</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">21</span><a href="bucket-sort-aed1f400b221406780e62fda841c33f0.html">Bucket Sort</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">22</span><a href="quicksort-a747cf00d05a41329b344cea62968a38.html">Quicksort</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">23</span><a href="depth-first-search-0abdd157bda84285b8a75aa4dd7e132b.html">Depth-First Search</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">24</span><a href="knapsack-problem-e79c088d5ede4b22b5dc16273a672796.html">Knapsack Problem</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">25</span><a href="counting-sort-721fb53cf2404ce6aaaa9f4be08c3460.html">Counting Sort</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">26</span><a href="cycle-sort-38ae0e5d81ea45b2b7f48eb197662514.html">Cycle Sort</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">27</span><a href="heap-sort-c06d75d61a6d48da8e094d63502dedee.html">Heap Sort</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">28</span><a href="prims-algorithm-3cca89f64b6c48b0957b2efc26b23041.html">Prims Algorithm</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">29</span><a href="matrix-exponentiation-db10fdd2ea0b4236ae1494781b2f7586.html">Matrix Exponentiation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">30</span><a href="pigeonhole-sort-9bd5a67d2c304b51a6b7b9eb3583b888.html">Pigeonhole Sort</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">31</span><a href="radix-sort-29a89f00863f40848ec5db4c455fc788.html">Radix Sort</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">32</span><a href="equation-solving-2734ccd8075a412f8976e67dfd9416da.html">Equation Solving</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">33</span><a href="odd-even-sort-a5ee928035d04aac89a2decbe44f483e.html">Odd-Even Sort</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">34</span><a href="pseudocode-790101e3fd8c47e3bcc454b18dc2fd9a.html">Pseudocode</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">35</span><a href="catalan-number-algorithm-aa2725ade1d140edab4f0042fe8e222f.html">Catalan Number Algorithm</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">36</span><a href="integer-partition-algorithm-7261d2a39d9d43cb9e3a4b432a018d9e.html">Integer Partition Algorithm</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">37</span><a href="a-pathfinding-7e7202cf172e479eb1d42842091d8b3e.html">A* Pathfinding</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">38</span><a href="shell-sort-ee3641188538481787be3e716db337cb.html">Shell Sort</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">39</span><a href="selection-sort-4ee11beba38d47e382277414b7e09239.html">Selection Sort</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">40</span><a href="pancake-sort-f82e52a5bc1541068c592d323c6aa2f1.html">Pancake Sort</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">41</span><a href="longest-common-subsequence-547abd24965c44ceb5f0e452aeea3821.html">Longest Common Subsequence</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">42</span><a href="longest-increasing-subsequence-d33782abd4ee4ba9938d2922e11247be.html">Longest Increasing Subsequence</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">43</span><a href="maximum-path-sum-algorithm-0c0e3472dac8416a833b40ef5e725f54.html">Maximum Path Sum Algorithm</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">44</span><a href="maxiumum-subarray-algorithm-c677c53060364f08810c5e2b963b6ded.html">Maxiumum Subarray Algorithm</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">45</span><a href="dynamic-time-warping-d1c46e3a31cb41e0acf1907b405548a3.html">Dynamic Time Warping</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">46</span><a href="pascal-triangle-24e66a7fc2cb4c77b4245e08b603ee59.html">Pascal Triangle</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">47</span><a href="line-drawing-15b863c228b54b319379ff8091b43c28.html">Line drawing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">48</span><a href="shortest-common-supersequence-5eb1332d741d47f8ad4cda01f28ef2ed.html">Shortest Common Supersequence</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">49</span><a href="sliding-window-algorithm-88259ac245264ea5b9e9d03f7dd06c8e.html">Sliding Window Algorithm</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">50</span><a href="application-of-greedy-techniqe-0652a44d8a6347b5b7cfaf85d0c3655a.html">Application of greedy techniqe</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">51</span><a href="online-algorithms-61f46cc6d7e04aebae8a47f4eb52c2bc.html">Online algorithms</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">52</span><a href="fast-fourier-transform-a3747844afb94883bbb2bea5662e919d.html">Fast Fourier Transform</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">53</span><a href="a-path-finding-algorithm-e567adff577f4fa6849a1a112f689048.html">A* Path-finding Algorithm</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">54</span><a href="check-if-tree-is-bst-c96af0bea3eb4385a6740f83049a23fd.html">Check if tree is BST</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">55</span><a href="binary-tree-traversal-1357e1664a6143aba4f0d9cbd7ba53de.html">Binary tree traversal</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">56</span><a href="lowest-common-ancestor-of-a-binary-tree-e7f8518091d140758feb5b5f495422a9.html">Lowest common ancestor of a binary tree</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">57</span><a href="graph-traversal-2a8a00f4a54041b487f7465c42e6a071.html">Graph Traversal</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">58</span><a href="minimum-vertex-cover-f11f3084c84d4f6e91d08c55df0d8c59.html">Minimum Vertex Cover</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">59</span><a href="multi-threaded-algorithms-491070bf06ff4de8bf7f3e121c11c49f.html">Multi-threaded Algorithms</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">60</span><a href="print-mxn-matrix-in-square-wise-2a95e83b1c1e40d2b8e08917aa02703e.html">Print MxN matrix in square wise</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">61</span><a href="check-two-strings-are-anagrams-a30ef1622edd4b1290d725d5049ed098.html">Check two strings are anagrams</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">62</span><a href="edit-distance-dynamic-algorithm-eaba21c76ac1482fbdc29410e7140b3d.html">Edit Distance Dynamic Algorithm</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">63</span><a href="applications-of-dynamic-programming-1f7d7534a5224df6a49544f1c3e4179d.html">Applications of Dynamic Programming</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">64</span><a href="knuth-moriss-pratt-924ef53cfe524d0f82331cbc0f7eb8f7.html">Knuth Moriss Pratt</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">65</span><a href="contributors-d9ba24fd508b4ddc9d8c15467083ba43.html">Contributors</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

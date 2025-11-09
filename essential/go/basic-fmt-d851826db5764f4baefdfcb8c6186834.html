@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">Basic fmt</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/d851826db5764f4baefdfcb8c6186834" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+<p>Package fmt implements formatted I/O using format <em>verbs</em>:
+</p>
+<div id="98b895cf-8dcf-43aa-937e-3e701699c959" class="collection-content">
+<h4 class="collection-title"></h4>
+<table class="collection-content">
+<thead>
+<tr>
+<th width="100">Verb</th>
+<th width="328">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr id="34855f0d-a9db-4c51-95f1-df0243887c2a">
+<td class="cell-title col-type-title">%v</td>
+<td class="cell-W4ch col-type-text">default format</td>
+</tr>
+
+<tr id="5afc8e11-ed4d-4690-9f84-c165b6f89c30">
+<td class="cell-title col-type-title">%T</td>
+<td class="cell-W4ch col-type-text">type of the value</td>
+</tr>
+
+<tr id="2e70865a-0d7c-4096-932e-4aa704010301">
+<td class="cell-title col-type-title">%s</td>
+<td class="cell-W4ch col-type-text">uninterpreted bytes of the string or slice</td>
+</tr>
+
+</tbody>
+</table>
+</div>
+  <h1 id="4b4f0e80-a277-4d81-86a5-ebcaa5011b0c" class="">Formatting functions
+  <a class="header-anchor" href="basic-fmt-d851826db5764f4baefdfcb8c6186834.html#4b4f0e80-a277-4d81-86a5-ebcaa5011b0c" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h1>
+<p>There are 4 main function types in <code>fmt</code> and several variations within.
+</p>
+  <h2 id="d72470a9-da64-4ad0-9587-1270c3e6cb9f" class="">Print, Println, Printf
+  <a class="header-anchor" href="basic-fmt-d851826db5764f4baefdfcb8c6186834.html#d72470a9-da64-4ad0-9587-1270c3e6cb9f" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h2>
+
+<div class="code-box lang-Go">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="nx">fmt</span><span class="p">.</span><span class="nf">Print</span><span class="p">(</span><span class="s">"Hello World"</span><span class="p">)</span>        <span class="c1">// prints: Hello World
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">"Hello World"</span><span class="p">)</span>      <span class="c1">// prints: Hello World\n
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">"Hello %s"</span><span class="p">,</span> <span class="s">"World"</span><span class="p">)</span> <span class="c1">// prints: Hello World
+</span></span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+  <h2 id="b818b9dd-e7a7-46ca-b471-9bc40dbcd054" class="">Sprintf
+  <a class="header-anchor" href="basic-fmt-d851826db5764f4baefdfcb8c6186834.html#b818b9dd-e7a7-46ca-b471-9bc40dbcd054" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h2>
+
+<div class="code-box lang-Go">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="nx">formattedString</span> <span class="o">:=</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">"%v %s"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s">"words"</span><span class="p">)</span> <span class="c1">// returns string "2 words"
+</span></span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+  <h2 id="61abd876-2b69-4922-a84c-e5c81a1179c1" class="">Fprint
+  <a class="header-anchor" href="basic-fmt-d851826db5764f4baefdfcb8c6186834.html#61abd876-2b69-4922-a84c-e5c81a1179c1" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h2>
+
+<div class="code-box lang-Go">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="nx">byteCount</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Fprint</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="s">"Hello World"</span><span class="p">)</span> <span class="c1">// writes to io.Writer w
+</span></span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p><code>Fprint</code> can be used inside <code>http</code> handlers:
+</p>
+
+<div class="code-box lang-Go">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">handler</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Fprint</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="s">"Hello %s!"</span><span class="p">,</span> <span class="s">"Browser"</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>   <span class="c1">// Writes: "Hello Browser!" to HTTP response
+</span></span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+  <h2 id="fc2583ac-62aa-44c1-89c6-b877e3913eee" class="">Scan
+  <a class="header-anchor" href="basic-fmt-d851826db5764f4baefdfcb8c6186834.html#fc2583ac-62aa-44c1-89c6-b877e3913eee" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 8 8"><path d="M5.88.03c-.18.01-.36.03-.53.09-.27.1-.53.25-.75.47a.5.5 0 1 0 .69.69c.11-.11.24-.17.38-.22.35-.12.78-.07 1.06.22.39.39.39 1.04 0 1.44l-1.5 1.5c-.44.44-.8.48-1.06.47-.26-.01-.41-.13-.41-.13a.5.5 0 1 0-.5.88s.34.22.84.25c.5.03 1.2-.16 1.81-.78l1.5-1.5c.78-.78.78-2.04 0-2.81-.28-.28-.61-.45-.97-.53-.18-.04-.38-.04-.56-.03zm-2 2.31c-.5-.02-1.19.15-1.78.75l-1.5 1.5c-.78.78-.78 2.04 0 2.81.56.56 1.36.72 2.06.47.27-.1.53-.25.75-.47a.5.5 0 1 0-.69-.69c-.11.11-.24.17-.38.22-.35.12-.78.07-1.06-.22-.39-.39-.39-1.04 0-1.44l1.5-1.5c.4-.4.75-.45 1.03-.44.28.01.47.09.47.09a.5.5 0 1 0 .44-.88s-.34-.2-.84-.22z"></path></svg></a>
+  </h2>
+<p>Scan scans text read from standard input.
+</p>
+
+<div class="code-box lang-Go">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">s</span> <span class="kt">string</span>
+</span></span><span class="line"><span class="cl"><span class="nx">fmt</span><span class="p">.</span><span class="nf">Scanln</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s</span><span class="p">)</span> <span class="c1">// pass pointer to buffer
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Scanln is similar to fmt.Scan(), but it stops scanning at new line.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="c1">// whatever was inputted
+</span></span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="basic-fmt-d851826db5764f4baefdfcb8c6186834.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>Package fmt:</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><b>Basic fmt</b></div><div class="mtoc-1 svelte-1t851gm"><span class="no svelte-1ib47n1">*</span><a href="stringer-interface-606cb9e93ee4411ab233882ff6f64b21.html">Stringer interface</a></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="getting-started-ba663c577a4a472e8c95fef8b4d8a8c6.html">Getting started</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="basic-types-2803d5d5229f4932af82a1dcc86eb8bf.html">Basic types</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="variables-5e911a698c43432dbf3ce33fc32dafe1.html">Variables</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="constants-cb80712dca7545da8e0b20762c637409.html">Constants</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="strings-ccc8d06958ae44319b21f9973716e3ca.html">Strings</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="pointers-1ef07599dd8247f493ba6dcba8ae7dbf.html">Pointers</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="arrays-58db8c9a56504deab2e61f1e0fa4a0a6.html">Arrays</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><a href="slices-f400553890d34185ba795870807c2615.html">Slices</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><a href="maps-80fb91dd63d445e28010b9f5e261da81.html">Maps</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><a href="structs-612802454798470ca5c5741d90543d22.html">Structs</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="interfaces-4f5f2959e72c431e995527b51ad7fd8e.html">Interfaces</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="empty-interface-c3315892508248fdb19b663bf8bff028.html">Empty interface</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><a href="if-switch-goto-fd755f13f0fc4e75ad9b9ee675e557e8.html">if, switch, goto</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="for-while-loops-ad923a2fbd994701844af2d688d30548.html">for, while loops</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="range-statement-c522a62872884110bcc300db67e0e9ad.html">range statement</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="functions-6464727799a04611a891be7ca4877f8c.html">Functions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><a href="methods-503ddd46a4854315a88973b8db780fba.html">Methods</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><a href="error-handling-39927eb13c11419492e67e9fd5328d8b.html">Error handling</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="defer-20bfd8fa45454479954a6814eeeef716.html">Defer</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">19</span><a href="panic-and-recover-dda02e368b3048a5a69b81c56bfa6dbb.html">Panic and recover</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">20</span><a href="concurrency-16e8d8c3d77e44faaf6857a1df368ce8.html">Concurrency</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">21</span><a href="channels-and-select-4fac57c09168477aa12069484979f419.html">Channels and select</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">22</span><a href="mutex-41f795bf701d4784b3197349cdb8f2de.html">Mutex</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">23</span><a href="packages-6461fef8092a45158959bddbaad99bce.html">Packages</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">24</span><a href="files-and-io-7a55634fb8194a85bcc6036eeba61b39.html">Files and I/O</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">25</span><a href="time-and-date-c4da053493334df995134741ae04f808.html">Time and date</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">26</span><a href="command-line-arguments-05239fc069c3463dabc532b9d808612e.html">Command line arguments</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">27</span><a href="logging-f7fca2011c3748a19e3b8d66235cbe59.html">Logging</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">28</span><a href="executing-commands-c290f0566c80467a9005ab3a4024ec1d.html">Executing commands</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">29</span><a href="hex-base64-encoding-b6e9fbb3165c4bcb907e469d86783aab.html">Hex, base64 encoding</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">30</span><a href="json-1479bc5a08b64dbb8aa0e2f5ed17782f.html">JSON</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">31</span><a href="xml-6744c6d0d620448dbe66e224f64b6f8b.html">XML</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">32</span><a href="csv-abb984fec0d04d74b2d494ed3206d1bc.html">CSV</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">33</span><a href="yaml-29bafea8c8a546ab92284378bb7dc364.html">YAML</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">34</span><a href="sql-fc416b38f6f341bfa311bf6c575c73a1.html">SQL</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">35</span><a href="http-client-710edf91b0f146629abbfcd96aba4d80.html">HTTP Client</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">36</span><a href="http-server-96e6137284ae4460a2827f456b4cf62c.html">HTTP Server</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">37</span><a href="text-and-html-templates-cabbd74152a74e298be4afcd41ed10b2.html">Text and HTML templates</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">38</span><a href="reflection-c7fea6b176b74c54ab35f2d8fdd56f13.html">Reflection</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">39</span><a href="context-b58d13145f924c11afcf00aa10d71364.html">Context</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">40</span><b>Package fmt</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">41</span><a href="os-signals-48f2d17d3a7644daafbaf0ca9c8b61ad.html">OS Signals</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">42</span><a href="testing-b55ab9b1d6e5499ea3014ba7e85d3efd.html">Testing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">43</span><a href="calling-c-from-go-with-cgo-d3b0419346904e0bbf6dc28b69fc93c6.html">Calling C from GO with cgo</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">44</span><a href="profiling-using-go-tool-pprof-83dc1f9b6ec04d25a2d2e7357b6bebba.html">Profiling using go tool pprof</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">45</span><a href="cross-compilation-41fdbdecca7b42c3b4b98e5ec0a96e13.html">Cross compilation</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">46</span><a href="conditional-compilation-with-build-tags-d1980344374d45c082c914c2aafa50cf.html">Conditional compilation with build tags</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">47</span><a href="inlining-functions-c2af72789a074a3aacf8d308f898f32c.html">Inlining functions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">48</span><a href="sync.pool-for-better-performance-ec2352421ba7472ab82d9dcc71d2c389.html">sync.Pool for better performance</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">49</span><a href="gob-a09f2d8c9bba44e0acd0a9206e8f733f.html">gob</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">50</span><a href="plugin-9f2c4121df7e4b3f818131c49676387b.html">Plugin</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">51</span><a href="http-server-middleware-d8b9c9c2a49e4ba8a04cf7ff6ee2db0f.html">HTTP server middleware</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">52</span><a href="protobuf-in-go-b5c70cd2244f48a0b89aebc75ef45ad0.html">Protobuf in Go</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">53</span><a href="console-io-ddc28bcf51794ae5b021b8c0d9423497.html">Console I/O</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">54</span><a href="cryptography-301bb328156d420694ebf5489d2cb744.html">Cryptography</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">55</span><a href="images-png-jpeg-bmp-tiff-webp-vp8-gif-c84a45304ec3498081c67aa1ea0d9c49.html">Images (PNG, JPEG, BMP, TIFF, WEBP, VP8, GIF)</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">56</span><a href="the-go-command-f2028ab74a354cf2ba6a86acfb813356.html">The Go Command</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">57</span><a href="testing-code-with-ci-services-0ada5cfc7c4a4217af2e62d01df777de.html">Testing code with CI services</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">58</span><a href="windows-gui-programming-944154630ac54def857caa8b50dd1b59.html">Windows GUI programming</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">59</span><a href="contributors-22efc95459e8462488d6608f1e963a74.html">Contributors</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>

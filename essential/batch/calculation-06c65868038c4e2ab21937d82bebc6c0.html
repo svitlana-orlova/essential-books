@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../assets/main.css" rel="stylesheet">
+</head>
+<body class="page">
+<header class="page__header">
+    <div class="page__header__left">
+        <a id="link-home" href="../../index.html">
+            &nbsp;Essential Books</a>
+    </div>
+</header>
+<div class="content">
+    <div class="article">
+      
+
+<div style="display: flex; justify-content: space-between">
+  <h1 class="title">Calculation</h1>
+  <a class="edit-link" style="font-size: 80%" href="https://notion.so/06c65868038c4e2ab21937d82bebc6c0" rel="nofollow" target="_blank">suggest change</a>
+</div>
+
+
+      
+<p>Batch scripts can do simple 32-bit integer arithmetic and bitwise manipulation using <a href="set-540c344e1358419fb62ff4cc35e604b8.html">SET</a> /a command. The largest supported integer is 2147483647 = 2 ^ 31 - 1. The smallest supported integer is -2147483648 = - (2 ^ 31), assignable with the trick of <code>set /a num=-2147483647-1</code>. The syntax is reminiscent of the C language.
+</p>
+<p>Arithmetic operators include *, /, % (modulo), +, -. In a batch, modulo has to be entered as "%%".
+</p>
+<p>Bitwise operators interpret the number as a sequence of 32 binary digits. These are ~ (complement), &amp; (and), | (or), ^ (xor), &lt;&lt; (left shift), &gt;&gt; (right shift).
+</p>
+<p>A logical operator of negation is !: it turns zero into one and non-zero into zero.
+</p>
+<p>A combination operator is ,: it allows more calculations in one set command.
+</p>
+<p>Combined assignment operators are modeled on "+=", which, in "a+=b", means "a=a+b". Thus, "a-=b" means "a=a-b". Similarly for *=, /=, %=, &amp;=, ^=, |=, &lt;&lt;=, and &gt;&gt;=.
+</p>
+<p>The precedence order of supported operators, is as follows:
+</p>
+  <ol id="00fb495b-2b66-49f0-9ede-d2a36ba8225d" class="numbered-list" start="1">
+    <li><code>( )</code>
+    </li>
+    <li><code>* / % + -</code>
+    </li>
+    <li><code>&lt;&lt; &gt;&gt;</code>
+    </li>
+    <li><code>&amp;</code>
+    </li>
+    <li><code>^</code>
+    </li>
+    <li><code>|</code>
+    </li>
+    <li><code>= *= /= %= += -= &amp;= ^= |= &lt;&lt;= &gt;&gt;=</code>
+    </li>
+    <li><code>,</code>
+    </li>
+  </ol>
+<p>Literals can be entered as decimal (1234), hexadecimal (0xffff, leading 0x), and octal (0777, leading 0).
+</p>
+<p>The internal bit representation of negative numbers is two's complement. This provides a connection between arithmetic operations and bit operations. For instance, -2147483648 is represented as 0x80000000, and therefore set /a num=~(-2147483647-1) yields 2147483647, which equals 0x7FFFFFFF (type set /a num=0x7FFFFFFF to check).
+</p>
+<p>As some of the operators have special meaning for the command interpreter, an expression using them needs to be enclosed in quotation marks, such as this:
+</p>
+  <ul id="c946366b-bf17-4a0d-a4b0-d63a0fde79b7" class="bulleted-list">
+    <li><code>set /a num="255^127"</code>
+    </li>
+    <li><code>set /a "num=255^127"</code>
+      <ul id="171ec74b-6b29-4243-b07c-8d0f6686bb73" class="bulleted-list">
+        <li>Alternative placement of quotation marks.
+        </li>
+      </ul>
+    </li>
+    <li><code>set /a num=255^^127</code>
+      <ul id="0a281306-59a0-4209-bf2e-7ece6d431c5f" class="bulleted-list">
+        <li>Escape ^ using ^ instead of quotation marks.
+        </li>
+      </ul>
+    </li>
+  </ul>
+<p>Examples:
+</p>
+  <ul id="b496c215-2dcb-4360-9e7d-f6be8c1f236c" class="bulleted-list">
+    <li><code>set n1=40 &amp; set n2=25</code>
+    <p><code>set /a n3=%n1%+%n2%</code>
+    </p>
+      <ul id="8a83e009-a73f-4155-b798-d662138067ff" class="bulleted-list">
+        <li>Uses the standard percent notation for variable expansion.
+        </li>
+      </ul>
+    </li>
+    <li><code>set n1=40 &amp; set n2=25</code>
+    <p><code>set /a n3=n1+n2</code>
+    </p>
+      <ul id="36a59ba1-1233-49f1-a94d-2ae84215b924" class="bulleted-list">
+        <li>Avoids the percent notation around variable names as unneeded for /a.
+        </li>
+      </ul>
+    </li>
+    <li><code>set /a num="255^127"</code>
+      <ul id="0dcb8932-67ce-4df6-8ee9-fa9e25039e31" class="bulleted-list">
+        <li>Encloses "^" in quotation marks to prevent its special meaning for the command interpreter.
+        </li>
+      </ul>
+    </li>
+    <li><code>set /a n1 = (10 + 5)/5</code>
+      <ul id="97993c32-aff2-4fdf-9947-9ad90de45036" class="bulleted-list">
+        <li>The spaces around = do not matter with /a. However, getting used to it lends itself to writing "set var = value" without /a, which sets the value of "var " rather than "var".
+        </li>
+      </ul>
+    </li>
+    <li><code>if 1==1 (set /a n1=(2+4)*5)</code>
+      <ul id="056ee8fb-e367-4209-bf85-b19b20c17c34" class="bulleted-list">
+        <li>Does not work: the arithmetic brackets within grouping brackets cause trouble.
+        </li>
+      </ul>
+    </li>
+    <li><code>if 1==1 (set /a n1=^(2+4^)*5)</code>
+      <ul id="eb00a468-16e1-46b6-9c31-5e8cd4f8bfad" class="bulleted-list">
+        <li>Escaping the arithmetic brackets with caret (^) works, as does enclosing "n1=2+(4*5)" in quotation marks.
+        </li>
+      </ul>
+    </li>
+    <li><code>set /a n1=2+3,n2=4*7</code>
+      <ul id="b59573e8-5e00-40a2-854f-267f52b6ba51" class="bulleted-list">
+        <li>Performs two calculations.
+        </li>
+      </ul>
+    </li>
+    <li><code>set /a n1=n2=2</code>
+      <ul id="ec2ab66c-2523-4fdf-9df0-e886fda79159" class="bulleted-list">
+        <li>Has the same effect as n1=2,n2=2.
+        </li>
+      </ul>
+    </li>
+    <li><code>set n1=40 &amp; set n2=25 &amp; set /a n3=n1+n2</code>
+      <ul id="b00abfc3-fb51-4258-9d44-327a89ae33b3" class="bulleted-list">
+        <li>Works as expected.
+        </li>
+      </ul>
+    </li>
+    <li><code>set /a n1=2,n2=3,n3=n1+n2</code>
+      <ul id="6e001fa7-d802-4695-957e-067899e09311" class="bulleted-list">
+        <li>Works as expected.
+        </li>
+      </ul>
+    </li>
+    <li><code>set n1=40 &amp; set n2=25 &amp; set /a n3=%n1%+%n2%</code>
+      <ul id="cbc331e4-8244-4334-8bd4-c23bf60f7030" class="bulleted-list">
+        <li>Does not work unless n1 and n2 were set previously. The variable specifications %n1%" and "%n2"% get expanded  the first set command is executed. Dropping percent notation makes it work.
+        <p>before
+        </p>
+        </li>
+      </ul>
+    </li>
+    <li><code>set /a n1=2,n2=3,n3=%n1%+%n2%</code>
+      <ul id="894f57e7-78bf-4202-8ce6-6eb80b51e8e9" class="bulleted-list">
+        <li>Does not work unless n1 and n2 were set previously, for the reason stated in the previous example.
+        </li>
+      </ul>
+    </li>
+    <li><code>set /a n1=0xffff</code>
+      <ul id="aa5caf86-cc9b-414f-be2c-22ff30fd5c10" class="bulleted-list">
+        <li>Sets n1 using hexadecimal notation.
+        </li>
+      </ul>
+    </li>
+    <li><code>set /a n1=0777</code>
+      <ul id="21920e66-3f6e-44b5-a7c3-18c4f6c645c2" class="bulleted-list">
+        <li>Sets n1 using octal notation.
+        </li>
+      </ul>
+    </li>
+    <li><code>set /a n1=%random%</code>
+      <ul id="faeaa1fe-b463-4616-bf05-11feec9dd02e" class="bulleted-list">
+        <li>A pseudo-random number from 0 to 32767 = 2^15-1.
+        </li>
+      </ul>
+    </li>
+    <li><code>set /a n1="%random%&gt;&gt;10"</code>
+      <ul id="acf5542f-7d22-470f-bac8-eeff30a84933" class="bulleted-list">
+        <li>A pseudo-random number from 0 to 31 = 2^5-1. The shift right operator drops 10 out of 15 bits, keeping 5 bits.
+        </li>
+      </ul>
+    </li>
+    <li><code>set /a n1=%random%%50</code>
+      <ul id="5e91b873-292d-4831-a006-dc0e631fe14c" class="bulleted-list">
+        <li>A pseudo-random number from 0 to 49. Uses the % modulo operator. In a batch, %% is needed for modulo: <code>set /a n1=%random%%%50</code>. Because of this particular use of the modulo, the result is not perfectly uniform; it is uniform if the 2nd modulo operand--above 50--equals to a power of 2, e.g. 256 = 2^8.
+        </li>
+      </ul>
+    </li>
+    <li><code>set /a n1="(%random%&lt;&lt;15)+%random%"</code>
+      <ul id="5fb2d55e-e1c0-444c-b766-d460a7ab099c" class="bulleted-list">
+        <li>A pseudo-random number from 0 to 1073741823 = 2^30 - 1. Combines the two 15-bit random numbers produced by %random% alone to produce a single 30-bit random number..
+        </li>
+      </ul>
+    </li>
+    <li><code>set /a n1="((%random%&lt;&lt;15)+%random%)%1000000"</code>
+      <ul id="97050159-3c82-4633-b682-3ca705286aa7" class="bulleted-list">
+        <li>As above, but again using modulo, this time to achieve the range 0 to 999999.
+        </li>
+      </ul>
+    </li>
+  </ul>
+<p>An example calculation that prints prime numbers:
+</p>
+
+<div class="code-box lang-Shell">
+	<div>
+	<pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">@echo off
+</span></span><span class="line"><span class="cl">setlocal
+</span></span><span class="line"><span class="cl"><span class="nb">set</span> <span class="nv">n</span><span class="o">=</span><span class="m">1</span>
+</span></span><span class="line"><span class="cl">:print_primes_loop
+</span></span><span class="line"><span class="cl"><span class="nb">set</span> /a <span class="nv">n</span><span class="o">=</span>n+1
+</span></span><span class="line"><span class="cl"><span class="nb">set</span> <span class="nv">cand_divisor</span><span class="o">=</span><span class="m">1</span>
+</span></span><span class="line"><span class="cl">:print_primes_loop2
+</span></span><span class="line"><span class="cl"><span class="nb">set</span> /a <span class="nv">cand_divisor</span><span class="o">=</span>cand_divisor+1
+</span></span><span class="line"><span class="cl"><span class="nb">set</span> /a <span class="nv">cand_divisor_squared</span><span class="o">=</span>cand_divisor*cand_divisor
+</span></span><span class="line"><span class="cl"><span class="k">if</span> %cand_divisor_squared% gtr %n% <span class="nb">echo</span> Prime %n% <span class="p">&amp;</span> goto :print_primes_loop
+</span></span><span class="line"><span class="cl"><span class="nb">set</span> /a <span class="nv">modulo</span><span class="o">=</span>n%%cand_divisor
+</span></span><span class="line"><span class="cl"><span class="k">if</span> %modulo% equ <span class="m">0</span> goto :print_primes_loop <span class="p">&amp;</span> REM Not a prime
+</span></span><span class="line"><span class="cl">goto :print_primes_loop2</span></span></code></pre>
+	</div>
+	<div class="code-box-nav">
+		
+	</div>
+</div>
+<p>Links:
+</p>
+  <ul id="c74ac18a-8dcf-4b6b-a4c5-a0002b043f04" class="bulleted-list">
+    <li><a href="http://ss64.com/nt/set.html">set at ss64.com</a>
+    </li>
+    <li><a href="https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/set_1">set at Microsoft</a>
+    </li>
+    <li><a href="http://ss64.com/nt/syntax-random.html">Random Numbers at ss64.com</a>
+    </li>
+  </ul>
+
+      <div class="forum-link">
+  Found a mistake? Have a question or improvement idea?
+  <a href="calculation-06c65868038c4e2ab21937d82bebc6c0.html#" onclick="showContact(); return false;">Let me know</a>.
+</div>
+
+      <form id="contact-form" action="https://formsubmit.co/kkowalczyk@gmail.com" method="POST">
+  <p>
+    </p><div class="contact-light">Feedback about page:</div>
+    <input type="text" name="page-url" id="contact-page-url" readonly>
+  
+
+  <p>
+    </p><div class="contact-light">Feedback:</div>
+    <textarea name="message" id="msg-for-chris"></textarea>
+    <div class="contact-light">Optional: your email if you want me to get back to you: </div>
+    <input type="email" name="email">
+    <input type="hidden" name="_template" value="box">
+    <input type="text" name="_honey" class="noshow">
+  
+
+  <p>
+    <button type="submit" class="contact-btn">
+      Send Feedback
+    </button>
+
+    <button class="contact-btn" style="float: right;" onclick="hideContact(); return false;">
+      Cancel
+    </button>
+  </p>
+</form>
+
+
+      <hr class="article-bottom-sep">
+    </div>
+
+    <div id="page-toc"><div class="article chapter-toc svelte-1t851gm"><div class="mtoc-0 svelte-1t851gm"><b>Calculation:</b></div></div></div>
+
+    <div id="chapter-toc-wrapper">
+      <hr>
+      <div class="hdr">Table Of Contents</div>
+      <div id="book-toc"><div class="article toc svelte-1ib47n1"><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">0</span><a href="introduction-846c7623625e434bb3c481641bf2e016.html">Introduction</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">1</span><a href="how-a-command-line-is-interpreted-cac61c915fce40c89a25c98ec229c5d6.html">How a command line is interpreted</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">2</span><a href="batch-reloading-98bc367236ef48559db589eddaa811ff.html">Batch reloading</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">3</span><a href="environment-variables-01b28cfb0b9b45409515334357d5f9bf.html">Environment variables</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">4</span><a href="switches-9e2a7d8c43bb46f29962b0d2f195e19c.html">Switches</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">5</span><a href="error-level-c70d88bae6d545b7a5b5ca99e777b409.html">Error level</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">6</span><a href="string-processing-20d44ad6fccd4a048e3464a4dd3d4570.html">String processing</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">7</span><a href="command-line-arguments-6a6ffadba81b4cc6a979f7e1ee4ea4aa.html">Command-line arguments</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">8</span><a href="wildcards-2b952cca7aee49b2a4a709c4c4ad5aef.html">Wildcards</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">9</span><a href="user-input-5726d65b176c49ebb21d2daa271031f9.html">User input</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">10</span><a href="-percent-tilde-f4263820c2db41e399c77259970464f1.html">%~ (percent tilde)</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">11</span><a href="functions-f516efa981d9481ca4253d271451381d.html">Functions</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">12</span><b>Calculation</b></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">13</span><a href="finding-files-af14c29c29d740609e9e8c887a2c3cb7.html">Finding files</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">14</span><a href="keyboard-shortcuts-af2ffcc6632c4dada420d99695ca6c10.html">Keyboard shortcuts</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">15</span><a href="paths-47408b417b4f4392a3bc79fe552b4895.html">Paths</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">16</span><a href="arrays-dc75afb35c164e29a9018d897be1f452.html">Arrays</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">17</span><a href="perl-one-liners-bdb9a0cee7bf4ca09a8bb650e6e2cad7.html">Perl one-liners</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">18</span><a href="limitations-09c168245f2e40d99e684733fb760091.html">Limitations</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">19</span><a href="built-in-commands-34f80a6dd2c84337951597d48e342fec.html">Built-in commands</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">20</span><a href="external-commands-f83d61795cb74a38996cd6085d1d63cb.html">External commands</a></div></div><div class="toc-item"><div class="chapters-toc-item"><span class="no svelte-1ib47n1">21</span><a href="legal-credits-fde438abeea34c909d226a9d31209ee8.html">Legal & credits</a></div></div></div></div>
+    </div>
+  </div></body>
+</html>
