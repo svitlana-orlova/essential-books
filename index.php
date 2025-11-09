@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 function extractFile(string $path) : string | false
 {
-    return file_get_contents(__DIR__ . "/essential/$path");
+    $zipPath = preg_replace('#//#', '/', "essential/$path");
+    return file_get_contents('zip://'. __DIR__ . "/essential.zip#$zipPath");
+//    return file_get_contents( __DIR__ . "/essential/$path");
 }
 
 function getJson(string $folder) : array
