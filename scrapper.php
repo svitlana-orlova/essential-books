@@ -6,8 +6,8 @@ require_once __DIR__ . '/vendor/autoload.php';
 use Utils\CurlFetcher;
 use Utils\PageScrapper;
 
-$outDir = __DIR__;
-$pages = [
+const OUT_DIR = __DIR__;
+const PAGES = [
     'essential/go'  => 'https://www.programming-books.io/s/app-go.js',
     'essential/cpp' => 'https://www.programming-books.io/s/app-cpp.js',
     'essential/javascript' => 'https://www.programming-books.io/s/app-javascript.js',
@@ -41,65 +41,69 @@ $pages = [
     'essential/sql' => 'https://www.programming-books.io/s/app-sql.js',
 ];
 
-$fetcher = new CurlFetcher("/tmp/essential-books/");
-$scrap = new PageScrapper($fetcher);
+function main(array $pages) : void
+{
+    $fetcher = new CurlFetcher("/tmp/essential-books/");
+    $scrap = new PageScrapper($fetcher);
+    $fetcher->setAutoClean(false);
 
-$fetcher->setAutoClean(false);
+    /* Collect json files */
+    foreach ($pages as $path => $url) {
+        echo "Fetching: $url\n";
+        $dirName = OUT_DIR . '/' . $path;
+        $fileName = $dirName . '/toc.json';
 
-/* Collect json files */
-foreach ($pages as $path => $url) {
-    echo "Fetching: $url\n";
-    $dirName = $outDir . '/' . $path;
-    $fileName = $dirName . '/toc.json';
-    $content = '';
+        /*
+         * Fix the JSON and parse all the available pages
+         */
+        $content = preg_replace('/[[:^print:]]/', '', $fetcher->get($url));
+        $content = preg_replace('/^gTocItems =/', '', $content);
+        $content = preg_replace('/;$/', '', $content);
 
-    /*
-     * Fix the JSON and parse all the available pages
-     */
-    $content = preg_replace('/[[:^print:]]/', '', $fetcher->get($url));
-    $content = preg_replace('/^gTocItems =/', '', $content);
-    $content = preg_replace('/;$/', '', $content);
+        echo "Writing into $fileName\n";
 
-    echo "Writing into $fileName\n";
-
-    if (!is_dir($dirName)) {
-        mkdir($dirName, 0755, true);
-    }
-
-    if (!file_put_contents($fileName, $content)) {
-        echo "Failed\n";
-        exit(1);
-    }
-
-    $json = json_decode($content, true);
-
-    if (!$json) {
-        echo "Failed to parse json";
-        continue;
-    }
-
-    foreach ($json as $title) {
-        if (str_contains($title[0], '#')) continue;
-
-        $titleFile = $dirName . '/' . $title[0];
-        $url = 'https://www.programming-books.io/' . $path . '/' . $title[0];
-
-        echo "Scrapping $url";
-        $page = $scrap->getContents($url);
-
-        if ($page) {
-            echo " Success\n";
-        } else {
-            echo " Failed\n";
-            continue;
+        if (!is_dir($dirName)) {
+            mkdir($dirName, 0755, true);
         }
 
-        echo "Writing into $titleFile\n";
-        if (!file_put_contents($titleFile, $page)) {
+        if (!file_put_contents($fileName, $content)) {
             echo "Failed\n";
+            exit(1);
+        }
+
+        $json = json_decode($content, true);
+
+        if (!$json) {
+            echo "Failed to parse json";
             continue;
         }
-    }
 
+        foreach ($json as $title) {
+            if (str_contains($title[0], '#')) continue;
+
+            $titleFile = $dirName . '/' . $title[0];
+            $url = 'https://www.programming-books.io/' . $path . '/' . $title[0];
+
+            echo "Scrapping $url";
+            $page = $scrap->getContents($url);
+
+            if ($page) {
+                echo " Success\n";
+            } else {
+                echo " Failed\n";
+                continue;
+            }
+
+            echo "Writing into $titleFile\n";
+            if (!file_put_contents($titleFile, $page)) {
+                echo "Failed\n";
+            }
+        }
+    }
 }
 
+if ($argv[1] >= 0 && $argv[1] < count(PAGES)) {
+    main(array_slice(PAGES, intval($argv[1])));
+} else {
+    main(PAGES);
+}
