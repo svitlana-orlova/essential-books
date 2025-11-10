@@ -45,6 +45,7 @@ const PAGES = [
 
 function scrapPages(array $pages) : void
 {
+    $children = [];
     $fetcher = new CurlFetcher(TMP_DIR);
     $scrap = new PageScrapper($fetcher);
     $fetcher->setAutoClean(false);
@@ -86,8 +87,9 @@ function scrapPages(array $pages) : void
             echo "Failed to fork\n";
             exit(1);
         } else if ($pid == 0) {
-            echo "Starting child process\n";
+            echo "Starting child process with pid: ". getmypid() ."\n";
         } else {
+            $children[] = $pid;
             continue;
         }
 
@@ -97,13 +99,14 @@ function scrapPages(array $pages) : void
             $titleFile = $dirName . '/' . $title[0];
             $url = "https://www.programming-books.io/$path/$title[0]";
 
-            echo "Fetching $path/$title[0]";
+            echo "Fetching $path/$title[0] ";
+            if ($fetcher->isCached($url)) { echo "C/"; }
             $page = $scrap->getContents($url);
 
             if ($page) {
-                echo " D";
+                echo "D";
             } else {
-                echo " Failed\n";
+                echo "Failed\n";
                 continue;
             }
 
@@ -116,6 +119,11 @@ function scrapPages(array $pages) : void
         }
 
         exit(0);
+    }
+
+    foreach ($children as $child) {
+        pcntl_wait($child);
+        echo "Child: $child exited\n";
     }
 }
 
