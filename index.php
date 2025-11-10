@@ -4,9 +4,18 @@ declare(strict_types=1);
 
 function extractFile(string $path) : string | false
 {
-    $zipPath = preg_replace('#//#', '/', "essential/$path");
-    return file_get_contents('zip://'. __DIR__ . "/essential.zip#$zipPath");
-//    return file_get_contents( __DIR__ . "/essential/$path");
+    $dirPath = __DIR__ . '/essential/';
+    $zipFile = __DIR__ . '/essential.zip';
+
+    if (is_dir($dirPath)) {
+        return file_get_contents( $dirPath . $path);
+    } else if (file_exists($zipFile)) {
+        $zipPath = preg_replace('#//#', '/', "essential/$path");
+        return file_get_contents('zip://'. $zipFile . '#'. $zipPath);
+    }
+
+    echo "No essential(.zip) file found\n";
+    return false;
 }
 
 function getJson(string $folder) : array
