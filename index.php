@@ -106,7 +106,6 @@ ob_start(); ?>
 function show404() : string
 {
     header("HTTP/1.1 404 Not Found");
-    echo "404 Not Found";
     return  "404 Not Found";
 }
 
@@ -117,7 +116,7 @@ function showPage(mixed $html) : void
         echo $html;
         echo extractFile('/assets/footer.html');
     } else {
-        show404();
+        echo show404();
     }
 }
 
