@@ -84,9 +84,7 @@ h1:hover svg, h2:hover svg, h3:hover svg {
   
   
 #chapter-toc-wrapper hr {
-    border: 1px solid rgba(1, 1, 1, 0.1);
-    border-style: dashed;
-    margin-bottom: 20px;
+  display: none;
 }
 
 #chapter-toc-wrapper div.hdr {
@@ -118,6 +116,7 @@ h1:hover svg, h2:hover svg, h3:hover svg {
   margin-left: 16px;
   margin-right: 16px;
   margin-bottom: 16px;
+  width: 100%;
 }
 
 #header-left,
@@ -501,7 +500,7 @@ h1.title {
 /* add visual indication that this is the end of the article */
 hr.article-bottom-sep {
   border: 1px solid rgba(1, 1, 1, 0.1);
-  border-style: dotted;
+  border-style: dashed;
   margin-top: 4px;
 }
 
