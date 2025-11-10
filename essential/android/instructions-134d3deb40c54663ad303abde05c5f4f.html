@@ -65,7 +65,7 @@
 		
 	</div>
 </div>
-<img class="img" src="img/c7a6972e88b282a324bb66f28f62a890a2b89a2d.jpg.html">
+<img class="img" src="http://localhost:8000/essential/android/img/c7a6972e88b282a324bb66f28f62a890a2b89a2d.jpg">
 
 <div class="code-box lang-Plain Text">
 	<div>
@@ -76,7 +76,7 @@
 		
 	</div>
 </div>
-<img class="img" src="img/fab9f4edbe11ab50921877f9003b015876af7273.jpg.html">
+<img class="img" src="http://localhost:8000/essential/android/img/fab9f4edbe11ab50921877f9003b015876af7273.jpg">
   <ol id="70efdd90-5748-4d9e-82a3-6f573888e570" class="numbered-list" start="1">
     <li>Open the project structure dialogue (<strong>Menu:/File/Project_Structure</strong>). Select the “app” module, click on the <strong>Dependencies</strong> tab and add <strong>:openCVLibrary310</strong> as a Module Dependency. When you select <strong>Add/Module_Dependency</strong> it should appear in the list of modules you can add. It will now show up as a dependency but you will get a few more <strong>cannot-find-android-14</strong> errors in the event log.
     </li>
@@ -99,10 +99,10 @@
     <li>Your project now has a <strong>cvtest1/OpenCVLibrary310</strong> directory but it is not visible from the project view:
     </li>
   </ol>
-<img class="img" src="img/0b886dec019c29598d7ffc59fa303c0206ff11d9.png.html">
+<img class="img" src="http://localhost:8000/essential/android/img/0b886dec019c29598d7ffc59fa303c0206ff11d9.png">
 <p>Use some other tool, such as any file manager, and go to this directory. You can also switch the project view from <strong>Android</strong> to <strong>Project Files</strong> and you can find this directory as shown in this screenshot:
 </p>
-<img class="img" src="img/b919651c7b2904db80979ae0d6eb9f1208cfdf4a.png.html">
+<img class="img" src="http://localhost:8000/essential/android/img/b919651c7b2904db80979ae0d6eb9f1208cfdf4a.png">
 <p>Inside there is another <strong>build.gradle</strong> file (it’s highlighted in the above screenshot). Update this file with the four values from step 6.
 </p>
   <ol id="c39dd020-3919-4b33-a8a2-e665d5eaa941" class="numbered-list" start="1">
@@ -130,7 +130,7 @@
     <li>Copy the <strong>{unzip-dir}/sdk/native/libs</strong> directory (and everything under it) to your Android project, to <strong>cvtest1/OpenCVLibrary310/src/main/</strong>, and then rename your copy from <strong>libs</strong> to <strong>jniLibs</strong>. You should now have a <strong>cvtest1/OpenCVLibrary310/src/main/jniLibs</strong> directory. Resynch your project and this directory should now appear in the project view under <strong>openCVLibrary310</strong>.
     </li>
   </ol>
-<img class="img" src="img/23d72a903f524875f49ea71955bd885de4188546.png.html">
+<img class="img" src="http://localhost:8000/essential/android/img/23d72a903f524875f49ea71955bd885de4188546.png">
   <ol id="52e2e745-50a3-4006-8634-289a5f094bc6" class="numbered-list" start="1">
     <li>Go to the onCreate method of <em>MainActivity.java</em> and append this code:
     </li>
@@ -150,7 +150,7 @@
 </div>
 <p>Then run your application. You should see lines like this in the Android Monitor:
 </p>
-<img class="img" src="img/00eb3f9b01ae147069485cecd89fb1c7e072b772.jpg.html">
+<img class="img" src="http://localhost:8000/essential/android/img/00eb3f9b01ae147069485cecd89fb1c7e072b772.jpg">
 <p>(I don’t know why that line with the error message is there)
 </p>
   <ol id="887c38e1-b00f-441b-8028-8cb72b8bced7" class="numbered-list" start="1">

@@ -84,9 +84,7 @@ h1:hover svg, h2:hover svg, h3:hover svg {
   
   
 #chapter-toc-wrapper hr {
-    border: 1px solid rgba(1, 1, 1, 0.1);
-    border-style: dashed;
-    margin-bottom: 20px;
+  display: none;
 }
 
 #chapter-toc-wrapper div.hdr {
@@ -118,6 +116,7 @@ h1:hover svg, h2:hover svg, h3:hover svg {
   margin-left: 16px;
   margin-right: 16px;
   margin-bottom: 16px;
+  width: 100%;
 }
 
 #header-left,
@@ -249,7 +248,7 @@ h1:hover svg, h2:hover svg, h3:hover svg {
 }
 
 /* for very small screens (i.e. phones) remove rarely needed elements and other tweaks */
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
     #book-toc {
         margin: 16px 0;
     }
@@ -473,7 +472,6 @@ style of an image <img> tag:
 
 .book-img-cover {
   width: 264px;
-  height: scale-down;
 }
 
 .article code {
@@ -501,7 +499,7 @@ h1.title {
 /* add visual indication that this is the end of the article */
 hr.article-bottom-sep {
   border: 1px solid rgba(1, 1, 1, 0.1);
-  border-style: dotted;
+  border-style: dashed;
   margin-top: 4px;
 }
 
@@ -1215,9 +1213,9 @@ input.svelte-hj7awy:focus{
     columns:2
   }
 }
-@media(max-width: 640px){
+@media(max-width: 600px){
   .toc.svelte-1ib47n1{
-    columns:2
+    columns:1
   }
 }
 @media(max-width: 320px){

@@ -26,10 +26,10 @@
       
 <p>Let’s say we have the following 4 by 4 grid:
 </p>
-<img class="img" src="img/7dd2f4e07461afcaafe3a172bc13f22fe86b89f0.png.html">
+<img class="img" src="http://localhost:8000/essential/algorithms/img/7dd2f4e07461afcaafe3a172bc13f22fe86b89f0.png">
 <p>Let’s assume that this is a <em>maze</em>. There are no walls/obstacles, though. We only have a starting point (the green square), and an ending point (the red square). Let’s also assume that in order to get from green to red, we cannot move diagonally. So, starting from the green square, let’s see which squares we can move to, and highlight them in blue:
 </p>
-<img class="img" src="img/a23a5ad7a73e5e234630298794048c4d4b345ca4.png.html">
+<img class="img" src="http://localhost:8000/essential/algorithms/img/a23a5ad7a73e5e234630298794048c4d4b345ca4.png">
 <p>In order to choose which square to move to next, we need to take into account 2 heuristics:
 </p>
   <ol id="7b3c6798-da14-4cb9-80dd-914b6a8544ce" class="numbered-list" start="1">
@@ -54,7 +54,7 @@
 </p>
 <p>Let’s do the same for all the other blue squares. The big number in the center of each square is the “f” value, while the number on the top left is the “g” value, and the number on the top right is the “h” value:
 </p>
-<img class="img" src="img/b0c9140d21b7e7082b5101c1eff585d6c1ac0b86.png.html">
+<img class="img" src="http://localhost:8000/essential/algorithms/img/b0c9140d21b7e7082b5101c1eff585d6c1ac0b86.png">
 <p>We’ve calculated the g, h, and f values for all of the blue nodes. Now, which do we pick?
 </p>
 <p>Whichever one has the lowest f value.
@@ -67,25 +67,25 @@
 </p>
 <p>I now mark the nodes which we calculated the heuristics for, but did not move to, as orange, and the node which we chose as cyan:
 </p>
-<img class="img" src="img/1b4cbd27d103531c0e98a1fef6c4638d2c3a9955.png.html">
+<img class="img" src="http://localhost:8000/essential/algorithms/img/1b4cbd27d103531c0e98a1fef6c4638d2c3a9955.png">
 <p>Alright, now let’s calculate the same heuristics for the nodes around the cyan node:
 </p>
-<img class="img" src="img/71795ab413097b9037d90b0ce81f104257f64bea.png.html">
+<img class="img" src="http://localhost:8000/essential/algorithms/img/71795ab413097b9037d90b0ce81f104257f64bea.png">
 <p>Again, we choose the node going down from the cyan node, as all the options have the same f value:
 </p>
-<img class="img" src="img/a10819596935a0fbb6f77963cc9a5a4ea1ee183c.png.html">
+<img class="img" src="http://localhost:8000/essential/algorithms/img/a10819596935a0fbb6f77963cc9a5a4ea1ee183c.png">
 <p>Let’s calculate the heuristics for the only neighbour that the cyan node has:
 </p>
-<img class="img" src="img/defd34c441dfde5e8fcd42e4d4131e76e03ff49c.png.html">
+<img class="img" src="http://localhost:8000/essential/algorithms/img/defd34c441dfde5e8fcd42e4d4131e76e03ff49c.png">
 <p>Alright, since we will follow the same pattern we have been following:
 </p>
-<img class="img" src="img/26d6da69ffaab934afa3bb6019adc0b043b17a74.png.html">
+<img class="img" src="http://localhost:8000/essential/algorithms/img/26d6da69ffaab934afa3bb6019adc0b043b17a74.png">
 <p>Once more, let’s calculate the heuristics for the node’s neighbour:
 </p>
-<img class="img" src="img/0fc5582fe6acdd097eb3a464fe85d3306d0708b2.png.html">
+<img class="img" src="http://localhost:8000/essential/algorithms/img/0fc5582fe6acdd097eb3a464fe85d3306d0708b2.png">
 <p>Let’s move there:
 </p>
-<img class="img" src="img/87c129e986bb3de445348389597c59c6e5e5c31c.png.html">
+<img class="img" src="http://localhost:8000/essential/algorithms/img/87c129e986bb3de445348389597c59c6e5e5c31c.png">
 <p>Finally, we can see that we have a <em>winning square</em> beside us, so we move there, and we are done.
 </p>
 

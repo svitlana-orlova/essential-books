@@ -40,7 +40,7 @@
 		
 	</div>
 </div>
-<p>Hash is an <a href="ruby-doc.org/core-2.3.1/Enumerable.html">enumerable</a>, in essence a collection of key/value pairs. Therefore is has methods such as <code>each</code>, <code>map</code> and <code>inject</code>.
+<p>Hash is an <a href="http://localhost:8000/essential/ruby/ruby-doc.org/core-2.3.1/Enumerable.html">enumerable</a>, in essence a collection of key/value pairs. Therefore is has methods such as <code>each</code>, <code>map</code> and <code>inject</code>.
 </p>
 <p>For every key/value pair in the hash the given block is evaluated, the value of memo on the first run is the seed value passed to <code>inject</code>, in our case an empty hash, <code>{}</code>. The value of <code>memo</code> for subsequent evaluations is the returned value of the previous blocks evaluation, this is why we modify <code>memo</code> by setting a key with a value and then return <code>memo</code> at the end. The return value of the final blocks evaluation is the return value of <code>inject</code>, in our case <code>memo</code>.
 </p>
