@@ -47,7 +47,7 @@ class FileCacherTest extends TestCase
         $this->assertIsObject($cache);
 
         $cacheFolder = $cache->getFolder();
-        $this->fileExists($cacheFolder);
+        $this->assertfileExists($cacheFolder);
 
         unset($cache);
         $this->assertFileDoesNotExist($cacheFolder);

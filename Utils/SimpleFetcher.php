@@ -2,9 +2,6 @@
 
 namespace Utils;
 
-use Utils\Fetcher;
-use Utils\FileCacher;
-
 class SimpleFetcher extends FileCacher implements Fetcher
 {
 
