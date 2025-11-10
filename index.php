@@ -8,10 +8,10 @@ function extractFile(string $path) : string | false
     $zipFile = __DIR__ . '/essential.zip';
 
     if (is_dir($dirPath)) {
-        return file_get_contents( $dirPath . $path);
+        return @file_get_contents( $dirPath . $path);
     } else if (file_exists($zipFile)) {
         $zipPath = preg_replace('#//#', '/', "essential/$path");
-        return file_get_contents('zip://'. $zipFile . '#'. $zipPath);
+        return @file_get_contents('zip://'. $zipFile . '#'. $zipPath);
     }
 
     echo "No essential(.zip) file found\n";
@@ -113,18 +113,22 @@ function main() : void
         $folder = $matches[1];
         $name = $matches[2];
 
-        echo extractFile('/assets/header.html');
-
         if (!$name || $name == 'index.html') {
+            echo extractFile('/assets/header.html');
             echo indexToc($folder);
+            echo extractFile('/assets/footer.html');
         } else {
             $page = extractFile($folder . '/' . $name);
-            $page = preg_replace('#<div id="page-toc"></div>#', pageToc($folder, $name), $page);
-            echo preg_replace('#<div id="book-toc"></div>#', indexToc($folder, $name), $page);
+            if (!$page) {
+                header("HTTP/1.1 404 Not Found");
+                echo "404 Not Found";
+            } else {
+                $page = preg_replace('#<div id="page-toc"></div>#', pageToc($folder, $name), $page);
+                echo extractFile('/assets/header.html');
+                echo preg_replace('#<div id="book-toc"></div>#', indexToc($folder, $name), $page);
+                echo extractFile('/assets/footer.html');
+            }
         }
-
-        echo extractFile('/assets/footer.html');
-
     } else if (str_ends_with($request, '.css')) {
         header('Content-Type: text/css');
         echo extractFile($request);
