@@ -12,10 +12,13 @@
             "App\\Tests\\": "tests/"
         }
     },
-  "require": {
-    "ext-curl": "*",
-    "ext-dom": "*",
-    "ext-libxml": "*",
-    "ext-pcntl": "*"
-  }
+    "require": {
+        "ext-curl": "*",
+        "ext-dom": "*",
+        "ext-libxml": "*",
+        "ext-pcntl": "*"
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit --colors=always tests"
+    }
 }
