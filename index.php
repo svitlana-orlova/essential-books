@@ -124,8 +124,8 @@ function main() : void
 {
     $request = $_SERVER['REQUEST_URI'];
 
-    if (preg_match('#^/essential/(\w+)/?(.*)$#', $request, $matches)) {
-        list (, $folder, $name) = $matches;
+    if (preg_match('#^/essential/(\w+)/?([a-zA-Z0-9\-_.]{1,256})?$#', $request, $matches)) {
+        @list (, $folder, $name) = $matches;
 
         if (!$name || $name == 'index.html') {
             showPage(indexToc($folder));
