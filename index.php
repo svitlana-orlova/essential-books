@@ -62,9 +62,9 @@ function indexToc(string $folder, $name = '') : string
 
 ob_start(); ?>
     <div id="book-toc"><div class="article toc svelte-1ib47n1">
-    <?php foreach ($json as $index => $title): ?>
+    <?php $count = 0; foreach ($json as $index => $title): ?>
        <div class="toc-item"><div class="chapters-toc-item">
-       <span class="no svelte-1ib47n1"><?= $index ?></span>
+       <span class="no svelte-1ib47n1"><?= $count++ ?></span>
         <?php if ($sub != -1 && $sub == $index): ?>
             <b><?= $title[3] ?></b>
         <?php else: ?>
