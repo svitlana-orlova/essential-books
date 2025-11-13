@@ -8,8 +8,8 @@ function extractFile(string $path) : string | false
     $zipFile = __DIR__ . '/essential.zip';
 
     if (is_dir($dirPath)) {
-        return @file_get_contents( $dirPath . $path);
-    } else if (file_exists($zipFile)) {
+        return @file_get_contents($dirPath . $path);
+    } elseif (file_exists($zipFile)) {
         $zipPath = preg_replace('#//#', '/', "essential/$path");
         return @file_get_contents('zip://'. $zipFile . '#'. $zipPath);
     }
@@ -25,7 +25,7 @@ function getJson(string $folder) : array
 
 function findRecords(string $folder, int $sub = -1) : array
 {
-    return array_filter(getJson($folder), function($title) use ($sub) {
+    return array_filter(getJson($folder), function ($title) use ($sub) {
         if (($sub == -1 && $title[1] == -1) || $title[1] == $sub) {
             return true;
         }
@@ -60,20 +60,20 @@ function indexToc(string $folder, $name = '') : string
     $json = findRecords($folder, -1);
     $sub = ($name ? findTitle($folder, $name) : -1);
 
-ob_start(); ?>
+    ob_start(); ?>
     <div id="book-toc"><div class="article toc svelte-1ib47n1">
-    <?php $count = 0; foreach ($json as $index => $title): ?>
+    <?php $count = 0; foreach ($json as $index => $title) : ?>
        <div class="toc-item"><div class="chapters-toc-item">
        <span class="no svelte-1ib47n1"><?= $count++ ?></span>
-        <?php if ($sub != -1 && $sub == $index): ?>
+        <?php if ($sub != -1 && $sub == $index) : ?>
             <b><?= $title[3] ?></b>
-        <?php else: ?>
+        <?php else : ?>
             <a href="/essential/<?= $folder . '/' . $title[0] ?>"><?= $title[3] ?></a>
         <?php endif; ?>
         </div></div>
     <?php endforeach; ?>
     </div></div>
-<?php
+    <?php
 
     return ob_get_clean();
 }
@@ -84,21 +84,21 @@ function pageToc(string $folder, $name) : string
     $records = findRecords($folder, $index);
     $title = findTitle($folder, $name);
 
-ob_start(); ?>
+    ob_start(); ?>
     <div id="page-toc"><div class="article chapter-toc svelte-1t851gm">
     <div class="mtoc-0 svelte-1t851gm"><b><?= findRecords($folder, -1)[$title][3]; ?>:</b></div>
-    <?php foreach ($records as $title): ?>
+    <?php foreach ($records as $title) : ?>
         <div class="mtoc-1 svelte-1t851gm">
         <span class="no svelte-1ib47n1">*</span>
-        <?php if ($name == $title[0]): ?>
+        <?php if ($name == $title[0]) : ?>
             <b> <?= $title[3] ?></b>
-        <?php else: ?>
+        <?php else : ?>
             <a href="/essential/<?= $folder . '/'. $title[0] ?>"><?= $title[3] ?></a>
         <?php endif; ?>
         </div>
     <?php endforeach; ?>
     </div></div>
-<?php
+    <?php
 
     return ob_get_clean();
 }
@@ -135,7 +135,7 @@ function main() : void
             $page = preg_replace('#<div id="book-toc"></div>#', indexToc($folder, $name), $page);
             showPage($page);
         }
-    } else if (str_ends_with($request, '.css')) {
+    } elseif (str_ends_with($request, '.css')) {
         header('Content-Type: text/css');
         echo extractFile($request) ?: show404();
     } else {

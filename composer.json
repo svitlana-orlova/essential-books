@@ -1,5 +1,6 @@
 {
     "require-dev": {
+        "squizlabs/php_codesniffer": "^4.0",
         "phpunit/phpunit": "^11.5"
     },
     "autoload": {
@@ -19,6 +20,7 @@
         "ext-pcntl": "*"
     },
     "scripts": {
+        "scan": "vendor/bin/phpcs index.php",
         "test": "vendor/bin/phpunit --colors=always tests"
     }
 }
