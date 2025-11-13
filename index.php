@@ -1,8 +1,8 @@
-<?php
+<?php /* @phpcs:disable PSR1.Files.SideEffects */
 
 declare(strict_types=1);
 
-function extractFile(string $path) : string | false
+function extractFile(string $path): string | false
 {
     $dirPath = __DIR__ . '/essential/';
     $zipFile = __DIR__ . '/essential.zip';
@@ -11,19 +11,19 @@ function extractFile(string $path) : string | false
         return @file_get_contents($dirPath . $path);
     } elseif (file_exists($zipFile)) {
         $zipPath = preg_replace('#//#', '/', "essential/$path");
-        return @file_get_contents('zip://'. $zipFile . '#'. $zipPath);
+        return @file_get_contents('zip://' . $zipFile . '#' . $zipPath);
     }
 
     echo "No essential(.zip) file found\n";
     return false;
 }
 
-function getJson(string $folder) : array
+function getJson(string $folder): array
 {
     return json_decode(extractFile("$folder/toc.json"), true) ?? [];
 }
 
-function findRecords(string $folder, int $sub = -1) : array
+function findRecords(string $folder, int $sub = -1): array
 {
     return array_filter(getJson($folder), function ($title) use ($sub) {
         if (($sub == -1 && $title[1] == -1) || $title[1] == $sub) {
@@ -33,7 +33,7 @@ function findRecords(string $folder, int $sub = -1) : array
     });
 }
 
-function findIndex(string $folder, string $name) : int
+function findIndex(string $folder, string $name): int
 {
     foreach (getJson($folder) as $index => $title) {
         if ($title[0] == $name) {
@@ -43,7 +43,7 @@ function findIndex(string $folder, string $name) : int
     return -1;
 }
 
-function findTitle(string $folder, string $name) : int
+function findTitle(string $folder, string $name): int
 {
     $json = findRecords($folder, -1);
     $sub = findIndex($folder, $name) + 1;
@@ -55,7 +55,7 @@ function findTitle(string $folder, string $name) : int
     return -1;
 }
 
-function indexToc(string $folder, $name = '') : string
+function indexToc(string $folder, $name = ''): string
 {
     $json = findRecords($folder, -1);
     $sub = ($name ? findTitle($folder, $name) : -1);
@@ -78,7 +78,7 @@ function indexToc(string $folder, $name = '') : string
     return ob_get_clean();
 }
 
-function pageToc(string $folder, $name) : string
+function pageToc(string $folder, $name): string
 {
     $index = findIndex($folder, $name);
     $records = findRecords($folder, $index);
@@ -93,7 +93,7 @@ function pageToc(string $folder, $name) : string
         <?php if ($name == $title[0]) : ?>
             <b> <?= $title[3] ?></b>
         <?php else : ?>
-            <a href="/essential/<?= $folder . '/'. $title[0] ?>"><?= $title[3] ?></a>
+            <a href="/essential/<?= $folder . '/' . $title[0] ?>"><?= $title[3] ?></a>
         <?php endif; ?>
         </div>
     <?php endforeach; ?>
@@ -103,13 +103,13 @@ function pageToc(string $folder, $name) : string
     return ob_get_clean();
 }
 
-function show404() : string
+function show404(): string
 {
     header("HTTP/1.1 404 Not Found");
     return  "404 Not Found";
 }
 
-function showPage(mixed $html) : void
+function showPage(mixed $html): void
 {
     if ($html) {
         echo extractFile('/assets/header.html');
@@ -120,7 +120,7 @@ function showPage(mixed $html) : void
     }
 }
 
-function main() : void
+function main(): void
 {
     $request = $_SERVER['REQUEST_URI'];
 
