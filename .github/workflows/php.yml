@@ -32,6 +32,9 @@ jobs:
     - name: Install dependencies
       run: composer install
 
+    - name: Run phpCodeSniffer scan
+      run: composer scan
+
     - name: Run test suite
       run: composer test
 
