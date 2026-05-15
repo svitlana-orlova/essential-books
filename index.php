@@ -1,5 +1,22 @@
 <?php /* @phpcs:disable PSR1.Files.SideEffects */
 
+/*
+ *
+ * To run the application the essential.zip,
+ * directory have to be extracted into the
+ * folder where index.php resides.
+ *
+ * Honestly speaking it does not matter what it is,
+ * eaither .zip file or extracted folder,
+ * both variants supported.
+ * The only difference that zip file is very slow.
+ *
+ * The command to run the server:
+ *
+ * php -S localhost:8000 index.php
+ *
+ */
+
 declare(strict_types=1);
 
 function extractFile(string $path): string | false
