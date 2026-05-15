@@ -126,10 +126,12 @@ function show404(): string
     return  "404 Not Found";
 }
 
-function showPage(mixed $html): void
+function showPage(mixed $html, string $title = ''): void
 {
     if ($html) {
         echo extractFile('/assets/header.html');
+        echo '<title>' . $title . '</title>';
+        echo extractFile('/assets/header2.html');
         echo $html;
         echo extractFile('/assets/footer.html');
     } else {
@@ -145,12 +147,19 @@ function main(): void
         @list (, $folder, $name) = $matches;
 
         if (!$name || $name == 'index.html') {
-            showPage(indexToc($folder));
+            showPage(indexToc($folder), 'Essential Books');
         } else {
+            $ptoc = pageToc($folder, $name);
+            $title = '';
+
+            if (preg_match('#^.*<div class="mtoc-0.+<b>(.+)?:</b>.*#m', $ptoc, $matches)) {
+                @list (, $title) = $matches;
+            }
+
             $page = extractFile($folder . '/' . $name) ?: '';
-            $page = preg_replace('#<div id="page-toc"></div>#', pageToc($folder, $name), $page);
+            $page = preg_replace('#<div id="page-toc"></div>#', $ptoc, $page);
             $page = preg_replace('#<div id="book-toc"></div>#', indexToc($folder, $name), $page);
-            showPage($page);
+            showPage($page, $title);
         }
     } elseif (str_ends_with($request, '.css')) {
         header('Content-Type: text/css');
